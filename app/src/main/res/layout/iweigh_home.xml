@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@mipmap/bpl_be_well_parameter_bg"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="2dp"
+        android:id="@+id/menu_bar"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imgBackKey"
+            android:layout_gravity="start"
+            android:contentDescription="@string/back"
+
+            android:src="@mipmap/ic_chevron_left_white_48dp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/menu"
+            android:contentDescription="@string/rec_saved"
+            android:id="@+id/img_records"
+            android:layout_weight="1"
+
+
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/settings"
+            android:contentDescription="@string/settings"
+
+            android:id="@+id/img_settings"
+            android:layout_weight="1"
+
+
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/help"
+            android:id="@+id/img_help"
+            android:contentDescription="@string/help"
+            android:layout_weight="1"
+
+            />
+
+
+
+    </LinearLayout>
+
+
+
+
+    <include layout="@layout/iweigh_grid"
+
+        />
+
+
+</LinearLayout>

@@ -1,0 +1,13 @@
+
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+    <item android:id="@+id/exp_pdf_wek"
+        android:title="Export All Bp Records as .txt file"
+        tools:ignore="HardcodedText" />
+
+
+
+</menu>

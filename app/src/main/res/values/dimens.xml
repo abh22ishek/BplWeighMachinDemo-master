@@ -1,0 +1,15 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+
+
+    <dimen name="relative_layout2_height">200dp</dimen>
+    <dimen name="relative_layout1_width">65dp</dimen>
+
+    <dimen name="start_rec_height">40dp</dimen>
+    <dimen name="start_rec_width">150dp</dimen>
+    <dimen name="margin_top_guage">0dp</dimen>
+    <dimen name="needle_margin_bottom">0dp</dimen>
+
+
+    <dimen name="bp_blood_pressure_txt">22sp</dimen>
+</resources>

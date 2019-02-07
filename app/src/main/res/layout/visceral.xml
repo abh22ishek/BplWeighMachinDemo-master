@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+
+    android:layout_width="match_parent"
+    android:layout_margin="1dp"
+    android:layout_height="match_parent">
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        tools:ignore="UselessParent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+
+            android:layout_height="match_parent"
+            tools:ignore="UselessParent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="3"
+                android:background="#212637"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/relative_top"
+                    android:layout_height="match_parent">
+
+
+
+
+
+                    <customviews.MyCustomTextView
+                        android:text="@string/visc_fat"
+                        app:fontname="centralSansXBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/relative_top"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="5dp"
+                        android:textColor="@color/white"
+                        android:id="@+id/measurementType"
+                        android:textSize="20sp"
+                        tools:ignore="NotSibling" />
+
+
+                    <customviews.MyCustomTextView
+                        android:text="@string/visceral_fat_str"
+                        app:fontname="arial"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/measurementType"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:id="@+id/text1"
+                        android:layout_marginTop="8dp"
+
+                        android:textSize="18sp"
+                        tools:ignore="NotSibling" />
+
+
+                </RelativeLayout>
+
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginTop="0dp"
+                android:layout_height="match_parent">
+
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/parent_relative"
+                    android:layout_height="match_parent">
+
+
+                    <TextView
+                        android:text="35"
+                        android:layout_width="100dp"
+                        android:gravity="center"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginStart="12dp"
+                        android:id="@+id/txtage_"
+                        android:layout_marginBottom="10dp"
+                        android:textColor="@color/white"
+                        android:layout_alignParentBottom="true" />
+
+                    <TextView
+                        android:text="167 cm"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentEnd="true"
+                        android:gravity="center"
+                        android:layout_marginBottom="10dp"
+                        android:textColor="@color/white"
+                        android:id="@+id/txtheight_" />
+
+                    <TextView
+                        android:text="@string/age"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="30dp"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:layout_marginStart="13dp"
+                        android:id="@+id/age_text" />
+
+                    <TextView
+                        android:text="@string/height"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentEnd="true"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:layout_marginBottom="30dp"
+                        android:id="@+id/height_text" />
+
+                    <customviews.MyCustomTextView
+                        android:text="@string/bmi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textSize="25sp"
+                        app:fontname="centralSansXBold"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="@dimen/bmi_margin_top"
+                        android:id="@+id/textView29" />
+
+
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="0dp"
+                        >
+
+
+                        <!-- <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginLeft="10dp"
+
+                            android:src="@mipmap/bmi_scale"
+                            android:id="@+id/imageView4" />-->
+
+                    </FrameLayout>
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</RelativeLayout>

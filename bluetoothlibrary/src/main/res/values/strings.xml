@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">BlueTooth Library</string>
+    <string name="ble_not_supported">BLE is not supported</string>
+    <string name="error_bluetooth_not_supported">Bluetooth not supported.</string>
+
+    <string name="unknown_device">Unknown device</string>
+
+    <!-- Menu items -->
+    <string name="spo2">血氧值</string>
+    <string name="pi">pi</string>
+    <string name="ble_test_error2">Loose cuff</string>
+    <string name="ble_test_error3">Compression failed</string>
+    <string name="ble_test_error5">Fail to identify High/Low pressure (signal is weak)</string>
+    <string name="ble_test_error6">Pressure exceeds max. measuring range</string>
+    <string name="ble_test_error7">Movement during measurement</string>
+    <string name="ble_test_error14">Unknown error</string>
+    <string name="ble_test_error15">error test result, SBP to be zero</string>
+    <string name="ble_test_error16">error test result, DBP to be zero</string>
+    <string name="ble_test_error17">error test result, RP to be zero</string>
+    <string name="ble_test_error18">Pulse is not normal</string>
+    <string name="ble_test_error19">Pulse over the limit</string>
+    <string name="ble_test_error20">Pulse lower limit</string>
+</resources>

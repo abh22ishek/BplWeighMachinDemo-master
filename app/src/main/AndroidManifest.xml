@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="test.bpl.com.bplscreens">
+
+
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
+    <uses-feature android:name="android.hardware.bluetooth_le" android:required="false"/>
+    <uses-feature android:name="android.hardware.camera2" android:required="false"/>
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <!--  <uses-permission android:name="android.permission.MANAGE_DOCUMENTS"/>-->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <application
+        android:allowBackup="false"
+        android:icon="@mipmap/bpl_"
+        android:supportsRtl="true"
+
+        android:name="constantsP.GlobalClass"
+        android:label="@string/app_name"
+
+        android:largeHeap="true"
+
+        android:theme="@style/AppTheme"
+        tools:replace="android:icon,android:theme,allowBackup"
+        tools:ignore="GoogleAppIndexingWarning,InnerclassSeparator">
+        <activity android:name="test.bpl.com.bplscreens.SplashScreenActivity"
+            android:screenOrientation="userPortrait"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".ForgotPasswordActivity"
+            android:screenOrientation="userPortrait"/>
+        <activity android:name=".ResetPasswordActivity"
+            android:screenOrientation="userPortrait"/>
+        <activity android:name=".UsersProfileActivity"
+            android:screenOrientation="userPortrait"
+            />
+        <activity android:name=".UserGuideContent"
+
+            android:screenOrientation="userPortrait"/>
+        <activity android:name=".OximeterMainActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan"
+            android:screenOrientation="userPortrait"/>
+        <activity android:name=".SelectParameterActivity"
+            android:screenOrientation="userPortrait"/>
+        <activity android:name=".WelcomeScreenActivity"
+            android:screenOrientation="userPortrait"/>
+        <activity android:name=".SignUpActivity"
+            android:screenOrientation="userPortrait"/>
+
+        <activity android:name=".MenuPageActivty"
+            android:screenOrientation="userPortrait"/>
+        <activity android:name=".HomeScreenActivity"
+            android:screenOrientation="userPortrait"/>
+
+
+        <activity android:name=".UserTestReportActivity"
+            android:hardwareAccelerated="true"
+            android:screenOrientation="userPortrait"/>
+
+        <activity android:name=".SettingsActivity"
+            android:screenOrientation="userPortrait"/>
+
+        <activity android:name=".UsersRecordActivity"
+            android:screenOrientation="userPortrait"/>
+
+        <activity android:name="bluetooth.BLEdevicelistActivity"
+            android:screenOrientation="userPortrait"/>
+
+        <activity android:name=".UserTestReportGraphActivity"
+            android:screenOrientation="userPortrait"/>
+
+        <service android:name="bluetooth.BLEService"/>
+
+        <activity android:name=".UserHelp"
+            android:screenOrientation="userPortrait"
+            />
+
+        <activity android:name=".WeighMachineActivity"
+            android:screenOrientation="userPortrait"/>
+
+        <activity android:name=".WeightMachine2Activity"
+            android:screenOrientation="userPortrait"/>
+
+        <activity android:name=".WeighMachineRecordActivity"
+            android:screenOrientation="userPortrait"/>
+
+        <activity android:name=".WeighingMachineUsersguide"
+            android:screenOrientation="userPortrait"/>
+
+        <activity android:name=".SettingsWeighingMachineActivity"
+            android:screenOrientation="userPortrait"/>
+
+
+
+
+        <service android:name="aicare.net.cn.iweightlibrary.wby.WBYService"/>
+
+        <activity android:name=".WeightMachine2RecordActivity"
+            android:screenOrientation="userPortrait"/>
+
+        <activity android:name="BPMachineBioLightActivity"
+            android:screenOrientation="userPortrait"/>
+
+
+        <activity android:name="biolight.BioLightDeviceScanActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name="biolight.BioLightDeviceHomeScreenActivity"
+            android:screenOrientation="portrait"/>
+
+
+        <activity android:name="biolight.BioLightSettingsActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name="biolight.BioLightRecordActivity"
+            android:screenOrientation="portrait"/>
+
+
+
+
+        <activity android:name="biolight.BioLightUserHelpActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name="biolight.BioLightReportActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name="biolight.BioLightChartActivity"
+            android:screenOrientation="portrait"/>
+
+
+       <activity android:name="PatientProfileActivity"
+           android:screenOrientation="portrait"/>
+
+        <activity android:name="ExistingUserActivity"
+
+            android:screenOrientation="portrait"/>
+
+
+        <activity android:name="adapter.ExistingUserActivityManage"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".WeightMachine2ReportActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="bluetooth.BluetoothdevicelistActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name="iweigh.IweighHomeScreenActivityl"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".MenuPageIndicatorActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name="iweigh.IweighSettingsScreenActivity"
+            android:screenOrientation="portrait"
+
+            />
+        <activity android:name="iweigh.IweighRecordsActivity"
+            android:screenOrientation="portrait"
+            />
+
+        <provider
+
+            android:authorities="${applicationId}.provider"
+            android:name="android.support.v4.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/providers_path"
+                />
+        </provider>
+
+    </application>
+
+
+
+
+
+
+
+
+
+</manifest>

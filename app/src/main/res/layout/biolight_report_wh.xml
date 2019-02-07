@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@mipmap/bpl_be_well_parameter_bg"
+    android:layout_height="match_parent">
+
+
+    <include layout="@layout/baseheader"
+
+        />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+       android:fillViewport="true"
+        android:layout_marginTop="50dp"
+        android:id="@+id/vScroll"
+
+        >
+
+
+        <RelativeLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/relative_scroll">
+
+
+
+            <include layout="@layout/bio_report"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_below="@+id/include"
+
+                />
+
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+    <io.github.yavski.fabspeeddial.FabSpeedDial
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|end"
+        app:fabGravity="bottom_end"
+        app:fabMenu="@menu/menu"
+        android:layout_marginBottom="70dp"
+        android:id="@+id/fabSpeedDial"
+        app:miniFabBackgroundTint="@color/colorAccent"
+        app:miniFabDrawableTint="@color/white"
+        app:miniFabTitleTextColor="@color/colorAccent"
+
+        />
+
+</FrameLayout>

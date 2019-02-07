@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:contentDescription="@string/background_image"
+        android:src="@mipmap/ble_be_well_bg"/>
+
+    <RelativeLayout
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <customviews.MyCustomTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/different_user"
+            android:id="@+id/sign_different_user"
+            app:fontname="centralSansXBold"
+            android:textColor="@color/white"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="50dp" />
+
+        <customviews.MyCustomTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Medium Text"
+            android:id="@+id/user_name"
+            android:textStyle="italic|bold"
+            app:fontname="centralSansXBold"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:layout_above="@+id/proceed"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="16dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/proceed"
+            android:src="@mipmap/proceed"
+            android:contentDescription="@string/proceed"
+            android:layout_marginBottom="56dp"
+            android:layout_above="@+id/sign_different_user"
+            android:layout_centerHorizontal="true" />
+
+        <customviews.RoundedImageView
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:id="@+id/profile_pic"
+            android:src="@drawable/user_icon"
+            android:layout_gravity="center"
+            android:contentDescription="@string/my_profile"
+            android:layout_marginBottom="115dp"
+            android:layout_above="@+id/user_name"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+
+</FrameLayout>

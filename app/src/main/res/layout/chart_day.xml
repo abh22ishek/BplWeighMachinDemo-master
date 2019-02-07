@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="match_parent">
+
+        <customviews.MyCustomChartHRDayYaxis
+            android:layout_width="wrap_content"
+            android:id="@+id/custom_hr_chartYaxis"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_height="wrap_content" />
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_weight="2"
+            android:scrollbars="none"
+            android:fillViewport="true"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:id="@+id/HeartRate"
+                android:layout_height="wrap_content">
+
+
+                <customviews.MyCustomChartHRDay
+                    android:layout_width="match_parent"
+                    android:id="@+id/custom_day_chart"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_height="match_parent" />
+
+                <jjoe64.graphview.GraphView
+                    android:layout_width="match_parent"
+                    android:layout_height="190dp"
+                    android:visibility="gone"
+                    android:id="@+id/graph_heart_rate"
+                    />
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/content"
+        android:background="@color/window_background_bottom"
+        android:layout_centerVertical="true"
+        android:layout_weight="1"
+        android:padding="5dp"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:id="@+id/l1"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:layout_height="wrap_content">
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:id="@+id/hr_color"
+                android:background="@color/header_itltle_color"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true" />
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pulse Rate"
+                android:layout_marginLeft="5dp"
+                android:id="@+id/txtspo2"
+                android:layout_alignBaseline="@+id/spo2_color"
+                android:layout_alignBottom="@+id/spo2_color"
+                android:layout_toEndOf="@+id/hr_color" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:id="@+id/time_hr" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:id="@+id/l2"
+            android:layout_marginTop="3dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:layout_below="@+id/l1"
+            android:layout_height="wrap_content">
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:background="@color/colorAccent"
+                android:id="@+id/spo2_color"
+                android:layout_below="@+id/hr_color"
+                android:layout_alignParentStart="true" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Spo2"
+                android:layout_marginLeft="5dp"
+                android:id="@+id/txthr"
+                android:layout_above="@+id/spo2_color"
+                android:layout_toEndOf="@+id/hr_color" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:id="@+id/time_spo2" />
+
+            </LinearLayout>
+
+
+
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_below="@+id/content"
+        android:layout_height="match_parent">
+
+
+        <customviews.MyCustomChartSPo2Yaxis
+            android:layout_width="wrap_content"
+            android:id="@+id/custom_spo2_chartYaxis"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_height="wrap_content" />
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_weight="2"
+            android:scrollbars="none"
+            android:fillViewport="true"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentStart="true">
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/spo2"
+                android:layout_below="@+id/content"
+                android:layout_marginTop="10dp">
+
+                <!--<jjoe64.graphview.GraphView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/graph_spo2"
+                    android:visibility="gone"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />-->
+
+
+                <customviews.MyCustomChartSpo2day
+                    android:layout_width="match_parent"
+                    android:id="@+id/custom_spo2_chart"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_height="match_parent" />
+
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

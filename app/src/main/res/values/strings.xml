@@ -1,0 +1,508 @@
+<resources>
+    <string name="app_name">Home Health</string>
+    <string name="my_profile">My Profile</string>
+    <string name="log_profile">Login Profile</string>
+    <string name="user_guide">User\'s Guide</string>
+
+
+    <string name="app_version">App Version</string>
+    <string name="selection">Make Your Selection</string>
+    <string name="logout">LogOut</string>
+
+    
+    <string name="ioxy">Bpl iOxy</string>
+    <string name="weigh_mc">I-Weigh</string>
+    <string name="bp">BioLight</string>
+      <!--user details strings-->
+    <string name="name">Name</string>
+    <string name="age">Age (Years)</string>
+    <string name="gender">Gender</string>
+    <string name="height">Height(cm)</string>
+    <string name="weight">Weight(kg)</string>
+    <string name="set_name">Set Name</string>
+    <string name="set_age">Set Age</string>
+
+    <string name="set_address">Set Address</string>
+    <string name="user_name">User Name</string>
+    <string name="ad_name">Login Name</string>
+    <string name="set_phone">Set Phone No.</string>
+    <string name="set_email">Set Email</string>
+
+    <string name="set_height">Set Height</string>
+    <string name="set_weight">Set Weight</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+
+    <string name="new_user">New User</string>
+    <string name="exist_user">Existing User</string>
+
+
+    <string name="ch_sel_user">Edit Selected User</string>
+    <string name="switch_user">Switch User</string>
+
+    <string name="sure_sel_user">Are you Sure you want to delete Selected Records</string>
+
+    <string name="address">Address</string>
+    <string name="add_user">Add New User</string>
+    <string name="sel_user">Select User</string>
+    <string name="phone">Phone No.</string>
+
+    <string name="edit_user">Edit User</string>
+
+    <string name="security_ver">Enter the Security Questions for verification</string>
+
+    <string name="spo2high"> Spo2 High</string>
+    <string name="spo2low">Spo2 Low</string>
+    <string name="heart_rate_high">Pulse Rate High</string>
+    <string name="heart_rate_low">Pulse Rate Low</string>
+    <string name="pi_high">PI High</string>
+    <string name="pi_low">PI Low</string>
+
+    <string name="security_question_1">Enter your favourite color</string>
+    <string name="security_question_2">Enter your Date Of Birth</string>
+    <string name="security_question_3">Select your Use Type</string>
+    <string name="security_question_3_">Use type</string>
+
+
+  <string name="user_guide_content">BPL Be Well App User Guide\n\n
+1.       Connecting your mobile phone with BPL iOxy device:\n
+To connect your mobile with BPL iOxy device, please follow the below steps\n
+a)	Before connecting the BPL iOxy device to your mobile through Bluetooth, turn on the BPl iOxy device and place your finger
+      into the slot provided. Wait until the data is displayed on BPL iOxy device’s screen post which you can establish the
+      Bluetooth connection.\n
+b)      Launch BPL Be Well App that is installed on your mobile.\n
+c)	Create a personal login by Signing Up. \n
+d)	Add a profile by entering your personal details. \n
+e)	Tap on Connect to initiate Bluetooth Connection. \n
+f)	Allow the App to Turn On Bluetooth on your mobile device. \n
+g)      Tap on Search button to scan for the BPL iOxy device.\n
+h)      Choose the ‘BPL iOxy’ from the displayed list of devices.\n\n
+After following the above steps, real time data would be displayed.\n\n
+Note: BPL iOxy device will automatically turn off if no signal is received within 10 seconds.\n\n
+2.       Usage steps:\n
+a)       After connecting your mobile to the device through Bluetooth, the data will be displayed on your BPL iOxy Application
+        screen.\n
+b)      After the connection, real time data of “Blood Oxygen (SPO2)”, “Pulse Rate (PR)” and “Perfusion Index (PI)”
+        will be displayed.\n
+c)       The application will record the monitoring results and displays with time range on your mobile phone.\n
+d)	To start a measurement, Tap on the “START RECORDING” button.
+Note: Ensure that at least 40 seconds has elapsed before you press on STOP RECORDING” for a record to get saved. \n
+e) 	To save this measurement, Tap on the “STOP RECORDING” button.
+        The App shall generate a record which includes “report” and “trend chart”.\n
+Note: Multiple Users can monitor and save measurements using dedicated logins.
+        Verify your user profile before taking measurements.\n\n
+3.       Application use:\n
+With the help of this App, the real time results can be synchronised with the device and shown on the
+        smart phone for a better user experience. Using the smartphone, the user information can be edited and
+        reports can be reviewed at any point of time.\n
+User Info: To Edit user’s name, age, height, and weight. New Users can be added at any point of time.\n
+User Guide: For App usage assistance\n\n
+4.       Health Parameters measured:\n
+a)       Oxy-haemoglobin Saturation: Oxygen Saturation (SPO2) is a term which refers to the concentration of oxygen
+        in the blood. It measures the percentage of haemoglobin binding sites in the blood stream occupied by Oxygen,
+        which is a very important physiological parameter of respiration cycle. The normal range of blood oxygen
+        levels is considered to be 95-100 percent. Between 90-95 percent, the blood oxygen level is considered to be
+        low but it does not necessarily indicate any health issue.\n
+b)      Pulse Rate: Pulse, also known as heart rate is the number of times the heart beats per minute.
+        Normally, pulse rate and heart rate are identical. The Pulse rate range for a healthy person would be 60-90
+        bpm. Nervousness and an excited state of being may increase the pulse rate/heart rate.\n
+c)       Perfusion Index: Perfusion index or PI is the ratio of the pulsatile blood flow to the non-pulsatile
+        static blood flow in a peripheral tissue, such as fingertip, toe, or ear lobe. Perfusion Index is an
+        indication of pulse strength at the sensor site. The PI value ranges from 0.02 percent for a very weak pulse
+        to 20 percent for a very strong pulse. The Pi value varies depending on the users, physiological conditions,
+        and monitoring sites. For a healthy user, the value of PI would be greater than three percent.\n\n
+5.       About this software:\n
+BPL Be Well app is designed and developed by BPL Medical Technologies Pvt. Ltd for the device BPL iOxy. This application is compatible with mobile phones with the operating system Android 4.3 (Or above).\n
+</string>
+
+
+    <string name="oxy_saturation_report">Oxyhemoglobin Saturation Report</string>
+    
+    
+    <string name="spo2">Spo2</string>
+    <string name="spo2_machine">measure Spo2 and its related parameters</string>
+    <string name="weigh_machine">measure weighing machine</string>
+    <string name="records">list of records</string>
+    <string name="baseline">Base Line</string>
+    <string name="duration">Duration</string>
+    <string name="event">Event</string>
+    <string name="minimum">Minimum</string>
+    <string name="low_oxy_avg">Low Oxyhaemoglobin average  —</string>
+    <string name="pulse_rate">Pulse Rate</string>
+    <string name="avg_bp_min">Average(bpm/min)</string>
+    <string name="min_bp_min">Minimum(bpm/min)</string>
+    
+    <string name="spo2_range">Spo2 Range</string>
+    <string name="analysis">Analysis</string>
+    <string name="pulse_rate_event">Pulse Rate Event</string>
+    <string name="plethysmogram">Plethysmogram</string>
+    <string name="testing_time">Testing Time</string>
+    <string name="user_info">User Information:</string>
+    <string name="device_mac_id">Device Name</string>
+
+    <string name="range_1">99–90</string>
+    <string name="range_2">89–80</string>
+    <string name="range_3">79–70</string>
+    <string name="range_4">69–60</string>
+    <string name="range_5">59–50</string>
+    <string name="range_6">49–40</string>
+    <string name="range_7">39–30</string>
+
+    <string name="user_name_">Enter User Name</string>
+    <string-array name="search_by">
+        <item> Name</item>
+        <item> Phone</item>
+
+
+    </string-array>
+
+    <string name="connect_device">Please Connect to BPL iOxy device</string>
+    <string name="disconnect_device">Do you want to exit BPL iOxy measurement ?</string>
+    <string name="search">Search</string>
+    <string name="search_by_name">Search By User Name</string>
+    <string name="search_by_phone">Search By Phone No.</string>
+
+    <string name="different_user">Sign in with a different account</string>
+    <string name="ble_not_supported">This device doesn\'t support Bluetooth Low Energy</string>
+    <string name="start_rec">Start Recording</string>
+    <string name="stop_rec">Stop Recording</string>
+
+    <string name="record_not_saved">Please wait atleast 40 sec in order to save current records</string>
+    <string name="app_version_str">The current app version you are using is </string>
+    <string name="field_empty">This field cannot be empty</string>
+    <string name="search_bpl_dev">Connecting to BPL iOxy device…</string>
+
+    <string name="proceed">Proceed</string>
+    <string name="background_image">Background Image</string>
+    <string name="back">Back key</string>
+    <string name="base_header_title">Base header title</string>
+    <string name="verify">Verify</string>
+    <string name="forgot_password">Forgot Password ?</string>
+    <string name="user_guide_">User Guide</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="email">Email</string>
+    <string name="log_in">Log In</string>
+    <string name="password">Password</string>
+    <string name="security_ques">Security Question</string>
+    <string name="submit">SUBMIT</string>
+    <string name="manage_user">MANAGE USER</string>
+
+    <string name="update">UPDATE</string>
+
+
+    <string name="bpl_moto">Happier Living Everyday</string>
+    <string name="spo_percentage">SPO2 (%)</string>
+    <string name="pr_bpm">Pulse Rate(bpm)</string>
+    <string name="pi">PI</string>
+    <string name="report">Report</string>
+    <string name="chart">Chart</string>
+
+    <string name="speaker_img">Speaker to enable alarm or not</string>
+    <string name="record_img">To capture records</string>
+    <string name="bluetooth_img">Indicator to know whether bluetooth is connected or not</string>
+    <string name="action_report">generate selected report</string>
+    <string name="action_report_chart">generate report chart of selected records</string>
+    <string name="high">High</string>
+    <string name="bluetooth">BLUETOOTH</string>
+    <string name="select">Select</string>
+    <string name="reset_pwd">RESET PASSWORD</string>
+    <string name="help">HELP</string>
+
+    <string name="records_weigh_a">RECORDS I-WEIGH 1</string>
+
+    <string name="weight_">Weight in kg</string>
+    <string name="bmi">BMI</string>
+    <string name="ok">OK</string>
+    <string name="delete">Delete</string>
+    <string name="weigh_machine_manual_1">1. Place the scale on a hard and flat surface. Gently step on it, and
+it turns on with digits display on the LED. Then step off the scale
+until the value on the LED displays zero. Step on it again in an
+upright and steady position. See the picture below for the correct
+standing position.\n\n 2. The weight value on the display will flash three times. Do not
+read it until it stabilizes.\n\n
+
+        <b>Converting Weight Units</b>\n\n
+The factory default unit is kg. For unit conversion, open the
+battery cover at the back when power-off and adjust the gear
+toggle switch. The units available are kg and lb  from
+left to right. When the switch is placed at one of the gears, the
+displayed unit automatically switches to the corresponding
+weight unit after the scale is turned on.\n\n
+        The unit conversion toggle switch is located inside the battery
+case at the back of the scale.
+
+    </string>
+
+
+    <string name="logout_content">Are you sure want to LogOut?</string>
+
+
+
+    <string name="biolight">BT02</string>
+
+
+    <string name="bio_user_guide">
+
+       <b>Preparation before measurement</b>\n\n
+
+
+(1)	Keep your body and mood calm, take off the thicker clothes such as coat,
+ sweater, Etc. When measuring, bare upper arm or wear thinner shirt.\n
+
+(2)	Users, who use APP software, need to open the Bluetooth of the device and terminal,
+ open the APP software, and connect with the device.\n\n
+
+
+When a call comes in during the measurement, the measurement will be terminated.
+It is recommended that Android  device be set in airplane mode during measurement to avoid strong magnetism interference.
+
+
+
+•	Using Steps\n
+•	Apply the cuff\n
+
+
+1.	Loosen the calibre of the curly cuff slightly. Place a bare arm through the cuff directly according to
+ the instruction\n
+
+2.	Position the cuff 1-2cm above the elbow joint and ensure the mark  on the cuff shall lie above artery.\n
+
+
+3.	Pull one end of the cuff to the lateral and tighten. The cuff should fit comfortably, yet snugly
+        around your arm. You should be able to insert one finger between your arm and the cuff.\n\n
+
+
+Body posture\n\n
+
+
+  Stay still and calm for five minutes before taking a blood pressure measurement.
+  Be seated with your feet flat on the floor without crossing your legs.
+  Place your hand palm-side up in front of you on a flat surface such as a desk or table.
+  The cuff should be placed at the same level as your heart.\n\n
+
+	<b>NOTE : </b>\n\n
+
+	Incorrect measuring posture showed as follows might cause an incorrect measurement:\n
+	Bent over（lean forward）;\n
+	Sitting cross-legged;\n
+	Bend the body because of the low table or sitting on sofa.\n\n
+
+
+
+•	Measuring\n
+
+•	Short press (press and hold it less than 2s) the power button to turn on the device, then the cuff pressure
+        automatically and the screen shows rising pressure values. Stay still and calm during measurement.
+        Do not move your arm, body and the device.\n\n
+
+•	You can press the select users button “   ” to select user.
+        If you need to change the user during measurement, short press (press and hold it less than 2s)
+        the power button to stop the measurement. Then press the button “   ” to select user. Short press
+        (press and hold it less than 2s) the power button again to continue the measurement.\n\n
+•	Display the measurement value\n
+
+•	The device exhausts automatically and displays the measurement results.
+        About the display interface of measurement results, please refer to chapter “Display ”.\n\n
+
+•	Users, who use the APP software, can read the measurement results on the software interface.\n
+
+•	Take off the cuff\n
+•	Turn off the device\n
+
+•	Long press (press and hold it more than 2s) the power button to turn off the device after the measurement.\n\n
+
+•	<b>NOTE :</b>\n\n
+
+   While measuring blood pressure, the users must stay still and calm without any talk;
+  The cuff tied on the limb shall be on the same level as the patient’s
+  heart so as to avoid the reading error resulting from the hydrostatics effect of the blood
+  flow between the heart and cuff. If the cuff position is higher than heart level, the BP reading will be
+  lower, the measured result shall be added 0.75mmHg\n\n
+
+   (0.1kPa) for each centimeter higher; in case the cuff position is lower than heart level,
+   the BP reading will be higher, the measured result shall be deducted 0.75mmHg (0.1kPa) for each centimeter lower;
+   If the signal measurement time is more than two minutes and the device doesn’t exhaust automatically,
+    please take off the cuff and turn off the device.\n\n
+
+
+
+   You can stop the measurement process at any time by pressing “Start/Stop” button.\n\n
+
+
+
+
+  Prolonged and frequent BPL BT02 measurements are associated with ischemia and neuropathy
+  in the limb wearing the cuff. Please examine the extremities of the limb frequently for normal color, warmth and
+  sensitivity. If any abnormality is observed, stop the BPL BT02 measurements.\n
+
+  Too frequent measurements may have influence on the measurement results.\n\n
+
+
+    </string>
+    <string name="searc">Search</string>
+    <string name="blu">BLUETOOTH</string>
+    <string name="sear">Search</string>
+    <string name="sear_">Search…</string>
+    <string name="res">Result</string>
+    <string name="mark_all">Mark All</string>
+
+
+    <string name="mark_all_active_users">Mark All Active Users</string>
+    <string name="mark_all_dormant_users">Mark All Dormant Users</string>
+    <string name="save_as_png">save as PNG</string>
+    <string name="pick_col">Pick a color</string>
+    <string name="share_as_png">Share as PNG</string>
+    <string name="sha">Share</string>
+    <string name="export_users">Export Users</string>
+    <string name="visc_fat">Visceral Fat</string>
+    <string name="body_fat">Body Fat</string>
+    <string name="bmr">BMR</string>
+    <string name="metabolic_age">Metabolic Age</string>
+    <string name="body_water">Body Water</string>
+    <string name="weight_in_kg">Weight in Kg</string>
+    <string name="bmi_statistics">BMI STATISTICS</string>
+    <string name="bmi_text1">BMI change since last 7 days : 0.2 %</string>
+    <string name="bmi_text2">BMI change since last 30 days : 1.0%</string>
+    <string name="tap_to_know_more_about_bmi">Tap to Know more about BMI</string>
+
+
+    <string name="bpm">BPM</string>
+    <string name="mm_hg">mm Hg</string>
+    <string name="kpa">kPa</string>
+    <string name="pul_rate">Pulse Rate</string>
+    <string name="normal_">Normal</string>
+    <string name="pre_hypertension">PreHypertension</string>
+    <string name="hypertension">Hypertension</string>
+
+    <string name="settings">Settings</string>
+    <string name="rec_saved">Current Record Saved</string>
+    <string name="save">Save</string>
+    <string name="start">Start</string>
+
+    <string name="comment">Comment</string>
+
+
+    <string name="unit">Unit</string>
+    <string name="voice">Voice</string>
+
+
+    <string name="sound_desirable">According to world health Organization , the blood pressure level
+    of your body is desirable</string>
+
+    <string name="sound_normal">According to world health Organization , the blood pressure level
+    of your body is normal</string>
+
+    <string name="sound_pre_hyper">According to world health Organization , the blood pressure level
+    of your body is pre hypertension</string>
+    <string name="sound_mild_hyper">According to world health Organization , the blood pressure level
+    of your body is Mild hypertension</string>
+
+    <string name="sound_moderate_hyper">According to world health Organization , the blood pressure level
+    of your body is Moderate hypertension</string>
+
+    <string name="sound_low">According to world health Organization , the blood pressure level
+    of your body is low</string>
+
+    <string name="sound_severe_hypertension">According to world health Organization , the blood pressure level
+    of your body is Severe hypertension</string>
+
+
+
+    <string name="severe_hypertension">Grade 3 Severe Hypertension</string>
+    <string name="moderate_hypertension">Grade 2 Moderate Hypertension</string>
+    <string name="mild_hypertension">Grade 1 Mild Hypertension</string>
+    <string name="high_normal">High Normal</string>
+    <string name="optimal">Optimal</string>
+    <string name="low">Low</string>
+    <string name="sys_by_dia">(SYS / DIA)</string>
+    <string name="action_delete">delete the records</string>
+    <string name="delete_rec">Do you want to delete the record ?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="del_rec">Delete Record</string>
+    <string name="record">Records</string>
+    <string name="trend">Trend</string>
+    <string name="exit_user_log">Select Existing User </string>
+
+
+    <string name="blood_press">Blood Pressure</string>
+    <string name="measuring">Measuring …</string>
+
+
+    <string name="bio_light_err_cuff">Check whether cuff is damaged or leaky, wrap cuff correctly refer to users manual and measure again
+    </string>
+    <string name="hide">Hide Values</string>
+    <string name="sho">Show Values</string>
+
+    <string name="share_via">Share Via</string>
+    <string name="cancel_">Cancel</string>
+    <string name="title_header">Title Header</string>
+    <string name="stp_">Stop</string>
+    <string name="day">Day</string>
+    <string name="month">Month</string>
+    <string name="week">Week</string>
+    <string name="skip">Skip</string>
+    <string name="body_age">Body Age</string>
+    <string name="metabolism">Metabolism</string>
+    <string name="bone_mass">Bone \n Mass</string>
+    <string name="muscle_mass">Muscle Mass</string>
+    <string name="lbm">LBM</string>
+    <string name="obesity">Obesity</string>
+    <string name="pulse_min_vs_time">Pulse/min Vs Time</string>
+    <string name="bp_mmhg_vs_date">BP(mmHg Vs Date)</string>
+    <string name="time">Time</string>
+    <string name="pul_mm_hg">PUL(mm Hg)</string>
+    <string name="dia_mm_hg">DIA(mm Hg)</string>
+    <string name="sys_mm_hg">SYS(mm Hg)</string>
+    <string name="protein">Protein</string>
+
+
+    <string name="muscle_mass_str">Muscle mass index is calculated from muscle masss, body weight and height
+    It is a quantitative assesment of health, status and strength</string>
+
+    <string name="protein_str">Protein is an important component of human cells and the organization,
+    accounting for about 18% of the total mass of the human body. Large numbers of protein are contained
+    in muscle cells, which is the main factors that reflect the nutritional status, physical development
+    and health of the person being tasted</string>
+
+    
+    
+    <string name="body_age_str">Body Age is calculated based on basal metabolism. And the basal metabolism is the
+    comprehensive weight,body fat rate, muscle rate and other indexes. So the age of the body is a measure 
+        of the physical condition of a person who is above and below the actual age.
+        In other words is the criteria for judging the condition of the body . Even the height and weight of the 
+        surveyors are the same, because differences in body fat and basal metabolic rate also lead to differences in age
+        
+    </string>
+    
+    
+<string name="metabolism_str">Basal Metabolism is the minimal rate of energy expenditure unit time by
+    animals at rest. It was measured under the circumstances when a man is awake and at complete rest
+</string>
+
+<string name="bone_mass_str">The human skeleton, composed of bones, supports the human body.
+Bone mineral density and calcium loss are the main concerns of bone health.
+</string>
+
+
+<string name="body_water_str"> Body Water percentage, is closely related to body muscle mass, since muscle
+contains a large amount of water. (approx 70%)</string>
+
+    <string name="body_fat_str"> Fat percentage is the total mass of fat divided by total body mass.
+    It provides a better assessment for how fat or thin a person is compared to BMI
+    </string>
+
+
+    <string name="lbm_str">Also known as lean body weight, which is the weight of the body composition
+    except the fat. Muscle is one of the main part of the fat body weight. The more developed the muscle is
+    , the better physical fitness is
+    </string>
+
+
+    <string name="visceral_fat_str">Visceral Fat is fat stored within abdominal cavity around a number of
+    internal organs</string>
+    <string name="bone_mass_">Bone Mass</string>
+    <string name="edit">Edit</string>
+    <string name="edit_prof">EDIT PROFILE</string>
+
+</resources>

@@ -1,0 +1,21 @@
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item android:id="@+id/markAll"
+        android:title="@string/mark_all"/>
+
+
+    <item android:id="@+id/marlActive"
+        android:title="@string/mark_all_active_users"/>
+
+
+    <item android:id="@+id/MarkDormant"
+        android:title="@string/mark_all_dormant_users"/>
+
+
+    <!--<item android:id="@+id/ExportUsers"
+        android:title="@string/export_all_users"/>
+-->
+
+</menu>

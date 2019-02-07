@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@mipmap/bpl_be_well_parameter_bg"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/baseheader"/>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:layout_marginTop="50dp"
+        android:id="@+id/vScroll"
+
+        >
+
+
+        <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/custom_card_bg"
+        android:id="@+id/relative_scroll"
+        android:layout_below="@+id/include"
+        android:layout_margin="8dp"
+        android:layout_centerHorizontal="true">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="3"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/relative_top"
+                    android:layout_height="match_parent">
+
+
+                    <customviews.MyCustomTextView
+                        android:text="@string/weight_"
+                        app:fontname="centralSansXBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/relative_top"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="5dp"
+                        android:textColor="@color/white"
+                        android:id="@+id/measurementType"
+                        android:textSize="20sp"
+                        tools:ignore="NotSibling" />
+
+
+                    <customviews.MyCustomTextView
+                        android:id="@+id/weight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/measurementType"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:text="- -"
+
+                        android:textColor="@color/header_itltle_color"
+                        android:textSize="95sp"
+                        android:textStyle="bold"
+                        app:fontname="avangami"
+
+                        />
+
+                </RelativeLayout>
+
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginTop="0dp"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center_horizontal"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="@string/name"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:id="@+id/name"
+                        android:textColor="@color/white"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/weight"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="15dp"
+                        android:text="03-05-2017 "
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+
+                <View
+                    android:text="Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_margin="5dp"
+                    android:layout_below="@+id/status"
+                    android:background="#4E69AC"
+                    android:id="@+id/button6" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/parent_relative"
+                    android:layout_height="match_parent">
+
+
+                    <TextView
+                        android:text="--"
+                        android:layout_width="100dp"
+                        android:gravity="center"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginStart="12dp"
+                        android:id="@+id/txtage_"
+                        android:textColor="@color/white"
+                        android:layout_alignParentBottom="true" />
+
+                    <TextView
+                        android:text="--"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentEnd="true"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:id="@+id/txtheight_" />
+
+                    <TextView
+                        android:text="@string/age"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="20dp"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:layout_marginStart="13dp"
+                        android:id="@+id/age_text" />
+
+                    <TextView
+                        android:text="@string/height"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentEnd="true"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:layout_marginBottom="20dp"
+                        android:id="@+id/height" />
+
+                    <customviews.MyCustomTextView
+                        android:text="@string/bmi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textSize="25sp"
+                        app:fontname="centralSansXBold"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="@dimen/bmi_margin_top"
+                        android:id="@+id/textView29" />
+
+
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="0dp"
+                        >
+
+
+                        <!-- <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginLeft="10dp"
+
+                            android:src="@mipmap/bmi_scale"
+                            android:id="@+id/imageView4" />-->
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom|center_horizontal"
+                            android:layout_marginBottom="@dimen/needle_margin_bottom"
+                            android:src="@mipmap/needle"
+                            android:id="@+id/needle" />
+                        <customviews.MyCustomTextView
+                            android:text="--"
+                            android:textSize="70sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/red"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:fontname="avangami"
+                            android:layout_gravity="bottom|center_horizontal"
+                            android:layout_above="@+id/height_text"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="30dp"
+                            android:id="@+id/bmi_value" />
+
+                        <customviews.CurvePathView
+                            android:id="@+id/curvePathView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="300dp"
+                            android:layout_marginTop="@dimen/margin_top_guage" />
+
+                    </FrameLayout>
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+    </ScrollView>
+
+    <io.github.yavski.fabspeeddial.FabSpeedDial
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        app:fabGravity="bottom_end"
+        app:fabMenu="@menu/menu"
+        android:id="@+id/fabSpeedDial"
+        app:miniFabBackgroundTint="@android:color/white"
+
+
+
+        />
+</FrameLayout>

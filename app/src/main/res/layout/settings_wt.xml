@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@mipmap/bpl_be_well_parameter_bg"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/baseheader"
+        />
+
+
+    <ListView
+        android:layout_width="match_parent"
+        android:id="@+id/list_item"
+        android:layout_below="@+id/include"
+        android:layout_height="wrap_content">
+
+    </ListView>
+
+</RelativeLayout>

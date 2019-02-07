@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:layout_width="match_parent"
+    android:background="@mipmap/bpl_be_well_splash"
+    android:layout_height="match_parent">
+
+
+   <!-- <wl.com.bpl.customviews.MyCustomTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:text="@string/app_title"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:padding="5dp"
+        android:textColor="@color/white"
+        android:textStyle="bold|italic"
+        app:typeface="centralSansXBold"
+        android:layout_centerHorizontal="true" />-->
+
+   <!-- <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/imageViewSplash"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/bpl_be_well_spalsh" />
+-->
+
+   <com.dragankrstic.autotypetextview.AutoTypeTextView
+       android:layout_width="match_parent"
+       android:layout_height="40dp"
+       android:textStyle="bold|italic"
+       android:textSize="25sp"
+       android:gravity="center_horizontal"
+       android:textColor="@color/spalsh_text_color"
+       android:layout_alignParentBottom="true"
+       android:layout_alignParentStart="true"
+       app:animateTextTypeWithoutMistakes="@string/bpl_moto"
+       android:id="@+id/textView" />
+
+
+</RelativeLayout>

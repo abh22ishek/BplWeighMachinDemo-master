@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorAccent">#FF4081</color>
+    <!--<color name="backgroundSplash">#125688</color>-->
+    <color name="backgroundSplash">#0066BB</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="samplebuttoncolor1">#768d4d</color>
+
+    <color name="separator">#E0E0E0</color>
+    <color name="statusbarbackground">#0F4973</color>
+
+    <color name="window_background_bottom">#0066BB</color>
+
+    <color name="header_itltle_color">#7CBC50</color>
+
+    <color name="button_text_color">#E31C15</color>
+    <color name="limits_text_color">#6195FA</color>
+    <color name="settings_bg">#004B88</color>
+    <color name="red">#E41710</color>
+    <color name="sig_strength_lo">#2196F3</color>
+    <color name="sig_strength_mid">#03A954</color>
+    <color name="sig_strength_hi">#FF00FF00</color>
+    <!--<color name="sig_strength_highest"></color>-->
+    <color name="grey_">#9E9E9E</color>
+    <color name="spalsh_text_color">#FF0F4183</color>
+    <color name="top_strength_color">#FFE9E90F</color>
+    <color name="sig_strength_top">#FFB0C826</color>
+
+    <color name="severe_hypertension_color">#9A0E07</color>
+    <color name="moderate_hypertension_color">#E41710</color>
+    <color name="mild_hypertension_color">#F3924F</color>
+    <color name="high_normal">#FBED17</color>
+    <color name="normal">#40AF59</color>
+    <color name="optimal">#41c1ED</color>
+    <color name="low">#6E8BC7</color>
+    <color name="text_color">#7CBC50</color>
+    <color name="button_bg_color">#4688C7</color>
+    <color name="transparent">#00FFFFFF</color>
+
+
+    <color name="bg_start_color">#242D45</color>
+    <color name="bg_end_color">#212637</color>
+    <color name="bg_centre_color">#4E69AC</color>
+    <color name="bg_solid_color">#4E69AC</color>
+    <color name="image_item_selected_for_dots">#787868</color>
+    <color name="iweigh_orange">#ECB607</color>
+
+    <color name="iweigh_sky_blue">#8CB8E5</color>
+
+</resources>

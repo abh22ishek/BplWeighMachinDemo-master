@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/Hz132"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:orientation="horizontal">
+
+        <customviews.MyCustomTextView
+            android:id="@+id/showVal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/savebutton"
+            android:gravity="start"
+            android:padding="3dp"
+
+
+            android:textColor="@color/white"
+            android:textSize="14sp"
+
+            tools:ignore="RelativeOverlap" />
+
+        <customviews.MyCustomTextView
+            android:id="@+id/bpChartTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="@string/bp_mmhg_vs_date"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+
+        <ImageView
+            android:id="@+id/pdf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+
+            android:layout_alignParentEnd="true"
+
+
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="1dp"
+            android:contentDescription="@string/chart"
+            android:src="@mipmap/pdf_"
+            />
+
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_below="@+id/Hz132"
+        android:id="@+id/Hz1"
+        android:layout_height="wrap_content">
+
+
+        <biolight.CustomBPDayChartYaxis
+            android:layout_width="wrap_content"
+            android:id="@+id/custom_day_chartYaxis"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content" />
+
+
+
+
+
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:scrollbars="none"
+            android:fillViewport="true"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:id="@+id/HeartRate"
+                android:padding="5dp"
+                android:layout_height="wrap_content">
+
+
+                <biolight.CustomBPDayChart
+                    android:layout_width="match_parent"
+                    android:id="@+id/custom_day_chart"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="wrap_content" />
+
+
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
+
+
+    </LinearLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/content"
+        android:background="@color/window_background_bottom"
+        android:layout_below="@+id/Hz1"
+        android:layout_alignParentStart="true"
+        android:padding="3dp"
+        android:layout_marginTop="0dp"
+        tools:ignore="ObsoleteLayoutParam">
+
+        <HorizontalScrollView
+            android:id="@+id/l1"
+            android:layout_width="381dp"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            tools:ignore="UselessParent">
+
+
+            <LinearLayout
+                android:id="@+id/l12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:visibility="visible">
+
+
+                <!--   <TextView
+                       android:id="@+id/dateText"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_marginStart="5dp"
+                       android:text="@string/date"
+                       android:textColor="@color/text_color" />-->
+
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="New Text"
+                    android:textColor="@color/text_color" />
+
+
+                <Button
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginStart="15dp"
+                    android:background="@color/text_color" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/normal_"
+                    android:layout_marginStart="5dp"
+                    android:textSize="12sp" />
+
+
+                <Button
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@color/high_normal" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pre_hypertension"
+                    android:layout_marginStart="5dp"
+                    android:textSize="12sp" />
+
+
+                <Button
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@color/severe_hypertension_color" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/hypertension"
+                    android:layout_marginStart="5dp"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </HorizontalScrollView>
+
+
+
+
+    </RelativeLayout>
+
+    <customviews.MyCustomTextView
+        android:layout_width="wrap_content"
+        android:id="@+id/showVal2"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:gravity="start"
+        android:padding="3dp"
+        android:layout_marginStart="5dp"
+        android:background="@drawable/savebutton"
+        android:layout_below="@+id/content"
+
+        android:text="Show Values"
+        android:layout_marginTop="0dp"
+        android:layout_height="wrap_content"
+        tools:ignore="HardcodedText" />
+    <customviews.MyCustomTextView
+        android:id="@+id/pulseTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/content"
+        android:layout_marginTop="0dp"
+        android:gravity="center"
+        android:text="@string/pulse_min_vs_time"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:fillViewport="true"
+        android:layout_below="@+id/pulseTitle"
+        android:id="@+id/scrollV"
+        android:scrollbars="none"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <biolight.PulseChartYaxis
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:scrollbars="none"
+                android:fillViewport="true"
+                android:layout_height="wrap_content"
+
+                >
+
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/spo2"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+
+                    >
+
+
+                    <biolight.PulseDayChart
+                        android:layout_width="match_parent"
+                        android:id="@+id/pulse_day_chart"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_height="wrap_content" />
+
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
+</RelativeLayout>

@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@mipmap/bpl_be_well_bg"
+
+    android:layout_height="match_parent">
+
+
+    <include layout="@layout/baseheader"
+        />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_below="@id/include"
+        android:layout_height="match_parent">
+
+
+        <customviews.RoundedImageView
+
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:id="@+id/img_photo"
+            android:src="@drawable/add_profile"
+            android:layout_marginBottom="10dp"
+            android:layout_centerHorizontal="true" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:padding="10dp"
+            android:id="@+id/details_linear"
+            android:background="@drawable/slect_parameter_bg"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_above="@+id/bottom_bar"
+
+            >
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="35dp"
+                    android:gravity="start"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:text="@string/ad_name"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:maxLength="30"
+                    android:hint="@string/set_name"
+                    android:id="@+id/userName"
+                    android:maxLines="1"
+                    android:imeOptions="actionNext"
+                    android:inputType="text|textPersonName"
+                    android:background="@android:color/transparent"
+                    android:scrollHorizontally="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/white"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="5dp"
+                android:visibility="gone"
+                android:background="@color/separator"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="35dp"
+                    android:gravity="start"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:text="@string/user_name"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:maxLength="15"
+                    android:hint="@string/set_name"
+                    android:id="@+id/userName_"
+                    android:maxLines="1"
+                    android:imeOptions="actionNext"
+                    android:inputType="text|textPersonName"
+                    android:background="@android:color/transparent"
+                    android:scrollHorizontally="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/white"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="5dp"
+                android:background="@color/separator"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="35dp"
+                    android:gravity="start"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:text="@string/email"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:maxLength="20"
+                    android:hint="@string/set_email"
+                    android:id="@+id/userEmail"
+                    android:maxLines="1"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:background="@android:color/transparent"
+                    android:scrollHorizontally="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/white"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="5dp"
+                android:background="@color/separator"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="35dp"
+                    android:gravity="start"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:text="@string/phone"/>
+
+                <EditText
+                    android:id="@+id/userPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:digits="0123456789"
+                    android:hint="@string/set_phone"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:maxLines="1"
+                    android:scrollHorizontally="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/white" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="5dp"
+                android:background="@color/separator"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="35dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:text="@string/age"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:hint="@string/set_age"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:id="@+id/address"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/white"
+                    android:background="@android:color/transparent"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="5dp"
+                android:background="@color/separator"
+                />
+
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="35dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:text="@string/gender"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:orientation="horizontal"
+                        android:id="@+id/sex"
+                        android:checkedButton="@+id/radio_btn_Male"
+                        android:layout_height="wrap_content">
+
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:layout_width="wrap_content"
+                            android:text="@string/male"
+                            android:id="@+id/radio_btn_Male"
+                            android:buttonTint="@color/white"
+                            android:textColor="@color/black"
+                            android:layout_height="35dp" />
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:layout_width="wrap_content"
+                            android:text="@string/female"
+                            android:id="@+id/radio_btn_Female"
+                            android:textColor="@color/black"
+                            android:layout_marginStart="8dp"
+                            android:buttonTint="@color/white"
+                            android:layout_height="35dp" />
+                    </RadioGroup>
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="5dp"
+                android:background="@color/separator"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="35dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:text="@string/height"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:hint="@string/set_height"
+                    android:maxLength="3"
+                    android:inputType="number"
+                    android:id="@+id/height"
+                    android:textColor="@color/black"
+                    android:background="@android:color/transparent"
+                    android:textColorHint="@color/white"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="5dp"
+                android:background="@color/separator"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="35dp"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:text="@string/weight"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:hint="@string/set_weight"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:id="@+id/weight"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/white"
+                    android:background="@android:color/transparent"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:id="@+id/bottom_bar"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:text="@string/submit"
+                android:textColor="@color/white"
+                android:background="@drawable/buttonshape"
+                android:id="@+id/btnSubmit" />
+
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:text="@string/update"
+                android:textColor="@color/white"
+                android:id="@+id/deleteUpdate"
+                android:visibility="visible"
+                android:background="@drawable/buttonshape"
+                />
+        </LinearLayout>
+
+
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

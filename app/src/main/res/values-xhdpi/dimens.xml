@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="margin_top_guage">30dp</dimen>
+    <dimen name="bmi_margin_top">5dp</dimen>
+    <dimen name="needle_margin_bottom">134dp</dimen>
+
+    <dimen name="iweigh_txt">86sp</dimen>
+</resources>

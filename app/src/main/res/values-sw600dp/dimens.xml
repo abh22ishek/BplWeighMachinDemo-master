@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+        <!-- Default screen margins, per the Android Design guidelines. -->
+
+
+    <dimen name="relative_layout1_width">80dp</dimen>
+        <dimen name="relative_layout2_height">250dp</dimen>
+
+
+    <dimen name="spo2_text_size">115sp</dimen>
+        <dimen name="hr_text_size">80sp</dimen>
+        <dimen name="pi_text_size">60sp</dimen>
+
+        <dimen name="spo2_text_size_alt">35sp</dimen>
+        <dimen name="hr_text_size_alt">30sp</dimen>
+        <dimen name="pi_text_size_alt">25sp</dimen>
+
+    <dimen name="chart_text">240dp</dimen>
+
+    <dimen name="start_rec_height">40dp</dimen>
+        <dimen name="start_rec_width">150dp</dimen>
+
+</resources>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@mipmap/bpl_be_well_parameter_bg"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:id="@+id/include"
+        android:layout_height="wrap_content">
+
+
+
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imgBackKey"
+            android:padding="0dp"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/back"
+            android:layout_alignParentStart="true"
+            android:src="@mipmap/ic_chevron_left_white_48dp" />
+
+        <!--<View
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:background="@color/white"
+            android:layout_margin="5dp"
+
+            android:layout_alignBottom="@+id/imgBackKey"
+            android:layout_toEndOf="@+id/imgBackKey"
+            android:id="@+id/view" />-->
+
+        <customviews.MyCustomTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/base_header_title"
+            android:textColor="@color/black"
+            android:textSize="26sp"
+            app:fontname="centralSansXBold"
+            android:id="@+id/base_header_title"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/optionSettings"
+            android:padding="0dp"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/settings"
+            android:layout_alignParentEnd="true"
+            android:visibility="visible"
+            android:src="@mipmap/options_settings" />
+
+
+
+    </RelativeLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/layout"
+        android:weightSum="3"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_below="@+id/include"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_width="0dp"
+            android:hint="@string/user_name_"
+            android:id="@+id/autoText"
+            android:gravity="center_vertical"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:textColor="@color/black"
+            android:cursorVisible="false"
+            android:inputType="text"
+            android:layout_weight="2"
+            android:background="@drawable/edit_text_rounded"
+            android:textColorHint="@color/grey_"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            />
+
+
+
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/searchBy"
+            android:layout_width="0dp"
+            android:layout_margin="5dp"
+
+            android:layout_weight="1"
+            android:layout_height="40dp"
+            />
+    </LinearLayout>
+
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView"
+        android:layout_marginLeft="5dp"
+        android:layout_below="@+id/layout"
+        android:layout_marginRight="5dp"
+        android:divider="@null"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="50dp"
+        android:layout_gravity="center_vertical"
+
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="4dp"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/proceed"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_btn_search"
+
+            android:gravity="center"
+            android:text="@string/proceed"
+            tools:ignore="ButtonStyle" />
+
+
+        <Button
+            android:id="@+id/ExportUsers"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/rounded_btn_search"
+
+            android:gravity="center"
+            android:text="@string/export_users"
+            tools:ignore="ButtonStyle" />
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@mipmap/bpl_be_well_parameter_bg"
+    android:layout_height="match_parent">
+
+
+
+
+    <include layout="@layout/baseheader"
+        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_below="@+id/include"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:id="@+id/Spo2_Linear"
+                android:layout_margin="5dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingTop="5dp"
+                android:background="@drawable/settings_background"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone"
+                    android:textColor="@color/header_itltle_color"
+                    android:text="SpO2"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="@string/spo2high"
+                        android:textColor="@color/white"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="150"
+                        android:id="@+id/txt_SPO2high"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/white"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true" />
+
+                    <android.support.v7.widget.SwitchCompat
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textOff=""
+                        android:textOn=""
+                        android:id="@+id/togle_spo2_high"
+                        android:layout_marginEnd="10dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true" />
+
+                </RelativeLayout>
+
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="@string/spo2low"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:layout_height="40dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="85"
+                        android:layout_weight="1"
+                        android:id="@+id/txt_SPO2Low"
+                        android:gravity="center_horizontal"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:textSize="20sp"
+                        android:textColor="@color/white"
+                        android:layout_height="40dp" />
+                    <android.support.v7.widget.SwitchCompat
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textOff=""
+                        android:textOn=""
+                        android:visibility="gone"
+                        android:layout_marginEnd="10dp"
+                        android:id="@+id/togle_spo2_low"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true" />
+
+                </RelativeLayout>
+
+
+
+                <customviews.customrangebar.RangeBar
+                    android:layout_width="match_parent"
+                    android:id="@+id/rangebar"
+                    custom:tickHeight="0dp"
+                    custom:tickCount="15"
+                    android:padding="0dp"
+                    xmlns:custom="http://schemas.android.com/apk/res-auto"
+                    android:layout_height="wrap_content" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:id="@+id/heartbeat_Linear"
+                android:layout_margin="5dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingTop="5dp"
+                android:background="@drawable/settings_background"
+                android:layout_below="@+id/Spo2_Linear"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone"
+                    android:textColor="@color/header_itltle_color"
+                    android:text="HEART RATE"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="@string/heart_rate_high"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="100"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:id="@+id/txt_HeartRateHigh"
+                        android:layout_height="wrap_content" />
+
+                    <android.support.v7.widget.SwitchCompat
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textOff=""
+                        android:textOn=""
+
+                        android:layout_marginEnd="10dp"
+                        android:layout_alignParentEnd="true"
+                        android:id="@+id/togle_heart_rate_high"
+                        />
+
+                </RelativeLayout>
+
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="@string/heart_rate_low"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:layout_height="40dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="100"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:id="@+id/txt_HeartRateLow"
+                        android:textColor="@color/white"
+                        android:gravity="center_horizontal"
+                        android:textSize="20sp"
+                        android:layout_height="40dp" />
+                    <android.support.v7.widget.SwitchCompat
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textOff=""
+                        android:textOn=""
+                        android:layout_marginEnd="10dp"
+                        android:visibility="gone"
+                        android:layout_alignParentEnd="true"
+                        android:id="@+id/togle_heart_rate_low"
+                        android:checked="false"
+                        />
+
+                </RelativeLayout>
+
+
+
+                <customviews.customrangebar.RangeBar
+                    android:layout_width="match_parent"
+                    android:id="@+id/rangebar2"
+                    custom:tickHeight="0dp"
+                    custom:tickCount="100"
+                    xmlns:custom="http://schemas.android.com/apk/res-auto"
+                    android:layout_height="wrap_content" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:id="@+id/PI_Linear"
+                android:layout_margin="5dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="5dp"
+                android:paddingRight="5dp"
+                android:background="@drawable/settings_background"
+                android:layout_below="@+id/heartbeat_Linear"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:layout_marginTop="1dp"
+                    android:visibility="gone"
+                    android:textColor="@color/header_itltle_color"
+                    android:text="PI"/>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="@string/pi_high"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="100"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:id="@+id/txt_PIHigh"
+                        android:gravity="center_horizontal"
+                        android:textSize="20sp"
+                        android:textColor="@color/white"
+                        android:layout_height="wrap_content" />
+
+                    <android.support.v7.widget.SwitchCompat
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textOff=""
+                        android:textOn=""
+                        android:layout_marginEnd="10dp"
+                        android:layout_alignParentEnd="true"
+                        android:id="@+id/togle_PI_high"
+                        />
+
+                </RelativeLayout>
+
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="@string/pi_low"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true"
+                        android:textSize="20sp"
+                        android:textColor="@color/white"
+                        android:layout_height="40dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="90"
+                        android:id="@+id/txt_PILow"
+                        android:gravity="center_horizontal"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:layout_height="40dp" />
+                    <android.support.v7.widget.SwitchCompat
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textOff=""
+                        android:textOn=""
+                        android:layout_marginEnd="10dp"
+                        android:layout_alignParentTop="true"
+                        android:visibility="gone"
+                        android:layout_alignParentEnd="true"
+                        android:id="@+id/togle_PI_low"
+                        />
+
+                </RelativeLayout>
+
+
+
+                <customviews.customrangebar.RangeBar
+                    android:layout_width="match_parent"
+                    android:id="@+id/rangebar3"
+                    custom:tickHeight="0dp"
+                    custom:tickCount="20"
+                    xmlns:custom="http://schemas.android.com/apk/res-auto"
+                    android:layout_height="wrap_content" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</RelativeLayout>

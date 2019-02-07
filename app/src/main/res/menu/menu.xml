@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+            android:id="@+id/action_png_"
+            android:icon="@drawable/save_pos"
+        android:title="@string/save_as_png" />
+
+
+    <item
+        android:id="@+id/share_png"
+        android:icon="@drawable/share_pos"
+        android:title="@string/share_as_png" />
+</menu>

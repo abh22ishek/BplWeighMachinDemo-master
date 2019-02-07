@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="@drawable/home_bg"
+    android:layout_height="match_parent">
+
+
+
+
+
+
+
+
+    <customviews.MyCustomTextView
+        android:text="@string/blood_press"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:padding="2dp"
+        android:textSize="@dimen/bp_blood_pressure_txt"
+        app:fontname="centralSansXBold"
+        android:textStyle="bold"
+        android:layout_height="wrap_content"
+        android:id="@+id/bpPressureText"
+        android:layout_below="@+id/menu_bar"
+
+        android:layout_centerHorizontal="true" />
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_below="@+id/bpPressureText"
+        android:id="@+id/bpOngoingLayout"
+        android:layout_height="100dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="60sp"
+            android:id="@+id/textOngoingBP"
+            android:gravity="center"
+            android:text="00"
+            android:layout_centerInParent="true"
+            android:textColor="@color/white"
+            android:textStyle="bold"/>
+
+
+        <customviews.MyCustomTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="40sp"
+            android:id="@+id/textError"
+            android:text="Error"
+            app:fontname="centralSansXBold"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="50dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"/>
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:textSize="30sp"
+            android:text="@string/mm_hg"
+            android:textColor="@color/white"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="15dp"
+            android:textStyle="bold"
+            android:id="@+id/textUnit"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_below="@+id/bpPressureText"
+        android:id="@+id/bpReadLayout"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/hyphen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/sysPressure"
+            android:layout_alignBottom="@+id/sysPressure"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="-2dp"
+            android:text="/"
+            android:textColor="@color/text_color"
+            android:textSize="48sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:text="---"
+            android:gravity="center"
+            android:textColor="@color/text_color"
+            android:layout_width="wrap_content"
+            android:textSize="40sp"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:id="@+id/sysPressure"
+            android:layout_alignParentTop="true"
+            android:layout_toStartOf="@+id/hyphen"
+
+
+            />
+
+
+
+
+
+        <TextView
+            android:text="@string/sys_by_dia"
+            android:layout_gravity="end"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:textSize="16sp"
+            android:layout_height="wrap_content"
+            android:id="@+id/sys_dia_text"
+            android:textStyle="bold"
+            android:gravity="right"
+            android:layout_marginEnd="5dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:text="---"
+            android:textColor="@color/text_color"
+            android:layout_width="wrap_content"
+            android:textSize="40sp"
+            android:layout_height="wrap_content"
+            android:id="@+id/diaPressure"
+            android:textStyle="bold"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/hyphen" />
+
+
+        <TextView
+            android:text="---"
+            android:textStyle="bold"
+            android:textSize="36sp"
+            android:textColor="@color/text_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pulseRate"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_below="@+id/pulseRateText"
+            android:layout_centerHorizontal="true"
+
+            />
+
+        <TextView
+            android:text="@string/bpm"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:id="@+id/bpmText"
+            android:layout_marginEnd="10dp"
+            android:layout_alignBottom="@+id/pulseRate"
+            android:layout_alignEnd="@+id/pulseRateText" />
+
+        <TextView
+            android:text="@string/mm_hg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/pulseRateText"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_marginEnd="10dp"
+            android:textSize="16sp"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/mmHgText" />
+
+        <TextView
+            android:text="@string/pul_rate"
+            android:layout_width="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_below="@+id/hyphen"
+            android:layout_height="wrap_content"
+            android:id="@+id/pulseRateText" />
+
+    </RelativeLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/bottomLayout"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <biolight.CustomBPChartBioLight
+            android:layout_width="wrap_content"
+            android:layout_margin="10dp"
+            android:id="@+id/customBPView"
+            android:layout_height="wrap_content"
+            />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="5dp"
+        android:layout_gravity="center"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_above="@+id/buttonLayout"
+        android:background="@color/bg_start_color"
+        />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_alignTop="@+id/bottomLayout"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="5dp"
+        android:id="@+id/buttonLayout"
+        android:layout_height="wrap_content">
+
+        <customviews.MyCustomButton
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:text="@string/start"
+            android:background="@drawable/background_button"
+            android:textColor="@color/white"
+            android:visibility="visible"
+            android:id="@+id/startTest"
+            />
+
+
+        <customviews.MyCustomButton
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:text="@string/stp_"
+            android:background="@drawable/background_button"
+            android:textColor="@color/white"
+            android:visibility="visible"
+            android:layout_marginStart="5dp"
+            android:id="@+id/stopTest"
+            />
+
+
+
+        <customviews.MyCustomButton
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:text="@string/save"
+            android:background="@drawable/background_button"
+            android:textColor="@color/white"
+            android:visibility="visible"
+            android:layout_marginStart="5dp"
+            android:id="@+id/Save"
+            />
+
+        <customviews.MyCustomButton
+            android:layout_width="90dp"
+            android:layout_height="30dp"
+            android:text="@string/comment"
+            android:background="@drawable/background_button"
+            android:textColor="@color/white"
+            android:visibility="visible"
+            android:layout_marginStart="5dp"
+            android:id="@+id/Comment"
+            />
+
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>

@@ -1,0 +1,12 @@
+<RelativeLayout
+    android:id="@+id/main_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bpl_be_well_parameter_bg"
+    >
+
+    <include
+        layout="@layout/baseheader"/>
+
+</RelativeLayout>

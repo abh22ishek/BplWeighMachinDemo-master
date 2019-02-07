@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@mipmap/be_well"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:orientation="vertical"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
+        tools:ignore="UselessParent">
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/infoDialog"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="12dp"
+                android:contentDescription="@string/user_info"
+                android:src="@android:drawable/ic_dialog_info"
+
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/options_settings"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/imageView"
+                android:visibility="gone"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/userNameS"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="61dp"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:text="" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="33dp"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_alignParentBottom="true"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/userNameSelected"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+
+                    android:text="fef" />
+
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtChangeUserSel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="7dp"
+                android:textColor="@color/white"
+
+                android:textStyle="bold"
+                android:layout_centerHorizontal="true"
+                android:text="@string/user_name" />
+
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/first_bar_relative"
+            android:orientation="vertical"
+            android:background="@drawable/slect_parameter_bg"
+            android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:id="@+id/first_bar"
+            android:padding="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:src="@mipmap/ioxy"
+                android:layout_weight="1"
+                android:contentDescription="@string/spo2_machine"
+                android:id="@+id/select_image_ioxy"
+                android:layout_height="wrap_content" />
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:src="@mipmap/weight"
+                android:layout_weight="1"
+                android:id="@+id/select_weigh_machine_"
+                android:contentDescription="@string/weigh_machine"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:src="@mipmap/bpump"
+                android:id="@+id/bPump"
+                android:layout_weight="1"
+                android:visibility="visible"
+                android:contentDescription="@string/analysis"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+            <View android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="#568DC0"
+
+                />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:id="@+id/second_bar"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:src="@mipmap/records"
+                    android:layout_weight="1"
+                    android:id="@+id/select_records"
+                    android:contentDescription="@string/records"
+                    android:layout_height="wrap_content" />
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:src="@mipmap/add_profile"
+                    android:layout_weight="1"
+                    android:id="@+id/user_profile"
+                    android:contentDescription="@string/weigh_machine"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:id="@+id/profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/weigh_machine"
+                    android:src="@mipmap/info_icon"
+
+                    />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+
+</FrameLayout>

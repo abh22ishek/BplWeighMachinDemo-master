@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent">
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:padding="1dp"
+        android:scrollbars="none"
+        android:layout_height="wrap_content"
+        android:fillViewport="false">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="2dp"
+            android:background="@drawable/custom_card_bg"
+            android:layout_height="wrap_content">
+
+
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtSpo2"
+                android:text="@string/spo_percentage"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                />
+            <View android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:layout_margin="3dp"
+                />
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="@string/pr_bpm"
+                android:id="@+id/txtHeartRate"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                />
+
+            <View android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:layout_margin="3dp"
+                />
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="@string/pi"
+                android:id="@+id/txtPI"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                />
+
+            <View android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:layout_margin="3dp"
+                />
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:text="@string/report"
+                android:layout_marginStart="10dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                />
+
+            <View android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:layout_margin="3dp"
+                />
+
+            <TextView
+                android:layout_width="@dimen/chart_text"
+                android:layout_height="wrap_content"
+                android:text="@string/chart"
+                android:textStyle="bold"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                />
+
+            <View android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:layout_margin="3dp"
+                />
+
+            <TextView
+                android:layout_width="@dimen/chart_text"
+                android:layout_height="wrap_content"
+                android:text="@string/delete"
+                android:textStyle="bold"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                />
+
+        </LinearLayout>
+
+
+
+
+
+    <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="0dp"
+                 android:layout_margin="0dp"
+                    android:id="@+id/recycler_view" />
+
+       </LinearLayout>
+    </HorizontalScrollView>
+</LinearLayout>

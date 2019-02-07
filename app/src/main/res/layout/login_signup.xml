@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/test.bpl.com.bploximeterdemo"
+    android:layout_width="match_parent"
+    android:id="@+id/loginRelative"
+    android:orientation="vertical"
+    android:background="@mipmap/be_well"
+    android:layout_height="match_parent">
+
+
+
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_weight="1.3"
+    android:layout_height="match_parent">
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+</LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:paddingBottom="0dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:layout_weight="1"
+        android:layout_marginBottom="10dp"
+        android:layout_height="match_parent"
+        android:id="@+id/rel_below_scroll">
+
+
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="0dp"
+        android:orientation="vertical"
+        android:padding="10dp"
+            android:gravity="center_horizontal"
+        android:background="@drawable/slect_parameter_bg"
+        android:layout_height="wrap_content"
+        android:id="@+id/loginLayout">
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/emailid"
+        android:textColor="@color/black"
+        android:padding="5dp"
+        android:background="@android:color/transparent"
+        android:hint="@string/email"
+        android:textColorHint="@color/white"
+
+       />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/separator"
+            />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:padding="5dp"
+        android:hint="@string/password"
+        android:id="@+id/password"
+        android:background="@android:color/transparent"
+        android:textColor="@color/black"
+        android:textColorHint="@color/white"
+        />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/separator"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/log_in"
+            android:layout_marginTop="10dp"
+            android:id="@+id/btnLoginSignUp"
+            android:textColor="@color/white"
+
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/buttonshape"
+            />
+
+    </LinearLayout>
+
+
+
+    <customviews.MyCustomTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/sign_up"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:id="@+id/SignUp"
+        android:textSize="22sp"
+        app:typeface="centralSansBook"
+        android:layout_below="@+id/loginLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp" />
+
+
+        <customviews.MyCustomTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/forgot_password"
+            android:id="@+id/forgotPassword"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:typeface="centralSansLight"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
+
+        <customviews.MyCustomTextView
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="@string/user_guide_"
+            android:textSize="19sp"
+            android:id="@+id/user_guide"
+            android:layout_above="@+id/forgotPassword"
+            android:layout_centerHorizontal="true" />
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>
+

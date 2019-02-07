@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:id="@+id/HeartRate"
+        android:layout_height="wrap_content">
+
+        <jjoe64.graphview.GraphView
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
+            android:id="@+id/graph_heart_rate"
+            />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/content"
+        android:layout_marginTop="5dp"
+        android:background="@color/window_background_bottom"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:id="@+id/l1"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:layout_height="wrap_content">
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:id="@+id/hr_color"
+                android:layout_margin="1dp"
+                android:background="@color/header_itltle_color"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true" />
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pulse Rate"
+                android:layout_marginLeft="5dp"
+                android:id="@+id/txtspo2"
+                android:layout_alignBaseline="@+id/spo2_color"
+                android:layout_alignBottom="@+id/spo2_color"
+                android:layout_toEndOf="@+id/hr_color" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:id="@+id/time_hr" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:id="@+id/l2"
+            android:layout_marginTop="3dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:layout_below="@+id/l1"
+            android:layout_height="wrap_content">
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:background="@color/colorAccent"
+                android:id="@+id/spo2_color"
+                android:layout_margin="1dp"
+                android:layout_below="@+id/hr_color"
+                android:layout_alignParentStart="true" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Spo2"
+                android:layout_marginLeft="5dp"
+                android:id="@+id/txthr"
+                android:layout_above="@+id/spo2_color"
+                android:layout_toEndOf="@+id/hr_color" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:id="@+id/time_spo2" />
+
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/spo2"
+        android:layout_below="@+id/content"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp">
+
+        <jjoe64.graphview.GraphView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/graph_spo2"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

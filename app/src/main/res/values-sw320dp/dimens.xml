@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <dimen name="relative_layout1_width">65dp</dimen>
+    <dimen name="relative_layout2_height">120dp</dimen>
+
+
+    <dimen name="spo2_text_size">96sp</dimen>
+    <dimen name="hr_text_size">72sp</dimen>
+    <dimen name="pi_text_size">56sp</dimen>
+
+    <dimen name="spo2_text_size_alt">24sp</dimen>
+    <dimen name="hr_text_size_alt">22sp</dimen>
+    <dimen name="pi_text_size_alt">18sp</dimen>
+
+    <dimen name="chart_text">50dp</dimen>
+    <dimen name="start_rec_height">34dp</dimen>
+    <dimen name="start_rec_width">140dp</dimen>
+    <dimen name="card_text">18sp</dimen>
+
+
+</resources>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_alignParentTop="true"
+    android:id="@+id/include"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="8dp"
+    android:layout_height="wrap_content">
+
+
+
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imgBackKey"
+        android:padding="0dp"
+        android:layout_centerVertical="true"
+        android:contentDescription="@string/back"
+        android:layout_alignParentStart="true"
+        android:src="@mipmap/ic_chevron_left_white_48dp" />
+
+    <!--<View
+        android:layout_width="1dp"
+        android:layout_height="wrap_content"
+        android:padding="2dp"
+        android:background="@color/white"
+        android:layout_margin="5dp"
+
+        android:layout_alignBottom="@+id/imgBackKey"
+        android:layout_toEndOf="@+id/imgBackKey"
+        android:id="@+id/view" />-->
+
+    <customviews.MyCustomTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/base_header_title"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        app:fontname="centralSansXBold"
+        android:id="@+id/base_header_title"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+
+
+
+
+</RelativeLayout>
+

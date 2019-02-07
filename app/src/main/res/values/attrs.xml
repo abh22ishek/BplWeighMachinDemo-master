@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+
+
+
+    <declare-styleable name="MyCustomTextView">
+        <attr name="fontname" format="enum">
+            <enum name="centralSansXBold" value="1" />
+            <enum name="centralSansLight" value="2" />
+            <enum name="centralSansBook" value="3" />
+            <enum name="avantgarde" value="4" />
+            <enum name="avangami" value="5" />
+            <enum name="arial" value="6"/>
+        </attr>
+    </declare-styleable>
+
+
+
+    <declare-styleable name="CircleImageView">
+        <attr name="civ_border_width" format="dimension" />
+        <attr name="civ_border_color" format="color" />
+        <attr name="civ_border_overlay" format="boolean" />
+        <attr name="civ_fill_color" format="color" />
+    </declare-styleable>
+
+
+
+    <declare-styleable name="RangeBar">
+        <attr name="tickCount" format="integer" />
+        <attr name="tickHeight" format="dimension" />
+        <attr name="barWeight" format="dimension" />
+        <attr name="barColor" format="reference|color" />
+        <attr name="connectingLineWeight" format="dimension" />
+        <attr name="connectingLineColor" format="reference|color" />
+        <attr name="thumbRadius" format="dimension" />
+        <attr name="thumbImageNormal" format="reference" />
+        <attr name="thumbImagePressed" format="reference" />
+        <attr name="thumbColorNormal" format="reference|color"/>
+        <attr name="thumbColorPressed" format="reference|color"/>
+    </declare-styleable>
+
+    <declare-styleable name="GraphViewXML">
+        <attr name="seriesData" format="string" />
+        <attr name="seriesType" format="string" />
+        <attr name="seriesTitle" format="string" />
+        <attr name="android:title" />
+        <attr name="seriesColor" format="color" />
+    </declare-styleable>
+
+
+
+    <declare-styleable name="CustomButtonColor">
+        <attr name="button_color" format="color"/>
+    </declare-styleable>
+
+
+
+
+
+
+
+</resources>
