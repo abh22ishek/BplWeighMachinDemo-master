@@ -22,7 +22,7 @@
     <string name="set_name">Set Name</string>
     <string name="set_age">Set Age</string>
 
-    <string name="set_address">Set Address</string>
+    <string name="set_address">Set City</string>
     <string name="user_name">User Name</string>
     <string name="ad_name">Login Name</string>
     <string name="set_phone">Set Phone No.</string>
@@ -42,7 +42,7 @@
 
     <string name="sure_sel_user">Are you Sure you want to delete Selected Records</string>
 
-    <string name="address">Address</string>
+    <string name="address">City</string>
     <string name="add_user">Add New User</string>
     <string name="sel_user">Select User</string>
     <string name="phone">Phone No.</string>
@@ -504,5 +504,8 @@ contains a large amount of water. (approx 70%)</string>
     <string name="bone_mass_">Bone Mass</string>
     <string name="edit">Edit</string>
     <string name="edit_prof">EDIT PROFILE</string>
+    <string name="add_prof">ADD PROFILE</string>
+    <string name="add_clinic_prof">Add CLINIC PROFILE</string>
+    <string name="man_fam_men">Manage Family Member</string>
 
 </resources>

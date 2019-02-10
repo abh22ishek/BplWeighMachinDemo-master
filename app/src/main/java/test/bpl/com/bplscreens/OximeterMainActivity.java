@@ -141,7 +141,7 @@ public class OximeterMainActivity extends Activity {
                     DatabaseManager.getInstance().openDatabase();
                     if (DatabaseManager.getInstance().Login(emailid.getText().toString().trim(), password.getText().toString().trim())) {
                         globalVariable.setUsername(emailid.getText().toString());
-                        StoreCredentials.save_signupcredentials(OximeterMainActivity.this, emailid.getText().toString().trim(), TAG);
+                        StoreCredentials.save_signupcredentials(OximeterMainActivity.this, emailid.getText().toString().trim(), TAG,"");
                        // Toast.makeText(OximeterMainActivity.this, "User id value stored in Shared Pref file" + " " + " ", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(OximeterMainActivity.this, SelectParameterActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

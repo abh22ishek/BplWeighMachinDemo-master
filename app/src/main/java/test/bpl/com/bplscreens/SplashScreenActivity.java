@@ -112,6 +112,8 @@ public class SplashScreenActivity extends Activity {
         mUsername=login_credentials.getString(Constants.USER_NAME, null);
         String mPwd= login_credentials.getString(Constants.PASSWORD, null);
 
+        String mUserType=login_credentials.getString(Constants.USE_TYPE,null);
+
 
         if(mUsername!=null)
             b=true;
@@ -125,6 +127,10 @@ public class SplashScreenActivity extends Activity {
             globalVariable.setUsername(mUsername);
         }
 
+
+        if(globalVariable.getUserType()==null){
+            globalVariable.setUserType(mUserType);
+        }
         return b;
 
     }
