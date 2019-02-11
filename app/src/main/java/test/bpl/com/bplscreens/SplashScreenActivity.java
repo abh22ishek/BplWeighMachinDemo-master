@@ -33,15 +33,11 @@ public class SplashScreenActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (Build.VERSION.SDK_INT < 16) {
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        }else{
             View decorView = getWindow().getDecorView();
             int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
             decorView.setSystemUiVisibility(uiOptions);
-        }
+
 
         setContentView(R.layout.splashscreen);
         globalVariable = (GlobalClass) getApplicationContext();
@@ -122,15 +118,10 @@ public class SplashScreenActivity extends Activity {
 
         Logger.log(Level.DEBUG, TAG, "get value stored in a shared preference s file **User ID**" + mUsername);
 
-        if(globalVariable.getUsername()==null)
-        {
+
             globalVariable.setUsername(mUsername);
-        }
-
-
-        if(globalVariable.getUserType()==null){
             globalVariable.setUserType(mUserType);
-        }
+
         return b;
 
     }

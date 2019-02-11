@@ -32,6 +32,7 @@ public class BplOximterdbHelper extends SQLiteOpenHelper {
     public static final String TABLE_NAME_WEIGHT_MACHINE_B = "Measured_Weight_Machine_B";
 
     public static final String TABLE_NAME_USER_PROFILE = "User_Profile";
+    public static final String TABLE_NAME_HOME_PROFILE = "Home_Profile";
 
     public static final String TABLE_NAME_LAST_ACTIVITY_USERS= "Last_Activity";
 
@@ -56,6 +57,16 @@ public class BplOximterdbHelper extends SQLiteOpenHelper {
     public static  final String WEIGHT="weight";
     public static  final String HEIGHT="height";
 
+
+
+    // profile home
+    public static final  String NAME_HOME_USER="name_home";
+    public static final  String CITY_HOME_USER="address_home";
+    public static  final  String AGE_HOME_USER="age_home";
+    public static  final String SEX_HOME_USER="sex_home";
+    public static  final String WEIGHT_HOME_USER="weight_home";
+    public static  final String HEIGHT_HOME_USER="height_home";
+    public static  final String PHONE_HOME_USER="phone_home";
 
 
     public static final  String USER_NAME_="user_names";
@@ -124,8 +135,14 @@ public class BplOximterdbHelper extends SQLiteOpenHelper {
 
 
 
-
-
+// HOME PROFILE
+public static final String CREATE_TABLE_HOME_PROFILE="CREATE TABLE " +TABLE_NAME_HOME_PROFILE+"("+KEY_ID+" integer primary key autoincrement"+","
+        +USER_NAME+" "+"text"+","+
+        NAME_HOME_USER+" "+"text"+","+AGE_HOME_USER+" "+"text"+","+SEX_HOME_USER+" "+"text"+","
+        +PHONE_HOME_USER+" "+"text"+","
+        +CITY_HOME_USER+" "+"text"+","
+        +WEIGHT_HOME_USER+" "+"text"+","+
+        HEIGHT_HOME_USER+" "+"text"+")";
 
 
 
@@ -202,12 +219,13 @@ public class BplOximterdbHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_BIO_LIGHT);
 
         db.execSQL(CREATE_TABLE_LAST_ACTIVITY_OF_USERS);
+        db.execSQL(CREATE_TABLE_HOME_PROFILE);
 
         Logger.log(Level.INFO, TAG, CREATE_TABLE);
         Logger.log(Level.INFO,TAG,CREATE_TABLE_PROFILE);
 
         Logger.log(Level.DEBUG, TAG, "Table" +TABLE_NAME +TABLE_NAME_PROFILE+TABLE_NAME_PROFILE+","
-                        +TABLE_NAME_WEIGHT+","+TABLE_NAME_WEIGHT_MACHINE_B
+                        +TABLE_NAME_WEIGHT+","+TABLE_NAME_WEIGHT_MACHINE_B+" "+TABLE_NAME_HOME_PROFILE
                 +"AND"+TABLE_NAME_BIO_LIGHT+"AND" +"of"+DATABASE_NAME+ "got created");
     }
 
@@ -225,7 +243,7 @@ public class BplOximterdbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_BIO_LIGHT);
 
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_LAST_ACTIVITY_USERS);
-
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_HOME_PROFILE);
         onCreate(db);
      /*   if(oldVersion<1)
         {

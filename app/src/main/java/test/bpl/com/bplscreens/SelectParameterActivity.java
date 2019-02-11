@@ -13,9 +13,12 @@ import java.util.*;
 import biolight.*;
 import constantsP.*;
 import database.*;
+import home.*;
 import iweigh.*;
 import logger.*;
 import model.*;
+
+import static com.tom_roush.fontbox.ttf.OS2WindowsMetricsTable.TAG;
 
 
 public class SelectParameterActivity extends Activity {
@@ -47,12 +50,17 @@ public class SelectParameterActivity extends Activity {
 
         infoDialog = findViewById(R.id.infoDialog);
         infoDialog.setVisibility(View.INVISIBLE);
+
+
+
         infoDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
             }
         });
+
+
         Constants.SELECTED_USER_SNOW = "";
 
         userNameSelected = findViewById(R.id.userNameSelected);
@@ -77,6 +85,8 @@ public class SelectParameterActivity extends Activity {
             @Override
             public void onClick(View view) {
 
+
+
                 if(mUsercount==0){
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         myADDUserProfile.setImageDrawable(getDrawable(R.mipmap.add_profile));
@@ -95,8 +105,6 @@ public class SelectParameterActivity extends Activity {
         });
         txtChangeUserSel = findViewById(R.id.txtChangeUserSel);
         txtChangeUserSel.setText(getString(R.string.exit_user_log));
-
-
 
 
         txtChangeUserSel.setVisibility(View.INVISIBLE);
@@ -142,12 +150,17 @@ public class SelectParameterActivity extends Activity {
                 return;*/
 
                if (userNameSelected.getText().toString().equals("")) {
-                   // selectOptionBPachine(SelectParameterActivity.this, "");
-                    if(isUserExistsForLoginProfile()){
-                        callExistingUserActivity(SelectParameterActivity.this);
-                        }else{
-                        Toast.makeText(SelectParameterActivity.this,"Please Add User",Toast.LENGTH_SHORT).show();
-                    }
+
+                   if(globalVariable.getUserType().equalsIgnoreCase("home")){
+                       callExistingUserActivity(SelectParameterActivity.this);
+                   }else{
+                       if(isUserExistsForLoginProfile()){
+                           callExistingUserActivity(SelectParameterActivity.this);
+                       }else{
+                           Toast.makeText(SelectParameterActivity.this,"Please Add User",Toast.LENGTH_SHORT).show();
+                       }
+
+                   }
 
                 } else {
                     ActivityOptions options;
@@ -169,12 +182,16 @@ public class SelectParameterActivity extends Activity {
                 //---To dispaly records of either Iweigh or Ioxy
 
                 if (userNameSelected.getText().toString().equals("")) {
-                    //selectOptionBPachine(SelectParameterActivity.this, "");
-                    if(isUserExistsForLoginProfile()){
+                    if(globalVariable.getUserType().equalsIgnoreCase("home")){
                         callExistingUserActivity(SelectParameterActivity.this);
                     }else{
-                        Toast.makeText(SelectParameterActivity.this,"Please Add User",Toast.LENGTH_SHORT).show();
+                        if(isUserExistsForLoginProfile()){
+                            callExistingUserActivity(SelectParameterActivity.this);
+                        }else{
+                            Toast.makeText(SelectParameterActivity.this,"Please Add User",Toast.LENGTH_SHORT).show();
+                        }
                     }
+
 
                 }else{
                     choose_option(SelectParameterActivity.this);
@@ -182,6 +199,7 @@ public class SelectParameterActivity extends Activity {
                 }
 
             } else if (view == select_image_ioxy) {
+
 
                 if (userNameSelected.getText().toString().equals("")) {
                     //selectOptionBPachine(SelectParameterActivity.this, "");
@@ -209,12 +227,16 @@ public class SelectParameterActivity extends Activity {
             } else if (view == bPump) {
 
                 if (userNameSelected.getText().toString().equals("")) {
-                    //selectOptionBPachine(SelectParameterActivity.this, "");
-                    if(isUserExistsForLoginProfile()){
+                    if(globalVariable.getUserType().equalsIgnoreCase("home")){
                         callExistingUserActivity(SelectParameterActivity.this);
                     }else{
-                        Toast.makeText(SelectParameterActivity.this,"Please Add User",Toast.LENGTH_SHORT).show();
+                        if(isUserExistsForLoginProfile()){
+                            callExistingUserActivity(SelectParameterActivity.this);
+                        }else{
+                            Toast.makeText(SelectParameterActivity.this,"Please Add User",Toast.LENGTH_SHORT).show();
+                        }
                     }
+
 
 
                 } else {
@@ -257,6 +279,23 @@ public class SelectParameterActivity extends Activity {
     @Override
     protected void onRestart() {
         super.onRestart();
+
+        Logger.log(Level.DEBUG,TAG,"On Restart ()");
+        List<UserModel> userModelList_=new ArrayList<>();
+
+        if(globalVariable.getUserType().equalsIgnoreCase("clinic")){
+            userModelList_.addAll( DatabaseManager.getInstance().
+                    getAllUserprofilecontent(globalVariable.getUsername(),Constants.USER_NAME));
+        }else{
+            userModelList_.addAll( DatabaseManager.getInstance().
+                    getAllMemberProfilecontent(globalVariable.getUsername(),Constants.USER_NAME));
+        }
+
+
+        if(userModelList_.size()==0){
+            userNameChosen="";
+            userNameSelected.setText("");
+        }
 
     }
 
@@ -689,13 +728,27 @@ public class SelectParameterActivity extends Activity {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             options = ActivityOptions.makeSceneTransitionAnimation(SelectParameterActivity.this);
 
-            startActivity(new Intent(SelectParameterActivity.this, PatientProfileActivity.class)
-                    .putExtra(Constants.PROFILE_FLAG,TAG).putExtra("user",userNameChosen).
-                            setFlags(Intent.FLAG_ACTIVITY_NEW_TASK), options.toBundle());
+            if(globalVariable.getUserType().equalsIgnoreCase("clinic")){
+                startActivity(new Intent(SelectParameterActivity.this, PatientProfileActivity.class)
+                        .putExtra(Constants.PROFILE_FLAG,TAG).putExtra("user",userNameChosen).
+                                setFlags(Intent.FLAG_ACTIVITY_NEW_TASK), options.toBundle());
+            }else{
+                startActivity(new Intent(SelectParameterActivity.this, HomeMemberProfileActivity.class)
+                        .putExtra(Constants.PROFILE_FLAG,TAG).putExtra("user",userNameChosen).
+                                setFlags(Intent.FLAG_ACTIVITY_NEW_TASK), options.toBundle());
+            }
+
         } else {
-            startActivity(new Intent(SelectParameterActivity.this, PatientProfileActivity.class)
-                    .putExtra(Constants.PROFILE_FLAG,TAG).putExtra("user",userNameChosen).
-                            setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+            if(globalVariable.getUserType().equalsIgnoreCase("clinic")) {
+                startActivity(new Intent(SelectParameterActivity.this, PatientProfileActivity.class)
+                        .putExtra(Constants.PROFILE_FLAG,TAG).putExtra("user",userNameChosen).
+                                setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+            }else{
+                startActivity(new Intent(SelectParameterActivity.this, HomeMemberProfileActivity.class)
+                        .putExtra(Constants.PROFILE_FLAG,TAG).putExtra("user",userNameChosen).
+                                setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+            }
+
         }
 
 
@@ -803,9 +856,7 @@ public class SelectParameterActivity extends Activity {
         ActivityOptions options;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             options = ActivityOptions.makeSceneTransitionAnimation(SelectParameterActivity.this);
-
             Intent intent = new Intent(context, ExistingUserActivity.class);
-
             startActivityForResult(intent, Constants.REQUEST_CODE, options.toBundle());
 
         } else {
@@ -814,4 +865,9 @@ public class SelectParameterActivity extends Activity {
             startActivityForResult(intent, Constants.REQUEST_CODE);
         }
     }
+
+
+
+
+
 }

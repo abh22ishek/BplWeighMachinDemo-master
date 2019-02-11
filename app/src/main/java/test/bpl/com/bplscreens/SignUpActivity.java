@@ -1,20 +1,31 @@
 package test.bpl.com.bplscreens;
 
+import android.*;
 import android.annotation.*;
 import android.app.*;
 import android.content.*;
+import android.content.res.*;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Bundle;
+import android.graphics.*;
+import android.graphics.drawable.*;
+import android.net.*;
+import android.os.*;
+import android.provider.*;
+import android.support.v4.app.*;
+import android.support.v4.content.*;
 import android.util.DisplayMetrics;
 import android.view.*;
+import android.view.inputmethod.*;
 import android.widget.*;
 
+import java.io.*;
 import java.util.*;
 
 import constantsP.Constants;
 import constantsP.GlobalClass;
 import database.BplOximterdbHelper;
 import database.DatabaseManager;
+import home.*;
 import localstorage.StoreCredentials;
 import logger.Level;
 import logger.Logger;
@@ -35,6 +46,7 @@ public class SignUpActivity extends Activity{
     SQLiteDatabase database;
     private TextView LogIn;
 
+    private TextView termsAndCondition;
     private boolean isLoginProfileExists;
     final String[] colors = {"Red", "Green", "Blue", "Yellow", "Orange"};
     final String[] useTypeArr = {"Home","Clinic"};
@@ -48,6 +60,10 @@ public class SignUpActivity extends Activity{
 
         email_id=  findViewById(R.id.email);
         password= findViewById(R.id.password);
+
+
+        termsAndCondition=findViewById(R.id.TermsAndConditions);
+      //  termsAndCondition.setPaintFlags(termsAndCondition.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
 
         security_question1=  findViewById(R.id.securityques1);
@@ -65,6 +81,19 @@ public class SignUpActivity extends Activity{
 
         final int density = getResources().getDisplayMetrics().densityDpi;
 
+        termsAndCondition.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                if(motionEvent.getAction()==MotionEvent.ACTION_DOWN)
+                {
+                    showTermsAndConditionDialog(SignUpActivity.this);
+                }
+
+                return true;
+            }
+        });
+
         if(density== DisplayMetrics.DENSITY_XHIGH || density==DisplayMetrics.DENSITY_XXHIGH)
             security_question3.setHint(getString(R.string.security_question_3_));
             else
@@ -76,7 +105,8 @@ public class SignUpActivity extends Activity{
                 public boolean onTouch(View view, MotionEvent motionEvent) {
                     if(MotionEvent.ACTION_DOWN==motionEvent.getAction())
                     {
-                     // Dialog d=new Dialog(SignUpActivity.this);
+                        hide_soft_keypad(SignUpActivity.this);
+
                         onCreateDialog(colors,"1");
                     }
                     return true;
@@ -89,6 +119,7 @@ public class SignUpActivity extends Activity{
 
                     if(MotionEvent.ACTION_DOWN==motionEvent.getAction())
                     {
+                        hide_soft_keypad(SignUpActivity.this);
                         datePicker();
                     }
                     return true;
@@ -101,6 +132,8 @@ public class SignUpActivity extends Activity{
                 public boolean onTouch(View view, MotionEvent motionEvent) {
                     if(MotionEvent.ACTION_DOWN==motionEvent.getAction())
                     {
+                        hide_soft_keypad(SignUpActivity.this);
+
                         onCreateDialog(useTypeArr,"3");
                     }
                     return true;
@@ -179,9 +212,17 @@ public class SignUpActivity extends Activity{
                         globalVariable.setUsername(email_id.getText().toString().trim());
                         globalVariable.setUserType(security_question3.getText().toString().trim());
 
-                        startActivity(new Intent(SignUpActivity.this, UsersProfileActivity.class).
-                                putExtra(Constants.PROFILE_FLAG, Constants.PROFILE_ADD)
-                                .putExtra(Constants.USE_TYPE, security_question3.getText().toString().trim()));
+                        if(security_question3.getText().toString().equalsIgnoreCase("Clinic"))
+                        {
+                            startActivity(new Intent(SignUpActivity.this, UsersProfileActivity.class).
+                                    putExtra(Constants.PROFILE_FLAG, Constants.PROFILE_ADD)
+                                    .putExtra(Constants.USE_TYPE, security_question3.getText().toString().trim()));
+                        }else{
+                            startActivity(new Intent(SignUpActivity.this, HomeMemberProfileActivity.class).
+                                    putExtra(Constants.PROFILE_FLAG, Constants.PROFILE_ADD)
+                                    .putExtra(Constants.USE_TYPE, security_question3.getText().toString().trim()));
+                        }
+
                         Toast.makeText(SignUpActivity.this, "Successful Registration", Toast.LENGTH_SHORT).show();
                         Logger.log(Level.DEBUG,TAG,"User TYpe ="+security_question3.getText().toString());
                         finish();
@@ -207,7 +248,13 @@ public class SignUpActivity extends Activity{
 
 
 
-
+    private void hide_soft_keypad(Context context) {
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
 
 
 
@@ -237,7 +284,7 @@ public class SignUpActivity extends Activity{
         mDay = c.get(Calendar.DAY_OF_MONTH);
 
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,R.style.datepicker,
                 new DatePickerDialog.OnDateSetListener() {
 
                     @Override
@@ -256,7 +303,7 @@ public class SignUpActivity extends Activity{
     int index=0;
 
     public void onCreateDialog(final String [] arrayC, final String params) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this,R.style.AlertDialogCustom);
         builder.setTitle(getString(R.string.pick_col));
 
 // add a radio button list
@@ -288,6 +335,27 @@ public class SignUpActivity extends Activity{
 
         // create and show the alert dialog
         AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+
+    Dialog dialog;
+
+    private void showTermsAndConditionDialog(final Context context)
+    {
+
+        dialog = new Dialog(context);
+
+
+
+        dialog.getWindow().getAttributes().windowAnimations =R.style.DialogBoxAnimation;
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.setContentView(R.layout.terms_condition);
+        final TextView header=  dialog.findViewById(R.id.base_header_title);
+        header.setText(getResources().getString(R.string.terms_and_condition));
+
+        final ImageView imgBackKey=dialog.findViewById(R.id.imgBackKey);
+        imgBackKey.setVisibility(View.INVISIBLE);
         dialog.show();
     }
 }

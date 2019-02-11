@@ -131,11 +131,17 @@ private final String TAG="DatabaseManager";
     }
 
 
-    public boolean IsProfileExists()
+    public boolean IsProfileExists(String useType)
     {
         boolean b;
 
-        long count=DatabaseUtils.queryNumEntries(mDatabaseHelper.getReadableDatabase(),TABLE_NAME_PROFILE);
+        long count;
+        if(useType.equalsIgnoreCase("clinic")){
+            count=DatabaseUtils.queryNumEntries(mDatabaseHelper.getReadableDatabase(), TABLE_NAME_PROFILE);
+        }else{
+             count=DatabaseUtils.queryNumEntries(mDatabaseHelper.getReadableDatabase(), TABLE_NAME_HOME_PROFILE);
+        }
+
 
         if(count>=1)
             b=true;
@@ -277,6 +283,38 @@ private final String TAG="DatabaseManager";
 
 
 
+    // get memeber profile content
+
+    public List<UserModel> getMemberprofilecontent(String memberName)
+    {
+
+        List<UserModel> user_Modelslist=new ArrayList<>();
+        Cursor cursor=mDatabase.query(TABLE_NAME_HOME_PROFILE, null,USER_NAME+"=?",new String[]{memberName},null,null,null);
+
+        UserModel m=new UserModel();
+        Logger.log(Level.INFO, TAG, TABLE_NAME_PROFILE+"Get profile count=" + cursor.getCount());
+
+        if(cursor.moveToNext())
+        {
+            m.setName(cursor.getString(cursor.getColumnIndex(NAME_HOME_USER)));
+            m.setAge(cursor.getString(cursor.getColumnIndex(AGE_HOME_USER)));
+            m.setSex(cursor.getString(cursor.getColumnIndex(SEX_HOME_USER)));
+            m.setHeight(cursor.getString(cursor.getColumnIndex(HEIGHT_HOME_USER)));
+            m.setAddress(cursor.getString(cursor.getColumnIndex(CITY_HOME_USER)));
+            m.setWeight(cursor.getString(cursor.getColumnIndex(WEIGHT_HOME_USER)));
+            m.setPhone(cursor.getString(cursor.getColumnIndex(PHONE_HOME_USER)));
+            user_Modelslist.add(m);
+        }
+
+
+
+        Logger.log(Level.INFO, TAG, "user_Models_list length=" + user_Modelslist.size());
+
+        cursor.close();
+        return user_Modelslist;
+
+    }
+
     // to retrieve user profile
 
     public List<UserModel> getAllUserprofilecontent(String username,String TAG)
@@ -324,6 +362,51 @@ private final String TAG="DatabaseManager";
 
     }
 
+
+
+        // Home based Users
+
+
+
+    public List<UserModel> getAllMemberProfilecontent(String username,String TAG)
+    {
+
+        List<UserModel> user_Model_List=new ArrayList<>();
+
+        Cursor cursor;
+
+        cursor=mDatabase.query(TABLE_NAME_HOME_PROFILE,
+                    null,USER_NAME+"=?",new String[]{username},null,null,null);
+
+
+
+
+        Logger.log(Level.DEBUG, TAG, TABLE_NAME_HOME_PROFILE+"(((Get profile count=)))" + cursor.getCount()+"--column count" +
+                +cursor.getColumnCount()+"");
+
+
+        while (cursor.moveToNext())
+        {
+            UserModel m=new UserModel();
+            m.setName(cursor.getString(cursor.getColumnIndex(USER_NAME)));
+            m.setUserName(cursor.getString(cursor.getColumnIndex(NAME_HOME_USER)));
+            m.setPhone(cursor.getString(cursor.getColumnIndex(PHONE_HOME_USER)));
+            m.setSex(cursor.getString(cursor.getColumnIndex(SEX_HOME_USER)));
+            m.setAddress(cursor.getString(cursor.getColumnIndex(CITY_HOME_USER)));
+            m.setHeight(cursor.getString(cursor.getColumnIndex(HEIGHT_HOME_USER)));
+            m.setWeight(cursor.getString(cursor.getColumnIndex(WEIGHT_HOME_USER)));
+         //   m.setUserEmail(cursor.getString(cursor.getColumnIndex(USER_EMAIL_)));
+            user_Model_List.add(m);
+        }
+
+        cursor.close();
+
+
+        Logger.log(Level.DEBUG, TAG, "user_Models_list length=" + user_Model_List.size());
+
+        return user_Model_List;
+
+    }
 
 
 
@@ -549,6 +632,11 @@ private final String TAG="DatabaseManager";
     }
 
 
+    public void deleteFamilyMembers(String username)
+    {
+        mDatabase.delete(BplOximterdbHelper.TABLE_NAME_HOME_PROFILE,
+                BplOximterdbHelper.NAME_HOME_USER + "=?", new String[]{username});
+    }
 
 
 

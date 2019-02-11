@@ -73,6 +73,15 @@ public class ExistingUserActivity extends Activity implements ListR{
         });
 
 
+        if(globalVariable.getUserType()!=null){
+            if(globalVariable.getUserType().equalsIgnoreCase("home")){
+                headertitle.setText(getString(R.string.sel_fam_mem));
+
+            }else{
+                headertitle.setText(getString(R.string.sel_user));
+            }
+        }
+
 
         proceed=findViewById(R.id.proceed);
         proceed.setText(getString(R.string.select));
@@ -99,7 +108,16 @@ public class ExistingUserActivity extends Activity implements ListR{
 
             }
         });
-        userModelList_.addAll( DatabaseManager.getInstance().getAllUserprofilecontent(globalVariable.getUsername(),Constants.USER_NAME));
+
+        if(globalVariable.getUserType().equalsIgnoreCase("clinic")){
+            userModelList_.addAll( DatabaseManager.getInstance().
+                    getAllUserprofilecontent(globalVariable.getUsername(),Constants.USER_NAME));
+        }else{
+            userModelList_.addAll( DatabaseManager.getInstance().
+                    getAllMemberProfilecontent(globalVariable.getUsername(),Constants.USER_NAME));
+        }
+
+
 
 
         if(userModelList_.size()>=1){

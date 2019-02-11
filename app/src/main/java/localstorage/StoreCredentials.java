@@ -42,7 +42,7 @@ public class StoreCredentials {
         SharedPreferences.Editor editor = signup_credentials.edit();
         editor.putString(Constants.USER_NAME,null);
         editor.putString(Constants.PASSWORD,null);
-        editor.commit();
+        editor.apply();
         Logger.log(Level.DEBUG, context.getClass().getSimpleName(), "shared preference s file all values is set to null");
     }
 
@@ -58,7 +58,7 @@ public class StoreCredentials {
         profile_image=context.getSharedPreferences(Constants.PREFERENCE_PROFILE_IMAGE, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = profile_image.edit();
         editor.putString(key_username,image);
-        editor.commit();
+        editor.apply();
 
 
         Logger.log(Level.DEBUG, TAG, "shared preference s file gets stored"+image);

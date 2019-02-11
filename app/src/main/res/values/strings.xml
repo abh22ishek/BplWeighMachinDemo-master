@@ -58,8 +58,8 @@
     <string name="pi_high">PI High</string>
     <string name="pi_low">PI Low</string>
 
-    <string name="security_question_1">Enter your favourite color</string>
-    <string name="security_question_2">Enter your Date Of Birth</string>
+    <string name="security_question_1">Select your favourite color</string>
+    <string name="security_question_2">Select your Date Of Birth</string>
     <string name="security_question_3">Select your Use Type</string>
     <string name="security_question_3_">Use type</string>
 
@@ -507,5 +507,14 @@ contains a large amount of water. (approx 70%)</string>
     <string name="add_prof">ADD PROFILE</string>
     <string name="add_clinic_prof">Add CLINIC PROFILE</string>
     <string name="man_fam_men">Manage Family Member</string>
+    <string name="mem_name">Member Name</string>
+    <string name="set_family_memeber_name">Set Member Name</string>
+    <string name="add_fam_mem">Add Family Member</string>
+    <string name="up_fam_mem">Update Family Member</string>
+    <string name="mana_fam_mem">MANAGE  FAMILY MEMBER</string>
+    <string name="terms_cond"> I understand and accept the "Terms and Conditions and "Privacy Consent"</string>
+    <string name="terms_and_condition">Terms And Condition</string>
+    <string name="sel_fam_mem">Select Family Member</string>
+    <string name="edt_fam_mem">Edit Family Member</string>
 
 </resources>

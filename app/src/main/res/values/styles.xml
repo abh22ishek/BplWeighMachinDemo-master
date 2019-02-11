@@ -16,6 +16,20 @@
         <item name="android:windowExitAnimation">@anim/slide_down</item>
 
     </style>
+    <style name="AlertDialogCustom" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!-- Used for the buttons -->
+        <item name="colorAccent">@color/colorAccent</item>
+        <!-- Used for the title and text -->
+        <item name="android:textColorPrimary">#000000</item>
+        <!-- Used for the background -->
+        <item name="android:background">@color/white</item>
+    </style>
 
+
+    <style name="datepicker" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorPrimary">@color/statusbarbackground</item>
+        <item name="colorPrimaryDark">@color/backgroundSplash</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
 
 </resources>

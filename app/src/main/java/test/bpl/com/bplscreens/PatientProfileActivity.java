@@ -86,7 +86,11 @@ public class PatientProfileActivity extends Activity {
         headertitle.setText(getString(R.string.add_user));
 
         globalVariable = (GlobalClass) getApplicationContext();
-
+        if (globalVariable.getUsername() != null) {
+            String mName=globalVariable.getUsername();
+            userName.setText(mName);
+        }
+         userName.setEnabled(false);
         final ImageView backKey=findViewById(R.id.imgBackKey);
 
         backKey.setOnClickListener(new View.OnClickListener() {
@@ -139,10 +143,7 @@ public class PatientProfileActivity extends Activity {
         update=findViewById(R.id.deleteUpdate);
         update.setVisibility(View.GONE);
 
-        if (globalVariable.getUsername() != null) {
-            userName.setText(globalVariable.getUsername());
-        }
-        userName.setEnabled(false);
+
         if (getIntent().getStringExtra(Constants.PROFILE_FLAG).equals(Constants.PROFILE_EDIT)
 
                 && !getIntent().getExtras().getString("user").equals("")) {
@@ -160,7 +161,8 @@ public class PatientProfileActivity extends Activity {
             male.setEnabled(false);
             female.setEnabled(false);
 
-            userIcon.setImageDrawable(ContextCompat.getDrawable(PatientProfileActivity.this, R.drawable.edit_profile));
+            userIcon.setImageDrawable(ContextCompat.getDrawable(PatientProfileActivity.this,
+                    R.drawable.edit_profile));
 
 
             TAG_USER = "Edit";
@@ -179,7 +181,8 @@ public class PatientProfileActivity extends Activity {
             if (globalVariable.getUsername() != null) {
 
                 DatabaseManager.getInstance().openDatabase();
-                UserModellist= DatabaseManager.getInstance().getAllUserprofilecontent(mUserName,Constants.SELECTED_USER_SNOW);
+                UserModellist= DatabaseManager.getInstance().
+                        getAllUserprofilecontent(mUserName,Constants.SELECTED_USER_SNOW);
 
                 if (UserModellist.size() > 0) {
                     userName.setText(UserModellist.get(0).getName());
@@ -224,7 +227,6 @@ public class PatientProfileActivity extends Activity {
                                     @Override
                                     public void onLoadFailed(Exception e, Drawable errorDrawable) {
                                         super.onLoadFailed(e, errorDrawable);
-
                                         Logger.log(Level.ERROR,TAG,e.toString());
                                     }
                                 });
@@ -346,6 +348,10 @@ public class PatientProfileActivity extends Activity {
                             e.printStackTrace();
                         }
 
+
+
+
+                        // pending Tasks to do
 
                             StoreCredentials.store_profile_image(PatientProfileActivity.this, profile_image, TAG,
                                     userName_.getText().toString());

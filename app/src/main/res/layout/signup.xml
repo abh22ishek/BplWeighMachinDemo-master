@@ -8,6 +8,56 @@
     android:layout_height="match_parent">
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/bottomBar"
+        android:orientation="vertical"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:background="@drawable/slect_parameter_bg"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+
+            <CheckBox
+                android:layout_width="50dp"
+                android:id="@+id/check"
+                android:gravity="center"
+                android:layout_margin="5dp"
+                android:layout_height="50dp" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:id="@+id/TermsAndConditions"
+                android:text="@string/terms_cond"
+                android:textStyle="italic"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:text="@string/sign_up"
+            android:layout_margin="10dp"
+            android:id="@+id/btnLoginSignUp"
+            android:textColor="@color/white"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/buttonshape"
+            />
+
+    </LinearLayout>
 
 
     <LinearLayout
@@ -18,7 +68,8 @@
         android:background="@drawable/slect_parameter_bg"
         android:layout_height="wrap_content"
         android:id="@+id/security_question"
-        android:layout_alignParentBottom="true"
+
+        android:layout_above="@+id/bottomBar"
         android:layout_alignParentStart="true">
 
 
@@ -99,7 +150,7 @@
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:inputType="text"
             android:ems="10"
             android:padding="5dp"
@@ -111,23 +162,7 @@
             android:textColorHint="@color/white"
              />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/separator"
-            />
 
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/sign_up"
-            android:layout_marginTop="10dp"
-            android:id="@+id/btnLoginSignUp"
-            android:textColor="@color/white"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/buttonshape"
-            />
 
     </LinearLayout>
 

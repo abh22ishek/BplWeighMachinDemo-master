@@ -91,7 +91,7 @@
                     android:text="@string/user_name"/>
                 <EditText
                     android:layout_width="match_parent"
-                    android:maxLength="15"
+                    android:maxLength="20"
                     android:hint="@string/set_name"
                     android:id="@+id/userName_"
                     android:maxLines="1"
@@ -122,20 +122,20 @@
                     android:textSize="16sp"
                     android:textColor="@color/black"
                     android:text="@string/email"/>
+
                 <EditText
-                    android:layout_width="match_parent"
-                    android:maxLength="20"
-                    android:hint="@string/set_email"
                     android:id="@+id/userEmail"
-                    android:maxLines="1"
-                    android:imeOptions="actionNext"
-                    android:inputType="text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
+                    android:hint="@string/set_email"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:maxLength="20"
+                    android:maxLines="1"
                     android:scrollHorizontally="true"
                     android:textColor="@color/black"
-                    android:textColorHint="@color/white"
-                    android:layout_height="wrap_content"
-                    />
+                    android:textColorHint="@color/white" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"

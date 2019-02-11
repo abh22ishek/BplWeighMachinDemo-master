@@ -143,7 +143,8 @@ public class OximeterMainActivity extends Activity {
                         globalVariable.setUsername(emailid.getText().toString());
                         StoreCredentials.save_signupcredentials(OximeterMainActivity.this, emailid.getText().toString().trim(), TAG,"");
                        // Toast.makeText(OximeterMainActivity.this, "User id value stored in Shared Pref file" + " " + " ", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(OximeterMainActivity.this, SelectParameterActivity.class);
+                        Intent intent = new Intent(OximeterMainActivity.this,
+                                SelectParameterActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                     } else {

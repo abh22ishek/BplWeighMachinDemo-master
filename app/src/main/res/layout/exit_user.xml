@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:text="@string/base_header_title"
             android:textColor="@color/black"
-            android:textSize="26sp"
+            android:textSize="24sp"
             app:fontname="centralSansXBold"
             android:id="@+id/base_header_title"
             android:layout_centerVertical="true"

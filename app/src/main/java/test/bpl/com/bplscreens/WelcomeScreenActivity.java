@@ -24,9 +24,10 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 
-import constantsP.Constants;
+import constantsP.*;
 import customviews.MyBounceInterpolator;
 import database.DatabaseManager;
+import home.*;
 import localstorage.StoreCredentials;
 import logger.Level;
 import logger.Logger;
@@ -43,6 +44,8 @@ public class WelcomeScreenActivity extends FragmentActivity {
     TextView sign_different_user;
     ImageView proceed;
 
+    GlobalClass globalClass;
+
     private final String TAG=WelcomeScreenActivity.class.getSimpleName();
     Intent intent;
 
@@ -57,6 +60,7 @@ public class WelcomeScreenActivity extends FragmentActivity {
         decorView.setSystemUiVisibility(uiOptions);
         setContentView(R.layout.welcome_user);
 
+        globalClass= (GlobalClass) getApplicationContext();
         profile_pic=  findViewById(R.id.profile_pic);
         username= findViewById(R.id.user_name);
         mUsername=getIntent().getStringExtra(Constants.USER_NAME);
@@ -90,14 +94,31 @@ public class WelcomeScreenActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 DatabaseManager.getInstance().openDatabase();
-                if(DatabaseManager.getInstance().IsProfileExists())
+
+                String useType;
+                if(globalClass.getUserType().equalsIgnoreCase("Home"))
+                {
+                    useType="Home";
+                }else{
+                        useType="Clinic";
+                }
+                if(DatabaseManager.getInstance().IsProfileExists(useType)){
                     startActivity(new Intent(WelcomeScreenActivity.this,
                             SelectParameterActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-                 //   startActivity(new Intent(WelcomeScreenActivity.this, MenuPageIndicatorActivity.class));
+                }
 
-                else
-               startActivity(new Intent(WelcomeScreenActivity.this, UsersProfileActivity.class).
-                        putExtra(Constants.PROFILE_FLAG,Constants.PROFILE_ADD));
+
+                else{
+                    if(globalClass.getUserType().equalsIgnoreCase("Clinic")){
+                        startActivity(new Intent(WelcomeScreenActivity.this, UsersProfileActivity.class).
+                                putExtra(Constants.PROFILE_FLAG,Constants.PROFILE_ADD));
+                    }else{
+                        startActivity(new Intent(WelcomeScreenActivity.this, HomeMemberProfileActivity.class).
+                                putExtra(Constants.PROFILE_FLAG,Constants.PROFILE_ADD));
+                    }
+
+                }
+
 
 
 

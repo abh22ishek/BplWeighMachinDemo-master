@@ -53,20 +53,22 @@ public class ExistingUserActivityManage extends FragmentActivity implements List
 
         optionsSettings=findViewById(R.id.optionSettings);
         optionsSettings.setVisibility(View.VISIBLE);
-        if(globalVariable!=null && globalVariable.getUserType().equalsIgnoreCase("home")){
-            popup.getMenu().findItem(R.id.marlActive).setTitle("Mark Active Members");
-            popup.getMenu().findItem(R.id.MarkDormant).setTitle("Mark Dormant Members");
 
-        }else{
-            popup.getMenu().findItem(R.id.marlActive).setTitle("Mark Active Users");
-            popup.getMenu().findItem(R.id.MarkDormant).setTitle("Mark Dormant Users");
-        }
         optionsSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                  popup = new PopupMenu(ExistingUserActivityManage.this,view);
                 popup.setOnMenuItemClickListener(ExistingUserActivityManage.this);
                 popup.inflate(R.menu.settings_options);
+                if(globalVariable!=null && globalVariable.getUserType().equalsIgnoreCase("home")){
+                    popup.getMenu().findItem(R.id.marlActive).setTitle("Mark Active Members");
+                    popup.getMenu().findItem(R.id.MarkDormant).setTitle("Mark Dormant Members");
+
+                }else{
+                    popup.getMenu().findItem(R.id.marlActive).setTitle("Mark Active Users");
+                    popup.getMenu().findItem(R.id.MarkDormant).setTitle("Mark Dormant Users");
+                }
+
                 if(!popUpTag){
                     if(globalVariable!=null && globalVariable.getUserType().equalsIgnoreCase("home")){
                         popup.getMenu().findItem(R.id.markAll).setTitle("Mark All Members");
@@ -92,8 +94,16 @@ public class ExistingUserActivityManage extends FragmentActivity implements List
         final TextView headertitle= findViewById(R.id.base_header_title);
         headertitle.setText(getString(R.string.sel_user));
 
-        userModelList_.addAll(DatabaseManager.getInstance().getAllUserprofilecontent
-                (globalVariable.getUsername(), Constants.USER_NAME));
+
+        if(globalVariable.getUserType().equalsIgnoreCase("clinic")){
+            userModelList_.addAll(DatabaseManager.getInstance().getAllUserprofilecontent
+                    (globalVariable.getUsername(), Constants.USER_NAME));
+
+        }else{
+            userModelList_.addAll(DatabaseManager.getInstance().getAllMemberProfilecontent
+                    (globalVariable.getUsername(), Constants.USER_NAME));
+
+        }
 
 
 
@@ -185,7 +195,10 @@ public class ExistingUserActivityManage extends FragmentActivity implements List
 
         DatabaseManager.getInstance().openDatabase();
         try{
+            if(globalVariable.getUserType().equalsIgnoreCase("clinic"))
             DatabaseManager.getInstance().deleteUser(userModelList_.get(index).getUserName());
+            else
+                DatabaseManager.getInstance().deleteFamilyMembers(userModelList_.get(index).getUserName());
 
         }catch (Exception e){
             e.printStackTrace();
@@ -224,7 +237,10 @@ public class ExistingUserActivityManage extends FragmentActivity implements List
             case R.id.markAll:
                 // do your code
 
-                selectedTAG="Mark All";
+                if(globalVariable.getUserType().equalsIgnoreCase("clinic"))
+                selectedTAG="Mark All Users";
+                else
+                    selectedTAG="Mark All Members";
                 if(!popUpTag)
                 {
                     existingUserAdapter.markAll();
@@ -244,8 +260,10 @@ public class ExistingUserActivityManage extends FragmentActivity implements List
                 // do your code
 
                 // Database Query
-
-                selectedTAG="Mark Active";
+                if(globalVariable.getUserType().equalsIgnoreCase("clinic"))
+                selectedTAG="Mark Active Users";
+                else
+                    selectedTAG="Mark Active Members";
 
                 if(globalVariable.getUsername()!=null){
                     DatabaseManager.getInstance().openDatabase();
@@ -305,7 +323,10 @@ public class ExistingUserActivityManage extends FragmentActivity implements List
                 return true;
             case R.id.MarkDormant:
                 // do your code
-                selectedTAG="Mark Dormant";
+                if(globalVariable.getUserType().equalsIgnoreCase("clinic"))
+                selectedTAG="Mark Dormant Users";
+                else
+                    selectedTAG="Mark Dormant Members";
 
                 if(globalVariable.getUsername()!=null){
                     DatabaseManager.getInstance().openDatabase();

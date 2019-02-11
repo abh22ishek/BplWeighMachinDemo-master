@@ -109,12 +109,13 @@ public class UsersProfileActivity extends Activity {
 
         userEmail=findViewById(R.id.userEmail);
         final LinearLayout   layoutHeight=findViewById(R.id.layoutHeight);
-
+        layoutHeight.setVisibility(View.GONE);
 
         final LinearLayout   layoutWeight=findViewById(R.id.layoutWeight);
         layoutWeight.setVisibility(View.GONE);
 
         final LinearLayout   layoutGender=findViewById(R.id.layoutGender);
+        layoutGender.setVisibility(View.GONE);
 
         headertitle =  findViewById(R.id.base_header_title);
 
@@ -125,28 +126,19 @@ public class UsersProfileActivity extends Activity {
         }
 
 
-        if(globalVariable.getUserType()!=null && globalVariable.getUserType().equalsIgnoreCase("Clinic"))
-        {
 
             headertitle.setText(R.string.add_clinic_prof);
-            layoutHeight.setVisibility(View.GONE);
-            layoutGender.setVisibility(View.GONE);
-
-
-        }else{
-            headertitle.setText(getString(R.string.add_prof));
-            layoutHeight.setVisibility(View.VISIBLE);
-            layoutGender.setVisibility(View.VISIBLE);
 
 
 
-        }
+
 
         Logger.log(Level.DEBUG,TAG,"userType="+globalVariable.getUserType());
 
         manageUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
 
 
             }
@@ -165,11 +157,7 @@ public class UsersProfileActivity extends Activity {
             female.setEnabled(false);
             manageUser.setVisibility(View.VISIBLE);
 
-            if(globalVariable.getUserType().equalsIgnoreCase("home")){
-                manageUser.setText("MANAGE  FAMILY MEMBER");
-            }else{
-                manageUser.setText("MANAGE USER");
-            }
+
             img_photo.setEnabled(false);
             img_photo.setImageDrawable(ContextCompat.getDrawable(UsersProfileActivity.this, R.drawable.edit_profile));
 
@@ -330,7 +318,8 @@ public class UsersProfileActivity extends Activity {
                             );
                             // database.close();
                             // DatabaseManager.getInstance().closeDatabase(); // correct way
-                            StoreCredentials.store_profile_image(UsersProfileActivity.this, profile_image, TAG, globalVariable.getUsername());
+                            StoreCredentials.
+                                    store_profile_image(UsersProfileActivity.this, profile_image, "Clinic", globalVariable.getUsername());
                             startActivity(new Intent(UsersProfileActivity.this,SelectParameterActivity.class));
                         }
 
@@ -366,7 +355,7 @@ public class UsersProfileActivity extends Activity {
                                         addContentProfiles(globalVariable.getUsername(), name.getText().toString(),
                                                 age.getText().toString()
                                         ), BplOximterdbHelper.USER_NAME + "=?", new String[]{globalVariable.getUsername()});
-                                StoreCredentials.store_profile_image(UsersProfileActivity.this, profile_image, TAG, globalVariable.getUsername());
+                                StoreCredentials.store_profile_image(UsersProfileActivity.this, profile_image,"Clinic", globalVariable.getUsername());
                                 Toast.makeText(UsersProfileActivity.this, "Profile Successfully updated", Toast.LENGTH_SHORT).show();
 
                                 finish();
