@@ -18,6 +18,16 @@ public class GlobalClass extends Config {
 
     String username;
 
+    String userType;
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
+
     public String getUsername() {
         return username;
     }

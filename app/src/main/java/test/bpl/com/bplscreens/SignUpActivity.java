@@ -16,7 +16,8 @@ import constantsP.GlobalClass;
 import database.BplOximterdbHelper;
 import database.DatabaseManager;
 import localstorage.StoreCredentials;
-
+import logger.Level;
+import logger.Logger;
 
 
 public class SignUpActivity extends Activity{
@@ -55,6 +56,8 @@ public class SignUpActivity extends Activity{
         security_question1.setCursorVisible(false);
         security_question2.setCursorVisible(false);
         security_question3.setCursorVisible(true);
+
+
 
 
         btnLoginSignUp=  findViewById(R.id.btnLoginSignUp);
@@ -131,78 +134,65 @@ public class SignUpActivity extends Activity{
         @Override
         public void onClick(View v) {
 
-            if(!isLoginProfileExists)
-            {
-                return;
-            }
-
-            if(email_id.getText().toString().trim().equals("")||password.getText().toString().trim().equals(""))
-            {
-                Toast.makeText(SignUpActivity.this,"Please enter the fields",Toast.LENGTH_SHORT).show();
-                return;
-
-            }else if (!isValidEmail(email_id.getText().toString().trim()))
-            {
-                Toast.makeText(SignUpActivity.this,"Email id format is not correct",Toast.LENGTH_SHORT).show();
-                return;
-
-            }
+            if (v == btnLoginSignUp) {
 
 
-            else if(password.getText().toString().trim().length()<6)
-            {
-                password.setError("Password should be minimum 6 characters");
-                return;
-            }
-            else if(security_question1.getText().toString().trim().equals(""))
-            {
-                security_question1.setError("Security Question 1 cannot be empty");
-                return;
-            }
+                if (!isLoginProfileExists) {
+                    return;
+                }
 
-            else if(security_question2.getText().toString().trim().equals(""))
-            {
-                security_question2.setError("Security Question 2 cannot be empty");
-                return;
-            }
+                if (email_id.getText().toString().trim().equals("") || password.getText().toString().trim().equals("")) {
+                    Toast.makeText(SignUpActivity.this, "Please enter the fields", Toast.LENGTH_SHORT).show();
+                    return;
 
-            else if(security_question3.getText().toString().trim().equals(""))
-            {
-                security_question3.setError("Security Question 3 cannot be empty");
-                return;
-            }
+                } else if (!isValidEmail(email_id.getText().toString().trim())) {
+                    Toast.makeText(SignUpActivity.this, "Email id format is not correct", Toast.LENGTH_SHORT).show();
+                    return;
 
+                } else if (password.getText().toString().trim().length() < 6) {
+                    password.setError("Password should be minimum 6 characters");
+                    return;
+                } else if (security_question1.getText().toString().trim().equals("")) {
+                    security_question1.setError("Security Question 1 cannot be empty");
+                    return;
+                } else if (security_question2.getText().toString().trim().equals("")) {
+                    security_question2.setError("Security Question 2 cannot be empty");
+                    return;
+                } else if (security_question3.getText().toString().trim().equals("")) {
+                    security_question3.setError("Security Question 3 cannot be empty");
+                    return;
+                } else {
 
+                    DatabaseManager.getInstance().openDatabase();
+                    if (!DatabaseManager.getInstance().IsUsernameexists(email_id.getText().toString().trim())) {
 
+                        database.insert(BplOximterdbHelper.TABLE_NAME, null,
+                                addUsers(email_id.getText().toString().trim(), password.getText().toString().trim(),
+                                        security_question1.getText().toString().toLowerCase().trim()
+                                        , security_question2.getText().toString().toLowerCase().trim(),
+                                        security_question3.getText().toString().toLowerCase().trim()));
+                        // database.close(); Don't close it directly!
 
-            else{
+                        StoreCredentials.
+                                save_signupcredentials(SignUpActivity.this,
+                                        email_id.getText().toString().trim(), TAG,security_question3.getText().toString().trim());
+                        globalVariable.setUsername(email_id.getText().toString().trim());
+                        globalVariable.setUserType(security_question3.getText().toString().trim());
 
-                DatabaseManager.getInstance().openDatabase();
-              if(!DatabaseManager.getInstance().IsUsernameexists(email_id.getText().toString().trim()))
-                {
+                        startActivity(new Intent(SignUpActivity.this, UsersProfileActivity.class).
+                                putExtra(Constants.PROFILE_FLAG, Constants.PROFILE_ADD)
+                                .putExtra(Constants.USE_TYPE, security_question3.getText().toString().trim()));
+                        Toast.makeText(SignUpActivity.this, "Successful Registration", Toast.LENGTH_SHORT).show();
+                        Logger.log(Level.DEBUG,TAG,"User TYpe ="+security_question3.getText().toString());
+                        finish();
 
-                    database.insert(BplOximterdbHelper.TABLE_NAME, null,
-                            addUsers(email_id.getText().toString().trim(), password.getText().toString().trim(),
-                                    security_question1.getText().toString().toLowerCase().trim()
-                                    , security_question2.getText().toString().toLowerCase().trim(),
-                                    security_question3.getText().toString().toLowerCase().trim()));
-                    // database.close(); Don't close it directly!
+                    }
 
-                    StoreCredentials.save_signupcredentials(SignUpActivity.this,email_id.getText().toString().trim(),TAG);
-                    globalVariable.setUsername(email_id.getText().toString().trim());
-
-                    startActivity(new Intent(SignUpActivity.this, UsersProfileActivity.class).
-                            putExtra(Constants.PROFILE_FLAG,Constants.PROFILE_ADD)
-                    .putExtra(Constants.USE_TYPE,security_question3.getText().toString().trim()));
-                    Toast.makeText(SignUpActivity.this,"Successful Registration", Toast.LENGTH_SHORT).show();
-                    finish();
 
                 }
 
 
             }
-
-
         }
     };
 

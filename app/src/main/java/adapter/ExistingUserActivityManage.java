@@ -53,6 +53,14 @@ public class ExistingUserActivityManage extends FragmentActivity implements List
 
         optionsSettings=findViewById(R.id.optionSettings);
         optionsSettings.setVisibility(View.VISIBLE);
+        if(globalVariable!=null && globalVariable.getUserType().equalsIgnoreCase("home")){
+            popup.getMenu().findItem(R.id.marlActive).setTitle("Mark Active Members");
+            popup.getMenu().findItem(R.id.MarkDormant).setTitle("Mark Dormant Members");
+
+        }else{
+            popup.getMenu().findItem(R.id.marlActive).setTitle("Mark Active Users");
+            popup.getMenu().findItem(R.id.MarkDormant).setTitle("Mark Dormant Users");
+        }
         optionsSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,10 +68,20 @@ public class ExistingUserActivityManage extends FragmentActivity implements List
                 popup.setOnMenuItemClickListener(ExistingUserActivityManage.this);
                 popup.inflate(R.menu.settings_options);
                 if(!popUpTag){
-                    popup.getMenu().findItem(R.id.markAll).setTitle("Mark All");
+                    if(globalVariable!=null && globalVariable.getUserType().equalsIgnoreCase("home")){
+                        popup.getMenu().findItem(R.id.markAll).setTitle("Mark All Members");
+                    }else{
+                        popup.getMenu().findItem(R.id.markAll).setTitle("Mark All Users");
+                    }
+
 
                 }else{
-                    popup.getMenu().findItem(R.id.markAll).setTitle("Un Mark All");
+                    if(globalVariable!=null && globalVariable.getUserType().equalsIgnoreCase("home")){
+                        popup.getMenu().findItem(R.id.markAll).setTitle("Un mark All Members");
+                    }else{
+                        popup.getMenu().findItem(R.id.markAll).setTitle("Un Mark All Users");
+                    }
+
 
                 }
                 popup.show();
@@ -108,14 +126,17 @@ public class ExistingUserActivityManage extends FragmentActivity implements List
                             Toast.LENGTH_SHORT).show();
                 return;
             }
-                if(selectedTAG.equalsIgnoreCase("Mark All"))
+                if(selectedTAG.equalsIgnoreCase("Mark All Users") ||
+                        selectedTAG.equalsIgnoreCase("Mark All Members"))
                 {
                     ExportAllUsers();
-                }else if(selectedTAG.equalsIgnoreCase("Mark Active"))
+                }else if(selectedTAG.equalsIgnoreCase("Mark Active Users")
+                        || selectedTAG.equalsIgnoreCase("Mark Active Members"))
                 {
                     ExportActiveUsers();
 
-                }else if(selectedTAG.equalsIgnoreCase("Mark Dormant")){
+                }else if(selectedTAG.equalsIgnoreCase("Mark Dormant Users") ||
+                        selectedTAG.equalsIgnoreCase("Mark Dormant Members")){
                     ExportDormantUsers();
                 }
 

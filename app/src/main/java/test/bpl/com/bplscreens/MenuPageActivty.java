@@ -26,6 +26,7 @@ public class MenuPageActivty extends FragmentActivity {
     Dialog dialog;
     Button app_version,user_guide,my_profile,logout,manageUser;
     ImageView back;
+    GlobalClass globalClass;
 
     Intent intent;
     @Override
@@ -54,8 +55,14 @@ public class MenuPageActivty extends FragmentActivity {
         back=  findViewById(R.id.back_key);
         back.setOnClickListener(mListner);
 
+        globalClass= (GlobalClass) getApplicationContext();
+
 
         manageUser=findViewById(R.id.btnManageUser);
+        if(globalClass.getUserType().equalsIgnoreCase("home")){
+            manageUser.setText("Manage Family Member");
+        }
+
         manageUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

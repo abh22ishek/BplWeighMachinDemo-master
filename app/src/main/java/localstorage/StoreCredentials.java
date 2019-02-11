@@ -3,6 +3,8 @@ package localstorage;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.example.bluetoothlibrary.entity.Constant;
+
 import constantsP.Constants;
 import logger.Level;
 import logger.Logger;
@@ -11,7 +13,7 @@ import logger.Logger;
 
 public class StoreCredentials {
 
-    public static SharedPreferences save_signupcredentials(Context context,String user_name,String TAG)
+    public static SharedPreferences save_signupcredentials(Context context,String user_name,String TAG,String userType)
     {
 
         SharedPreferences signup_credentials;
@@ -19,8 +21,9 @@ public class StoreCredentials {
         signup_credentials=context.getSharedPreferences(Constants.PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = signup_credentials.edit();
         editor.putString(Constants.USER_NAME,user_name);
+        editor.putString(Constants.USE_TYPE,userType);
        // editor.putString(ConstantsP.PASSWORD, password.getText().toString());
-        editor.commit();
+        editor.apply();
 
         Logger.log(Level.DEBUG, TAG, "shared preference s file gets stored");
 
