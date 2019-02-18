@@ -53,7 +53,7 @@ public class UsersRecordActivity extends FragmentActivity {
         int density =this.getResources().getDisplayMetrics().densityDpi;
         if(DisplayMetrics.DENSITY_XXHIGH==density)
         {
-            headertitle.setTextSize(25);
+            headertitle.setTextSize(22f);
         }else{
             headertitle.setTextSize(21);
         }

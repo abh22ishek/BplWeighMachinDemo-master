@@ -45,9 +45,9 @@ public class UserTestReportGraphActivity extends FragmentActivity {
 
         if(DisplayMetrics.DENSITY_XXHIGH==density)
         {
-            header_title.setTextSize(25);
+            header_title.setTextSize(22f);
         }else{
-            header_title.setTextSize(22);
+            header_title.setTextSize(21);
         }
         if(userName.length()>12)
         {

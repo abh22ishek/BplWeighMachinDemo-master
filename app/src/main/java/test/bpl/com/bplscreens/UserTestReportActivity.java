@@ -123,9 +123,9 @@ public class UserTestReportActivity extends FragmentActivity {
 
         if(DisplayMetrics.DENSITY_XXHIGH==density)
         {
-            header_title.setTextSize(25);
-        }else{
             header_title.setTextSize(22);
+        }else{
+            header_title.setTextSize(21);
         }
         if(userName.length()>12)
         {

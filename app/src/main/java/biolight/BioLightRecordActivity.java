@@ -120,7 +120,7 @@ public class BioLightRecordActivity extends Activity implements BioLightListner{
         int density =this.getResources().getDisplayMetrics().densityDpi;
         if(DisplayMetrics.DENSITY_XXHIGH==density)
         {
-            headerText.setTextSize(25);
+            headerText.setTextSize(22);
         }else{
             headerText.setTextSize(22);
         }

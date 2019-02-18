@@ -23,6 +23,8 @@ import constantsP.*;
 import database.*;
 import io.github.yavski.fabspeeddial.*;
 import logger.*;
+import logger.Level;
+import logger.Logger;
 import model.*;
 import test.bpl.com.bplscreens.R;
 
@@ -133,7 +135,7 @@ public class BioLightReportActivity extends Activity {
             int density =this.getResources().getDisplayMetrics().densityDpi;
             if(DisplayMetrics.DENSITY_XXHIGH==density)
             {
-                base_header_title.setTextSize(25);
+                base_header_title.setTextSize(22);
             }else{
                 base_header_title.setTextSize(22);
             }

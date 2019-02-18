@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.*;
 import android.view.View;
 import android.view.WindowManager;
 
@@ -16,7 +17,7 @@ import database.DatabaseManager;
 import logger.Level;
 import logger.Logger;
 
-public class SplashScreenActivity extends Activity {
+public class SplashScreenActivity extends FragmentActivity {
 
     Handler mHandler;
 

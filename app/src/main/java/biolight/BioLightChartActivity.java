@@ -33,7 +33,6 @@ public class BioLightChartActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.graph_chart);
-
         viewPager= findViewById(R.id.pager);
         tabLayout= findViewById(R.id.tab_layout);
 
@@ -48,7 +47,7 @@ public class BioLightChartActivity extends FragmentActivity {
         int density =this.getResources().getDisplayMetrics().densityDpi;
         if(DisplayMetrics.DENSITY_XXHIGH==density)
         {
-            headerText.setTextSize(25);
+            headerText.setTextSize(22);
         }else{
             headerText.setTextSize(22);
         }
@@ -113,9 +112,6 @@ public class BioLightChartActivity extends FragmentActivity {
 
         tabLayout.getTabAt(2).
                 setText((getString(R.string.month)==null) ? "" : getString(R.string.month));
-
-
-
 
 
         tabLayout.setTabTextColors(Color.GRAY,Color.WHITE);
