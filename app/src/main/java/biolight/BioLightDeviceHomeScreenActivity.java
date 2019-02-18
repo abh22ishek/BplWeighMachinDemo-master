@@ -88,12 +88,16 @@ public class BioLightDeviceHomeScreenActivity extends Activity {
 
     String mUserName,age,gender;
 
+
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bio_light_wh);
 
         // wake device
+
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);

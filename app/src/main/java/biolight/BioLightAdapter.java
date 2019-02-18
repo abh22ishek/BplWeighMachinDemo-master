@@ -66,8 +66,11 @@ public class BioLightAdapter extends BaseAdapter {
         else
             viewHolder.deviceName.setText(R.string.unknown_device);
 
-        viewHolder.deviceAddress.setText(device.getBluetooth());
-        viewHolder.type.setText(device.getModel());
+       // viewHolder.deviceAddress.setText(device.getBluetooth());
+      //  viewHolder.type.setText(device.getModel());
+
+        viewHolder.deviceAddress.setText("BT02");
+        viewHolder.type.setText("BPL Ipressure");
         viewHolder.sn.setText(device.getPreipheralSN());
         return view;
     }

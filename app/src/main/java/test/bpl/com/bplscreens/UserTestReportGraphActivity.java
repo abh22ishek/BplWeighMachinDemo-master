@@ -52,10 +52,10 @@ public class UserTestReportGraphActivity extends FragmentActivity {
         if(userName.length()>12)
         {
             String mx= userName.substring(0,10)+"..";
-            header_title.setText(new StringBuilder().append(mx).append(" 's ").append(getString(R.string.trend)).toString());
+            header_title.setText(new StringBuilder().append(mx).append(" 's ").append("Sp02 ").append(getString(R.string.trend)).toString());
 
         }else{
-            header_title.setText(new StringBuilder().append(userName).append(" 's").append(getString(R.string.trend)).toString());
+            header_title.setText(new StringBuilder().append(userName).append(" 's ").append("Sp02 ").append(getString(R.string.trend)).toString());
 
         }
 

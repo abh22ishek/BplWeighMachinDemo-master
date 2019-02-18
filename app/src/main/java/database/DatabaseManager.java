@@ -256,7 +256,7 @@ private final String TAG="DatabaseManager";
     public List<UserModel> getprofilecontent(String username)
     {
 
-        List<UserModel> user_Modelslist=new ArrayList<UserModel>();
+        List<UserModel> user_Modelslist=new ArrayList<>();
         Cursor cursor=mDatabase.query(TABLE_NAME_PROFILE, null,USER_NAME+"=?",new String[]{username},null,null,null);
 
         UserModel m=new UserModel();
@@ -273,9 +273,7 @@ private final String TAG="DatabaseManager";
         }
 
 
-
         Logger.log(Level.INFO, TAG, "user_Models_list length=" + user_Modelslist.size());
-
         cursor.close();
       return user_Modelslist;
 
@@ -289,7 +287,8 @@ private final String TAG="DatabaseManager";
     {
 
         List<UserModel> user_Modelslist=new ArrayList<>();
-        Cursor cursor=mDatabase.query(TABLE_NAME_HOME_PROFILE, null,USER_NAME+"=?",new String[]{memberName},null,null,null);
+        Cursor cursor=mDatabase.query(TABLE_NAME_HOME_PROFILE, null,
+                NAME_HOME_USER+"=?",new String[]{memberName},null,null,null);
 
         UserModel m=new UserModel();
         Logger.log(Level.INFO, TAG, TABLE_NAME_PROFILE+"Get profile count=" + cursor.getCount());
@@ -375,8 +374,20 @@ private final String TAG="DatabaseManager";
 
         Cursor cursor;
 
-        cursor=mDatabase.query(TABLE_NAME_HOME_PROFILE,
+        if(TAG.equals(Constants.USER_NAME)){
+            cursor=mDatabase.query(TABLE_NAME_HOME_PROFILE,
                     null,USER_NAME+"=?",new String[]{username},null,null,null);
+
+        }
+
+        else
+        {
+            cursor=mDatabase.query(TABLE_NAME_HOME_PROFILE,
+                    null,NAME_HOME_USER+"=?",new String[]{username},
+                    null,null,null);
+
+        }
+
 
 
 
@@ -395,6 +406,7 @@ private final String TAG="DatabaseManager";
             m.setAddress(cursor.getString(cursor.getColumnIndex(CITY_HOME_USER)));
             m.setHeight(cursor.getString(cursor.getColumnIndex(HEIGHT_HOME_USER)));
             m.setWeight(cursor.getString(cursor.getColumnIndex(WEIGHT_HOME_USER)));
+            m.setAge(cursor.getString(cursor.getColumnIndex(AGE_HOME_USER)));
          //   m.setUserEmail(cursor.getString(cursor.getColumnIndex(USER_EMAIL_)));
             user_Model_List.add(m);
         }

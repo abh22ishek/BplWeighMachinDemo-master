@@ -146,10 +146,10 @@ public class SelectParameterActivity extends Activity {
 
             if (view == select_weigh_machine) {
 
-               /* Toast.makeText(SelectParameterActivity.this,"Coming Soon",Toast.LENGTH_SHORT).show();
-                return;*/
+               Toast.makeText(SelectParameterActivity.this,"Coming Soon",Toast.LENGTH_SHORT).show();
+                return;
 
-               if (userNameSelected.getText().toString().equals("")) {
+              /* if (userNameSelected.getText().toString().equals("")) {
 
                    if(globalVariable.getUserType().equalsIgnoreCase("home")){
                        callExistingUserActivity(SelectParameterActivity.this);
@@ -176,7 +176,7 @@ public class SelectParameterActivity extends Activity {
                                         addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                     }
                 }
-
+*/
 
             } else if (view == select_records) {
                 //---To dispaly records of either Iweigh or Ioxy
@@ -202,12 +202,18 @@ public class SelectParameterActivity extends Activity {
 
 
                 if (userNameSelected.getText().toString().equals("")) {
-                    //selectOptionBPachine(SelectParameterActivity.this, "");
-                    if(isUserExistsForLoginProfile()){
+                    if(globalVariable.getUserType().equalsIgnoreCase("home")){
                         callExistingUserActivity(SelectParameterActivity.this);
                     }else{
-                        Toast.makeText(SelectParameterActivity.this,"Please Add User",Toast.LENGTH_SHORT).show();
+                        if(isUserExistsForLoginProfile()){
+                            callExistingUserActivity(SelectParameterActivity.this);
+                        }else{
+                            Toast.makeText(SelectParameterActivity.this,"Please Add User",Toast.LENGTH_SHORT).show();
+                        }
                     }
+
+
+
 
                 } else {
                     ActivityOptions options;
@@ -292,13 +298,18 @@ public class SelectParameterActivity extends Activity {
         }
 
 
-        if(userModelList_.size()==0){
+
+        if(userModelList_.size()==0 ||isSelectedUserUpdated){
             userNameChosen="";
             userNameSelected.setText("");
         }
 
-    }
 
+        // if selected user is modified then de selelect the user
+
+
+    }
+    boolean isSelectedUserUpdated;
     @Override
     protected void onResume() {
         super.onResume();
@@ -718,6 +729,16 @@ public class SelectParameterActivity extends Activity {
 
 
             }
+
+
+            else if(resultCode==800){
+            mUsercount=0;
+            userNameChosen="";
+                Constants.SELECTED_USER_SNOW = userNameChosen;
+                txtChangeUserSel.setVisibility(View.GONE);
+                userNameSelected.setText("");
+            }
+
     }
 
 
@@ -830,7 +851,17 @@ public class SelectParameterActivity extends Activity {
                 else if(adapterView.getItemAtPosition(i).equals(getString(R.string.ch_sel_user)))  // Existing User
                 {
 
-                   callAddOrEditUser(Constants.PROFILE_EDIT);
+                    if(globalVariable.getUserType().equalsIgnoreCase("Home")){
+                        Intent intent=new Intent(SelectParameterActivity.this,HomeMemberProfileActivity.class);
+                        intent.putExtra(Constants.PROFILE_FLAG,Constants.PROFILE_EDIT);
+                        intent.putExtra("user",userNameChosen);
+                        startActivityForResult(intent,Constants.REQUEST_CODE);
+                    }else{
+                        Intent intent=new Intent(SelectParameterActivity.this,PatientProfileActivity.class);
+                        intent.putExtra(Constants.PROFILE_FLAG,Constants.PROFILE_EDIT);
+                        intent.putExtra("user",userNameChosen);
+                        startActivityForResult(intent,Constants.REQUEST_CODE);
+                    }
 
                 }
 
@@ -865,6 +896,10 @@ public class SelectParameterActivity extends Activity {
             startActivityForResult(intent, Constants.REQUEST_CODE);
         }
     }
+
+
+
+
 
 
 

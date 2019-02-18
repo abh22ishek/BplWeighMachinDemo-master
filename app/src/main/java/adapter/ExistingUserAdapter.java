@@ -31,14 +31,17 @@ public class ExistingUserAdapter extends BaseAdapter implements Filterable{
     ListR listlistner;
     String searchByTag;
     List<UserModel> filterList;
-
-    public ExistingUserAdapter(Context context, List<UserModel> userModelList,ListR listlistner,String serchbyTag) {
+    String uri;
+    String useType;
+    public ExistingUserAdapter(Context context, List<UserModel> userModelList,
+                               ListR listlistner,String serchbyTag,String mUseType) {
         this.context = context;
         this.userModelList = userModelList;
         array =new boolean[userModelList.size()];
         this.listlistner=listlistner;
         this. filterList=userModelList;
         this.searchByTag=serchbyTag;
+        this.useType=mUseType;
     }
 
 
@@ -77,6 +80,7 @@ public class ExistingUserAdapter extends BaseAdapter implements Filterable{
             holder.gender=convertView.findViewById(R.id.gender);
             holder.patientIcon=convertView.findViewById(R.id.patientIcon);
 
+            holder.weight.setVisibility(View.GONE);
 
             convertView.setTag(holder);
         }else{
@@ -93,17 +97,31 @@ public class ExistingUserAdapter extends BaseAdapter implements Filterable{
         }
         holder.radioButton.setChecked(array[position]);
         holder.phone.setText(userModelList.get(position).getPhone());
-        holder.age.setText(new StringBuilder().append(userModelList.get(position).getAddress()).append("Years").toString());
+
+        if(useType.equalsIgnoreCase("Clinic")){
+            holder.age.setText(new StringBuilder().
+                    append(userModelList.get(position).getAddress()).append(" Years").toString());
+
+        }else{
+            holder.age.setText(new StringBuilder().
+                    append(userModelList.get(position).getAge()).append(" Years").toString());
+        }
 
         holder.gender.setText(new StringBuilder().append(",").
                 append(userModelList.get(position).getSex()).toString());
         holder.height.setText(new StringBuilder().append(",").
-                append(userModelList.get(position).getHeight()).append("CM").toString());
-        holder.weight.setText(new StringBuilder().append(",").
-                append(userModelList.get(position).getWeight()).append("Kg").toString());
+                append(userModelList.get(position).getHeight()).append(" CM").toString());
+     //   holder.weight.setText(new StringBuilder().append(",").
+       //         append(userModelList.get(position).getWeight()).append("Kg").toString());
 
 
-        String uri = get_profile_image(userModelList.get(position).getUserName());
+        if(useType.equalsIgnoreCase("Clinic")) {
+            uri = get_profile_image(userModelList.get(position).getUserName()+"_"+"clinic");
+        }
+        else{
+             uri = get_profile_image(userModelList.get(position).getUserName()+"_"+"home");
+        }
+
 
         if(uri!=""){
             Glide
@@ -267,8 +285,7 @@ public class ExistingUserAdapter extends BaseAdapter implements Filterable{
 
     private String get_profile_image(String key_username) {
         SharedPreferences profile_image_prefs;
-        profile_image_prefs =context.
-                getSharedPreferences(Constants.PREFERENCE_PROFILE_IMAGE, Context.MODE_PRIVATE);
+        profile_image_prefs =context.getSharedPreferences(Constants.PREFERENCE_PROFILE_IMAGE, Context.MODE_PRIVATE);
 
         String image_str = profile_image_prefs.getString(key_username, "");
         Logger.log(Level.INFO, "SHARED PREFS", "get profile image from shared pref=" + image_str);

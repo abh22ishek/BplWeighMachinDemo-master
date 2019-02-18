@@ -422,6 +422,7 @@ public class DaysChartFragment extends Fragment{
             contentStream.beginText();
             contentStream.setFont(font, 11);
             contentStream.newLineAtOffset(120f, marginUpperLine + 2);
+
             contentStream.showText("User Name : " + userName + "   " + "Age : " + "26" + "   " + "Gender : " +
                     gender+ "  " + "Clinic Name : " + "Bpl Med Tech");
 

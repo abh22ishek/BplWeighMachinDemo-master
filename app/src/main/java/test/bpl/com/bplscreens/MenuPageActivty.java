@@ -60,16 +60,15 @@ public class MenuPageActivty extends FragmentActivity {
 
         manageUser=findViewById(R.id.btnManageUser);
         if(globalClass.getUserType().equalsIgnoreCase("home")){
-            manageUser.setText("Manage Family Member");
+            manageUser.setText("Manage Family Members");
         }
 
         manageUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Intent intent=new Intent(MenuPageActivty.this, ExistingUserActivityManage.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
+
+               Utility.navActivity(MenuPageActivty.this,ExistingUserActivityManage.class);
             }
         });
 
@@ -123,9 +122,10 @@ public class MenuPageActivty extends FragmentActivity {
 
         cancel.setVisibility(View.GONE);
         header.setText(getResources().getString(R.string.app_version));
-        content.setText("The current app version is "+BuildConfig.VERSION_NAME );
+        content.setText(new StringBuilder().append(getString(R.string.curr_app)).
+                append(BuildConfig.VERSION_NAME).toString());
 
-        save.setText("OK");
+        save.setText(R.string.ok_);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -229,8 +229,9 @@ public class MenuPageActivty extends FragmentActivity {
 
                 if(adapterView.getItemAtPosition(i).equals(getString(R.string.weigh_mc)))
                 {
-                    // selectOptionWeighMachine(context,ConstantsP.RECORDS_WEIGH_MACHINE);
-                    ActivityOptions options;
+                    Toast.makeText(MenuPageActivty.this,"Coming Soon",Toast.LENGTH_SHORT).show();
+                    return;
+                  /*  ActivityOptions options;
                     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
                         options = ActivityOptions.makeSceneTransitionAnimation(MenuPageActivty.this);
 
@@ -244,7 +245,7 @@ public class MenuPageActivty extends FragmentActivity {
                                 intent.putExtra("weigh machine","weigh machine 2");
                                intent. setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
-                    }
+                    }*/
                 }else if(adapterView.getItemAtPosition(i).equals(getString(R.string.ioxy)))
                 {
                     ActivityOptions options;
@@ -290,6 +291,7 @@ public class MenuPageActivty extends FragmentActivity {
 
         dialog.show();
     }
+
 
 
 

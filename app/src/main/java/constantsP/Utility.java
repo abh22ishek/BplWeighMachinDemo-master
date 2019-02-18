@@ -1,6 +1,7 @@
 package constantsP;
 
 import android.annotation.*;
+import android.app.*;
 import android.content.*;
 import android.net.Uri;
 import android.os.Build;
@@ -648,5 +649,27 @@ public class Utility {
         values.put(BplOximterdbHelper.COMMENT,comment);
 
         return values;
+    }
+
+
+
+    public static void navActivity(Context context1, Class cl)
+    {
+
+        ActivityOptions options;
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            options = ActivityOptions.makeSceneTransitionAnimation((Activity) context1);
+            Intent intent=new Intent(context1,cl);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context1.startActivity(intent,options.toBundle());
+
+        } else {
+            Intent intent=new Intent(context1,cl);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context1.startActivity(intent);
+        }
+
+
     }
 }

@@ -1,19 +1,21 @@
 package test.bpl.com.bplscreens;
 
 import android.Manifest;
-import android.content.Context;
+import android.content.*;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.*;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.internal.NavigationMenu;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.*;
 import android.util.*;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -35,6 +37,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import biolight.*;
 import constantsP.Constants;
 import constantsP.Utility;
 import customviews.MyCustomSPO2Graph;
@@ -126,11 +129,11 @@ public class UserTestReportActivity extends FragmentActivity {
         }
         if(userName.length()>12)
         {
-            String mx= userName.substring(0,10)+"..";
-            header_title.setText(new StringBuilder().append(mx).append(" 's ").append(getString(R.string.report)).toString());
+            String mx= userName.substring(0,9)+"..";
+            header_title.setText(new StringBuilder().append(mx).append(" 's ").append("Sp02 ").append(getString(R.string.report)).toString());
 
         }else{
-            header_title.setText(new StringBuilder().append(userName).append(" 's").append(getString(R.string.report)).toString());
+            header_title.setText(new StringBuilder().append(userName).append(" 's ").append("Sp02 ").append(getString(R.string.report)).toString());
 
         }
         init(userName);
@@ -174,12 +177,7 @@ public class UserTestReportActivity extends FragmentActivity {
 
 
 
-        fabSpeedDial.setMenuListener(new SimpleMenuListenerAdapter() {
-            @Override
-            public boolean onPrepareMenu(NavigationMenu navigationMenu) {
-                return true;
-            }
-        });
+
 
 
         fabSpeedDial.setMenuListener(new SimpleMenuListenerAdapter() {
@@ -197,6 +195,12 @@ public class UserTestReportActivity extends FragmentActivity {
                     }
 
 
+                }else if(menuItem.getItemId()==R.id.share_png)
+                {
+                    if(screenShotFile!=null) {
+
+                        sharePNG();
+                    }
                 }
                 return true;
             }
@@ -266,41 +270,40 @@ public class UserTestReportActivity extends FragmentActivity {
 
     public void display_text() {
 
-        device_macid.setText("Device Id:  "+device_id);
-
+        device_macid.setText(new StringBuilder().append("Device Id:  ").append(device_id).toString());
         name.setText(userName);
-
         PackageInfo pInfo=null;
+
         try {
             pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
 
-        txt_app_version.setText("App Version: " +pInfo.versionName);
+        txt_app_version.setText(String.format("App Version: %s", pInfo.versionName));
 
 
 
-        event9990.setText("" + counter_99_90);
-        event8980.setText("" + counter_89_80);
+        event9990.setText(new StringBuilder().append(counter_99_90).toString());
+        event8980.setText(new StringBuilder().append(counter_89_80).toString());
 
-        event7970.setText("" + counter_79_70);
-        event6960.setText("" + counter_69_60);
-        event5950.setText("" + counter_59_50);
-        event4940.setText("" + counter_49_40);
-        event3930.setText("" + counter_39_30);
+        event7970.setText(new StringBuilder().append(counter_79_70).toString());
+        event6960.setText(new StringBuilder().append(counter_69_60).toString());
+        event5950.setText(new StringBuilder().append(counter_59_50).toString());
+        event4940.setText(new StringBuilder().append(counter_49_40).toString());
+        event3930.setText(new StringBuilder().append(counter_39_30).toString());
 
 
-        testingtime.setText("" + testing_time_str);
-        duration.setText(duration_str + "s");
+        testingtime.setText(new StringBuilder().append(testing_time_str).toString());
+        duration.setText(new StringBuilder().append(duration_str).append("s").toString());
 
 
         spo2_baseline.setText(spo2_str.split(",")[0]);
-        spo2_duartion.setText("" + 0);
-        spo2_event.setText("" + 0);
+        spo2_duartion.setText(new StringBuilder().append(0).toString());
+        spo2_event.setText(new StringBuilder().append(0).toString());
 
         if (spo2_str != "") {
-            List<String> spo2_integer = new ArrayList<String>(Arrays.asList(spo2_arr));
+            List<String> spo2_integer = new ArrayList<>(Arrays.asList(spo2_arr));
             Collections.sort(spo2_integer);
             Logger.log(Level.INFO, TAG, "spo2 integer=" + spo2_integer);
             spo2_minimum.setText(spo2_integer.get(0));
@@ -314,7 +317,7 @@ public class UserTestReportActivity extends FragmentActivity {
             for (String s : pr_list) {
                 x = x + Integer.parseInt(s);
             }
-            pulserate_avergaebpm.setText("" + x / pr_list.size());
+            pulserate_avergaebpm.setText(new StringBuilder().append(x / pr_list.size()).toString());
             Collections.sort(pr_list);
             Logger.log(Level.INFO, TAG, " pr_list=" + pr_list);
             pulserate_minimum.setText(pr_list.get(0));
@@ -626,10 +629,20 @@ public class UserTestReportActivity extends FragmentActivity {
     }
 
 
+    private void sharePNG()
+    {
+        Intent shareIntent = new Intent();
+        shareIntent.setAction(Intent.ACTION_SEND);
+        Uri contentUri = FileProvider.getUriForFile(UserTestReportActivity.this,
+                UserTestReportActivity.this.getPackageName() + ".provider", screenShotFile);
+        shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
+
+        shareIntent.setType("image/png");
+        startActivity(Intent.createChooser(shareIntent, getResources().getText(R.string.share_via)));
+    }
 
 
-
-
+    File screenShotFile;
     private  File saveScreenshot(String fileName,String loginFileName,String userDirName)
     {
         String fileNameDir="BplBeWell";
@@ -644,7 +657,6 @@ public class UserTestReportActivity extends FragmentActivity {
        File loginFile=new File(file,loginFileName);
 
         if(!loginFile.exists()){
-
             loginFile.mkdir();
         }
 
@@ -656,7 +668,7 @@ public class UserTestReportActivity extends FragmentActivity {
             userDir.mkdir();
         }
 
-        File screenShotFile=new File(userDir,fileName);
+         screenShotFile=new File(userDir,fileName);
 
         try {
             FileWriter filewriter=new FileWriter(screenShotFile,false);

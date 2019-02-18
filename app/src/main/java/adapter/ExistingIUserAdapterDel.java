@@ -27,15 +27,17 @@ public class ExistingIUserAdapterDel extends BaseAdapter implements MarkUsers{
     List<UserModel> userModelList;
     boolean array[];
     ListR listlistner;
+    String mUseType;
     boolean activeUsrsArray[];
     Set<String> activeUsersS;
     Set<String> dormantUsersS;
-
-    public ExistingIUserAdapterDel(Context context, List<UserModel> userModelList,ListR listlistner) {
+String uri;
+    public ExistingIUserAdapterDel(Context context, List<UserModel> userModelList,ListR listlistner,String usetType) {
         this.context = context;
         this.userModelList = userModelList;
         array =new boolean[userModelList.size()];
         this.listlistner=listlistner;
+        mUseType=usetType;
     }
 
     @Override
@@ -97,7 +99,14 @@ public class ExistingIUserAdapterDel extends BaseAdapter implements MarkUsers{
                 append(userModelList.get(position).getWeight()).append("Kg").toString());
 
 
-        String uri = get_profile_image(userModelList.get(position).getUserName());
+
+
+
+        if(mUseType.equalsIgnoreCase("Home")){
+            uri = get_profile_image(userModelList.get(position).getUserName()+"_"+"home");
+        }else{
+            uri = get_profile_image(userModelList.get(position).getUserName()+"_"+"clinic");
+        }
 
         if(uri!=""){
             Glide

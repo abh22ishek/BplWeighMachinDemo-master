@@ -39,6 +39,7 @@ public class ExistingUserActivityManage extends FragmentActivity implements List
     private ExistingIUserAdapterDel existingUserAdapter;
 
 
+    String mUseType;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,17 +99,19 @@ public class ExistingUserActivityManage extends FragmentActivity implements List
         if(globalVariable.getUserType().equalsIgnoreCase("clinic")){
             userModelList_.addAll(DatabaseManager.getInstance().getAllUserprofilecontent
                     (globalVariable.getUsername(), Constants.USER_NAME));
+            mUseType="Clinic";
 
         }else{
             userModelList_.addAll(DatabaseManager.getInstance().getAllMemberProfilecontent
                     (globalVariable.getUsername(), Constants.USER_NAME));
+            mUseType="Home";
 
         }
 
 
 
         existingUserAdapter=new ExistingIUserAdapterDel(ExistingUserActivityManage.this,
-                userModelList_,listR);
+                userModelList_,listR,mUseType);
 
 
         recyclerView.setAdapter(existingUserAdapter);

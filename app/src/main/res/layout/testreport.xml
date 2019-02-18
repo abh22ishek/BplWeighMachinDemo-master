@@ -661,9 +661,9 @@
         app:fabGravity="bottom_end"
         app:fabMenu="@menu/menu"
         android:id="@+id/fabSpeedDial"
-        app:miniFabBackgroundTint="@android:color/white"
-        app:miniFabDrawableTint="?attr/colorPrimaryDark"
-        app:miniFabTitleTextColor="?attr/colorPrimaryDark"
+        app:miniFabBackgroundTint="@color/colorAccent"
+        app:miniFabDrawableTint="@color/white"
+        app:miniFabTitleTextColor="@color/colorAccent"
 
 
         />

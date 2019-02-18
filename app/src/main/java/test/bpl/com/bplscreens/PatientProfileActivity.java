@@ -40,13 +40,13 @@ public class PatientProfileActivity extends Activity {
 
      final String TAG=PatientProfileActivity.class.getSimpleName();
 
-
      private EditText height,weight, Age,userName,userName_;
-    private GlobalClass globalVariable;
-     Button submit,update;
-    String TAG_USER = "Edit";
-    List<UserModel> UserModellist;
-     String mUserName;
+     private GlobalClass globalVariable;
+
+        Button submit,update;
+        String TAG_USER = "Edit";
+        List<UserModel> UserModellist;
+        String mUserName;
 
     String gender="Male";
     RadioGroup sex;
@@ -88,9 +88,9 @@ public class PatientProfileActivity extends Activity {
         globalVariable = (GlobalClass) getApplicationContext();
         if (globalVariable.getUsername() != null) {
             String mName=globalVariable.getUsername();
-            userName.setText(mName);
+            userEmail.setText(mName);
         }
-         userName.setEnabled(false);
+        userEmail.setEnabled(false);
         final ImageView backKey=findViewById(R.id.imgBackKey);
 
         backKey.setOnClickListener(new View.OnClickListener() {
@@ -206,7 +206,7 @@ public class PatientProfileActivity extends Activity {
                 if (globalVariable.getUsername() != null) {
 
 
-                    String img_profile = get_profile_image(userName_.getText().toString());
+                    String img_profile = get_profile_image(userName_.getText().toString()+"_"+"clinic");
                     if (!img_profile.equals("") || img_profile != "") {
                         profile_image = img_profile;
 
@@ -244,7 +244,8 @@ public class PatientProfileActivity extends Activity {
 
         {
             TAG_USER = "Update";
-            userIcon.setImageDrawable(ContextCompat.getDrawable(PatientProfileActivity.this, R.drawable.add_profile));
+            userIcon.setImageDrawable
+                    (ContextCompat.getDrawable(PatientProfileActivity.this, R.drawable.add_profile));
 
             headertitle.setText(getString(R.string.add_user));
             update.setVisibility(View.GONE);
@@ -291,7 +292,7 @@ public class PatientProfileActivity extends Activity {
                                                   userPhone.getText().toString().trim(),  gender,Age.getText().toString(), height.getText().toString(),
                                                     weight.getText().toString(),userEmail.getText().toString().toLowerCase().trim()), BplOximterdbHelper.USER_NAME_ + "=?", new String[]{mUserName});
                                     StoreCredentials.store_profile_image(PatientProfileActivity.this,
-                                            profile_image, TAG, userName_.getText().toString());
+                                            profile_image, TAG, userName_.getText().toString()+"_"+"clinic");
 
                                     Toast.makeText(PatientProfileActivity.this,
                                             "User Profile Successfully updated", Toast.LENGTH_SHORT).show();
@@ -349,17 +350,11 @@ public class PatientProfileActivity extends Activity {
                         }
 
 
-
-
+                        String patientUri=userName_.getText().toString()+"_"+"clinic";
                         // pending Tasks to do
 
-                            StoreCredentials.store_profile_image(PatientProfileActivity.this, profile_image, TAG,
-                                    userName_.getText().toString());
-
-
-
+                            StoreCredentials.store_profile_image(PatientProfileActivity.this, profile_image, TAG, patientUri);
                             Toast.makeText(PatientProfileActivity.this, "User Successfully Added", Toast.LENGTH_SHORT).show();
-
                             finish();
                         }
                     }

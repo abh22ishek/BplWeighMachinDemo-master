@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Home Health</string>
+    <string name="app_name">BPL BeWell</string>
     <string name="my_profile">My Profile</string>
     <string name="log_profile">Login Profile</string>
     <string name="user_guide">User\'s Guide</string>
@@ -516,5 +516,7 @@ contains a large amount of water. (approx 70%)</string>
     <string name="terms_and_condition">Terms And Condition</string>
     <string name="sel_fam_mem">Select Family Member</string>
     <string name="edt_fam_mem">Edit Family Member</string>
+    <string name="ok_">OK</string>
+    <string name="curr_app">The current app version is</string>
 
 </resources>

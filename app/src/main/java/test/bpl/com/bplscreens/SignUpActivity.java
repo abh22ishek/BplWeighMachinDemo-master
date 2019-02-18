@@ -50,6 +50,10 @@ public class SignUpActivity extends Activity{
     private boolean isLoginProfileExists;
     final String[] colors = {"Red", "Green", "Blue", "Yellow", "Orange"};
     final String[] useTypeArr = {"Home","Clinic"};
+    CheckBox termsCheckbox;
+
+    boolean IsTermsAndCondition;
+
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +65,22 @@ public class SignUpActivity extends Activity{
         email_id=  findViewById(R.id.email);
         password= findViewById(R.id.password);
 
+        termsCheckbox=findViewById(R.id.checkTermsConditions);
+
+        termsCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
+
+                if(compoundButton.isChecked()){
+
+                    IsTermsAndCondition=true;
+                }else{
+                    IsTermsAndCondition=false;
+
+                }
+            }
+        });
 
         termsAndCondition=findViewById(R.id.TermsAndConditions);
       //  termsAndCondition.setPaintFlags(termsAndCondition.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
@@ -170,15 +190,20 @@ public class SignUpActivity extends Activity{
             if (v == btnLoginSignUp) {
 
 
-                if (!isLoginProfileExists) {
+                if (!isLoginProfileExists && !email_id.getText().toString().equals("")) {
                     return;
                 }
 
-                if (email_id.getText().toString().trim().equals("") || password.getText().toString().trim().equals("")) {
-                    Toast.makeText(SignUpActivity.this, "Please enter the fields", Toast.LENGTH_SHORT).show();
+                if (email_id.getText().toString().trim().equals("")) {
+                    Toast.makeText(SignUpActivity.this, "Please enter Email Id", Toast.LENGTH_SHORT).show();
                     return;
 
-                } else if (!isValidEmail(email_id.getText().toString().trim())) {
+                }
+                   else if(password.getText().toString().trim().equals("")){
+                    Toast.makeText(SignUpActivity.this, "Please enter password", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                 else if (!isValidEmail(email_id.getText().toString().trim())) {
                     Toast.makeText(SignUpActivity.this, "Email id format is not correct", Toast.LENGTH_SHORT).show();
                     return;
 
@@ -193,6 +218,12 @@ public class SignUpActivity extends Activity{
                     return;
                 } else if (security_question3.getText().toString().trim().equals("")) {
                     security_question3.setError("Security Question 3 cannot be empty");
+                    return;
+                }
+
+                    else if(!termsCheckbox.isChecked()){
+                    Toast.makeText(SignUpActivity.this,
+                            "Please Accept the Terms And Condition",Toast.LENGTH_SHORT).show();
                     return;
                 } else {
 

@@ -1,10 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
+
+    lintOptions {
+
+        checkReleaseBuilds false
+        abortOnError false
+    }
     compileSdkVersion 27
     buildToolsVersion "27.0.3"
     defaultConfig {
-        applicationId "test.bpl.com.bplweighmachinedemo"
+        applicationId "bpl.bewell"
         minSdkVersion 19
         targetSdkVersion 24
         versionCode 2
@@ -12,8 +18,15 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
-        release {
+
+        debug {
             minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled true
+            shrinkResources true
+            debuggable false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -21,6 +34,7 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
+
 
     implementation project(':iweightlibrary')
     implementation 'com.android.support:appcompat-v7:27.0.2'

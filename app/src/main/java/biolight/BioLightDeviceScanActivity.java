@@ -60,11 +60,216 @@ public class BioLightDeviceScanActivity extends Activity {
     ProgressDialog progressDialog;
 
     String mUserName,mAge,mGender;
+
+    String biolighArry[]={"88:4A:EA:84:B7:74",
+            "F045DA1120BE",
+            "F045DA111AE2",
+            "F045DA118FF9",
+            "F045DA1120F2",
+            "F045DA10F4A6",
+            "94E36DA61876",
+            "F045DA10F2C6",
+            "94E36DA4E1D3",
+            "F045DA116479",
+            "F045DA10DA30",
+            "94E36DA60B69",
+            "F045DA11641C",
+            "F045DA111ADA",
+            "F045DA111DE5",
+            "F045DA111A9C",
+            "F045DA10DB27",
+            "F045DA10E8FE",
+            "94E36DAA978F",
+            "F045DA11177A",
+            "94E36DA4F327",
+            "F045DA10F11A",
+            "94E36DA60339",
+            "94E36DA6036F",
+            "F045DA111DB5",
+            "94E36DAA6C4D",
+            "F045DA10DD5A",
+            "94E36DA61D33",
+            "F045DA11D90F",
+            "F045DA111D8A",
+            "94E36DA6187C",
+            "94E36DAA7492",
+            "F045DA11D766",
+            "94E36DAA978C",
+            "F045DA111ACD",
+            "F045DA10DD3A",
+            "94E36DA4FDDC",
+            "94E36DA612CA",
+            "F045DA116764",
+            "F045DA10DB36",
+            "94E36DAA9781",
+            "F045DA10F494",
+            "F045DA10DA4F",
+            "F045DA111AC3",
+            "F045DA116768",
+            "F045DA10DB09",
+            "F045DA10DD46",
+            "F045DA11DB2D",
+            "F045DA12173C",
+            "94E36DAA9786",
+            "F045DA1120D7",
+            "F045DA11174D",
+            "F045DA111DAC",
+            "F045DA11E36F",
+            "94E36DA60F29",
+            "F045DA111AFE",
+            "94E36DAA978A",
+            "94E36DAA6FB9",
+            "F045DA111DD7",
+            "F045DA111709",
+            "94E36DA61D15",
+            "F045DA111DCD",
+            "F045DA11626D",
+            "94E36DA6184A",
+            "94E36DA4F809",
+            "C8DF842BE11F",
+            "94E36DAA6C72",
+            "F045DA111DFA",
+            "F045DA10DA19",
+            "F045DA111701",
+            "94E36DAA6C75",
+            "F045DA11208A",
+            "F045DA11D931",
+            "F045DA111DCB",
+            "F045DA11DB69",
+            "C8DF842BD8F4",
+            "F045DA11176D",
+            "94E36DAA6C7E",
+            "F045DA10DC30",
+            "F045DA116A27",
+            "94E36DAA6C23",
+            "F045DA10DB34",
+            "94E36DA4F358",
+            "F045DA11E361",
+            "F045DA11E55E",
+            "F045DA111752",
+            "F045DA10F10A",
+            "F045DA11174F",
+            "94E36DAA6FEF",
+            "94E36DA61D7D",
+            "94E36DAA7491",
+            "F045DA111DB3",
+            "F045DA116A28",
+            "F045DA111AE6",
+            "C8DF842BDDDB",
+            "94E36DA4F85B",
+            "F045DA10EA3F",
+            "F045DA1120A2",
+            "F045DA1191FE",
+            "F045DA111DE7",
+            "F045DA11DB08",
+            "F045DA10DB59",
+            "94E36DAA6C77",
+            "F045DA10DD09",
+            "94E36DA61D58",
+            "F045DA111734",
+            "F045DA11DB4A",
+            "F045DA1120E7",
+            "F045DA112092",
+            "F045DA111AA5",
+            "F045DA10F287",
+            "F045DA112098",
+            "F045DA10DA43",
+            "F045DA116452",
+            "F045DA10DA66",
+            "F045DA1120AB",
+            "94E36DA6031F",
+            "F045DA10DC36",
+            "F045DA116222",
+            "C8DF842BC7F6",
+            "F045DA111779",
+            "94E36DAA93E3",
+            "F045DA111D9A",
+            "F045DA10DB1A",
+            "F045DA10DD1D",
+            "F045DA11D775",
+            "94E36DAA9793",
+            "F045DA11D919",
+            "94E36DA4F31A",
+            "94E36DA612AB",
+            "94E36DA6213E",
+            "94E36DAA9783",
+            "F045DA10DB3D",
+            "94E36DAA93EE",
+            "94E36DAA724D",
+            "94E36DA4FDD2",
+            "F045DA10EF87",
+            "F045DA10DB29",
+            "F045DA10F105",
+            "94E36DAA6FE7",
+            "94E36DAA6C34",
+            "F045DA10DB32",
+            "94E36DAA6C30",
+            "F045DA118FE7",
+            "F045DA10DA61",
+            "F045DA11624C",
+            "F045DA111777",
+            "94E36DA4F834",
+            "F045DA111A85",
+            "94E36DAA97A2",
+            "94E36DAA6FC2",
+            "F045DA10EBB0",
+            "F045DA1114E5",
+            "94E36DA4F36D",
+            "F045DA10F2C7",
+            "F045DA10DA79",
+            "C8DF842BE14D",
+            "94E36DAA7217",
+            "94E36DA4FDBA",
+            "F045DA10DD4A",
+            "94E36DAA6C73",
+            "94E36DAA6FDD",
+            "F045DA111A99",
+            "94E36DAA93EB",
+            "F045DA10DC00",
+            "94E36DA4FDA2",
+            "F045DA116247",
+            "94E36DAA74F7",
+            "F045DA10DB66",
+            "94E36DA60B0C",
+            "F045DA11DB11",
+            "F045DA10F486",
+            "F045DA10DB46",
+            "F045DA116736",
+            "94E36DAA725E",
+            "F045DA11176A",
+            "F045DA10F28B",
+            "F045DA111DBF",
+            "C8DF842BCD96",
+            "94E36DA62138",
+            "F045DA10F104",
+            "94E36DAA6FE2",
+            "94E36DAA74D1",
+            "F045DA11DB0D",
+            "F045DA116476",
+            "F045DA11DB19",
+            "F045DA10DD39",
+            "C8DF842BC7BB",
+            "94E36DAA74CF",
+            "94E36DAA74BE",
+            "F045DA1114FA",
+            "F045DA111AF7",
+            "94E36DAA6C64",
+            "F045DA10F2A5",
+            "F045DA121731",
+            "F045DA11DB03",
+            "F045DA1114DE",
+            "F045DA111DAD",
+            "F045DA1120F1",
+            "94E36DA612DE",
+            "F045DA111DDD"};
+
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
        setContentView(R.layout.biolight);
-
+        final ArrayList<String> macList= new ArrayList<String>(Arrays.asList(biolighArry));
         final   Button  btnFindDevice= findViewById(R.id.btnFindDevice);
         blueToothListView = findViewById(R.id.listDevices);
         config=new Config();
@@ -80,7 +285,8 @@ public class BioLightDeviceScanActivity extends Activity {
         mGender=getIntent().getExtras().getString("gender");
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(BioLightDeviceScanActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION)
+            if (ContextCompat.checkSelfPermission(BioLightDeviceScanActivity.this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION)
                     != PackageManager.PERMISSION_GRANTED) {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(BioLightDeviceScanActivity.this,
                         Manifest.permission.ACCESS_COARSE_LOCATION)) {
@@ -162,8 +368,6 @@ public class BioLightDeviceScanActivity extends Activity {
             public void onClick(View view) {
 
 
-
-              //  insert_data();
             }
         });
 
@@ -181,11 +385,19 @@ public class BioLightDeviceScanActivity extends Activity {
                 else
                 {
 
-                    mBLE.setBLEService(device.getPreipheralMAC());
-                    config.setConnectPreipheralOpsition(device);//set to be current device
+                    if(macList.contains(device.getPreipheralMAC()))
+                        {
+                            mBLE.setBLEService(device.getPreipheralMAC());
+                            config.setConnectPreipheralOpsition(device);//set to be current device
 
-                    Log.e(" the current device", "" + config.getConnectPreipheralOpsition().getPreipheralMAC() + "" + config.getConnectPreipheralOpsition().getBluetooth());
-                    Log.e(" version of  device", "" + device.getModel());
+                            Log.e(" the current device", "" + config.getConnectPreipheralOpsition().getPreipheralMAC() + "" + config.getConnectPreipheralOpsition().getBluetooth());
+                            Log.e(" version of  device", "" + device.getModel());
+                        }else{
+                            Toast.makeText(BioLightDeviceScanActivity.this,"Mac Id not Registered",Toast.LENGTH_SHORT).show();
+                        }
+
+
+
 
                 }
             }

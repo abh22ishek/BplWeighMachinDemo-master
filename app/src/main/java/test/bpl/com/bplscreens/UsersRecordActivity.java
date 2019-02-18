@@ -55,15 +55,15 @@ public class UsersRecordActivity extends FragmentActivity {
         {
             headertitle.setTextSize(25);
         }else{
-            headertitle.setTextSize(22);
+            headertitle.setTextSize(21);
         }
         if(mUserName.length()>12)
         {
-            String mx= mUserName.substring(0,10)+"..";
-            headertitle.setText(new StringBuilder().append(mx).append(" 's ").append(getString(R.string.record)).toString());
+            String mx= mUserName.substring(0,9)+"..";
+            headertitle.setText(new StringBuilder().append(mx).append(" 's ").append("Sp02 ").append(getString(R.string.record)).toString());
 
         }else{
-            headertitle.setText(new StringBuilder().append(mUserName).append(" 's").append(getString(R.string.record)).toString());
+            headertitle.setText(new StringBuilder().append(mUserName).append(" 's ").append("Sp02 ").append(getString(R.string.record)).toString());
 
         }
         if(mUserName!=null)

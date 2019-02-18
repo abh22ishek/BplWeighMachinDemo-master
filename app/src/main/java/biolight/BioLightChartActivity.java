@@ -55,11 +55,11 @@ public class BioLightChartActivity extends FragmentActivity {
         if(mUserName.length()>12)
         {
             String mx= mUserName.substring(0,10)+"..";
-            headerText.setText(new StringBuilder().append(mx).append(" 's ").
+            headerText.setText(new StringBuilder().append(mx).append(" 's ").append("BP ").
                     append(getString(R.string.trend)).toString());
 
         }else{
-            headerText.setText(new StringBuilder().append(mUserName).append(" 's").
+            headerText.setText(new StringBuilder().append(mUserName).append(" 's ").append("BP ").
                     append(getString(R.string.trend)).toString());
 
         }

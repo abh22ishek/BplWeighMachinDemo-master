@@ -57,6 +57,7 @@ public class HomeMemberProfileActivity extends FragmentActivity {
     private TextView userEmail,phoneNumber;
     Button manageUser;
 
+    String mMemeberName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,10 +67,7 @@ public class HomeMemberProfileActivity extends FragmentActivity {
 
         globalVariable = (GlobalClass) getApplicationContext();
 
-
-
         sex = findViewById(R.id.sex);
-
         member_name = findViewById(R.id.memberName);
 
         manageUser = findViewById(R.id.btnManageUser);
@@ -140,6 +138,7 @@ public class HomeMemberProfileActivity extends FragmentActivity {
 
 
         if (getIntent().getStringExtra(Constants.PROFILE_FLAG).equals(Constants.PROFILE_EDIT)) {
+            mMemeberName= getIntent().getExtras().getString("user");
 
             member_name.setEnabled(false);
             age.setEnabled(false);
@@ -168,10 +167,11 @@ public class HomeMemberProfileActivity extends FragmentActivity {
             if (globalVariable.getUsername() != null) {
                 DatabaseManager.getInstance().openDatabase();
                 UserModellist = new ArrayList<>(DatabaseManager.getInstance().
-                        getMemberprofilecontent(globalVariable.getUsername()));
+                        getMemberprofilecontent(mMemeberName));
 
                 if (UserModellist.size() > 0) {
                     member_name.setText(UserModellist.get(0).getName());
+                    mMemeberName=UserModellist.get(0).getName();
                     age.setText(UserModellist.get(0).getAge());
                  //   weight.setText(UserModellist.get(0).getWeight());
                     height.setText(UserModellist.get(0).getHeight());
@@ -187,7 +187,7 @@ public class HomeMemberProfileActivity extends FragmentActivity {
 
 
                 if (globalVariable.getUsername() != null) {
-                    String img_profile = get_profile_image(globalVariable.getUsername());
+                    String img_profile = get_profile_image(member_name.getText().toString().trim()+"_"+"home");
                     if (!img_profile.equals("") || img_profile != "") {
                         profile_image = img_profile;
 
@@ -236,7 +236,6 @@ public class HomeMemberProfileActivity extends FragmentActivity {
         }
 
 
-
     }
 
 
@@ -277,7 +276,9 @@ public class HomeMemberProfileActivity extends FragmentActivity {
 
                         );
 
-                        StoreCredentials.store_profile_image(HomeMemberProfileActivity.this, profile_image, "Home", globalVariable.getUsername());
+                        String mMemberUri=member_name.getText().toString().trim()+"_"+"home";
+
+                        StoreCredentials.store_profile_image(HomeMemberProfileActivity.this, profile_image, "Home",mMemberUri);
                         startActivity(new Intent(HomeMemberProfileActivity.this,SelectParameterActivity.class));
 
                     }
@@ -315,10 +316,16 @@ public class HomeMemberProfileActivity extends FragmentActivity {
                                                     toString().trim(),
                                             age.getText().toString().trim(),gender,phoneNumber.getText().toString().trim(),city.getText().toString().trim()
                                             ,height.getText().toString().trim()
-                                    ), BplOximterdbHelper.USER_NAME + "=?", new String[]{globalVariable.getUsername()});
-                            StoreCredentials.store_profile_image(HomeMemberProfileActivity.this, profile_image, "Home", globalVariable.getUsername());
+                                    ),
+                                    BplOximterdbHelper.NAME_HOME_USER + "=?",
+                                    new String[]{mMemeberName});
+                            StoreCredentials.store_profile_image(HomeMemberProfileActivity.this, profile_image, "Home", member_name.getText().toString().trim()+"_"+"home");
                             Toast.makeText(HomeMemberProfileActivity.this, "Profile Successfully updated", Toast.LENGTH_SHORT).show();
 
+
+                            Intent intent = new Intent();
+                            intent.putExtra("IsUserEdited",true);
+                            setResult(800, intent);
                             finish();
                         }
 
@@ -484,12 +491,6 @@ public class HomeMemberProfileActivity extends FragmentActivity {
                 uri=file.getAbsolutePath();
 
                 profile_image="file://"+uri;
-               /* Picasso
-                        .with(UsersProfileActivity.this)
-                        .load("file://"+Uri.parse(uri))
-                        .resize(200,200) // resizes the image to these dimensions (in pixel)
-                        .centerCrop() // this cropping technique scales the image so that it fills the requested bounds and then crops the extra.
-                        .into(img_photo);*/
 
                 Glide
                         .with(HomeMemberProfileActivity.this)
@@ -652,7 +653,7 @@ public class HomeMemberProfileActivity extends FragmentActivity {
 
 
 
-        ArrayAdapter<String> adapter=new ArrayAdapter<String>(context,android.R.layout.simple_list_item_1,options);
+        ArrayAdapter<String> adapter=new ArrayAdapter<>(context,android.R.layout.simple_list_item_1,options);
         if(dialog==null)
         {
             dialog = new Dialog(context);
@@ -710,7 +711,8 @@ public class HomeMemberProfileActivity extends FragmentActivity {
                     intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
                     intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                     intent.setType("image/*");
-                    startActivityForResult(Intent.createChooser(intent, "Select Picture"), Constants.SELECT_PICTURE);
+                    startActivityForResult(Intent
+                            .createChooser(intent, "Select Picture"), Constants.SELECT_PICTURE);
 
                 }
                 dialog.dismiss();

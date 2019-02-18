@@ -46,6 +46,7 @@ public class BioLightReportActivity extends Activity {
     RelativeLayout  relative_scroll;
     String mUri;
     Handler mHandler;
+    List<UserModel> userModelList;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -139,19 +140,25 @@ public class BioLightReportActivity extends Activity {
             if(mUserName.length()>12)
             {
                 String mx= mUserName.substring(0,10)+"..";
-                base_header_title.setText(new StringBuilder().append(mx).append(" 's ").append(getString(R.string.report)).toString());
+                base_header_title.setText(new StringBuilder().append(mx).append(" 's ").append("BP ").append(getString(R.string.report)).toString());
 
             }else{
-                base_header_title.setText(new StringBuilder().append(mUserName).append(" 's").append(getString(R.string.report)).toString());
+                base_header_title.setText(new StringBuilder().append(mUserName).append(" 's ").append("BP ").append(getString(R.string.report)).toString());
 
             }
 
 
 
         }
-        List<UserModel> userModelList=DatabaseManager.getInstance().getAllUserprofilecontent(userName,"");
 
-        if(userModelList!=null){
+        if(globalVariable.getUserType().equalsIgnoreCase("clinic")){
+             userModelList=DatabaseManager.getInstance().getAllUserprofilecontent(userName,"");
+
+        }else{
+            userModelList=DatabaseManager.getInstance().getAllMemberProfilecontent(userName,"");
+        }
+
+        if(userModelList!=null && userModelList.size()>0){
             age.setText(new StringBuilder().append(getString(R.string.age)).append(":").
                     append(userModelList.get(0).getAddress()).append(" , ").append(" ").
                     append(getString(R.string.weight)).append(": ").append(userModelList.get(0).getWeight()).append(", ").

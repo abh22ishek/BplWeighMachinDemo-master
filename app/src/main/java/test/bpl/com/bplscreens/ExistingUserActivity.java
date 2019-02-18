@@ -21,6 +21,7 @@ public class ExistingUserActivity extends Activity implements ListR{
     private EditText autoCompleteTextView;
     ListView recyclerView;
     List<UserModel> userModelList_;
+    List<UserModel> userModelList_home;
     private ArrayAdapter<CharSequence> adapter;
     private GlobalClass globalVariable;
     Button proceed;
@@ -36,6 +37,7 @@ public class ExistingUserActivity extends Activity implements ListR{
 
     ImageView optionsSettings;
 
+    String mUseType;
     @Override
     protected void onResume() {
         super.onResume();
@@ -46,13 +48,17 @@ public class ExistingUserActivity extends Activity implements ListR{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.exit_user);
-        globalVariable = (GlobalClass) getApplicationContext();
+        globalVariable = (GlobalClass)
+                getApplicationContext();
 
         recyclerView=findViewById(R.id.listView);
 
         Button ExportUsers=findViewById(R.id.ExportUsers);
         ExportUsers.setVisibility(View.GONE);
+
         userModelList_= new ArrayList<>();
+        userModelList_home=new ArrayList<>();
+
         autoCompleteTextView=findViewById(R.id.autoText);
         SearchBy=findViewById(R.id.searchBy);
         listR=  ExistingUserActivity.this;
@@ -76,9 +82,11 @@ public class ExistingUserActivity extends Activity implements ListR{
         if(globalVariable.getUserType()!=null){
             if(globalVariable.getUserType().equalsIgnoreCase("home")){
                 headertitle.setText(getString(R.string.sel_fam_mem));
+                mUseType="Home";
 
             }else{
                 headertitle.setText(getString(R.string.sel_user));
+                mUseType="Clinic";
             }
         }
 
@@ -94,16 +102,12 @@ public class ExistingUserActivity extends Activity implements ListR{
                 if(!selectedUser.equals("")){
                     Intent intent = new Intent();
                     intent.putExtra("user", selectedUser);
-
                     intent.putExtra("age", age);
-
                     intent.putExtra("gender", gender);
-
-
                     setResult(200, intent);
                     finish();
                 }else
-                    Toast.makeText(ExistingUserActivity.this,"Please select Any User",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ExistingUserActivity.this, "Please select Any User",Toast.LENGTH_SHORT).show();
                 return;
 
             }
@@ -112,34 +116,38 @@ public class ExistingUserActivity extends Activity implements ListR{
         if(globalVariable.getUserType().equalsIgnoreCase("clinic")){
             userModelList_.addAll( DatabaseManager.getInstance().
                     getAllUserprofilecontent(globalVariable.getUsername(),Constants.USER_NAME));
+
+            if(userModelList_.size()>=1){
+                proceed.setVisibility(View.VISIBLE);
+                populateRecyclerView("",mUseType);
+            }else{
+                Toast.makeText(ExistingUserActivity.this,"Sorry No Users",Toast.LENGTH_SHORT).show();
+                proceed.setVisibility(View.INVISIBLE);
+            }
         }else{
-            userModelList_.addAll( DatabaseManager.getInstance().
+            userModelList_home.addAll( DatabaseManager.getInstance().
                     getAllMemberProfilecontent(globalVariable.getUsername(),Constants.USER_NAME));
+
+            if(userModelList_home.size()>=1){
+                proceed.setVisibility(View.VISIBLE);
+                populateRecyclerView("",mUseType);
+            }else{
+                Toast.makeText(ExistingUserActivity.this,"Sorry No Users",Toast.LENGTH_SHORT).show();
+                proceed.setVisibility(View.INVISIBLE);
+            }
         }
 
 
 
 
-        if(userModelList_.size()>=1){
-            proceed.setVisibility(View.VISIBLE);
-
-            populateRecyclerView("");
-        }else{
-            Toast.makeText(ExistingUserActivity.this,"Sorry No Users",Toast.LENGTH_SHORT).show();
-            proceed.setVisibility(View.INVISIBLE);
-        }
 
         adapter = ArrayAdapter.createFromResource(ExistingUserActivity.this,
                 R.array.search_by, android.R.layout.simple_spinner_item);
-
-
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         SearchBy.setAdapter(adapter);
 
         final String [] spinnerArr= getResources().getStringArray(R.array.search_by);
-
-
         SearchBy.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
@@ -156,15 +164,15 @@ public class ExistingUserActivity extends Activity implements ListR{
                 }
                 autoCompleteTextView.getText().clear();
                 hide_soft_keypad();
-                populateRecyclerView(searchByTag);
+                populateRecyclerView(searchByTag,mUseType);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
                 //
-
-                Logger.log(Level.DEBUG,ExistingUserActivity.class.getName(),"Nothing gets selected in Spinner");
+                Logger.log(Level.DEBUG,ExistingUserActivity.class.getName(),
+                        "Nothing gets selected in Spinner");
             }
 
 
@@ -195,10 +203,17 @@ public class ExistingUserActivity extends Activity implements ListR{
 }
     ExistingUserAdapter existingUserAdapter;
 
-        private void   populateRecyclerView(String searchByTag){
+        private void   populateRecyclerView(String searchByTag,String useType){
 
-             existingUserAdapter=new ExistingUserAdapter(ExistingUserActivity.this,
-                    userModelList_,listR,searchByTag);
+
+            if(useType.equalsIgnoreCase("Clinic")){
+                existingUserAdapter=new ExistingUserAdapter(ExistingUserActivity.this,
+                        userModelList_,listR,searchByTag,useType);
+            }else{
+                existingUserAdapter=new ExistingUserAdapter(ExistingUserActivity.this,
+                        userModelList_home,listR,searchByTag,useType);
+            }
+
             recyclerView.setAdapter(existingUserAdapter);
 
         }
