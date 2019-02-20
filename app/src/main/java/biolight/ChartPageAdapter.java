@@ -15,10 +15,11 @@ public class ChartPageAdapter extends FragmentStatePagerAdapter {
     public List<BPMeasurementModel> mRecordDetailList;
     String date;
     String userName,gender,age;
+    String globalUserNme;
 
 
     public ChartPageAdapter(FragmentManager fm, int mTabs, List<BPMeasurementModel> mRecordDetail,
-                            String date, String userN, String age, String gender) {
+                            String date, String userN, String age, String gender,String globalUserName) {
         super(fm);
         this.nTabs=mTabs;
         this.mRecordDetailList=mRecordDetail;
@@ -26,6 +27,7 @@ public class ChartPageAdapter extends FragmentStatePagerAdapter {
         this.userName=userN;
         this.age=age;
         this.gender=gender;
+        this.globalUserNme=globalUserName;
     }
 
 
@@ -58,6 +60,7 @@ public class ChartPageAdapter extends FragmentStatePagerAdapter {
                 bundle.putString("user",userName);
                 bundle.putString("gender",gender);
                 bundle.putString("age",age);
+                bundle.putString("global_user",globalUserNme);
 
                 bundle.putString(Constants.DATE,date);
                 daysChartFragment.setArguments(bundle);

@@ -73,6 +73,7 @@ public class DaysChartFragment extends Fragment{
         return view;
     }
 
+    String globalUserName;
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -91,7 +92,9 @@ public class DaysChartFragment extends Fragment{
         }
 
 
-
+        if(getArguments().getString("global_user")!=null){
+            globalUserName=getArguments().getString("global_user");
+        }
 
         if(getArguments().getString("age")!=null){
             age=getArguments().getString("age");
@@ -303,7 +306,8 @@ public class DaysChartFragment extends Fragment{
                     {
                         // PDF Viewer
                         File mFile;
-                        mFile = new File(Environment.getExternalStorageDirectory()+"/Bpl Be Well"+ "/"+userName
+                        mFile = new File(Environment.getExternalStorageDirectory()+"/Bpl Be Well"+ "/"+globalUserName+"/" +userName
+                                +"/"+userName
                                 +"_"+DateTime.getDateTimeinMinutes()+"_BPL_iPressure_BT02_DAY_Trend.pdf");
 
                         Intent target = new Intent(Intent.ACTION_VIEW);
@@ -329,8 +333,9 @@ public class DaysChartFragment extends Fragment{
                     }else if(which==1)
                     {
                         // Share
-                       File mFile = new File(Environment.getExternalStorageDirectory()+"/Bpl Be Well"+ "/"+userName
-                               +"_"+DateTime.getDateTimeinMinutes()+"_BPL_iPressure_BT02_DAY_Trend.pdf");
+                      File  mFile = new File(Environment.getExternalStorageDirectory()+"/Bpl Be Well"+ "/"+globalUserName+"/" +userName
+                                +"/"+userName +"_"+DateTime.getDateTimeinMinutes()+"_BPL_iPressure_BT02_DAY_Trend.pdf");
+
 
 
                         Intent shareIntent = new Intent();
@@ -369,6 +374,8 @@ public class DaysChartFragment extends Fragment{
     }
     File file,mFinalFIle;
     String path;
+
+
     private void createPdf(){
 
         PDDocument document = new PDDocument();
@@ -390,10 +397,26 @@ public class DaysChartFragment extends Fragment{
             file.mkdir();
 
         }
+
         path = "";
 
+        File loginFile=new File(file,globalUserName);
+        if(!loginFile.exists()){
+
+            loginFile.mkdir();
+        }
+
+
+        File userDir=new File(loginFile,userName);
+
+        if(!userDir.exists()){
+            userDir.mkdir();
+        }
+
+
+
         try {
-            path = file + "/" + userName + "_" +DateTime.getDateTimeinMinutes()+ "_BPL_iPressure_BT02_DAY_Trend.pdf";
+            path = userDir.getAbsolutePath() + "/" + userName + "_" +DateTime.getDateTimeinMinutes()+ "_BPL_iPressure_BT02_DAY_Trend.pdf";
 
 
         } catch (Exception e) {
@@ -439,7 +462,7 @@ public class DaysChartFragment extends Fragment{
             contentStream.setFont(font, 11);
             contentStream.newLineAtOffset(120f, marginUpperLine + 2);
 
-            contentStream.showText("User Name : " + userName + "   " + "Age : " + "26" + "   " + "Gender : " +
+            contentStream.showText("User Name : " + userName + "   " + "Age : " + age + "   " + "Gender : " +
                     gender+ "  " + "Clinic Name : " + "Bpl Med Tech");
 
             contentStream.endText();

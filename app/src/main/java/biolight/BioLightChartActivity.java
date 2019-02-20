@@ -27,6 +27,7 @@ public class BioLightChartActivity extends FragmentActivity {
 
     private final String TAG=BioLightChartActivity.class.getSimpleName();
 
+    GlobalClass globalClass;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,6 +44,7 @@ public class BioLightChartActivity extends FragmentActivity {
         final String gender=getIntent().getExtras().getString("gender");
 
 
+        globalClass= (GlobalClass) getApplication();
         // Fetch record data
         int density =this.getResources().getDisplayMetrics().densityDpi;
         if(DisplayMetrics.DENSITY_XXHIGH==density)
@@ -95,7 +97,7 @@ public class BioLightChartActivity extends FragmentActivity {
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         chartPagerAdapter=new ChartPageAdapter(getSupportFragmentManager(),
-                tabLayout.getTabCount(),mRecordDetail,date,mUserName,age,gender);
+                tabLayout.getTabCount(),mRecordDetail,date,mUserName,age,gender,globalClass.getUsername());
 
 
         viewPager.setPageTransformer(true, new ZoomOutPageTransformer());
