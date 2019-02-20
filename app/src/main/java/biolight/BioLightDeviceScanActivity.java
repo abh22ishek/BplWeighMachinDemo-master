@@ -33,9 +33,10 @@ import test.bpl.com.bplscreens.R;
  */
 
 
-public class BioLightDeviceScanActivity extends Activity {
+public class BioLightDeviceScanActivity extends Activity implements BioLightListner{
 
 
+    ProgressDialog progressDialog;
     private static final String TAG =BioLightDeviceScanActivity.class.getSimpleName() ;
     BluetoothAdapter mBluetoothAdapter;
     public static ArrayList<Peripheral> preipheralCopy ;
@@ -57,211 +58,211 @@ public class BioLightDeviceScanActivity extends Activity {
     boolean mActivitySeriesPause;
 
     public static  BioLightListner bioLightListner;
-    ProgressDialog progressDialog;
+
 
     String mUserName,mAge,mGender;
 
     String biolighArry[]={"88:4A:EA:84:B7:74",
-            "F045DA1120BE",
-            "F045DA111AE2",
-            "F045DA118FF9",
-            "F045DA1120F2",
-            "F045DA10F4A6",
-            "94E36DA61876",
-            "F045DA10F2C6",
-            "94E36DA4E1D3",
-            "F045DA116479",
-            "F045DA10DA30",
-            "94E36DA60B69",
-            "F045DA11641C",
-            "F045DA111ADA",
-            "F045DA111DE5",
-            "F045DA111A9C",
-            "F045DA10DB27",
-            "F045DA10E8FE",
-            "94E36DAA978F",
-            "F045DA11177A",
-            "94E36DA4F327",
-            "F045DA10F11A",
-            "94E36DA60339",
-            "94E36DA6036F",
-            "F045DA111DB5",
-            "94E36DAA6C4D",
-            "F045DA10DD5A",
-            "94E36DA61D33",
-            "F045DA11D90F",
-            "F045DA111D8A",
-            "94E36DA6187C",
-            "94E36DAA7492",
-            "F045DA11D766",
-            "94E36DAA978C",
-            "F045DA111ACD",
-            "F045DA10DD3A",
-            "94E36DA4FDDC",
-            "94E36DA612CA",
-            "F045DA116764",
-            "F045DA10DB36",
-            "94E36DAA9781",
-            "F045DA10F494",
-            "F045DA10DA4F",
-            "F045DA111AC3",
-            "F045DA116768",
-            "F045DA10DB09",
-            "F045DA10DD46",
-            "F045DA11DB2D",
-            "F045DA12173C",
-            "94E36DAA9786",
-            "F045DA1120D7",
-            "F045DA11174D",
-            "F045DA111DAC",
-            "F045DA11E36F",
-            "94E36DA60F29",
-            "F045DA111AFE",
-            "94E36DAA978A",
-            "94E36DAA6FB9",
-            "F045DA111DD7",
-            "F045DA111709",
-            "94E36DA61D15",
-            "F045DA111DCD",
-            "F045DA11626D",
-            "94E36DA6184A",
-            "94E36DA4F809",
-            "C8DF842BE11F",
-            "94E36DAA6C72",
-            "F045DA111DFA",
-            "F045DA10DA19",
-            "F045DA111701",
-            "94E36DAA6C75",
-            "F045DA11208A",
-            "F045DA11D931",
-            "F045DA111DCB",
-            "F045DA11DB69",
-            "C8DF842BD8F4",
-            "F045DA11176D",
-            "94E36DAA6C7E",
-            "F045DA10DC30",
-            "F045DA116A27",
-            "94E36DAA6C23",
-            "F045DA10DB34",
-            "94E36DA4F358",
-            "F045DA11E361",
-            "F045DA11E55E",
-            "F045DA111752",
-            "F045DA10F10A",
-            "F045DA11174F",
-            "94E36DAA6FEF",
-            "94E36DA61D7D",
-            "94E36DAA7491",
-            "F045DA111DB3",
-            "F045DA116A28",
-            "F045DA111AE6",
-            "C8DF842BDDDB",
-            "94E36DA4F85B",
-            "F045DA10EA3F",
-            "F045DA1120A2",
-            "F045DA1191FE",
-            "F045DA111DE7",
-            "F045DA11DB08",
-            "F045DA10DB59",
-            "94E36DAA6C77",
-            "F045DA10DD09",
-            "94E36DA61D58",
-            "F045DA111734",
-            "F045DA11DB4A",
-            "F045DA1120E7",
-            "F045DA112092",
-            "F045DA111AA5",
-            "F045DA10F287",
-            "F045DA112098",
-            "F045DA10DA43",
-            "F045DA116452",
-            "F045DA10DA66",
-            "F045DA1120AB",
-            "94E36DA6031F",
-            "F045DA10DC36",
-            "F045DA116222",
-            "C8DF842BC7F6",
-            "F045DA111779",
-            "94E36DAA93E3",
-            "F045DA111D9A",
-            "F045DA10DB1A",
-            "F045DA10DD1D",
-            "F045DA11D775",
-            "94E36DAA9793",
-            "F045DA11D919",
-            "94E36DA4F31A",
-            "94E36DA612AB",
-            "94E36DA6213E",
-            "94E36DAA9783",
-            "F045DA10DB3D",
-            "94E36DAA93EE",
-            "94E36DAA724D",
-            "94E36DA4FDD2",
-            "F045DA10EF87",
-            "F045DA10DB29",
-            "F045DA10F105",
-            "94E36DAA6FE7",
-            "94E36DAA6C34",
-            "F045DA10DB32",
-            "94E36DAA6C30",
-            "F045DA118FE7",
-            "F045DA10DA61",
-            "F045DA11624C",
-            "F045DA111777",
-            "94E36DA4F834",
-            "F045DA111A85",
-            "94E36DAA97A2",
-            "94E36DAA6FC2",
-            "F045DA10EBB0",
-            "F045DA1114E5",
-            "94E36DA4F36D",
-            "F045DA10F2C7",
-            "F045DA10DA79",
-            "C8DF842BE14D",
-            "94E36DAA7217",
-            "94E36DA4FDBA",
-            "F045DA10DD4A",
-            "94E36DAA6C73",
-            "94E36DAA6FDD",
-            "F045DA111A99",
-            "94E36DAA93EB",
-            "F045DA10DC00",
-            "94E36DA4FDA2",
-            "F045DA116247",
-            "94E36DAA74F7",
-            "F045DA10DB66",
-            "94E36DA60B0C",
-            "F045DA11DB11",
-            "F045DA10F486",
-            "F045DA10DB46",
-            "F045DA116736",
-            "94E36DAA725E",
-            "F045DA11176A",
-            "F045DA10F28B",
-            "F045DA111DBF",
-            "C8DF842BCD96",
-            "94E36DA62138",
-            "F045DA10F104",
-            "94E36DAA6FE2",
-            "94E36DAA74D1",
-            "F045DA11DB0D",
-            "F045DA116476",
-            "F045DA11DB19",
-            "F045DA10DD39",
-            "C8DF842BC7BB",
-            "94E36DAA74CF",
-            "94E36DAA74BE",
-            "F045DA1114FA",
-            "F045DA111AF7",
-            "94E36DAA6C64",
-            "F045DA10F2A5",
-            "F045DA121731",
-            "F045DA11DB03",
-            "F045DA1114DE",
-            "F045DA111DAD",
-            "F045DA1120F1",
-            "94E36DA612DE",
-            "F045DA111DDD"};
+            "F0:45:DA:11:20:BE",
+            "F0:45:DA:11:1A:E2",
+            "F0:45:DA:11:8F:F9",
+            "F0:45:DA:11:20:F2",
+            "F0:45:DA:10:F4:A6",
+            "94:E3:6D:A6:18:76",
+            "F0:45:DA:10:F2:C6",
+            "94:E3:6D:A4:E1:D3",
+            "F0:45:DA:11:64:79",
+            "F0:45:DA:10:DA:30",
+            "94:E3:6D:A6:0B:69",
+            "F0:45:DA:11:64:1C",
+            "F0:45:DA:11:1A:DA",
+            "F0:45:DA:11:1D:E5",
+            "F0:45:DA:11:1A:9C",
+            "F0:45:DA:10:DB:27",
+            "F0:45:DA:10:E8:FE",
+            "94:E3:6D:AA:97:8F",
+            "F0:45:DA:11:17:7A",
+            "94:E3:6D:A4:F3:27",
+            "F0:45:DA:10:F1:1A",
+            "94:E3:6D:A6:03:39",
+            "94:E3:6D:A6:03:6F",
+            "F0:45:DA:11:1D:B5",
+            "94:E3:6D:AA:6C:4D",
+            "F0:45:DA:10:DD:5A",
+            "94:E3:6D:A6:1D:33",
+            "F0:45:DA:11:D9:0F",
+            "F0:45:DA:11:1D:8A",
+            "94:E3:6D:A6:18:7C",
+            "94:E3:6D:AA:74:92",
+            "F0:45:DA:11:D7:66",
+            "94:E3:6D:AA:97:8C",
+            "F0:45:DA:11:1A:CD",
+            "F0:45:DA:10:DD:3A",
+            "94:E3:6D:A4:FD:DC",
+            "94:E3:6D:A6:12:CA",
+            "F0:45:DA:11:67:64",
+            "F0:45:DA:10:DB:36",
+            "94:E3:6D:AA:97:81",
+            "F0:45:DA:10:F4:94",
+            "F0:45:DA:10:DA:4F",
+            "F0:45:DA:11:1A:C3",
+            "F0:45:DA:11:67:68",
+            "F0:45:DA:10:DB:09",
+            "F0:45:DA:10:DD:46",
+            "F0:45:DA:11:DB:2D",
+            "F0:45:DA:12:17:3C",
+            "94:E3:6D:AA:97:86",
+            "F0:45:DA:11:20:D7",
+            "F0:45:DA:11:17:4D",
+            "F0:45:DA:11:1D:AC",
+            "F0:45:DA:11:E3:6F",
+            "94:E3:6D:A6:0F:29",
+            "F0:45:DA:11:1A:FE",
+            "94:E3:6D:AA:97:8A",
+            "94:E3:6D:AA:6F:B9",
+            "F0:45:DA:11:1D:D7",
+            "F0:45:DA:11:17:09",
+            "94:E3:6D:A6:1D:15",
+            "F0:45:DA:11:1D:CD",
+            "F0:45:DA:11:62:6D",
+            "94:E3:6D:A6:18:4A",
+            "94:E3:6D:A4:F8:09",
+            "C8:DF:84:2B:E1:1F",
+            "94:E3:6D:AA:6C:72",
+            "F0:45:DA:11:1D:FA",
+            "F0:45:DA:10:DA:19",
+            "F0:45:DA:11:17:01",
+            "94:E3:6D:AA:6C:75",
+            "F0:45:DA:11:20:8A",
+            "F0:45:DA:11:D9:31",
+            "F0:45:DA:11:1D:CB",
+            "F0:45:DA:11:DB:69",
+            "C8:DF:84:2B:D8:F4",
+            "F0:45:DA:11:17:6D",
+            "94:E3:6D:AA:6C:7E",
+            "F0:45:DA:10:DC:30",
+            "F0:45:DA:11:6A:27",
+            "94:E3:6D:AA:6C:23",
+            "F0:45:DA:10:DB:34",
+            "94:E3:6D:A4:F3:58",
+            "F0:45:DA:11:E3:61",
+            "F0:45:DA:11:E5:5E",
+            "F0:45:DA:11:17:52",
+            "F0:45:DA:10:F1:0A",
+            "F0:45:DA:11:17:4F",
+            "94:E3:6D:AA:6F:EF",
+            "94:E3:6D:A6:1D:7D",
+            "94:E3:6D:AA:74:91",
+            "F0:45:DA:11:1D:B3",
+            "F0:45:DA:11:6A:28",
+            "F0:45:DA:11:1A:E6",
+            "C8:DF:84:2B:DD:DB",
+            "94:E3:6D:A4:F8:5B",
+            "F0:45:DA:10:EA:3F",
+            "F0:45:DA:11:20:A2",
+            "F0:45:DA:11:91:FE",
+            "F0:45:DA:11:1D:E7",
+            "F0:45:DA:11:DB:08",
+            "F0:45:DA:10:DB:59",
+            "94:E3:6D:AA:6C:77",
+            "F0:45:DA:10:DD:09",
+            "94:E3:6D:A6:1D:58",
+            "F0:45:DA:11:17:34",
+            "F0:45:DA:11:DB:4A",
+            "F0:45:DA:11:20:E7",
+            "F0:45:DA:11:20:92",
+            "F0:45:DA:11:1A:A5",
+            "F0:45:DA:10:F2:87",
+            "F0:45:DA:11:20:98",
+            "F0:45:DA:10:DA:43",
+            "F0:45:DA:11:64:52",
+            "F0:45:DA:10:DA:66",
+            "F0:45:DA:11:20:AB",
+            "94:E3:6D:A6:03:1F",
+            "F0:45:DA:10:DC:36",
+            "F0:45:DA:11:62:22",
+            "C8:DF:84:2B:C7:F6",
+            "F0:45:DA:11:17:79",
+            "94:E3:6D:AA:93:E3",
+            "F0:45:DA:11:1D:9A",
+            "F0:45:DA:10:DB:1A",
+            "F0:45:DA:10:DD:1D",
+            "F0:45:DA:11:D7:75",
+            "94:E3:6D:AA:97:93",
+            "F0:45:DA:11:D9:19",
+            "94:E3:6D:A4:F3:1A",
+            "94:E3:6D:A6:12:AB",
+            "94:E3:6D:A6:21:3E",
+            "94:E3:6D:AA:97:83",
+            "F0:45:DA:10:DB:3D",
+            "94:E3:6D:AA:93:EE",
+            "94:E3:6D:AA:72:4D",
+            "94:E3:6D:A4:FD:D2",
+            "F0:45:DA:10:EF:87",
+            "F0:45:DA:10:DB:29",
+            "F0:45:DA:10:F1:05",
+            "94:E3:6D:AA:6F:E7",
+            "94:E3:6D:AA:6C:34",
+            "F0:45:DA:10:DB:32",
+            "94:E3:6D:AA:6C:30",
+            "F0:45:DA:11:8F:E7",
+            "F0:45:DA:10:DA:61",
+            "F0:45:DA:11:62:4C",
+            "F0:45:DA:11:17:77",
+            "94:E3:6D:A4:F8:34",
+            "F0:45:DA:11:1A:85",
+            "94:E3:6D:AA:97:A2",
+            "94:E3:6D:AA:6F:C2",
+            "F0:45:DA:10:EB:B0",
+            "F0:45:DA:11:14:E5",
+            "94:E3:6D:A4:F3:6D",
+            "F0:45:DA:10:F2:C7",
+            "F0:45:DA:10:DA:79",
+            "C8:DF:84:2B:E1:4D",
+            "94:E3:6D:AA:72:17",
+            "94:E3:6D:A4:FD:BA",
+            "F0:45:DA:10:DD:4A",
+            "94:E3:6D:AA:6C:73",
+            "94:E3:6D:AA:6F:DD",
+            "F0:45:DA:11:1A:99",
+            "94:E3:6D:AA:93:EB",
+            "F0:45:DA:10:DC:00",
+            "94:E3:6D:A4:FD:A2",
+            "F0:45:DA:11:62:47",
+            "94:E3:6D:AA:74:F7",
+            "F0:45:DA:10:DB:66",
+            "94:E3:6D:A6:0B:0C",
+            "F0:45:DA:11:DB:11",
+            "F0:45:DA:10:F4:86",
+            "F0:45:DA:10:DB:46",
+            "F0:45:DA:11:67:36",
+            "94:E3:6D:AA:72:5E",
+            "F0:45:DA:11:17:6A",
+            "F0:45:DA:10:F2:8B",
+            "F0:45:DA:11:1D:BF",
+            "C8:DF:84:2B:CD:96",
+            "94:E3:6D:A6:21:38",
+            "F0:45:DA:10:F1:04",
+            "94:E3:6D:AA:6F:E2",
+            "94:E3:6D:AA:74:D1",
+            "F0:45:DA:11:DB:0D",
+            "F0:45:DA:11:64:76",
+            "F0:45:DA:11:DB:19",
+            "F0:45:DA:10:DD:39",
+            "C8:DF:84:2B:C7:BB",
+            "94:E3:6D:AA:74:CF",
+            "94:E3:6D:AA:74:BE",
+            "F0:45:DA:11:14:FA",
+            "F0:45:DA:11:1A:F7",
+            "94:E3:6D:AA:6C:64",
+            "F0:45:DA:10:F2:A5",
+            "F0:45:DA:12:17:31",
+            "F0:45:DA:11:DB:03",
+            "F0:45:DA:11:14:DE",
+            "F0:45:DA:11:1D:AD",
+            "F0:45:DA:11:20:F1",
+            "94:E3:6D:A6:12:DE",
+            "F0:45:DA:11:1D:DD"};
 
 
 
@@ -273,7 +274,7 @@ public class BioLightDeviceScanActivity extends Activity {
         final   Button  btnFindDevice= findViewById(R.id.btnFindDevice);
         blueToothListView = findViewById(R.id.listDevices);
         config=new Config();
-        mScanning=true;
+
 
         preipheralCopy=new ArrayList<>();
 
@@ -337,36 +338,54 @@ public class BioLightDeviceScanActivity extends Activity {
 
 
 
-        //----
-
-        mBLE = new BluetoothLeClass(BioLightDeviceScanActivity.this);
-        mBLE.setBluetoothGattCallback();
-
-
-
-        if (!mBLE.initialize()) {
-            Log.e(TAG, "Unable to initialize Bluetooth");
-            finish();
-        }
-
-        if (mBluetoothAdapter.isEnabled())
-        {
-            mBLE.scanLeDevice(true);//start to scan
-        //    initializeProgressDialog();
-        }
-
-
-        mBLE.setOnServiceDiscoverListener(mOnServiceDiscover);
-        mBLE.setOnsetDevicePreipheral(mOnSetDevicePreipheral);
-        mBLE.setOnConnectListener(mOnConnectlistener);
-        mBLE.setOnDisconnectListener(mOndisconnectListener);
-
-        initHandler();
 
         btnFindDevice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+
+                if(progressDialog==null){
+                    progressDialog = new ProgressDialog(BioLightDeviceScanActivity.this);
+                    progressDialog.setMessage(getResources().getString(R.string.search_bio_dev));
+                    progressDialog.setIndeterminate(true);
+                    progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                    progressDialog.setCancelable(false);
+                    progressDialog.setCanceledOnTouchOutside(false);
+                    progressDialog.show();
+
+                }
+                /*if(!mScanning){
+                    mScanning=true;
+                    mBLE.scanLeDevice(true);
+                }
+*/
+
+
+                //----
+
+                if(mBLE==null){
+                    mBLE = new BluetoothLeClass(BioLightDeviceScanActivity.this);
+                    mBLE.setBluetoothGattCallback();
+                }
+
+                if (!mBLE.initialize()) {
+                    Log.e(TAG, "Unable to initialize Bluetooth");
+                    finish();
+                }
+
+                if (mBluetoothAdapter.isEnabled())
+                {
+                    mBLE.scanLeDevice(true);
+
+                }
+
+
+                mBLE.setOnServiceDiscoverListener(mOnServiceDiscover);
+                mBLE.setOnsetDevicePreipheral(mOnSetDevicePreipheral);
+                mBLE.setOnConnectListener(mOnConnectlistener);
+                mBLE.setOnDisconnectListener(mOndisconnectListener);
+
+                initHandler();
 
             }
         });
@@ -390,7 +409,9 @@ public class BioLightDeviceScanActivity extends Activity {
                             mBLE.setBLEService(device.getPreipheralMAC());
                             config.setConnectPreipheralOpsition(device);//set to be current device
 
-                            Log.e(" the current device", "" + config.getConnectPreipheralOpsition().getPreipheralMAC() + "" + config.getConnectPreipheralOpsition().getBluetooth());
+                            Log.e(" the current device", "" + config.
+                                    getConnectPreipheralOpsition().getPreipheralMAC() + "" +
+                                    config.getConnectPreipheralOpsition().getBluetooth());
                             Log.e(" version of  device", "" + device.getModel());
                         }else{
                             Toast.makeText(BioLightDeviceScanActivity.this,"Mac Id not Registered",Toast.LENGTH_SHORT).show();
@@ -429,6 +450,9 @@ public class BioLightDeviceScanActivity extends Activity {
     protected void onStop() {
 //        mBLE.Unregister();
         super.onStop();
+        if(progressDialog!=null && progressDialog.isShowing())
+            progressDialog.dismiss();
+
 
         }
 
@@ -439,9 +463,7 @@ public class BioLightDeviceScanActivity extends Activity {
     protected void onResume() {
         super.onResume();
 
-        if(!mScanning){
-            mBLE.scanLeDevice(true);
-        }
+
 
 
 
@@ -485,9 +507,9 @@ public class BioLightDeviceScanActivity extends Activity {
         @Override
         public void setDevicePreipheral(BluetoothDevice device, int model, String SN, float protocolVer) {
 
-            /*if(progressDialog.isShowing()){
+            if(progressDialog.isShowing()){
                 progressDialog.dismiss();
-            }*/
+            }
             Peripheral preipheral = new Peripheral();
             preipheral.setBluetooth(device.getName());
             preipheral.setPreipheralMAC(device.getAddress());
@@ -868,4 +890,8 @@ public class BioLightDeviceScanActivity extends Activity {
     }
 
 
+    @Override
+    public void biolightItemRecived(boolean isItem) {
+
+    }
 }

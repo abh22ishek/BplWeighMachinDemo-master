@@ -68,9 +68,6 @@ public class BioLightReportActivity extends Activity {
         relative_scroll=  findViewById(R.id.relative_scroll);
         final  TextView base_header_title=findViewById(R.id.base_header_title);
 
-
-
-
         globalVariable = (GlobalClass) getApplicationContext();
         fabSpeedDial=  findViewById(R.id.fabSpeedDial);
 
@@ -148,10 +145,10 @@ public class BioLightReportActivity extends Activity {
                 base_header_title.setText(new StringBuilder().append(mUserName).append(" 's ").append("BP ").append(getString(R.string.report)).toString());
 
             }
-
-
-
         }
+
+
+
 
         if(globalVariable.getUserType().equalsIgnoreCase("clinic")){
              userModelList=DatabaseManager.getInstance().getAllUserprofilecontent(userName,"");

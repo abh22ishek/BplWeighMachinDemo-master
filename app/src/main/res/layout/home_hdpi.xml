@@ -241,6 +241,7 @@
             android:id="@+id/imageViewheart"
             android:src="@mipmap/heart_icon"
             android:scaleType="fitXY"
+            android:contentDescription="@string/heart_rate_high"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true" />
 

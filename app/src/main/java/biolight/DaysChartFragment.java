@@ -1,14 +1,17 @@
 package biolight;
 
 
+import android.*;
 import android.annotation.*;
 import android.app.*;
 import android.content.*;
+import android.content.pm.*;
 import android.content.res.*;
 import android.graphics.*;
 import android.net.*;
 import android.os.*;
 import android.support.annotation.*;
+import android.support.v4.app.*;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.*;
 import android.util.*;
@@ -29,6 +32,7 @@ import java.util.*;
 import constantsP.*;
 import logger.*;
 import test.bpl.com.bplscreens.*;
+import test.bpl.com.bplscreens.R;
 
 public class DaysChartFragment extends Fragment{
 
@@ -114,8 +118,12 @@ public class DaysChartFragment extends Fragment{
         pdf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EcgPdf task = new EcgPdf();
-                task.execute(new String[0]);
+                if(!isStoragePermissionGranted())
+                {
+                    Toast.makeText(getActivity(),"Storage Permission is necessary to generate PDF ",Toast.LENGTH_SHORT).show();
+
+                }
+
             }
         });
 
@@ -1202,5 +1210,47 @@ public class DaysChartFragment extends Fragment{
     List<Float> oldXvalList;
     List<Float> newXvalList;
 
+    public  boolean isStoragePermissionGranted() {
+
+        if (Build.VERSION.SDK_INT >= 23) {
+
+            if (getActivity().checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED) {
+                Logger.log(Level.DEBUG,TAG,"Permission is granted");
+                EcgPdf task = new EcgPdf();
+                task.execute(new String[0]);
+                return true;
+            }
+            else {
+
+                Logger.log(Level.DEBUG,TAG,"Permission is revoked");
+                ActivityCompat.requestPermissions(getActivity(),
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                return false;
+            }
+        }
+        else {
+            Logger.log(Level.DEBUG,TAG,"Permission is granted");
+            EcgPdf task = new EcgPdf();
+            task.execute(new String[0]);
+            return true;
+        }
+    }
+
+
+
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(grantResults[0]== PackageManager.PERMISSION_GRANTED){
+            Logger.log(Level.DEBUG,TAG,"Permission: "+permissions[0]+ "was "+grantResults[0]);
+            Logger.log(Level.DEBUG,TAG,"##Capturing Screen Processed###");
+
+            EcgPdf task = new EcgPdf();
+            task.execute(new String[0]);
+        }
+    }
 
 }

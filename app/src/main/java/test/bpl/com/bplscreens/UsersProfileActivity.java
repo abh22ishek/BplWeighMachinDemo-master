@@ -159,7 +159,8 @@ public class UsersProfileActivity extends Activity {
 
 
             img_photo.setEnabled(false);
-            img_photo.setImageDrawable(ContextCompat.getDrawable(UsersProfileActivity.this, R.drawable.edit_profile));
+            img_photo.setImageDrawable(ContextCompat.getDrawable(
+                    UsersProfileActivity.this, R.drawable.edit_profile));
 
 
             TAG_USER = "Edit";
@@ -173,7 +174,8 @@ public class UsersProfileActivity extends Activity {
             btn_Submit.setVisibility(View.GONE);
             if (globalVariable.getUsername() != null) {
                 DatabaseManager.getInstance().openDatabase();
-                UserModellist = new ArrayList<>(DatabaseManager.getInstance().getprofilecontent(globalVariable.getUsername()));
+                UserModellist = new ArrayList<>(DatabaseManager.getInstance().
+                        getprofilecontent(globalVariable.getUsername()));
 
                 if (UserModellist.size() > 0) {
                     name.setText(UserModellist.get(0).getName());
@@ -194,12 +196,9 @@ public class UsersProfileActivity extends Activity {
                     String img_profile = get_profile_image(globalVariable.getUsername());
                     if (!img_profile.equals("") || img_profile != "") {
                         profile_image = img_profile;
-                        //  byte[] imageAsBytes = Base64.decode(img_profile.getBytes(), Base64.DEFAULT);
-                        // Bitmap bitmap = BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
-                        //img_photo.setImageBitmap(cropCenter(Bitmap.createScaledBitmap(bitmap, 150, 150, true)));
 
                         Uri uri = Uri.parse(profile_image);
-                     //   Picasso.with(UsersProfileActivity.this).load(uri).centerCrop().resize(200,200).into(img_photo);
+
 
                         Glide
                                 .with(UsersProfileActivity.this)
@@ -279,20 +278,7 @@ public class UsersProfileActivity extends Activity {
 
             } else if (v == img_photo) {
 
-                /*Intent intent;
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
-                    intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-                    intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-                    intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
-                }else{
-                    intent = new Intent(Intent.ACTION_GET_CONTENT);
-                }
-                intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
-                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                intent.setType("image*//*");
 
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"),ConstantsP.SELECT_PICTURE);
-                hide_soft_keypad(UsersProfileActivity.this);*/
                 choose_option(UsersProfileActivity.this);
 
             } else if (v == btn_Submit) {

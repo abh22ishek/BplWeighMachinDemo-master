@@ -339,7 +339,7 @@ public class PatientProfileActivity extends Activity {
                                     addContentProfiles(globalVariable.getUsername(),userName_.getText().toString().trim(),
                                             userPhone.getText().toString().trim(),gender,
                                     Age.getText().toString(),  height.getText().toString().trim(),
-                                            weight.getText().toString().trim(),
+                                            "NA",
                                             userEmail.getText().toString().toLowerCase().trim()));
 
 
@@ -586,13 +586,13 @@ public class PatientProfileActivity extends Activity {
         }
 
         if (userPhone.getText().toString().equals("")) {
-            userPhone.setError("Weight cannot be empty");
+            userPhone.setError("Phone cannot be empty");
             return b;
         }
 
 
         if (Age.getText().toString().equals("")) {
-            Age.setError("Address cannot be empty");
+            Age.setError("Age cannot be empty");
             return b;
         }
 
@@ -602,10 +602,7 @@ public class PatientProfileActivity extends Activity {
             return b;
         }
 
-        if (weight.getText().toString().equals("")) {
-            weight.setError("Weight cannot be empty");
-            return b;
-        }
+
 
 
         b = true;
@@ -631,6 +628,11 @@ public class PatientProfileActivity extends Activity {
             return b;
         }
 
+
+        if(userPhone.getText().toString().trim().length()<10){
+            userPhone.setError("Phone not valid");
+        }
+
         if(Integer.parseInt(height.getText().toString())>50 && Integer.parseInt(height.getText().toString())<250)
         {
 
@@ -641,16 +643,7 @@ public class PatientProfileActivity extends Activity {
           return b;
         }
 
-        if(Integer.parseInt(weight.getText().toString())>10 && Integer.parseInt(weight.getText().toString())<200)
 
-        {
-            b=true;
-        }else
-        {
-            Toast.makeText(PatientProfileActivity.this,"Please enter a valid weight",Toast.LENGTH_SHORT).show();
-            b=false;
-            return b;
-        }
 
         return b;
     }

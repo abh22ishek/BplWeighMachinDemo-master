@@ -48,7 +48,7 @@
         android:layout_gravity="center|end"
         app:fabGravity="bottom_end"
         app:fabMenu="@menu/menu"
-        android:layout_marginBottom="70dp"
+        android:layout_marginBottom="@dimen/fab_speed_margin_bottom"
         android:id="@+id/fabSpeedDial"
         app:miniFabBackgroundTint="@color/colorAccent"
         app:miniFabDrawableTint="@color/white"

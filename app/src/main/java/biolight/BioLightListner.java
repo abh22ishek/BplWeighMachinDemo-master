@@ -1,7 +1,7 @@
 package biolight;
 
 public interface BioLightListner {
-    void share();
+    void biolightItemRecived(boolean isItem);
 }
 
 

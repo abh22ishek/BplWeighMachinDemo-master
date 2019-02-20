@@ -160,7 +160,7 @@ public class HomeMemberProfileActivity extends FragmentActivity {
             hide_soft_keypad(HomeMemberProfileActivity.this);
 
 
-            headertitle.setText(R.string.edit_prof);
+
             btn_Update_delete.setVisibility(View.VISIBLE);
 
             btn_Submit.setVisibility(View.GONE);
@@ -262,6 +262,9 @@ public class HomeMemberProfileActivity extends FragmentActivity {
             } else if (v == btn_Submit) {
                 if (validate_profile()) {
 
+                    if(!validateFields())
+                        return;
+
                     if (globalVariable.getUsername() != null) {
 
 
@@ -309,6 +312,10 @@ public class HomeMemberProfileActivity extends FragmentActivity {
                     if(validate_profile())
                     {
 
+                        if(!validateFields())
+                            return;
+
+
                         if (globalVariable.getUsername() != null) {
                             SQLiteDatabase database = DatabaseManager.getInstance().openDatabase();
                             database.update(BplOximterdbHelper.TABLE_NAME_HOME_PROFILE,
@@ -352,12 +359,24 @@ public class HomeMemberProfileActivity extends FragmentActivity {
             return b;
         }
 
+
+        if (phoneNumber.getText().toString().equals("")) {
+            phoneNumber.setError("Phone cannot be empty");
+            return b;
+        }
+
         if (age.getText().toString().equals("")) {
             age.setError("Age cannot be empty");
             return b;
         }
 
 
+
+
+        if (height.getText().toString().equals("")) {
+            height.setError("Height cannot be empty");
+            return b;
+        }
         b = true;
         return b;
 
@@ -370,28 +389,26 @@ public class HomeMemberProfileActivity extends FragmentActivity {
 
 
 
+        if(phoneNumber.getText().toString().trim().length()<10){
+            Toast.makeText(HomeMemberProfileActivity.this,"Phone Number Not Valid",
+                    Toast.LENGTH_SHORT).show();
+            return  b;
+        }
 
-        if(Integer.parseInt(height.getText().toString())>50 && Integer.parseInt(height.getText().toString())<250)
+
+        if(Integer.parseInt(age.getText().toString().trim())>120){
+            Toast.makeText(HomeMemberProfileActivity.this,"Age is not Valid",
+                    Toast.LENGTH_SHORT).show();
+            return  b;
+        }
+        if(!(Integer.parseInt(height.getText().toString())>50 && Integer.parseInt(height.getText().toString())<250))
         {
-
-            b=true;
-        }else{
             Toast.makeText(HomeMemberProfileActivity.this,"Please enter a valid height",Toast.LENGTH_SHORT).show();
-            b=false;
             return b;
         }
 
 
-        if(Integer.parseInt(weight.getText().toString())>10 && Integer.parseInt(weight.getText().toString())<200)
-
-        {
-            b=true;
-        }else
-        {
-            Toast.makeText(HomeMemberProfileActivity.this,"Please enter a valid weight",Toast.LENGTH_SHORT).show();
-            b=false;
-            return b;
-        }
+        b=true;
 
         return b;
     }

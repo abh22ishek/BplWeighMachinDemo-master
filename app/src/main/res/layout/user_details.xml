@@ -204,6 +204,7 @@
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:id="@+id/layoutWeight"
+                android:visibility="gone"
                 android:layout_height="wrap_content">
                 <TextView
                     android:layout_width="120dp"

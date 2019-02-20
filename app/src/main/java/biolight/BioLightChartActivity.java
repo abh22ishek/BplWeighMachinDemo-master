@@ -114,14 +114,12 @@ public class BioLightChartActivity extends FragmentActivity {
                 setText((getString(R.string.month)==null) ? "" : getString(R.string.month));
 
 
+
         tabLayout.setTabTextColors(Color.GRAY,Color.WHITE);
-
-
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
-
 
                 if(tab.getPosition()==0)
                 {

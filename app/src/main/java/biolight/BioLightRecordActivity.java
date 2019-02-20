@@ -210,10 +210,7 @@ public class BioLightRecordActivity extends Activity implements BioLightListner{
 
     }
 
-    @Override
-    public void share() {
 
-    }
 
 
 
@@ -286,7 +283,6 @@ public class BioLightRecordActivity extends Activity implements BioLightListner{
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // user clicked OK
-
                 dialog.dismiss();
             }
         });
@@ -294,5 +290,10 @@ public class BioLightRecordActivity extends Activity implements BioLightListner{
         // create and show the alert dialog
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    @Override
+    public void biolightItemRecived(boolean isItem) {
+
     }
 }

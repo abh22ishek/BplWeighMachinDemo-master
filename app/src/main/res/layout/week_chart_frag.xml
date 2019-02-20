@@ -32,7 +32,7 @@
 
             tools:ignore="RelativeOverlap" />
 
-        <TextView
+        <customviews.MyCustomTextView
             android:id="@+id/bpChartTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="1dp"
             android:contentDescription="@string/chart"
-            android:src="@drawable/pdf_icon"
+            android:src="@mipmap/pdf_"
 
             />
 

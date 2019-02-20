@@ -85,8 +85,6 @@ public class SelectParameterActivity extends Activity {
             @Override
             public void onClick(View view) {
 
-
-
                 if(mUsercount==0){
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         myADDUserProfile.setImageDrawable(getDrawable(R.mipmap.add_profile));
@@ -345,9 +343,10 @@ public class SelectParameterActivity extends Activity {
     private void choose_option(final Context context) {
         if (options == null) {
             options = new ArrayList<>();
-            options.add("I-Weigh");
+
             options.add("Bpl-Ioxy");
             options.add("BP Machine");
+            options.add("I-Weigh");
         }
 
 
@@ -633,7 +632,8 @@ public class SelectParameterActivity extends Activity {
         }
 
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, userList);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(context,
+                android.R.layout.simple_list_item_1, userList);
         if (mDialog == null) {
             mDialog = new Dialog(context);
         }
@@ -656,7 +656,6 @@ public class SelectParameterActivity extends Activity {
                 if (adapterView.getItemAtPosition(i).equals(getString(R.string.new_user)))  // biolight
                 {
 
-
                     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
                         options[0] = ActivityOptions.makeSceneTransitionAnimation(SelectParameterActivity.this);
 
@@ -665,7 +664,6 @@ public class SelectParameterActivity extends Activity {
                         intent.putExtra(Constants.PROFILE_FLAG, Constants.PROFILE_ADD);
                         startActivity(intent, options[0].toBundle());
                     } else {
-
                         Intent intent = new Intent(context, PatientProfileActivity.class);
                         intent.putExtra(Constants.PROFILE_FLAG, Constants.PROFILE_ADD);
                         startActivity(intent);
@@ -677,9 +675,7 @@ public class SelectParameterActivity extends Activity {
 
                     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
                         options[0] = ActivityOptions.makeSceneTransitionAnimation(SelectParameterActivity.this);
-
                         Intent intent = new Intent(context, ExistingUserActivity.class);
-
                         startActivityForResult(intent, Constants.REQUEST_CODE, options[0].toBundle());
 
                     } else {
