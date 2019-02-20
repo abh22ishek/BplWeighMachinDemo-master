@@ -1,5 +1,6 @@
 package biolight;
 
+import android.annotation.*;
 import android.app.*;
 import android.view.*;
 import android.widget.*;
@@ -42,6 +43,7 @@ public class BioLightAdapter extends BaseAdapter {
         return i;
     }
 
+    @SuppressLint("InflateParams")
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         ViewHolder viewHolder;
@@ -69,8 +71,8 @@ public class BioLightAdapter extends BaseAdapter {
        // viewHolder.deviceAddress.setText(device.getBluetooth());
       //  viewHolder.type.setText(device.getModel());
 
-        viewHolder.deviceAddress.setText("BT02");
-        viewHolder.type.setText("BPL Ipressure");
+        viewHolder.deviceAddress.setText(R.string.bpl_ip);
+        viewHolder.type.setText(R.string.bt);
         viewHolder.sn.setText(device.getPreipheralSN());
         return view;
     }

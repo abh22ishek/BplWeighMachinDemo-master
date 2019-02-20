@@ -38,8 +38,7 @@ import java.util.Collections;
 import java.util.List;
 
 import biolight.*;
-import constantsP.Constants;
-import constantsP.Utility;
+import constantsP.*;
 import customviews.MyCustomSPO2Graph;
 import database.DatabaseManager;
 import io.github.yavski.fabspeeddial.FabSpeedDial;
@@ -90,6 +89,8 @@ public class UserTestReportActivity extends FragmentActivity {
 
 
 
+    GlobalClass globalClass;
+
     FabSpeedDial fabSpeedDial;
     ScrollView iv_scroll;
     RelativeLayout relative_scroll;
@@ -115,6 +116,7 @@ public class UserTestReportActivity extends FragmentActivity {
         root_layout =  findViewById(R.id.root_layout);
 
 
+        globalClass= (GlobalClass) getApplicationContext();
 
         populate_view(UserTestReportActivity.this);
         // mTestReport.setImageBitmap(convertTobitmap(UserTestReportActivity.this));
@@ -130,10 +132,12 @@ public class UserTestReportActivity extends FragmentActivity {
         if(userName.length()>12)
         {
             String mx= userName.substring(0,9)+"..";
-            header_title.setText(new StringBuilder().append(mx).append(" 's ").append("Sp02 ").append(getString(R.string.report)).toString());
+            header_title.setText(new StringBuilder().append(mx).append(" 's ").append("Sp02 ").
+                    append(getString(R.string.report)).toString());
 
         }else{
-            header_title.setText(new StringBuilder().append(userName).append(" 's ").append("Sp02 ").append(getString(R.string.report)).toString());
+            header_title.setText(new StringBuilder().append(userName).append(" 's ").
+                    append("Sp02 ").append(getString(R.string.report)).toString());
 
         }
         init(userName);
@@ -149,9 +153,17 @@ public class UserTestReportActivity extends FragmentActivity {
             device_id = getIntent().getExtras().getString(Constants.DEVICE_MACID,"");
 
 
-            Logger.log(Level.INFO, TAG, "Get spo2 string Intent from Recycler View of Records list=" + spo2_str);
-            Logger.log(Level.INFO, TAG, "Get PR string Intent from Recycler View of Records list=" + pr_str);
-            Logger.log(Level.INFO, TAG, "Get PI string Intent from Recycler View of Records list=" + pi_str);
+            Logger.log(Level.INFO, TAG, "Get spo2 string Intent from" +
+                    " Recycler View of Records list=" + spo2_str);
+
+            Logger.log(Level.INFO, TAG, "Get PR string Intent" +
+                    " from Recycler View of Records list=" + pr_str);
+
+
+            Logger.log(Level.INFO, TAG, "Get PI string Intent from " +
+                    "Recycler View of Records list=" + pi_str);
+
+
 
             if (spo2_str != "") {
                 spo2_arr = spo2_str.split(",");
@@ -176,10 +188,6 @@ public class UserTestReportActivity extends FragmentActivity {
         plot_PR_graph(mPR_list, UserTestReportActivity.this);
 
 
-
-
-
-
         fabSpeedDial.setMenuListener(new SimpleMenuListenerAdapter() {
             @Override
             public boolean onMenuItemSelected(MenuItem menuItem) {
@@ -187,9 +195,10 @@ public class UserTestReportActivity extends FragmentActivity {
                 if(menuItem.getItemId()==R.id.action_png_)
                 {
 
-                    if(!isStoragePermissionGranted())
+                    if(!isStoragePermissionGranted("Save"))
                     {
-                       Toast.makeText(UserTestReportActivity.this,"Permission are necessary in order to save " +
+                       Toast.makeText(UserTestReportActivity.this,"Permission are necessary " +
+                               "in order to save " +
                                "this file",Toast.LENGTH_SHORT).show();
 
                     }
@@ -250,14 +259,29 @@ public class UserTestReportActivity extends FragmentActivity {
 
         graphview_spo2 = findViewById(R.id.graph_spo2);
         graphview_pr = findViewById(R.id.graph_pr);
-
+        List<UserModel>UserModellist;
         if (Constants.LOGGED_User_ID != null || !Constants.LOGGED_User_ID.equals("")) {
             DatabaseManager.getInstance().openDatabase();
-            List<UserModel> UserModellist = new ArrayList<>(DatabaseManager.getInstance().getAllUserprofilecontent(userName,""));
+
+            if(globalClass.getUserType()!=null && globalClass.getUserType().
+                    equalsIgnoreCase("home")){
+              UserModellist = new ArrayList<>(DatabaseManager.getInstance().
+                        getAllMemberProfilecontent(userName,""));
+
+            }else{
+                 UserModellist = new ArrayList<>(DatabaseManager.getInstance().
+                        getAllUserprofilecontent(userName,""));
+
+            }
 
             if (UserModellist.size() > 0) {
                loginName=UserModellist.get(0).getName();
-                age.setText(UserModellist.get(0).getAddress());
+               if(globalClass.getUserType().equalsIgnoreCase("home")){
+                   age.setText(UserModellist.get(0).getAge());
+               }else{
+                   age.setText(UserModellist.get(0).getAddress());
+               }
+
                 weight.setText(UserModellist.get(0).getWeight());
                 height.setText(UserModellist.get(0).getHeight());
                 Logger.log(Level.DEBUG, TAG, "GENDER=" + UserModellist.get(0).getSex());
@@ -352,7 +376,6 @@ public class UserTestReportActivity extends FragmentActivity {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.testreport, root_layout);
         spo2_graph=  findViewById(R.id.spo2_custom_graph);
-
         Logger.log(Level.INFO, TAG, "view returned=" + v);
         return v;
 
@@ -523,7 +546,7 @@ public class UserTestReportActivity extends FragmentActivity {
     }
 
 
-    private void captureScreen(String loginName,String userName) {
+    private void captureScreen(String loginName,String userName,String Tag) {
 
         //iv_scroll.getChildAt(0).measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
         Bitmap bmp = Bitmap.createBitmap(iv_scroll.getChildAt(0).getMeasuredWidth(), iv_scroll.getChildAt(0).getMeasuredHeight(), Bitmap.Config.ARGB_8888);
@@ -537,12 +560,16 @@ public class UserTestReportActivity extends FragmentActivity {
 
         iv_scroll.getChildAt(0).draw(canvas);
 
-        String name=userName+"_"+System.currentTimeMillis()+"_ioxy" + ".PNG";
+        String name=userName+"_"+DateTime.getDateTimeinMinutes()+"_BPL_iOxy" + ".PNG";
 
         try {
             FileOutputStream fos = new FileOutputStream(saveScreenshot(name,loginName,userName));
             bmp.compress(Bitmap.CompressFormat.PNG, 100, fos);
-            Toast.makeText(UserTestReportActivity.this, "Screenshot Captured", Toast.LENGTH_SHORT).show();
+            if(Tag.equalsIgnoreCase("save")){
+                Toast.makeText(UserTestReportActivity.this, "BPL iOxy Report is saved successfully in a folder " +
+                        "Bpl Be Well", Toast.LENGTH_SHORT).show();
+            }
+
             fos.flush();
             fos.close();
           
@@ -597,23 +624,24 @@ public class UserTestReportActivity extends FragmentActivity {
     }*/
 
 
-    public  boolean isStoragePermissionGranted() {
+    public  boolean isStoragePermissionGranted(String Tag) {
         if (Build.VERSION.SDK_INT >= 23) {
             if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     == PackageManager.PERMISSION_GRANTED) {
                 Logger.log(Level.DEBUG,TAG,"Permission is granted");
-                captureScreen(loginName,userName);
+                captureScreen(loginName,userName,Tag);
                 return true;
             } else {
 
                 Logger.log(Level.DEBUG,TAG,"Permission is revoked");
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        1);
                 return false;
             }
         }
         else {
             Logger.log(Level.DEBUG,TAG,"Permission is granted");
-            captureScreen(loginName,userName);
+            captureScreen(loginName,userName,Tag);
             return true;
         }
     }
@@ -623,8 +651,8 @@ public class UserTestReportActivity extends FragmentActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if(grantResults[0]== PackageManager.PERMISSION_GRANTED){
             Logger.log(Level.DEBUG,TAG,"Permission: "+permissions[0]+ "was "+grantResults[0]);
-            Logger.log(Level.DEBUG,TAG,"##Capturing Screen Processed###");
-            captureScreen(loginName,userName);
+            Logger.log(Level.DEBUG,TAG,"##Snapshot Screen Processed###");
+            captureScreen(loginName,userName,"save");
         }
     }
 
@@ -645,7 +673,7 @@ public class UserTestReportActivity extends FragmentActivity {
     File screenShotFile;
     private  File saveScreenshot(String fileName,String loginFileName,String userDirName)
     {
-        String fileNameDir="BplBeWell";
+        String fileNameDir="Bpl Be Well";
 
         File file =new File(Environment.getExternalStorageDirectory(),fileNameDir);
         if(!file.exists())

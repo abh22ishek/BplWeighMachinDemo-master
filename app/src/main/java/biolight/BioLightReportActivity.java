@@ -7,6 +7,7 @@ import android.content.pm.*;
 import android.graphics.*;
 import android.graphics.drawable.*;
 import android.net.*;
+import android.nfc.*;
 import android.os.*;
 import android.support.annotation.*;
 import android.support.design.internal.*;
@@ -95,7 +96,7 @@ public class BioLightReportActivity extends Activity {
                 if(menuItem.getItemId()==R.id.action_png_)
                 {
 
-                    if(!isStoragePermissionGranted())
+                    if(!isStoragePermissionGranted("save"))
                     {
                         Toast.makeText(BioLightReportActivity.this,
                                 "Permission are necessary in order to save " +
@@ -139,10 +140,12 @@ public class BioLightReportActivity extends Activity {
             if(mUserName.length()>12)
             {
                 String mx= mUserName.substring(0,10)+"..";
-                base_header_title.setText(new StringBuilder().append(mx).append(" 's ").append("BP ").append(getString(R.string.report)).toString());
+                base_header_title.setText(new StringBuilder().append(mx).append(" 's ").append("BP").append(" ")
+                        .append(getString(R.string.report)).toString());
 
             }else{
-                base_header_title.setText(new StringBuilder().append(mUserName).append(" 's ").append("BP ").append(getString(R.string.report)).toString());
+                base_header_title.setText(new StringBuilder().append(mUserName).append(" 's ").append("BP")
+                        .append(" ").append(getString(R.string.report)).toString());
 
             }
         }
@@ -152,18 +155,24 @@ public class BioLightReportActivity extends Activity {
 
         if(globalVariable.getUserType().equalsIgnoreCase("clinic")){
              userModelList=DatabaseManager.getInstance().getAllUserprofilecontent(userName,"");
-
-        }else{
-            userModelList=DatabaseManager.getInstance().getAllMemberProfilecontent(userName,"");
-        }
-
-        if(userModelList!=null && userModelList.size()>0){
             age.setText(new StringBuilder().append(getString(R.string.age)).append(":").
                     append(userModelList.get(0).getAddress()).append(" , ").append(" ").
                     append(getString(R.string.weight)).append(": ").append(userModelList.get(0).getWeight()).append(", ").
                     append(getString(R.string.height)).append(": ").append(userModelList.get(0).getHeight()).toString());
 
-            name.setText(new StringBuilder().append(getString(R.string.name)).append(" :").append(" ").append(userName).append(",").append(" ").append(userModelList.get(0).getSex()).toString());
+        }else{
+            userModelList=DatabaseManager.getInstance().getAllMemberProfilecontent(userName,"");
+            age.setText(new StringBuilder().append(getString(R.string.age)).append(":").
+                    append(userModelList.get(0).getAge()).append(" , ").append(" ").
+                    append(getString(R.string.weight)).append(": ").append(userModelList.get(0).getWeight()).append(", ").
+                    append(getString(R.string.height)).append(": ").append(userModelList.get(0).getHeight()).toString());
+
+        }
+
+        if(userModelList!=null && userModelList.size()>0){
+
+            name.setText(new StringBuilder().append(getString(R.string.name)).append(" :").append(" ").
+                    append(userName).append(",").append(" ").append(userModelList.get(0).getSex()).toString());
 
         }
 
@@ -296,7 +305,7 @@ public class BioLightReportActivity extends Activity {
 
                         mCountResume++;
 
-                        if(!isStoragePermissionGranted())
+                        if(!isStoragePermissionGranted("share"))
                         {
                             Toast.makeText(BioLightReportActivity.this,"Permission " +
                                     "are necessary in order to save " +
@@ -320,14 +329,14 @@ public class BioLightReportActivity extends Activity {
 
     }
 
-    public  boolean isStoragePermissionGranted() {
+    public  boolean isStoragePermissionGranted(String tag) {
         if (Build.VERSION.SDK_INT >= 23) {
             if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     == PackageManager.PERMISSION_GRANTED) {
                 Logger.log(Level.DEBUG,TAG,"Permission is granted");
 
                 if(globalVariable.getUsername()!=null){
-                    captureScreen(globalVariable.getUsername(),userName);
+                    captureScreen(globalVariable.getUsername(),userName,tag);
 
                 }
                 return true;
@@ -341,7 +350,7 @@ public class BioLightReportActivity extends Activity {
         }
         else {
             Logger.log(Level.DEBUG,TAG,"Permission is granted");
-            captureScreen(globalVariable.getUsername(),userName);
+            captureScreen(globalVariable.getUsername(),userName,tag);
             return true;
         }
     }
@@ -352,12 +361,12 @@ public class BioLightReportActivity extends Activity {
         if(grantResults[0]== PackageManager.PERMISSION_GRANTED){
             Logger.log(Level.DEBUG,TAG,"Permission: "+permissions[0]+ "was "+grantResults[0]);
             Logger.log(Level.DEBUG,TAG,"##Capturing Screen Processed###");
-            captureScreen(globalVariable.getUsername(),userName);
+            captureScreen(globalVariable.getUsername(),userName,"save");
         }
     }
 
 
-    private void captureScreen(String loginName,String userName) {
+    private void captureScreen(String loginName,String userName,String tag) {
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
@@ -378,13 +387,17 @@ public class BioLightReportActivity extends Activity {
 
         iv_scroll.getChildAt(0).draw(canvas);
 
-        String name=userName+"_"+System.currentTimeMillis()+"_bpump" + ".PNG";
+        String name=userName+"_"+DateTime.getDateTimeinMinutes()+"_BPL_iPressure_BT02" + ".PNG";
         mUri=name;
 
         try {
             FileOutputStream fos = new FileOutputStream(saveScreenshot(name,loginName,userName));
             bmp.compress(Bitmap.CompressFormat.PNG, 100, fos);
-            Toast.makeText(BioLightReportActivity.this, "Screenshot Captured", Toast.LENGTH_SHORT).show();
+            if(tag.equalsIgnoreCase("save")){
+                Toast.makeText(BioLightReportActivity.this, "BP Report is saved successfully " +
+                        "in a Folder BPl BE Well", Toast.LENGTH_SHORT).show();
+            }
+
             fos.flush();
             fos.close();
 
@@ -400,7 +413,7 @@ public class BioLightReportActivity extends Activity {
     File screenShotFile;
     private File saveScreenshot(String fileName, String loginFileName, String userDirName)
     {
-        String fileNameDir="BplBeWell";
+        String fileNameDir="Bpl Be Well";
 
         File file =new File(Environment.getExternalStorageDirectory(),fileNameDir);
         if(!file.exists())

@@ -26,6 +26,7 @@ import com.tom_roush.pdfbox.pdmodel.graphics.image.*;
 import com.tom_roush.pdfbox.util.*;
 
 import java.io.*;
+import java.lang.reflect.*;
 import java.text.*;
 import java.util.*;
 
@@ -302,9 +303,8 @@ public class DaysChartFragment extends Fragment{
                     {
                         // PDF Viewer
                         File mFile;
-                        mFile = new File(Environment.getExternalStorageDirectory()+
-                                "/BPL_BE_WELL_REPORT"+ "/BPL__USER_BP_DAY_.pdf");
-
+                        mFile = new File(Environment.getExternalStorageDirectory()+"/Bpl Be Well"+ "/"+userName
+                                +"_"+DateTime.getDateTimeinMinutes()+"_BPL_iPressure_BT02_DAY_Trend.pdf");
 
                         Intent target = new Intent(Intent.ACTION_VIEW);
                         target.setDataAndType(Uri.fromFile(mFile),"application/pdf");
@@ -312,8 +312,16 @@ public class DaysChartFragment extends Fragment{
 
                         Intent intent = Intent.createChooser(target, "Open File");
                         try {
+                            if(Build.VERSION.SDK_INT>=24){
+                                try{
+                                    Method m = StrictMode.class.getMethod("disableDeathOnFileUriExposure");
+                                    m.invoke(null);
+                                }catch(Exception e){
+                                    e.printStackTrace();
+                                }
+                            }
                             startActivity(intent);
-                        } catch (ActivityNotFoundException e) {
+                        } catch (Exception e) {
                             // Instruct the user to install a PDF reader here, or something
                             e.printStackTrace();
                             Logger.log(Level.DEBUG,"---","Install any PDF viewer");
@@ -321,7 +329,8 @@ public class DaysChartFragment extends Fragment{
                     }else if(which==1)
                     {
                         // Share
-                       File mFile = new File(Environment.getExternalStorageDirectory()+"/BPL_BE_WELL_REPORT"+ "/BPL__USER_BP_DAY_.pdf");
+                       File mFile = new File(Environment.getExternalStorageDirectory()+"/Bpl Be Well"+ "/"+userName
+                               +"_"+DateTime.getDateTimeinMinutes()+"_BPL_iPressure_BT02_DAY_Trend.pdf");
 
 
                         Intent shareIntent = new Intent();
@@ -373,7 +382,7 @@ public class DaysChartFragment extends Fragment{
 
         PDFBoxResourceLoader.init(getActivity());
 
-        String fileNameDirectory = "BPL_BE_WELL_REPORT";
+        String fileNameDirectory = "Bpl Be Well";
 
       file = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), fileNameDirectory);
 
@@ -381,11 +390,10 @@ public class DaysChartFragment extends Fragment{
             file.mkdir();
 
         }
+        path = "";
 
-
-         path = "";
         try {
-            path = file + "/" + "BPL" + "_" + "_USER_BP_DAY_.pdf";
+            path = file + "/" + userName + "_" +DateTime.getDateTimeinMinutes()+ "_BPL_iPressure_BT02_DAY_Trend.pdf";
 
 
         } catch (Exception e) {

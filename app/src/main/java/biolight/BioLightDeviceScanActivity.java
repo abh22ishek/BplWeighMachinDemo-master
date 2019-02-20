@@ -20,6 +20,8 @@ import com.example.bluetoothlibrary.*;
 import com.example.bluetoothlibrary.Config;
 import com.example.bluetoothlibrary.entity.*;
 
+import java.lang.*;
+import java.lang.Process;
 import java.util.*;
 
 import constantsP.*;
@@ -33,10 +35,9 @@ import test.bpl.com.bplscreens.R;
  */
 
 
-public class BioLightDeviceScanActivity extends Activity implements BioLightListner{
+public class BioLightDeviceScanActivity extends Activity {
 
 
-    ProgressDialog progressDialog;
     private static final String TAG =BioLightDeviceScanActivity.class.getSimpleName() ;
     BluetoothAdapter mBluetoothAdapter;
     public static ArrayList<Peripheral> preipheralCopy ;
@@ -48,6 +49,8 @@ public class BioLightDeviceScanActivity extends Activity implements BioLightList
 
     public static final int MACRO_CODE_1 = 1;
     public static final int MACRO_CODE_2 = 2;
+
+
     public static final int MACRO_CODE_22= 22;
 
 
@@ -58,7 +61,7 @@ public class BioLightDeviceScanActivity extends Activity implements BioLightList
     boolean mActivitySeriesPause;
 
     public static  BioLightListner bioLightListner;
-
+    ProgressDialog progressDialog;
 
     String mUserName,mAge,mGender;
 
@@ -269,16 +272,16 @@ public class BioLightDeviceScanActivity extends Activity implements BioLightList
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       setContentView(R.layout.biolight);
+        setContentView(R.layout.biolight);
         final ArrayList<String> macList= new ArrayList<String>(Arrays.asList(biolighArry));
         final   Button  btnFindDevice= findViewById(R.id.btnFindDevice);
         blueToothListView = findViewById(R.id.listDevices);
         config=new Config();
-
+        mScanning=true;
 
         preipheralCopy=new ArrayList<>();
 
-       // bioLightListner=BioLightDeviceScanActivity.this;
+        // bioLightListner=BioLightDeviceScanActivity.this;
 
 
         mUserName=getIntent().getExtras().getString(Constants.USER_NAME);
@@ -294,7 +297,7 @@ public class BioLightDeviceScanActivity extends Activity implements BioLightList
                 } else {
                     ActivityCompat.requestPermissions(BioLightDeviceScanActivity.this,
                             new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
-                           Constants. PERMISSION_REQUEST_COARSE_LOCATION);
+                            Constants. PERMISSION_REQUEST_COARSE_LOCATION);
                 }
             }
 
@@ -338,54 +341,32 @@ public class BioLightDeviceScanActivity extends Activity implements BioLightList
 
 
 
+        //----
+
+        mBLE = new BluetoothLeClass(BioLightDeviceScanActivity.this);
+        mBLE.setBluetoothGattCallback();
+
+
+
+        if (!mBLE.initialize()) {
+            Log.e(TAG, "Unable to initialize Bluetooth");
+            finish();
+        }
+
+
+
+
+        mBLE.setOnServiceDiscoverListener(mOnServiceDiscover);
+        mBLE.setOnsetDevicePreipheral(mOnSetDevicePreipheral);
+        mBLE.setOnConnectListener(mOnConnectlistener);
+        mBLE.setOnDisconnectListener(mOndisconnectListener);
+
+        initHandler();
 
         btnFindDevice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-
-                if(progressDialog==null){
-                    progressDialog = new ProgressDialog(BioLightDeviceScanActivity.this);
-                    progressDialog.setMessage(getResources().getString(R.string.search_bio_dev));
-                    progressDialog.setIndeterminate(true);
-                    progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                    progressDialog.setCancelable(false);
-                    progressDialog.setCanceledOnTouchOutside(false);
-                    progressDialog.show();
-
-                }
-                /*if(!mScanning){
-                    mScanning=true;
-                    mBLE.scanLeDevice(true);
-                }
-*/
-
-
-                //----
-
-                if(mBLE==null){
-                    mBLE = new BluetoothLeClass(BioLightDeviceScanActivity.this);
-                    mBLE.setBluetoothGattCallback();
-                }
-
-                if (!mBLE.initialize()) {
-                    Log.e(TAG, "Unable to initialize Bluetooth");
-                    finish();
-                }
-
-                if (mBluetoothAdapter.isEnabled())
-                {
-                    mBLE.scanLeDevice(true);
-
-                }
-
-
-                mBLE.setOnServiceDiscoverListener(mOnServiceDiscover);
-                mBLE.setOnsetDevicePreipheral(mOnSetDevicePreipheral);
-                mBLE.setOnConnectListener(mOnConnectlistener);
-                mBLE.setOnDisconnectListener(mOndisconnectListener);
-
-                initHandler();
 
             }
         });
@@ -405,17 +386,15 @@ public class BioLightDeviceScanActivity extends Activity implements BioLightList
                 {
 
                     if(macList.contains(device.getPreipheralMAC()))
-                        {
-                            mBLE.setBLEService(device.getPreipheralMAC());
-                            config.setConnectPreipheralOpsition(device);//set to be current device
+                    {
+                        mBLE.setBLEService(device.getPreipheralMAC());
+                        config.setConnectPreipheralOpsition(device);//set to be current device
 
-                            Log.e(" the current device", "" + config.
-                                    getConnectPreipheralOpsition().getPreipheralMAC() + "" +
-                                    config.getConnectPreipheralOpsition().getBluetooth());
-                            Log.e(" version of  device", "" + device.getModel());
-                        }else{
-                            Toast.makeText(BioLightDeviceScanActivity.this,"Mac Id not Registered",Toast.LENGTH_SHORT).show();
-                        }
+                        Log.e(" the current device", "" + config.getConnectPreipheralOpsition().getPreipheralMAC() + "" + config.getConnectPreipheralOpsition().getBluetooth());
+                        Log.e(" version of  device", "" + device.getModel());
+                    }else{
+                        Toast.makeText(BioLightDeviceScanActivity.this,"Mac Id not Registered",Toast.LENGTH_SHORT).show();
+                    }
 
 
 
@@ -450,11 +429,11 @@ public class BioLightDeviceScanActivity extends Activity implements BioLightList
     protected void onStop() {
 //        mBLE.Unregister();
         super.onStop();
-        if(progressDialog!=null && progressDialog.isShowing())
-            progressDialog.dismiss();
-
-
+        if(mBLE!=null){
+            mBLE.scanLeDevice(false);
         }
+
+    }
 
 
 
@@ -463,6 +442,9 @@ public class BioLightDeviceScanActivity extends Activity implements BioLightList
     protected void onResume() {
         super.onResume();
 
+        if(mBLE!=null){
+            mBLE.scanLeDevice(true);
+        }
 
 
 
@@ -500,16 +482,16 @@ public class BioLightDeviceScanActivity extends Activity implements BioLightList
     }
 
 
-        // scanner the list
+    // scanner the list
 
 
     BluetoothLeClass.OnsetDevicePreipheral mOnSetDevicePreipheral=new BluetoothLeClass.OnsetDevicePreipheral() {
         @Override
         public void setDevicePreipheral(BluetoothDevice device, int model, String SN, float protocolVer) {
 
-            if(progressDialog.isShowing()){
+            /*if(progressDialog.isShowing()){
                 progressDialog.dismiss();
-            }
+            }*/
             Peripheral preipheral = new Peripheral();
             preipheral.setBluetooth(device.getName());
             preipheral.setPreipheralMAC(device.getAddress());
@@ -569,7 +551,7 @@ public class BioLightDeviceScanActivity extends Activity implements BioLightList
                 if (preipheralCopy.size() == 0) {
                     preipheralCopy.add(preipheral);
                     bioLightAdapter=new BioLightAdapter(BioLightDeviceScanActivity.this,preipheralCopy);
-                   sendMsg(BioLightDeviceScanActivity.MACRO_CODE_1,handler,null);
+                    sendMsg(BioLightDeviceScanActivity.MACRO_CODE_1,handler,null);
                 } else {
                     boolean isTrue = false;//
                     for (int i = 0; i < preipheralCopy.size(); i++) {
@@ -634,7 +616,7 @@ public class BioLightDeviceScanActivity extends Activity implements BioLightList
                         ActivityOptions options;
                         Logger.log(Level.DEBUG,TAG," Connection State is 1 and is working ..BioLight  got working ");
 
-                       if (msg.arg1==0)
+                        if (msg.arg1==0)
                         {
                             //blt_state.setText("1");
                             mActivitySeriesPause=true;
@@ -665,9 +647,9 @@ public class BioLightDeviceScanActivity extends Activity implements BioLightList
 
 
                         }else {
-                           Toast.makeText(BioLightDeviceScanActivity.this,"Device got Disconnected",
-                                   Toast.LENGTH_SHORT).show();
-                           finish();
+                            Toast.makeText(BioLightDeviceScanActivity.this,"Device got Disconnected",
+                                    Toast.LENGTH_SHORT).show();
+                            finish();
                         }
 
 
@@ -816,9 +798,9 @@ public class BioLightDeviceScanActivity extends Activity implements BioLightList
                                 gattCharacteristics.size());
 
 
-                       mBLE.setCharacteristicNotification(gattCharacteristic, true, serviceInfo);
-                       mBLE.readCharacteristic(gattCharacteristic);
-                       Logger.log(Level.INFO, TAG, "displayGattServices()  gatt service read data");
+                        mBLE.setCharacteristicNotification(gattCharacteristic, true, serviceInfo);
+                        mBLE.readCharacteristic(gattCharacteristic);
+                        Logger.log(Level.INFO, TAG, "displayGattServices()  gatt service read data");
 
                         return;
 
@@ -828,7 +810,7 @@ public class BioLightDeviceScanActivity extends Activity implements BioLightList
                     if (uuid.equals(serviceInfo.getCharateUUID())) {
 
                         Logger.log(Level.INFO, TAG, "(--displayGattServices()  gatt service character Notification--)");
-                         mBLE.setCharacteristicNotification(gattCharacteristic, true, serviceInfo);
+                        mBLE.setCharacteristicNotification(gattCharacteristic, true, serviceInfo);
                         return;
                     }
                 }
@@ -890,8 +872,4 @@ public class BioLightDeviceScanActivity extends Activity implements BioLightList
     }
 
 
-    @Override
-    public void biolightItemRecived(boolean isItem) {
-
-    }
 }

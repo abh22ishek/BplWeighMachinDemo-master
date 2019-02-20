@@ -52,7 +52,7 @@ public class SettingsActivity extends Activity {
         StatusBarWindow.set_status_bar_color(SettingsActivity.this);
 
         final TextView headertitle= findViewById(R.id.base_header_title);
-        headertitle.setText(getString(R.string.settings));
+        headertitle.setText(new StringBuilder().append("iOxy").append(getString(R.string.settings)).toString());
 
         txt_Spo2high=  findViewById(R.id.txt_SPO2high);
         txt_Spo2low= findViewById(R.id.txt_SPO2Low);
@@ -151,11 +151,11 @@ public class SettingsActivity extends Activity {
         txt_Spo2low.setText(String.valueOf(85));
 
 
-        txt_HeartRatehigh.setText(""+150);
-        txt_HeartRatelow.setText(""+50);
+        txt_HeartRatehigh.setText(new StringBuilder().append(150).toString());
+        txt_HeartRatelow.setText(new StringBuilder().append(50).toString());
 
-        txt_PIhigh.setText(""+20);
-        txt_PIlow.setText(""+0);
+        txt_PIhigh.setText(new StringBuilder().append(20).toString());
+        txt_PIlow.setText(new StringBuilder().append(0).toString());
 
 
         final ImageView mBackKey=  findViewById(R.id.imgBackKey);

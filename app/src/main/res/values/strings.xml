@@ -238,7 +238,7 @@ case at the back of the scale.
 
 
 
-    <string name="biolight">BT02</string>
+    <string name="biolight">BPL iPressure BT02</string>
 
 
     <string name="bio_user_guide">
@@ -382,7 +382,7 @@ Body posture\n\n
     <string name="comment">Comment</string>
 
 
-    <string name="unit">Unit</string>
+    <string name="unit">Unit Selected</string>
     <string name="voice">Voice</string>
 
 
@@ -930,5 +930,9 @@ ALONG WITH PRIVACY POLICY WITH  AND HAVE UNDERSTOOD IT, AND AGREE THAT THEY WILL
 
 
 </string>
-    <string name="search_bio_dev">Searching Bpl iPressure …</string>
+    <string name="search_bio_dev">Searching for BPL iPressure BT02..</string>
+    <string name="search_bpl_ipressure_">Search BPL iPressure BT02</string>
+    <string name="man_p_mem">Manage Primary Members</string>
+    <string name="bpl_ip">BPL iPressure</string>
+    <string name="bt">BT02</string>
 </resources>

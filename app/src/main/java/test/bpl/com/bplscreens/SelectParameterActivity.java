@@ -344,8 +344,8 @@ public class SelectParameterActivity extends Activity {
         if (options == null) {
             options = new ArrayList<>();
 
-            options.add("Bpl-Ioxy");
-            options.add("BP Machine");
+            options.add(getString(R.string.ioxy));
+            options.add(getString(R.string.biolight));
             options.add("I-Weigh");
         }
 
@@ -388,7 +388,7 @@ public class SelectParameterActivity extends Activity {
                                 setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                     }*/
-                } else if (adapterView.getItemAtPosition(i) == "Bpl-Ioxy") {
+                } else if (adapterView.getItemAtPosition(i) == getString(R.string.ioxy)) {
                     ActivityOptions options;
                     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
                         options = ActivityOptions.makeSceneTransitionAnimation(SelectParameterActivity.this);
@@ -405,7 +405,7 @@ public class SelectParameterActivity extends Activity {
 
                         startActivity(intent);
                     }
-                } else if (adapterView.getItemAtPosition(i) == "BP Machine") {
+                } else if (adapterView.getItemAtPosition(i) == getString(R.string.biolight)) {
 
 
                     ActivityOptions options;

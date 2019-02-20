@@ -7,6 +7,7 @@ import android.graphics.drawable.*;
 import android.os.*;
 import android.support.annotation.*;
 import android.support.v4.app.*;
+import android.support.v7.app.AlertDialog;
 import android.util.*;
 import android.view.*;
 import android.widget.*;
@@ -62,8 +63,8 @@ public class ExistingUserActivityManage extends FragmentActivity implements List
                 popup.setOnMenuItemClickListener(ExistingUserActivityManage.this);
                 popup.inflate(R.menu.settings_options);
                 if(globalVariable!=null && globalVariable.getUserType().equalsIgnoreCase("home")){
-                    popup.getMenu().findItem(R.id.marlActive).setTitle("Mark Active Members");
-                    popup.getMenu().findItem(R.id.MarkDormant).setTitle("Mark Dormant Members");
+                    popup.getMenu().findItem(R.id.marlActive).setTitle("Mark Active Members").setVisible(false);
+                    popup.getMenu().findItem(R.id.MarkDormant).setTitle("Mark Dormant Members").setVisible(false);
 
                 }else{
                     popup.getMenu().findItem(R.id.marlActive).setTitle("Mark Active Users");
@@ -93,18 +94,20 @@ public class ExistingUserActivityManage extends FragmentActivity implements List
         listR=this;
 
         final TextView headertitle= findViewById(R.id.base_header_title);
-        headertitle.setText(getString(R.string.sel_user));
+
 
 
         if(globalVariable.getUserType().equalsIgnoreCase("clinic")){
             userModelList_.addAll(DatabaseManager.getInstance().getAllUserprofilecontent
                     (globalVariable.getUsername(), Constants.USER_NAME));
             mUseType="Clinic";
+            headertitle.setText(getString(R.string.sel_user));
 
         }else{
             userModelList_.addAll(DatabaseManager.getInstance().getAllMemberProfilecontent
                     (globalVariable.getUsername(), Constants.USER_NAME));
             mUseType="Home";
+            headertitle.setText(getString(R.string.sel_fam_mem));
 
         }
 
@@ -174,6 +177,8 @@ public class ExistingUserActivityManage extends FragmentActivity implements List
 
             }
         });
+
+
     }
 
 
@@ -572,9 +577,52 @@ public class ExistingUserActivityManage extends FragmentActivity implements List
 
 
 
+    android.support.v7.app.AlertDialog alert;
+
+
+    private void showDialog(Context context,String title,String message)
+    {
+
+            android.support.v7.app.AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle(title);
+            builder.setMessage(message)
+                    .setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+
+                            if(alert.isShowing()){
+                                alert.dismiss();
+                               finish();
+                            }
+
+                        }
+                    });
 
 
 
+            alert = builder.create();
+            alert.setCanceledOnTouchOutside(false);
+            logger.Logger.log(logger.Level.DEBUG, "Existing User Manage", "Alert dialog box gets called");
+            if(!alert.isShowing()){
+                alert.show();
+            }
+
+        }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(userModelList_.size()==0){
+            if(globalVariable.getUserType().equalsIgnoreCase("Home"))
+            showDialog(ExistingUserActivityManage.this,"No Members Available",
+                    "Sorry No Primary Members Available. Please create a new one");
+            else{
+                showDialog(ExistingUserActivityManage.this,"No Users Available",
+                        "Sorry No Users are Available. Please create a new one");
+
+            }
+        }
+    }
 }
 
 

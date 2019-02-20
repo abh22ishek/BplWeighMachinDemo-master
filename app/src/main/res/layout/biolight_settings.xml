@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@mipmap/bpl_be_well_parameter_bg"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -37,7 +38,7 @@
             android:layout_height="40dp">
 
             <customviews.MyCustomTextView
-                android:layout_width="100dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:paddingStart="10dp"
@@ -53,9 +54,10 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:background="@color/separator"
+              android:background="@color/window_background_bottom"
                 android:id="@+id/unitConversion"
                 android:textOn="@string/mm_hg"
+
                 android:textOff="@string/kpa"
 
                 />

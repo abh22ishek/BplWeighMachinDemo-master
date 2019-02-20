@@ -60,7 +60,8 @@ public class MenuPageActivty extends FragmentActivity {
 
         manageUser=findViewById(R.id.btnManageUser);
         if(globalClass.getUserType().equalsIgnoreCase("home")){
-            manageUser.setText("Manage Family Members");
+            manageUser.setText(R.string.man_p_mem);
+            my_profile.setVisibility(View.INVISIBLE);
         }
 
         manageUser.setOnClickListener(new View.OnClickListener() {
@@ -104,9 +105,7 @@ public class MenuPageActivty extends FragmentActivity {
     private void app_version_dialog(Context context)
     {
 
-        /*MyCustomDialogFragment dialogFragment=new MyCustomDialogFragment();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        dialogFragment.show(fragmentManager,"fragment");*/
+
 
 
         dialog = new Dialog(context);
@@ -122,7 +121,7 @@ public class MenuPageActivty extends FragmentActivity {
 
         cancel.setVisibility(View.GONE);
         header.setText(getResources().getString(R.string.app_version));
-        content.setText(new StringBuilder().append(getString(R.string.curr_app)).
+        content.setText(new StringBuilder().append(getString(R.string.curr_app)).append(" ").
                 append(BuildConfig.VERSION_NAME).toString());
 
         save.setText(R.string.ok_);
@@ -142,8 +141,7 @@ public class MenuPageActivty extends FragmentActivity {
             Transition enterTrans = new Explode().setDuration(700);
             getWindow().setEnterTransition(enterTrans);
 
-            //Transition returnTrans = new Slide().setDuration(700);
-            //getWindow().setReturnTransition(returnTrans);
+
         }
 
 

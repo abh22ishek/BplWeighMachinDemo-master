@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="@drawable/button_shape"
-        android:text="Select Device"
+        android:text="@string/search_bpl_ipressure_"
         app:fontname="arial"
         android:layout_margin="10dp"
         android:layout_above="@+id/listDevices"

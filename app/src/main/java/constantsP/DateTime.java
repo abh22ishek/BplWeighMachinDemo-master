@@ -6,7 +6,7 @@ import android.annotation.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.*;
 
 import logger.Level;
 import logger.Logger;
@@ -57,7 +57,12 @@ public class DateTime {
         return  df.format(date);
     }
 
-
+    public  static String getDateTimeinMinutes()
+    {
+        SimpleDateFormat df = new SimpleDateFormat("dd_MM_yyyy_HH:mm", Locale.getDefault());
+        Date date = new Date();
+        return  df.format(date);
+    }
 
     // get Current Date
 

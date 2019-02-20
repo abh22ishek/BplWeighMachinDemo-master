@@ -654,7 +654,7 @@ public class BioLightDeviceHomeScreenActivity extends Activity {
 
                         if(BioLightDeviceHomeScreenActivity.this.getCurrentUnit
                                 (Constants.MM_UNIT_MEASUREMENT_KEY).equalsIgnoreCase(Constants.MM_HG)){
-                            textOngoingBP.setText(new StringBuilder().append("").append(msg.arg1).toString());
+                            textOngoingBP.setText(new StringBuilder().append(msg.arg1).toString());
                         }else{
                             textOngoingBP.setText(mmHgTokPa(msg.arg1));
                         }
@@ -666,7 +666,8 @@ public class BioLightDeviceHomeScreenActivity extends Activity {
 
                     case MACRO_CODE_13://web the final result
 
-                        Logger.log(Level.DEBUG, TAG, "***Get Final BP Result***"+msg.arg1+"-Another Parameter-"+msg.arg2);
+                        Logger.log(Level.DEBUG, TAG, "***Get Final BP Result***"+
+                                msg.arg1+"-Another Parameter-"+msg.arg2);
 
                         mSyssSet.add(msg.arg1);
                         mDiasSet.add(msg.arg2);
@@ -710,7 +711,8 @@ public class BioLightDeviceHomeScreenActivity extends Activity {
                                                 TextToSpeech.QUEUE_FLUSH,null,"uk");
 
                                     }
-                                    Logger.log(Level.WARNING,TAG,"Text to voice is  working");
+                                    Logger.log(Level.INFO,TAG,"GET Shared Pref for Sound="+getSWitchVoiceState( Constants.BIO_LIGHT_VOICE_STATUS));
+                                    Logger.log(Level.INFO,TAG,"Text to voice is  working");
                                 }
                             }
 
@@ -1306,8 +1308,8 @@ public class BioLightDeviceHomeScreenActivity extends Activity {
 
                             if(alert.isShowing()){
                                 alert.dismiss();
-                                Intent intent = new Intent(BioLightDeviceHomeScreenActivity.this, SelectParameterActivity.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                               Intent intent = new Intent(BioLightDeviceHomeScreenActivity.this, SelectParameterActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                                 startActivity(intent);
                                 mDialogCount=0;
 

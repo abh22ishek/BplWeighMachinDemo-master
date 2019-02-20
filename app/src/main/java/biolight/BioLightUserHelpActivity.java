@@ -17,7 +17,7 @@ public class BioLightUserHelpActivity extends Activity{
         setContentView(R.layout.bio_user_guide);
 
         final TextView headerText=findViewById(R.id.base_header_title);
-        headerText.setText(new StringBuilder().append(getString(R.string.biolight)).append(" ").
+        headerText.setText(new StringBuilder().append(getString(R.string.bt)).append(" ").
                 append(getString(R.string.user_guide)).toString());
 
         final ImageView backKey=findViewById(R.id.imgBackKey);

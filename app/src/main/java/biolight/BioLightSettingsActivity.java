@@ -30,7 +30,8 @@ public class BioLightSettingsActivity extends Activity {
         setContentView(R.layout.biolight_settings);
 
         base_header_title=findViewById(R.id.base_header_title);
-        base_header_title.setText(new StringBuilder().append(getString(R.string.biolight)).append(" ").append(getString(R.string.settings)).toString());
+        base_header_title.setText(new StringBuilder().append(getString(R.string.bt))
+                .append(" ").append(getString(R.string.settings)).toString());
 
 
         unitConversion=findViewById(R.id.unitConversion);

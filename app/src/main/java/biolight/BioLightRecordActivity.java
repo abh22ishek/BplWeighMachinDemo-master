@@ -127,10 +127,12 @@ public class BioLightRecordActivity extends Activity implements BioLightListner{
         if(mUserName.length()>12)
         {
            String mx= mUserName.substring(0,10)+"..";
-            headerText.setText(new StringBuilder().append(mx).append(" 's ").append("BP ").append(getString(R.string.record)).toString());
+            headerText.setText(new StringBuilder().append(mx).append(" 's ").append("BP").append(" ").
+                    append(getString(R.string.record)).toString());
 
         }else{
-            headerText.setText(new StringBuilder().append(mUserName).append(" 's ").append("BP ").append(getString(R.string.record)).toString());
+            headerText.setText(new StringBuilder().append(mUserName).append(" 's ").append("BP").append(" ").
+                    append(getString(R.string.record)).toString());
 
         }
 
