@@ -52,7 +52,7 @@ public class SettingsActivity extends Activity {
         StatusBarWindow.set_status_bar_color(SettingsActivity.this);
 
         final TextView headertitle= findViewById(R.id.base_header_title);
-        headertitle.setText(new StringBuilder().append("iOxy").append(getString(R.string.settings)).toString());
+        headertitle.setText(new StringBuilder().append("BPL iOxy ").append(getString(R.string.settings)).toString());
 
         txt_Spo2high=  findViewById(R.id.txt_SPO2high);
         txt_Spo2low= findViewById(R.id.txt_SPO2Low);

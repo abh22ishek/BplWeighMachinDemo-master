@@ -331,9 +331,9 @@ Body posture\n\n
 
 
 
-  Prolonged and frequent BPL BT02 measurements are associated with ischemia and neuropathy
+  Prolonged and frequent BPL iPressure BT02 measurements are associated with ischemia and neuropathy
   in the limb wearing the cuff. Please examine the extremities of the limb frequently for normal color, warmth and
-  sensitivity. If any abnormality is observed, stop the BPL BT02 measurements.\n
+  sensitivity. If any abnormality is observed, stop the BPL iPressure BT02 measurements.\n
 
   Too frequent measurements may have influence on the measurement results.\n\n
 
@@ -932,7 +932,8 @@ ALONG WITH PRIVACY POLICY WITH  AND HAVE UNDERSTOOD IT, AND AGREE THAT THEY WILL
 </string>
     <string name="search_bio_dev">Searching for BPL iPressure BT02..</string>
     <string name="search_bpl_ipressure_">Search BPL iPressure BT02</string>
-    <string name="man_p_mem">Manage Primary Members</string>
+    <string name="man_p_mem">Manage Family Members</string>
     <string name="bpl_ip">BPL iPressure</string>
     <string name="bt">BT02</string>
+    <string name="tap_bt">Tap on below BPL iPressure BT02</string>
 </resources>

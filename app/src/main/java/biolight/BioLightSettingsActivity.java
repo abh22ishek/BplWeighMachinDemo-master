@@ -37,6 +37,23 @@ public class BioLightSettingsActivity extends Activity {
         unitConversion=findViewById(R.id.unitConversion);
         voiceSpeaker=findViewById(R.id.bioSettingsVoice);
 
+        unitConversion.setChecked(true);
+        unitConversion.setEnabled(false);
+
+
+
+        voiceSpeaker.setChecked(true);
+        if(getSWitchVoiceState(Constants.BIO_LIGHT_VOICE_STATUS)!=null){
+
+            String sWitchVoiceState =getSWitchVoiceState(Constants.BIO_LIGHT_VOICE_STATUS);
+
+            if(sWitchVoiceState.equalsIgnoreCase( Constants.SWITCH_ON))
+            {
+                voiceSpeaker.setChecked(true);
+            }else{
+                voiceSpeaker.setChecked(false);
+            }
+        }
 
         final ImageView backKey=findViewById(R.id.imgBackKey);
         backKey.setOnClickListener(new View.OnClickListener() {
@@ -108,6 +125,20 @@ public class BioLightSettingsActivity extends Activity {
         Logger.log(Level.DEBUG, TAG, "// *shared preference switch state gets stored // *"+switchCompat);
 
     }
+
+
+    private String getSWitchVoiceState(String key_name)
+    {
+        SharedPreferences switchStatePref;
+        switchStatePref = BioLightSettingsActivity.this.
+                getSharedPreferences(Constants.BIOLIGHT_PREF_VOICE, Context.MODE_PRIVATE);
+
+        final String switchState=switchStatePref.getString(key_name, Constants.SWITCH_ON);
+        Logger.log(Level.INFO, TAG, "((get switch state from shared pref**=))" + switchState);
+        return switchState;
+
+    }
+
 
 }
 

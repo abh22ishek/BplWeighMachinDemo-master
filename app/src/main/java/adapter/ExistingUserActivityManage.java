@@ -34,6 +34,7 @@ public class ExistingUserActivityManage extends FragmentActivity implements List
 
     String selectedTAG="";
 
+
     private LinearLayout layout;
     private PopupMenu popup;
     private ImageView optionsSettings;
@@ -571,6 +572,7 @@ public class ExistingUserActivityManage extends FragmentActivity implements List
     public void getSelectedUser(String data, String age1, String gender1, boolean[] arrays) {
         booleansArr=new boolean[arrays.length];
         //copying one array to another
+       // selectedTAG="without_tag";
         booleansArr=Arrays.copyOf(arrays,arrays.length);
     }
 

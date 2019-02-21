@@ -35,7 +35,7 @@ import test.bpl.com.bplscreens.R;
  */
 
 
-public class BioLightDeviceScanActivity extends Activity {
+public class BioLightDeviceScanActivity extends Activity implements BioLightListner{
 
 
     private static final String TAG =BioLightDeviceScanActivity.class.getSimpleName() ;
@@ -267,14 +267,14 @@ public class BioLightDeviceScanActivity extends Activity {
             "94:E3:6D:A6:12:DE",
             "F0:45:DA:11:1D:DD"};
 
-
+       Button  btnFindDevice;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.biolight);
         final ArrayList<String> macList= new ArrayList<String>(Arrays.asList(biolighArry));
-        final   Button  btnFindDevice= findViewById(R.id.btnFindDevice);
+          btnFindDevice= findViewById(R.id.btnFindDevice);
         blueToothListView = findViewById(R.id.listDevices);
         config=new Config();
         mScanning=true;
@@ -535,6 +535,7 @@ public class BioLightDeviceScanActivity extends Activity {
             }
             preipheral.setPreipheralSN(SN);
             preipheral.setName("Smart thermometer");
+
             preipheral.setBrand("Wearcare");
             preipheral.setManufacturer("blt");
             preipheral.setIsActivation(0);
@@ -603,12 +604,16 @@ public class BioLightDeviceScanActivity extends Activity {
                         blueToothListView.setAdapter(bioLightAdapter);
                         if (bioLightAdapter != null) {
                             bioLightAdapter.notifyDataSetChanged();
+                            btnFindDevice.setText(R.string.tap_bt);
+
                         }
                         break;
                     case MACRO_CODE_2:
                         blueToothListView.setAdapter(bioLightAdapter);
                         if (bioLightAdapter != null) {
                             bioLightAdapter.notifyDataSetChanged();
+                            btnFindDevice.setText(R.string.tap_bt);
+
                         }
                         break;
                     case MACRO_CODE_22://the state of Biolight  0:spare 1:working
@@ -872,4 +877,8 @@ public class BioLightDeviceScanActivity extends Activity {
     }
 
 
+    @Override
+    public void biolightItemRecived(Object object) {
+
+    }
 }

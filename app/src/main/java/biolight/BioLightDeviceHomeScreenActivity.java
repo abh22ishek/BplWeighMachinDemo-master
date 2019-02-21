@@ -501,18 +501,21 @@ public class BioLightDeviceHomeScreenActivity extends Activity {
 
 
                 final byte[] data = characteristic.getValue();
-                if (BioLightDeviceScanActivity.config.getConnectPreipheralOpsition().getBluetooth().equals(Constant.BLT_WBP)) {
+
+                if (BioLightDeviceScanActivity.config.
+                        getConnectPreipheralOpsition().getBluetooth().equals(Constant.BLT_WBP)) {
 
                     resolveWbp.resolveBPData2(data, BioLightDeviceScanActivity.mBLE, BioLightDeviceHomeScreenActivity.this);//resolve data from wep
                 } else if (BioLightDeviceScanActivity.config.getConnectPreipheralOpsition().getBluetooth().equals(Constant.AL_WBP)) {
-                    resolveWbp.resolveALiBPData(data, getApplicationContext());//this is to resolve data from alibaba'device
+                    resolveWbp.resolveALiBPData(data, getApplicationContext());
+                    //this is to resolve data from alibaba' device
                 } else {
 
                     if (data != null && data.length > 0) {
-                        final StringBuilder stringBuilder = new StringBuilder(
-                                data.length);
+                        final StringBuilder stringBuilder = new StringBuilder(data.length);
                         for (byte byteChar : data)
                             stringBuilder.append(String.format("%02X ", byteChar));
+
                         String s = stringBuilder.toString();
                         s = s.replace(" ", "");
                         Log.e("s", "this is what" + "" + s);
@@ -975,15 +978,13 @@ public class BioLightDeviceHomeScreenActivity extends Activity {
                 }
             }
         };
+
         BioLightDeviceScanActivity.config.setMyFragmentHandler(mHandler);
     }
 
 
 
-
     boolean pxCounter;
-
-
 
     class MyTimerTask extends TimerTask {
         public void run() {
@@ -1227,6 +1228,9 @@ public class BioLightDeviceHomeScreenActivity extends Activity {
     protected void onResume() {
         super.onResume();
 
+
+        Logger.log(Level.DEBUG,TAG,"On Resume() called");
+
         if(BioLightDeviceHomeScreenActivity.this.getCurrentUnit
                 (Constants.MM_UNIT_MEASUREMENT_KEY).equalsIgnoreCase(Constants.MM_HG)){
 
@@ -1253,8 +1257,9 @@ public class BioLightDeviceHomeScreenActivity extends Activity {
                 getSharedPreferences(Constants.BIOLIGHT_PREF, Context.MODE_PRIVATE);
 
         final String toggleUnitMeasurementState=toggleStatePref.getString(keyName, Constants.MM_HG);
-        Logger.log(Level.INFO, TAG, "((get current unit state from shared pref**=))"
-                + toggleUnitMeasurementState);
+        Logger.log(Level.INFO, TAG, "((get current unit state from shared pref**=))" +
+                toggleUnitMeasurementState);
+
         return toggleUnitMeasurementState;
 
     }
@@ -1308,7 +1313,8 @@ public class BioLightDeviceHomeScreenActivity extends Activity {
 
                             if(alert.isShowing()){
                                 alert.dismiss();
-                               Intent intent = new Intent(BioLightDeviceHomeScreenActivity.this, SelectParameterActivity.class);
+                               Intent intent = new Intent(BioLightDeviceHomeScreenActivity.this,
+                                       SelectParameterActivity.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                                 startActivity(intent);
                                 mDialogCount=0;
@@ -1322,7 +1328,8 @@ public class BioLightDeviceHomeScreenActivity extends Activity {
 
             alert = builder.create();
             alert.setCanceledOnTouchOutside(false);
-            logger.Logger.log(logger.Level.DEBUG, TAG, "Alert dialog box gets called");
+            logger.Logger.log(logger.Level.DEBUG, TAG,
+                    "Alert dialog box gets called");
             if(!alert.isShowing()){
                 alert.show();
             }
@@ -1368,20 +1375,5 @@ public class BioLightDeviceHomeScreenActivity extends Activity {
 
         dialog.show();
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

@@ -17,6 +17,7 @@ public class BioLightAdapter extends BaseAdapter {
     private LayoutInflater mInflator;
     private Activity mContext;
 
+    BioLightListner bioLightListner;
 
     public BioLightAdapter(Activity c ,ArrayList<Peripheral> showDevice) {
         super();
@@ -74,6 +75,7 @@ public class BioLightAdapter extends BaseAdapter {
         viewHolder.deviceAddress.setText(R.string.bpl_ip);
         viewHolder.type.setText(R.string.bt);
         viewHolder.sn.setText(device.getPreipheralSN());
+
         return view;
     }
 

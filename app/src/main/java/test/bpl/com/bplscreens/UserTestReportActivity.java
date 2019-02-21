@@ -209,6 +209,16 @@ public class UserTestReportActivity extends FragmentActivity {
                     if(screenShotFile!=null) {
 
                         sharePNG();
+                    }else{
+                        if(!isStoragePermissionGranted("Save"))
+                        {
+                            Toast.makeText(UserTestReportActivity.this,"Permission are necessary " +
+                                    "in order to save " +
+                                    "this file",Toast.LENGTH_SHORT).show();
+                        }else{
+                            sharePNG();
+                        }
+
                     }
                 }
                 return true;

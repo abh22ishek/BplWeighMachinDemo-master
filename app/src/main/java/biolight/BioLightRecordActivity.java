@@ -1,10 +1,13 @@
 package biolight;
 
+import android.*;
 import android.app.*;
 import android.content.*;
+import android.content.pm.*;
 import android.net.*;
 import android.os.*;
 import android.support.annotation.*;
+import android.support.v4.app.*;
 import android.support.v4.content.*;
 import android.support.v7.widget.*;
 import android.util.*;
@@ -14,12 +17,14 @@ import android.widget.PopupMenu;
 
 
 import java.io.*;
+import java.lang.reflect.*;
 import java.util.*;
 
 import constantsP.*;
 import database.*;
 import logger.*;
 import test.bpl.com.bplscreens.*;
+import test.bpl.com.bplscreens.R;
 
 public class BioLightRecordActivity extends Activity implements BioLightListner{
 
@@ -71,30 +76,21 @@ public class BioLightRecordActivity extends Activity implements BioLightListner{
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
 
-                           StringBuilder sb=new StringBuilder();
+                        if(mRecordDetailList.size()==0)
+                        {
+                            Toast.makeText(BioLightRecordActivity.this,"No Records Found. Please Take " +
+                                    "Records with BPL iPressure BT02",Toast.LENGTH_LONG).show();
+                        }else{
 
-                           try {
-                               for(int i=0;i<mRecordDetailList.size();i++){
-                                   sb.append(i+1).append(". ").append(" Name :").append(mUserName).
-                                   append(" SBP/DBP (mmHg) : ").append(mRecordDetailList.get(i).getSysPressure()).
-                                           append("/").append(mRecordDetailList.get(i).getDiabolicPressure()).append(" HR(bpm) :").
-                                           append(mRecordDetailList.get(i).getPulsePerMin()).append(" Time :").append(mRecordDetailList.get(i).getMeasurementTime()).
-                                           append(" BP Status :").append(mRecordDetailList.get(i).getTypeBP()).append(" Comments :").append(mRecordDetailList.get(i).getComments());
-                                   sb.append("\n\n");
+                            if(!isStoragePermissionGranted())
+                            {
+                                Toast.makeText(BioLightRecordActivity.this,
+                                        "Storage Permission is necessary to generate .txt File ",Toast.LENGTH_SHORT).show();
 
-                               }
-                               createUsersTextFile(mUserName+"bp_report_"+DateTime.getDateTime()+".txt", globalVariable.getUsername(),sb);
-                               currentTime=DateTime.getDateTime();
-                               onCreateDialog();
+                            }
 
-                           }catch (Exception e)
-                           {
-                               e.printStackTrace();
-                           }
-
-                           Toast.makeText(BioLightRecordActivity.this,
-                                   "Users BP Report Exported Successfully",Toast.LENGTH_SHORT).show();
-                           return true;
+                        }
+                        return true;
                     }
                 });
 
@@ -177,7 +173,7 @@ public class BioLightRecordActivity extends Activity implements BioLightListner{
 
 
     private static void  createUsersTextFile(String fileName, String loginFileName, StringBuilder data) {
-        String fileNameDir = "BplBeWell";
+        String fileNameDir = "Bpl Be Well";
 
         File file = new File(Environment.getExternalStorageDirectory(), fileNameDir);
         if (!file.exists()) {
@@ -231,10 +227,10 @@ public class BioLightRecordActivity extends Activity implements BioLightListner{
                 if (which != -1) {
                     // Write code for share
                     if (which == 0) {
-                        // PDF Viewer
+                        // PDF ViewerDaysCha
 
                         File   mFile = new File(Environment.getExternalStorageDirectory() +
-                                "/BplBeWell/"+globalVariable.getUsername()+"/" +mUserName+"bp_report_"+currentTime+".txt");
+                                "/Bpl Be Well/"+globalVariable.getUsername()+"/" +mUserName+"_bp_report_"+currentTime+".txt");
 
 
                         Intent target = new Intent(Intent.ACTION_VIEW);
@@ -244,18 +240,26 @@ public class BioLightRecordActivity extends Activity implements BioLightListner{
 
                         Intent intent = Intent.createChooser(target, "Open File");
                         try {
+                            if(Build.VERSION.SDK_INT>=24){
+                                try{
+                                    Method m = StrictMode.class.getMethod("disableDeathOnFileUriExposure");
+                                    m.invoke(null);
+                                }catch(Exception e){
+                                    e.printStackTrace();
+                                }
+                            }
                             startActivity(intent);
-                        } catch (ActivityNotFoundException e) {
+                        } catch (Exception e) {
                             // Instruct the user to install a PDF reader here, or something
                             e.printStackTrace();
-                            Logger.log(Level.DEBUG, "---", "Install any PDF viewer");
+                            Logger.log(Level.DEBUG,"---","Install any PDF viewer");
                         }
                     } else if (which == 1) {
                         // Share
 
 
                      File   mFile = new File(Environment.getExternalStorageDirectory() +
-                                "/BplBeWell/"+globalVariable.getUsername()+"/" +mUserName+"bp_report_"+currentTime+".txt");
+                                "/Bpl Be Well/"+globalVariable.getUsername()+"/" +mUserName+"_bp_report_"+currentTime+".txt");
 
                      Logger.log(Level.DEBUG,TAG,"-File Path-"+mFile.toString()+"--"+mFile.getAbsolutePath());
 
@@ -295,7 +299,76 @@ public class BioLightRecordActivity extends Activity implements BioLightListner{
     }
 
     @Override
-    public void biolightItemRecived(boolean isItem) {
+    public void biolightItemRecived(Object isItem) {
 
+    }
+
+
+
+    private void ExportBPRecords(List<BPMeasurementModel> mRecordDetailList)
+    {
+        StringBuilder sb=new StringBuilder();
+
+        try {
+            for(int i=0;i<mRecordDetailList.size();i++){
+                sb.append(i+1).append(". ").append(" Name :").append(mUserName).
+                        append(" SBP/DBP (mmHg) : ").append(mRecordDetailList.get(i).getSysPressure()).
+                        append("/").append(mRecordDetailList.get(i).getDiabolicPressure()).append(" HR(bpm) :").
+                        append(mRecordDetailList.get(i).getPulsePerMin()).append(" Time :").append(mRecordDetailList.get(i).getMeasurementTime()).
+                        append(" BP Status :").append(mRecordDetailList.get(i).getTypeBP()).append(" Comments :").append(mRecordDetailList.get(i).getComments());
+                sb.append("\n\n");
+
+            }
+            createUsersTextFile(mUserName+"_bp_report_"+DateTime.getDateTimeinMinutes()+".txt", globalVariable.getUsername(),sb);
+            currentTime=DateTime.getDateTimeinMinutes();
+            onCreateDialog();
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        Toast.makeText(BioLightRecordActivity.this,
+                "Users BP Report Exported Successfully",Toast.LENGTH_SHORT).show();
+    }
+
+    public  boolean isStoragePermissionGranted() {
+
+        if (Build.VERSION.SDK_INT >= 23) {
+
+            if (BioLightRecordActivity.this.checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED) {
+                Logger.log(Level.DEBUG,TAG,"Permission is granted");
+                ExportBPRecords(mRecordDetailList);
+                return true;
+            }
+            else {
+
+                Logger.log(Level.DEBUG,TAG,"Permission is revoked");
+                ActivityCompat.requestPermissions(BioLightRecordActivity.this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                return false;
+            }
+        }
+        else {
+            Logger.log(Level.DEBUG,TAG,"Permission is granted");
+            ExportBPRecords(mRecordDetailList);
+            return true;
+        }
+    }
+
+
+
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(grantResults[0]== PackageManager.PERMISSION_GRANTED){
+            Logger.log(Level.DEBUG,TAG,"Permission: "+permissions[0]+ "was "+grantResults[0]);
+            Logger.log(Level.DEBUG,TAG,"##Capturing Screen Processed###");
+            ExportBPRecords(mRecordDetailList);
+
+        }
     }
 }

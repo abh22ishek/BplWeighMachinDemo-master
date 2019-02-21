@@ -111,6 +111,15 @@ public class BioLightReportActivity extends Activity {
                     if(screenShotFile!=null) {
 
                       sharePNG();
+                    }else{
+                        if(!isStoragePermissionGranted("save"))
+                        {
+                            Toast.makeText(BioLightReportActivity.this,
+                                    "Permission are necessary in order to save " +
+                                            "this file",Toast.LENGTH_SHORT).show();
+                        }else{
+                            sharePNG();
+                        }
                     }
                 }
                 return true;

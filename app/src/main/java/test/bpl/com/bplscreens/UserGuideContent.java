@@ -22,7 +22,8 @@ public class UserGuideContent extends Activity {
         img_back_key.setOnClickListener(listner);
 
        final TextView header_title= findViewById(R.id.base_header_title);
-        header_title.setText(getApplicationContext().getString(R.string.user_guide));
+        header_title.setText(new StringBuilder().append("BPL iOxy ").
+                append(getApplicationContext().getString(R.string.user_guide)).toString());
 
     }
 

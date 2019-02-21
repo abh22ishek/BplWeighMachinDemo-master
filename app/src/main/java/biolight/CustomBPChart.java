@@ -328,18 +328,18 @@ class CustomBPChart extends View {
         // canvas.drawText("Systolic Blood Pressure(mm Hg)",getWidth()/2-150f,getHeight()-10f,paint);
 
         if(density==DisplayMetrics.DENSITY_XXHIGH){
-            canvas.drawBitmap(mSysBitmap,getWidth()/2-160f, getHeight()-34f,paint);
+            canvas.drawBitmap(mDiaBitmap,getWidth()/2-160f, getHeight()-34f,paint);
         }
         else if(density==DisplayMetrics.DENSITY_XXXHIGH){
-            canvas.drawBitmap(mSysBitmap,getWidth()/2-160f, getHeight()-40f,paint);
+            canvas.drawBitmap(mDiaBitmap,getWidth()/2-160f, getHeight()-40f,paint);
         }
         else{
-            canvas.drawBitmap(mSysBitmap,getWidth()/2-160f, getHeight()-27f,paint);
+            canvas.drawBitmap(mDiaBitmap,getWidth()/2-160f, getHeight()-27f,paint);
         }
 
 
 
-        canvas.drawBitmap(mDiaBitmap,0f, 100f,paint);
+        canvas.drawBitmap(mSysBitmap,0f, 100f,paint);
         // plot the points x and y (140,100)
         // canvas.drawCircle((100-40)*width_scale+marginX,(190-140)*height_scale+marginY,20f,paint);
 
