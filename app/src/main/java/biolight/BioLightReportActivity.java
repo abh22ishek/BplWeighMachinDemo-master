@@ -422,7 +422,7 @@ public class BioLightReportActivity extends Activity {
     File screenShotFile;
     private File saveScreenshot(String fileName, String loginFileName, String userDirName)
     {
-        String fileNameDir="Bpl Be Well";
+        String fileNameDir=Constants.BPL_FOLDER;
 
         File file =new File(Environment.getExternalStorageDirectory(),fileNameDir);
         if(!file.exists())

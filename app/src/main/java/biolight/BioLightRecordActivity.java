@@ -173,7 +173,7 @@ public class BioLightRecordActivity extends Activity implements BioLightListner{
 
 
     private static void  createUsersTextFile(String fileName, String loginFileName, StringBuilder data) {
-        String fileNameDir = "Bpl Be Well";
+        String fileNameDir =Constants.BPL_FOLDER;
 
         File file = new File(Environment.getExternalStorageDirectory(), fileNameDir);
         if (!file.exists()) {
@@ -230,7 +230,7 @@ public class BioLightRecordActivity extends Activity implements BioLightListner{
                         // PDF ViewerDaysCha
 
                         File   mFile = new File(Environment.getExternalStorageDirectory() +
-                                "/Bpl Be Well/"+globalVariable.getUsername()+"/" +mUserName+"_bp_report_"+currentTime+".txt");
+                                "/"+Constants.BPL_FOLDER+"/"+globalVariable.getUsername()+"/" +mUserName+"_bp_report_"+currentTime+".txt");
 
 
                         Intent target = new Intent(Intent.ACTION_VIEW);
@@ -259,7 +259,7 @@ public class BioLightRecordActivity extends Activity implements BioLightListner{
 
 
                      File   mFile = new File(Environment.getExternalStorageDirectory() +
-                                "/Bpl Be Well/"+globalVariable.getUsername()+"/" +mUserName+"_bp_report_"+currentTime+".txt");
+                                "/"+Constants.BPL_FOLDER+"/"+globalVariable.getUsername()+"/" +mUserName+"_bp_report_"+currentTime+".txt");
 
                      Logger.log(Level.DEBUG,TAG,"-File Path-"+mFile.toString()+"--"+mFile.getAbsolutePath());
 

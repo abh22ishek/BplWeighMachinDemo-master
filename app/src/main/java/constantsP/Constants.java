@@ -99,7 +99,6 @@ public class Constants {
 
     public static final String RECORDS_WEIGH_MACHINE1="RECORDS_WEIGH_MACHINE1";
     public static final String RECORDS_WEIGH_MACHINE2="RECORDS_WEIGH_MACHINE2";
-
     public static final String RECORDS_WEIGH_MACHINE="RECORDS_WEIGH_MACHINE";
 
     // -----
@@ -107,7 +106,6 @@ public class Constants {
 
     public static final String RECORDS_BPMACHINE_BIOLIGHT="RECORDS_BP_MACHINE_BIO_LIGHT";
     public static final String RECORDS_BPMACHINE_BPUMP="RECORDS_BP_MACHINE_B_PUMP";
-
     public static final String RECORDS_BP_MACHINE="RECORDS_BP_MACHINE";
 
 
@@ -239,10 +237,11 @@ public class Constants {
 
 
 
-
+    public static final String BPL_FOLDER="Bpl Be Well";
     public static final String CHART="CHART";
     public static final String REPORT="REPORT";
     public static final String DATE="DATE";
 
     public static  String GENDER="AGE";
+
 }

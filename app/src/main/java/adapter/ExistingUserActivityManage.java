@@ -533,7 +533,7 @@ public class ExistingUserActivityManage extends FragmentActivity implements List
 
     private static void  createUsersTextFile(String fileName, String loginFileName, StringBuilder data)
     {
-        String fileNameDir="BplBeWell";
+        String fileNameDir=Constants.BPL_FOLDER;
 
         File file =new File(Environment.getExternalStorageDirectory(),fileNameDir);
         if(!file.exists())

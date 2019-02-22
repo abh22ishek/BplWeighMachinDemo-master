@@ -18,6 +18,7 @@ import android.util.*;
 import android.view.*;
 import android.widget.*;
 
+import com.example.bluetoothlibrary.entity.*;
 import com.tom_roush.harmony.awt.*;
 import com.tom_roush.pdfbox.pdmodel.*;
 import com.tom_roush.pdfbox.pdmodel.common.*;
@@ -306,7 +307,7 @@ public class DaysChartFragment extends Fragment{
                     {
                         // PDF Viewer
                         File mFile;
-                        mFile = new File(Environment.getExternalStorageDirectory()+"/Bpl Be Well"+ "/"+globalUserName+"/" +userName
+                        mFile = new File(Environment.getExternalStorageDirectory()+"/"+Constants.BPL_FOLDER+ "/"+globalUserName+"/" +userName
                                 +"/"+userName
                                 +"_"+DateTime.getDateTimeinMinutes()+"_BPL_iPressure_BT02_DAY_Trend.pdf");
 
@@ -333,7 +334,7 @@ public class DaysChartFragment extends Fragment{
                     }else if(which==1)
                     {
                         // Share
-                      File  mFile = new File(Environment.getExternalStorageDirectory()+"/Bpl Be Well"+ "/"+globalUserName+"/" +userName
+                      File  mFile = new File(Environment.getExternalStorageDirectory()+"/"+Constants.BPL_FOLDER+ "/"+globalUserName+"/" +userName
                                 +"/"+userName +"_"+DateTime.getDateTimeinMinutes()+"_BPL_iPressure_BT02_DAY_Trend.pdf");
 
 
@@ -389,7 +390,7 @@ public class DaysChartFragment extends Fragment{
 
         PDFBoxResourceLoader.init(getActivity());
 
-        String fileNameDirectory = "Bpl Be Well";
+        String fileNameDirectory = Constants.BPL_FOLDER;
 
       file = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), fileNameDirectory);
 

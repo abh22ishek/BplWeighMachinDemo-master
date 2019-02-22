@@ -12,7 +12,7 @@
     
     <string name="ioxy">Bpl iOxy</string>
     <string name="weigh_mc">I-Weigh</string>
-    <string name="bp">BioLight</string>
+    <string name="bp">BPL iPressure BT02</string>
       <!--user details strings-->
     <string name="name">Name</string>
     <string name="age">Age (Years)</string>
@@ -779,7 +779,7 @@ causes of like or different kind beyond the control of BPL Medtech, including fa
 19. QUESTIONS \n
 
 If Users have any questions or concerns about our Terms, e-mail us at:
-sales@bpl.in\n
+sales.medical@bpl.in\n
 PRIVACY POLICY\n
 
 At BPL MEDICAL TECHNOLOGIES PRIVATE LIMITED , a company incorporated and registered in India and having its registered office at 11th  KM,
@@ -897,7 +897,7 @@ The Application may contain links to other websites and software. We are not res
 9. ACCESS TO USER INFORMATION\n
 
 If Users believes that any Users Information that BPL Medtech is holding about such User (or part thereof) is incorrect or incomplete,
-then Users may write to or email BPL Medtech, at this email address sales@bpl.in. BPL Medtech will promptly take all reasonable
+then Users may write to or email BPL Medtech, at this email address sales.medical@bpl.in. BPL Medtech will promptly take all reasonable
  efforts to incorporate the changes, and correct any information found to be incorrect.
 \n\n
 10. GRIEVANCES\n
@@ -906,7 +906,7 @@ We have nominated the Customer Support Manager at BPL Medtech as the Grievance O
 with respect to the processing and
 \n\n
 
-use of their Application. Users may contact this officer at  sales@bpl.in.
+use of their Application. Users may contact this officer at  sales.medical@bpl.in.
 
 11. COMPLIANCE WITH LAWS\n
 
@@ -935,5 +935,5 @@ ALONG WITH PRIVACY POLICY WITH  AND HAVE UNDERSTOOD IT, AND AGREE THAT THEY WILL
     <string name="man_p_mem">Manage Family Members</string>
     <string name="bpl_ip">BPL iPressure</string>
     <string name="bt">BT02</string>
-    <string name="tap_bt">Tap on below BPL iPressure BT02</string>
+    <string name="tap_bt">Tap on BPL iPressure BT02</string>
 </resources>

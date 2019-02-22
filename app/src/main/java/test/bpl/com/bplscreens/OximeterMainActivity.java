@@ -115,11 +115,6 @@ public class OximeterMainActivity extends Activity {
 
 
 
-
-
-
-
-
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -182,7 +177,7 @@ public class OximeterMainActivity extends Activity {
 
         }
 
-        final ArrayAdapter<String> adapter=new ArrayAdapter<String>(context,android.R.layout.simple_list_item_1,options);
+        final ArrayAdapter<String> adapter=new ArrayAdapter<>(context,android.R.layout.simple_list_item_1,options);
         if(dialog==null)
         {
             dialog = new Dialog(context);
