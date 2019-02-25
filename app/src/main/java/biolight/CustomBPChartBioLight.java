@@ -329,18 +329,18 @@ public class CustomBPChartBioLight extends View {
         // canvas.drawText("Systolic Blood Pressure(mm Hg)",getWidth()/2-150f,getHeight()-10f,paint);
 
         if(density==DisplayMetrics.DENSITY_XXHIGH){
-            canvas.drawBitmap(mSysBitmap,getWidth()/2-160f, getHeight()-34f,paint);
+            canvas.drawBitmap(mDiaBitmap,getWidth()/2-160f, getHeight()-34f,paint);
         }
         else if(density==DisplayMetrics.DENSITY_XXXHIGH){
-            canvas.drawBitmap(mSysBitmap,getWidth()/2-160f, getHeight()-40f,paint);
+            canvas.drawBitmap(mDiaBitmap,getWidth()/2-160f, getHeight()-40f,paint);
         }
         else{
-            canvas.drawBitmap(mSysBitmap,getWidth()/2-160f, getHeight()-27f,paint);
+            canvas.drawBitmap(mDiaBitmap,getWidth()/2-160f, getHeight()-27f,paint);
         }
 
 
 
-        canvas.drawBitmap(mDiaBitmap,0f, 100f,paint);
+        canvas.drawBitmap(mSysBitmap,0f, 100f,paint);
         // plot the points x and y (140,100)
 
 
@@ -359,7 +359,7 @@ public class CustomBPChartBioLight extends View {
             }else{
                 textPaint.setTextSize(25);
             }
-            textPaint.setColor(Color.WHITE);
+            textPaint.setColor(Color.BLACK);
             canvas.drawText("("+py+"/"+px+")",(finalPointX-40)*width_scale+marginX-mBitmap.getWidth()/2,
                     ((190-finalPointY)*height_scale+marginY-mBitmap.getHeight())+mBitmap.getHeight()+20,textPaint);
 
@@ -384,4 +384,8 @@ public class CustomBPChartBioLight extends View {
 
     }
 
+
+
 }
+
+

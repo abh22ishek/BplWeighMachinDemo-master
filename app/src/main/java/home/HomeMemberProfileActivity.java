@@ -58,6 +58,7 @@ public class HomeMemberProfileActivity extends FragmentActivity {
     Button manageUser;
 
     String mMemeberName;
+    List<UserModel> userModelList_home;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +110,9 @@ public class HomeMemberProfileActivity extends FragmentActivity {
             userEmail.setEnabled(false);
         }
 
+
+        userModelList_home.addAll( DatabaseManager.getInstance().
+                getAllMemberProfilecontent(globalVariable.getUsername(),Constants.USER_NAME));
 
         headertitle.setText(R.string.add_fam_mem);
 
@@ -166,8 +170,7 @@ public class HomeMemberProfileActivity extends FragmentActivity {
             btn_Submit.setVisibility(View.GONE);
             if (globalVariable.getUsername() != null) {
                 DatabaseManager.getInstance().openDatabase();
-                UserModellist = new ArrayList<>(DatabaseManager.getInstance().
-                        getMemberprofilecontent(mMemeberName));
+                UserModellist = new ArrayList<>(DatabaseManager.getInstance().getMemberprofilecontent(mMemeberName));
 
                 if (UserModellist.size() > 0) {
                     member_name.setText(UserModellist.get(0).getName());
@@ -250,8 +253,8 @@ public class HomeMemberProfileActivity extends FragmentActivity {
         public void onClick(View v) {
 
             if (v == mBackkey) {
-                if (headertitle.getText().toString().equalsIgnoreCase("ADD PROFILE"))
-                    Toast.makeText(HomeMemberProfileActivity.this, "Please add your Profile", Toast.LENGTH_SHORT).show();
+                if (headertitle.getText().toString().equalsIgnoreCase(getString(R.string.add_fam_mem)))
+                    Toast.makeText(HomeMemberProfileActivity.this, "Please add Any Family Member", Toast.LENGTH_SHORT).show();
                 else
                     finish();
 
@@ -739,4 +742,8 @@ public class HomeMemberProfileActivity extends FragmentActivity {
 
         dialog.show();
     }
+
+
+
+
 }

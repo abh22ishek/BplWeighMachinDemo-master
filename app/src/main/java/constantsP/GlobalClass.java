@@ -42,18 +42,17 @@ public class GlobalClass extends Config {
     public void onCreate() {
         super.onCreate();
         get_density();
-        // Thread.setDefaultUncaughtExceptionHandler(new ForceCloseHandlerException(getApplicationContext()));
+     //   Thread.setDefaultUncaughtExceptionHandler(new ForceCloseHandlerException(getApplicationContext()));
         DatabaseManager.initializeInstance(new BplOximterdbHelper(getApplicationContext()));
-
-
     }
+
+
 
     @Override
     public void onLowMemory() {
         super.onLowMemory();
         Logger.log(Level.ERROR,"***Application Class***","App got crashed due to low memory");
     }
-
 
     @Override
     public void onTerminate() {

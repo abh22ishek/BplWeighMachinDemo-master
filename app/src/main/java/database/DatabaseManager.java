@@ -108,6 +108,39 @@ private final String TAG="DatabaseManager";
     }
 
 
+    public String getUseTypeFromLogin(String username,String password) throws SQLException
+    {
+        //  Cursor mCursor = mDatabase.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE user_name=? AND password=?", new String[]{USER_NAME,PASSWORD});
+
+        String useType="";
+        Logger.log(Level.INFO, "DatabaseManager", "username " +username);
+        Logger.log(Level.INFO, "DatabaseManager", "password " +password);
+
+
+
+
+        Cursor cursor=mDatabase.query(TABLE_NAME,
+                new String[]{USER_NAME,PASSWORD,USE_TYPE},
+                USER_NAME + "=?"+" "+"AND"+" "+PASSWORD+"=?" , new String[]{username,password}, null, null, null);
+
+        Logger.log(Level.INFO, "DatabaseManager", "Get  username and password count=" + cursor.getCount());
+        //Logger.log(Level.INFO, "DatabaseManager", "Get  username vlaue=" + cursor.getString(cursor.getColumnIndex("user_name")));
+
+        while (cursor.moveToNext())
+        {
+            Logger.log(Level.INFO, "DatabaseManager", "Get  username value="
+                    + cursor.getString(cursor.getColumnIndex("use_type")));
+
+            useType=cursor.getString(cursor.getColumnIndex("use_type"));
+
+        }
+
+
+
+        cursor.close();
+
+        return useType;
+    }
 
     // to check if username is already taken or not
 
@@ -367,7 +400,7 @@ private final String TAG="DatabaseManager";
 
 
 
-    public List<UserModel> getAllMemberProfilecontent(String username,String TAG)
+    public List<UserModel>   getAllMemberProfilecontent(String username,String TAG)
     {
 
         List<UserModel> user_Model_List=new ArrayList<>();

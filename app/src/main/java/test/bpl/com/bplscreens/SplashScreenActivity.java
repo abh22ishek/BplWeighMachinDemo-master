@@ -109,7 +109,7 @@ public class SplashScreenActivity extends FragmentActivity {
         mUsername=login_credentials.getString(Constants.USER_NAME, null);
         String mPwd= login_credentials.getString(Constants.PASSWORD, null);
 
-        String mUserType=login_credentials.getString(Constants.USE_TYPE,null);
+        String mUserType=login_credentials.getString(Constants.USE_TYPE,"Home");
 
 
         if(mUsername!=null)
@@ -122,6 +122,8 @@ public class SplashScreenActivity extends FragmentActivity {
 
             globalVariable.setUsername(mUsername);
             globalVariable.setUserType(mUserType);
+
+
 
         return b;
 

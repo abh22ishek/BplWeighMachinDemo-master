@@ -4,6 +4,7 @@ import android.app.*;
 import android.content.*;
 import android.os.*;
 import android.support.annotation.*;
+import android.support.v7.app.AlertDialog;
 import android.text.*;
 import android.view.*;
 import android.widget.*;
@@ -42,6 +43,25 @@ public class ExistingUserActivity extends Activity implements ListR{
     protected void onResume() {
         super.onResume();
         hide_soft_keypad();
+
+
+            if(globalVariable.getUserType().equalsIgnoreCase("Home"))
+            {
+                if(userModelList_home.size()==0){
+                    showDialog(ExistingUserActivity.this,"No Members Available",
+                            "Sorry No Primary Members Available. Please add a Member");
+                }
+            }
+
+            else{
+                if(userModelList_.size()==0){
+                    showDialog(ExistingUserActivity.this,"No Users Available",
+                            "Sorry No Users are Available. Please create a new one");
+                }
+
+
+            }
+
     }
 
     @Override
@@ -236,6 +256,34 @@ public class ExistingUserActivity extends Activity implements ListR{
 
 
 
+    AlertDialog alert;
+    private void showDialog(Context context,String title,String message)
+    {
+
+        android.support.v7.app.AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle(title);
+        builder.setMessage(message)
+                .setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        if(alert.isShowing()){
+                            alert.dismiss();
+                            finish();
+                        }
+
+                    }
+                });
+
+
+
+        alert = builder.create();
+        alert.setCanceledOnTouchOutside(false);
+        logger.Logger.log(logger.Level.DEBUG, "Existing User Manage", "Alert dialog box gets called");
+        if(!alert.isShowing()){
+            alert.show();
+        }
+
+    }
 
 
 
