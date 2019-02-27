@@ -49,16 +49,16 @@
                     android:gravity="start"
                     android:textSize="16sp"
                     android:textColor="@color/black"
-                    android:text="@string/email"/>
+                    android:text="@string/logged_as"/>
                 <EditText
                     android:layout_width="match_parent"
-                    android:maxLength="30"
+                    android:maxLength="40"
                     android:hint="@string/set_name"
                     android:id="@+id/userEmail"
 
                     android:maxLines="1"
                     android:imeOptions="actionNext"
-                    android:inputType="text|textPersonName"
+                    android:inputType="textEmailAddress"
                     android:background="@android:color/transparent"
                     android:scrollHorizontally="true"
                     android:textColor="@color/black"

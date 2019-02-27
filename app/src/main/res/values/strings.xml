@@ -6,13 +6,14 @@
 
 
     <string name="app_version">App Version</string>
-    <string name="selection">Make Your Selection</string>
+    <string name="selection">Select your Device</string>
+    <string name="select_option">Select Any Option</string>
     <string name="logout">LogOut</string>
 
     
-    <string name="ioxy">Bpl iOxy</string>
-    <string name="weigh_mc">I-Weigh</string>
-    <string name="bp">BPL iPressure BT02</string>
+    <string name="ioxy">BPLBeWell iOxy</string>
+    <string name="weigh_mc">BPLBeWell iWeigh</string>
+    <string name="bp">BPLBeWell iPressure BT02</string>
       <!--user details strings-->
     <string name="name">Name</string>
     <string name="age">Age (Years)</string>
@@ -156,7 +157,7 @@ BPL Be Well app is designed and developed by BPL Medical Technologies Pvt. Ltd f
 
     </string-array>
 
-    <string name="connect_device">Please Connect to BPL iOxy device</string>
+    <string name="connect_device">Switch On BPL iOxy device </string>
     <string name="disconnect_device">Do you want to exit BPL iOxy measurement ?</string>
     <string name="search">Search</string>
     <string name="search_by_name">Search By User Name</string>
@@ -238,7 +239,7 @@ case at the back of the scale.
 
 
 
-    <string name="biolight">BPL iPressure BT02</string>
+    <string name="biolight">BPLBeWell iPressure BT02</string>
 
 
     <string name="bio_user_guide">
@@ -367,7 +368,7 @@ Body posture\n\n
 
 
     <string name="bpm">BPM</string>
-    <string name="mm_hg">mm Hg</string>
+    <string name="mm_hg">mmHg</string>
     <string name="kpa">kPa</string>
     <string name="pul_rate">Pulse Rate</string>
     <string name="normal_">Normal</string>
@@ -445,19 +446,19 @@ Body posture\n\n
     <string name="body_age">Body Age</string>
     <string name="metabolism">Metabolism</string>
     <string name="bone_mass">Bone \n Mass</string>
-    <string name="muscle_mass">Muscle Mass</string>
+    <string name="muscle_mass">Muscle Mass</string>r
     <string name="lbm">LBM</string>
     <string name="obesity">Obesity</string>
     <string name="pulse_min_vs_time">Pulse/min Vs Time</string>
     <string name="bp_mmhg_vs_date">BP(mmHg Vs Date)</string>
     <string name="time">Time</string>
-    <string name="pul_mm_hg">PUL(mm Hg)</string>
-    <string name="dia_mm_hg">DIA(mm Hg)</string>
-    <string name="sys_mm_hg">SYS(mm Hg)</string>
+    <string name="pul_mm_hg">PUL(mmHg)</string>
+    <string name="dia_mm_hg">DIA(mmHg)</string>
+    <string name="sys_mm_hg">SYS(mmHg)</string>
     <string name="protein">Protein</string>
 
 
-    <string name="muscle_mass_str">Muscle mass index is calculated from muscle masss, body weight and height
+    <string name="muscle_mass_str">Muscle mass index is calculated from muscle mass, body weight and height
     It is a quantitative assesment of health, status and strength</string>
 
     <string name="protein_str">Protein is an important component of human cells and the organization,
@@ -920,7 +921,7 @@ of the Users will be subject to all laws, present and future, of any government 
 
 If Users have any questions or concerns about our Privacy Policy, e-mail us at:
 
-sales.@bpl.in
+sales.medical@bpl.in
 
 \n\n
 
@@ -932,8 +933,11 @@ ALONG WITH PRIVACY POLICY WITH  AND HAVE UNDERSTOOD IT, AND AGREE THAT THEY WILL
 </string>
     <string name="search_bio_dev">Searching for BPL iPressure BT02..</string>
     <string name="search_bpl_ipressure_">Search BPL iPressure BT02</string>
-    <string name="man_p_mem">Manage Family Members</string>
-    <string name="bpl_ip">BPL iPressure</string>
+    <string name="man_p_mem">Manage Family Info</string>
+    <string name="bpl_ip">BPLBeWell iPressure</string>
     <string name="bt">BT02</string>
     <string name="tap_bt">Tap on BPL iPressure BT02</string>
+    <string name="tap_connect">Tap on Connect</string>
+    <string name="logged_as">Logged As</string>
+    <string name="bp_ip">Bpl iPressure</string>
 </resources>

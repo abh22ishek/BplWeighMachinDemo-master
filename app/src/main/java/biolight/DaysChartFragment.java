@@ -463,10 +463,17 @@ public class DaysChartFragment extends Fragment{
             contentStream.setFont(font, 11);
             contentStream.newLineAtOffset(120f, marginUpperLine + 2);
 
-            contentStream.showText("User Name : " + userName + "   " + "Age : " + age + "   " + "Gender : " +
-                    gender+ "  " + "Clinic Name : " + "Bpl Med Tech");
+            if(Constants.SELECTED_USER_TYPE.equalsIgnoreCase("Clinic")){
+                contentStream.showText("User Name : " + userName + "   " + "Age : " + age + "   " + "Gender : " +
+                        gender+ "  " + "Clinic Name : " + "Bpl Med Tech");
+            }else{
+                contentStream.showText("User Name : " + userName + "   " + "Age : " + age + "   " + "Gender : " +
+                        gender+ "  " );
+            }
+
 
             contentStream.endText();
+
 
 
             contentStream.setNonStrokingColor(0, 0, 0); //black text
@@ -474,14 +481,25 @@ public class DaysChartFragment extends Fragment{
             contentStream.setFont(font, 11);
             contentStream.newLineAtOffset(120f, marginUpperLine - 12);
             contentStream.showText("Comments :" + "--");
-
             contentStream.endText();
 
+
+            contentStream.setLineWidth(0.5f);
+            contentStream.setStrokingColor(AWTColor.GRAY);
+            contentStream.beginText();
+            contentStream.setFont(font, 9);
+            contentStream.newLineAtOffset(120f, marginUpperLine - 27);
+            contentStream.showText("Mac Id -" + Constants.SELECTED_MAC_ID_BT02+"  "+
+                    "Serial No. - "+Constants.SELECTED_SERIAL_NO_ID_BT02+"            "+"App Version -"+BuildConfig.VERSION_NAME);
+            contentStream.endText();
+
+
+            contentStream.setLineWidth(1.4f);
             contentStream.setNonStrokingColor(0, 0, 0); //black text
             contentStream.beginText();
             contentStream.setFont(font, 10);
             contentStream.newLineAtOffset(1.9f * unit_per_cm, page_height-2.8f*unit_per_cm);
-            contentStream.showText("(BPL BE WELL I-PRESSURE DAY REPORT) " );
+            contentStream.showText("(BPLBeWell iPressure BT02 Day Report) " );
             contentStream.endText();
 
 

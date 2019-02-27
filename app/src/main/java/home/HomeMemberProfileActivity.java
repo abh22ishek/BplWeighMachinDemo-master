@@ -110,9 +110,11 @@ public class HomeMemberProfileActivity extends FragmentActivity {
             userEmail.setEnabled(false);
         }
 
+        userModelList_home=new ArrayList<>();
 
-        userModelList_home.addAll( DatabaseManager.getInstance().
-                getAllMemberProfilecontent(globalVariable.getUsername(),Constants.USER_NAME));
+
+       /* userModelList_home.addAll( DatabaseManager.getInstance().
+                getAllMemberProfilecontent(globalVariable.getUsername(),Constants.USER_NAME));*/
 
         headertitle.setText(R.string.add_fam_mem);
 
@@ -688,7 +690,7 @@ public class HomeMemberProfileActivity extends FragmentActivity {
 
 
         content.setAdapter(adapter);
-        header.setText(getResources().getString(R.string.selection));
+        header.setText(getResources().getString(R.string.select_option));
         content.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {

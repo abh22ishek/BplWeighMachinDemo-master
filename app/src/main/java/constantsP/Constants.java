@@ -1,6 +1,8 @@
 package constantsP;
 
 
+import android.annotation.*;
+
 import java.util.HashMap;
 
 public class Constants {
@@ -143,6 +145,7 @@ public class Constants {
 
     public static String SHOW_VALUES="FALSE";
 
+    @SuppressLint("UseSparseArrays")
     public static HashMap<Integer,Integer> ROTATION_DEGREES=new HashMap<>();
 
     static {
@@ -237,11 +240,16 @@ public class Constants {
 
 
 
-    public static final String BPL_FOLDER="Bpl Be Well";
+    public static final String BPL_FOLDER="BPLBeWell";
     public static final String CHART="CHART";
     public static final String REPORT="REPORT";
     public static final String DATE="DATE";
 
     public static  String GENDER="AGE";
+
+    public static  String SELECTED_USER_TYPE="Home";
+
+    public static String SELECTED_MAC_ID_BT02="";
+    public static String SELECTED_SERIAL_NO_ID_BT02="";
 
 }

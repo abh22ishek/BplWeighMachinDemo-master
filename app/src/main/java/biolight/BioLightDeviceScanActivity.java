@@ -390,8 +390,18 @@ public class BioLightDeviceScanActivity extends Activity implements BioLightList
                         mBLE.setBLEService(device.getPreipheralMAC());
                         config.setConnectPreipheralOpsition(device);//set to be current device
 
-                        Log.e(" the current device", "" + config.getConnectPreipheralOpsition().getPreipheralMAC() + "" + config.getConnectPreipheralOpsition().getBluetooth());
+                        Log.e(" the current device", "" + config.
+                                getConnectPreipheralOpsition().
+                                getPreipheralMAC() + "" + config.getConnectPreipheralOpsition().getBluetooth());
                         Log.e(" version of  device", "" + device.getModel());
+
+                       Log.w("Row Selected=","Mac Id "+config.getConnectPreipheralOpsition().getPreipheralMAC()
+                               +" Serial No. "+config.getConnectPreipheralOpsition().getPreipheralSN());
+
+                       Constants.SELECTED_MAC_ID_BT02=config.getConnectPreipheralOpsition().getPreipheralMAC();
+                       Constants.SELECTED_SERIAL_NO_ID_BT02=config.getConnectPreipheralOpsition().getPreipheralSN();
+
+
                     }else{
                         Toast.makeText(BioLightDeviceScanActivity.this,"Mac Id not Registered",Toast.LENGTH_SHORT).show();
                     }
@@ -855,26 +865,7 @@ public class BioLightDeviceScanActivity extends Activity implements BioLightList
     String dates[]={"01-12-2018 10:12:34","31-12-2018 10:20:34",};
 
 
-    private void insert_data()
-    {
 
-        String x="00";
-        List<String> datesList=Utility.getDaysBetweenDates(dates[0],dates[1]);
-        SQLiteDatabase database = DatabaseManager.getInstance().openDatabase();
-        if(database!=null){
-
-            for(int i=0;i<15;i++)
-            {
-                database.insert(BplOximterdbHelper.TABLE_NAME_BIO_LIGHT,
-                        null, Utility.content_values_biolight_bp_monitor(Constants.LOGGED_User_ID,mUserName,
-                                String.valueOf(SysArray[i]),String.valueOf(DiabArray[i])
-                                , String.valueOf(pulseArray[i]),datesList.get(i)+"\n"+"10:12:34",
-                                Utility.validateTypeBP(String.valueOf(SysArray[i]),String.valueOf(DiabArray[i])),""));
-            }
-        }
-
-
-    }
 
 
     @Override

@@ -82,9 +82,9 @@ public class ExistingUserActivityManage extends FragmentActivity implements List
 
                 }else{
                     if(globalVariable!=null && globalVariable.getUserType().equalsIgnoreCase("home")){
-                        popup.getMenu().findItem(R.id.markAll).setTitle("Un mark All Members");
+                        popup.getMenu().findItem(R.id.markAll).setTitle("Unmark All Members");
                     }else{
-                        popup.getMenu().findItem(R.id.markAll).setTitle("Un Mark All Users");
+                        popup.getMenu().findItem(R.id.markAll).setTitle("Unmark All Users");
                     }
 
 

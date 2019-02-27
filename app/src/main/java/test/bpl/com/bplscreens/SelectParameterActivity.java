@@ -53,6 +53,7 @@ public class SelectParameterActivity extends Activity {
 
 
 
+
         infoDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -118,8 +119,11 @@ public class SelectParameterActivity extends Activity {
 
         globalVariable = (GlobalClass) getApplicationContext();
 
-        Constants.LOGGED_User_ID = globalVariable.getUsername();
 
+        if(globalVariable!=null){
+            Constants.SELECTED_USER_TYPE=globalVariable.getUserType();
+            Constants.LOGGED_User_ID = globalVariable.getUsername();
+        }
 
     }
 
@@ -346,7 +350,7 @@ public class SelectParameterActivity extends Activity {
 
             options.add(getString(R.string.ioxy));
             options.add(getString(R.string.biolight));
-            options.add("I-Weigh");
+            options.add(getString(R.string.weigh_mc));
         }
 
 
@@ -369,7 +373,7 @@ public class SelectParameterActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                if (adapterView.getItemAtPosition(i) == "I-Weigh") {
+                if (adapterView.getItemAtPosition(i) == getString(R.string.weigh_mc)) {
                     Toast.makeText(SelectParameterActivity.this,"Not Available",Toast.LENGTH_SHORT).show();
                     return;
 
@@ -818,7 +822,7 @@ public class SelectParameterActivity extends Activity {
 
         final ActivityOptions[] options = new ActivityOptions[1];
         content.setAdapter(adapter);
-        header.setText(getResources().getString(R.string.selection));
+        header.setText(getResources().getString(R.string.select_option));
         content.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {

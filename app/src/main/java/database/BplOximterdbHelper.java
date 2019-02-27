@@ -106,7 +106,8 @@ public class BplOximterdbHelper extends SQLiteOpenHelper {
     public static final String COMMENT="comment";
     public static final String TYPE_BP="type_bp";
 
-
+    public static final String BIOLIGHT_MACID="biolight_macid";
+    public static final String BIOLIGHT_SERIAL_N0="biolight_Serial_no";
 
     public static final String CREATE_TABLE="CREATE TABLE " +TABLE_NAME+"("+KEY_ID+" integer primary key autoincrement"+","
             +USER_NAME+" "+"text"+","+PASSWORD+" "+"text"+","+SECURITY_Q_1+" "+"text"+","
@@ -174,7 +175,8 @@ public static final String CREATE_TABLE_HOME_PROFILE="CREATE TABLE " +TABLE_NAME
     public static final String CREATE_TABLE_BIO_LIGHT="CREATE TABLE " +TABLE_NAME_BIO_LIGHT+"("+KEY_ID+" " +
             "integer primary key autoincrement"+","
             +USER_NAME+" "+"REAL"+","+USER_NAME_+" "+"text"+","+SYS+" "+"REAL"+","
-            +DIA+" "+"REAL"+","+PUL+" "+"REAL"+","+TESTING_TIME+" "+"TEXT"+","+TYPE_BP+" "+"TEXT"+","+COMMENT+" "+"TEXT"+ ")";
+            +DIA+" "+"REAL"+","+PUL+" "+"REAL"+","+TESTING_TIME+" "+"TEXT"+","+TYPE_BP+" "+"TEXT"+","+
+            COMMENT+" "+"TEXT"+","+ BIOLIGHT_MACID+" "+"TEXT"+","+ BIOLIGHT_SERIAL_N0+" "+"TEXT" +")";
 
 
 

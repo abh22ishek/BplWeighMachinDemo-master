@@ -193,15 +193,12 @@ private final String TAG="DatabaseManager";
     {
         boolean b=false;
 
-
         Cursor cursor=mDatabase.query(TABLE_NAME,
                 new String[]{USER_NAME,PASSWORD,SECURITY_Q_1,SECURITY_Q_2,USE_TYPE},
                 USER_NAME+"=?", new String[]{username}, null, null, null);
 
-
-
-
         Logger.log(Level.INFO, "Get count of username exists=", "" +  cursor.getCount());
+
         if(cursor.getCount()>=1)
         {
             b=true;

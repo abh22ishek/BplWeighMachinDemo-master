@@ -208,7 +208,8 @@ public class BioLightDeviceHomeScreenActivity extends Activity {
                             null, Utility.content_values_biolight_bp_monitor(Constants.LOGGED_User_ID,mUserName,
                                     String.valueOf(sys),String.valueOf(dia)
                                     ,pulseRateText.getText().toString(),DateTime.getDateTime(),
-                                    Utility.validateTypeBP(sysPressure.getText().toString(),diaPressure.getText().toString()),mComment));
+                                    Utility.validateTypeBP(sysPressure.getText().toString(),diaPressure.getText().toString()),mComment,
+                                    Constants.SELECTED_MAC_ID_BT02,Constants.SELECTED_SERIAL_NO_ID_BT02));
                 }else{
                     // Database records insertion with username
 
@@ -216,7 +217,8 @@ public class BioLightDeviceHomeScreenActivity extends Activity {
                             null, Utility.content_values_biolight_bp_monitor(Constants.LOGGED_User_ID,mUserName,
                                     sysPressure.getText().toString(),diaPressure.getText().toString()
                                     ,pulseRateText.getText().toString(),DateTime.getDateTime(),
-                                   Utility.validateTypeBP(sysPressure.getText().toString(),diaPressure.getText().toString()),mComment));
+                                   Utility.validateTypeBP(sysPressure.getText().toString(),diaPressure.getText().toString()),
+                                    mComment,Constants.SELECTED_MAC_ID_BT02,Constants.SELECTED_SERIAL_NO_ID_BT02));
 
                 }
 
@@ -387,14 +389,6 @@ public class BioLightDeviceHomeScreenActivity extends Activity {
 
 
         initHandler();
-
-
-
-
-
-
-
-
 
         textToSpeech=new TextToSpeech(BioLightDeviceHomeScreenActivity.this, new TextToSpeech.OnInitListener() {
             @Override

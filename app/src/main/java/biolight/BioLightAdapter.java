@@ -72,7 +72,7 @@ public class BioLightAdapter extends BaseAdapter {
        // viewHolder.deviceAddress.setText(device.getBluetooth());
       //  viewHolder.type.setText(device.getModel());
 
-        viewHolder.deviceAddress.setText(R.string.bpl_ip);
+        viewHolder.deviceAddress.setText(R.string.bp_ip);
         viewHolder.type.setText(R.string.bt);
         viewHolder.sn.setText(device.getPreipheralSN());
 

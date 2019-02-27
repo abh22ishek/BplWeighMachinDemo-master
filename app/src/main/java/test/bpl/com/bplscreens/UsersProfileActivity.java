@@ -690,7 +690,7 @@ public class UsersProfileActivity extends Activity {
 
 
         content.setAdapter(adapter);
-        header.setText(getResources().getString(R.string.selection));
+        header.setText(getResources().getString(R.string.select_option));
         content.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {

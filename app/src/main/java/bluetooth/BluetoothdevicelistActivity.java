@@ -143,7 +143,7 @@ public class BluetoothdevicelistActivity extends FragmentActivity{
         mSearch.setText(R.string.sear_);
         mScanning = true;
        pd = new ProgressDialog(BluetoothdevicelistActivity.this);
-    pd.setMessage("Searching for Bpl ioxy device...");
+    pd.setMessage("Searching for BPL iOxy device...");
     pd.setIndeterminate(true);
     pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
     pd.setCancelable(false);

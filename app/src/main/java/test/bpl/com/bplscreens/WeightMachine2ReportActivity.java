@@ -268,7 +268,7 @@ public class WeightMachine2ReportActivity extends FragmentActivity implements Bm
 
         iv_scroll.getChildAt(0).draw(canvas);
 
-        String name=userName+"_"+System.currentTimeMillis()+"_iWeigh" + ".PNG";
+        String name=userName+"_"+System.currentTimeMillis()+"_iWeigh" + ".png";
 
         try {
             FileOutputStream fos = new FileOutputStream(saveScreenshot(name,loginName,userName));

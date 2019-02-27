@@ -635,7 +635,7 @@ public class Utility {
 
 
     public static  ContentValues content_values_biolight_bp_monitor(String username,String user_name_ ,String systolicPressure, String diastolicPressure,
-                                                            String pulsePerMin, String testingTime, String typeBP, String comment) {
+                                                            String pulsePerMin, String testingTime, String typeBP, String comment,String macid,String sno) {
 
         ContentValues values = new ContentValues();
 
@@ -647,6 +647,8 @@ public class Utility {
         values.put(BplOximterdbHelper.TESTING_TIME_BIO_LIGHT,testingTime);
         values.put(BplOximterdbHelper.TYPE_BP,typeBP);
         values.put(BplOximterdbHelper.COMMENT,comment);
+        values.put(BplOximterdbHelper.BIOLIGHT_MACID,macid);
+        values.put(BplOximterdbHelper.BIOLIGHT_SERIAL_N0,sno);
 
         return values;
     }

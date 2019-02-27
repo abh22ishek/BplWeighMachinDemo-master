@@ -1137,7 +1137,7 @@ public class HomeScreenActivity extends FragmentActivity {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage(R.string.connect_device)
-                .setPositiveButton("Connect", new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.tap_connect, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         Intent intent = new Intent(context, BLEdevicelistActivity.class);
                         if (isBleseviceRegister) {

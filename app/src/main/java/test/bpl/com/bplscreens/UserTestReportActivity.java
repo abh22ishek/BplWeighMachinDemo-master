@@ -570,14 +570,14 @@ public class UserTestReportActivity extends FragmentActivity {
 
         iv_scroll.getChildAt(0).draw(canvas);
 
-        String name=userName+"_"+DateTime.getDateTimeinMinutes()+"_BPL_iOxy" + ".PNG";
+        String name=userName+"_"+DateTime.getDateTimeinMinutes()+"_BPL_iOxy" + ".png";
 
         try {
             FileOutputStream fos = new FileOutputStream(saveScreenshot(name,loginName,userName));
             bmp.compress(Bitmap.CompressFormat.PNG, 100, fos);
             if(Tag.equalsIgnoreCase("save")){
                 Toast.makeText(UserTestReportActivity.this, "BPL iOxy Report is saved successfully in a folder " +
-                        "Bpl Be Well", Toast.LENGTH_SHORT).show();
+                        Constants.BPL_FOLDER, Toast.LENGTH_SHORT).show();
             }
 
             fos.flush();

@@ -396,15 +396,16 @@ public class BioLightReportActivity extends Activity {
 
         iv_scroll.getChildAt(0).draw(canvas);
 
-        String name=userName+"_"+DateTime.getDateTimeinMinutes()+"_BPL_iPressure_BT02" + ".PNG";
+        String name=userName+"_"+DateTime.getDateTimeinMinutes()+"_BPL_iPressure_BT02" + ".png";
         mUri=name;
 
         try {
             FileOutputStream fos = new FileOutputStream(saveScreenshot(name,loginName,userName));
             bmp.compress(Bitmap.CompressFormat.PNG, 100, fos);
+
             if(tag.equalsIgnoreCase("save")){
                 Toast.makeText(BioLightReportActivity.this, "BP Report is saved successfully " +
-                        "in a Folder BPl BE Well", Toast.LENGTH_SHORT).show();
+                        "in a Folder "+Constants.BPL_FOLDER, Toast.LENGTH_SHORT).show();
             }
 
             fos.flush();
