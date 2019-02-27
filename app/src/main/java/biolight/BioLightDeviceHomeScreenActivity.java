@@ -209,7 +209,8 @@ public class BioLightDeviceHomeScreenActivity extends Activity {
                                     String.valueOf(sys),String.valueOf(dia)
                                     ,pulseRateText.getText().toString(),DateTime.getDateTime(),
                                     Utility.validateTypeBP(sysPressure.getText().toString(),diaPressure.getText().toString()),mComment,
-                                    Constants.SELECTED_MAC_ID_BT02,Constants.SELECTED_SERIAL_NO_ID_BT02));
+                                    Constants.SELECTED_MAC_ID_BT02,Constants.SELECTED_SERIAL_NO_ID_BT02,
+                                    Constants.SELECTED_USER_TYPE));
                 }else{
                     // Database records insertion with username
 
@@ -218,7 +219,7 @@ public class BioLightDeviceHomeScreenActivity extends Activity {
                                     sysPressure.getText().toString(),diaPressure.getText().toString()
                                     ,pulseRateText.getText().toString(),DateTime.getDateTime(),
                                    Utility.validateTypeBP(sysPressure.getText().toString(),diaPressure.getText().toString()),
-                                    mComment,Constants.SELECTED_MAC_ID_BT02,Constants.SELECTED_SERIAL_NO_ID_BT02));
+                                    mComment,Constants.SELECTED_MAC_ID_BT02,Constants.SELECTED_SERIAL_NO_ID_BT02,Constants.SELECTED_USER_TYPE));
 
                 }
 
@@ -229,7 +230,7 @@ public class BioLightDeviceHomeScreenActivity extends Activity {
 
                     database.insert(BplOximterdbHelper.TABLE_NAME_LAST_ACTIVITY_USERS,null,Utility.
                             lastActivityUsers(Constants.LOGGED_User_ID,
-                            mUserName,Constants.DEVICE_PARAMETER_IPRESSURE,DateTime.getCurrentDate()));
+                            mUserName,Constants.DEVICE_PARAMETER_IPRESSURE,DateTime.getCurrentDate(),Constants.SELECTED_USER_TYPE));
 
                 }catch (Exception e)
                 {

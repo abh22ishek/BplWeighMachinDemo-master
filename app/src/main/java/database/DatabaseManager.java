@@ -189,6 +189,42 @@ private final String TAG="DatabaseManager";
     }
 
 
+
+    // check if memeber name exists
+
+    public boolean IsMemeberNameExists(String useType, String memberName)
+    {
+        boolean b=false;
+        Cursor cursor;
+        if(useType.equalsIgnoreCase("Home")){
+
+         cursor =mDatabase.query(TABLE_NAME_HOME_PROFILE, null,
+                 NAME_HOME_USER+"=?", new String[]{memberName}, null, null, null);
+        }else{
+            cursor=mDatabase.query(TABLE_NAME_USER_PROFILE, null,
+                    USER_NAME_+"=?", new String[]{memberName}, null, null, null);
+        }
+
+
+
+        Logger.log(Level.INFO, "Get count of username exists=", "" +  cursor.getCount());
+
+        if(cursor.getCount()>=1)
+        {
+            b=true;
+            Logger.log(Level.INFO,TAG,"Member Name already exists inside the  table");
+            return b;
+
+
+        }
+        Logger.log(Level.INFO,TAG,"Member Name is new  inside table");
+        cursor.close();
+        return b;
+
+    }
+
+
+
     public boolean IsUsernameexists(String username)
     {
         boolean b=false;
@@ -518,14 +554,14 @@ private final String TAG="DatabaseManager";
 
 
     // retreive list of readings submitted by userId
-    public List<RecordsDetail> get_Records_list(String username_)
+    public List<RecordsDetail> get_Records_list(String username_,String useType)
     {
 
         List<RecordsDetail> recordsDetailList=new ArrayList<RecordsDetail>();
 
 
         Cursor cursor=mDatabase.query(TABLE_NAME_RECORDS, null,
-                USER_NAME_+"=?",new String[]{username_},null,null, TESTING_TIME+" "+"DESC");
+                USER_NAME_+"=?"+ " " + "AND" + " " + USE_TYPE + "=?",new String[]{username_,useType},null,null, TESTING_TIME+" "+"DESC");
 
 
 
@@ -552,10 +588,10 @@ private final String TAG="DatabaseManager";
     }
 
 
-    public void delete_records(String username,String testing_time)
+    public void delete_records(String username,String testing_time,String useTpe)
     {
         mDatabase.delete(TABLE_NAME_RECORDS, USER_NAME + "=?" + " " + "AND"
-                + " " + TESTING_TIME + "=?", new String[]{username, testing_time});
+                + " " + TESTING_TIME + "=?"+" "+"AND"+" "+USE_TYPE+"=?", new String[]{username, testing_time,useTpe});
     }
 
 
@@ -575,12 +611,13 @@ private final String TAG="DatabaseManager";
     }
 
 
-    public List<RecordsDetail> get_Records_Test_Report(String username,String testing_time)
+    public List<RecordsDetail> get_Records_Test_Report(String username,String testing_time,String useType)
     {
         List<RecordsDetail> recordsDetailList=new ArrayList<RecordsDetail>();
 
         Cursor cursor=mDatabase.query(TABLE_NAME_RECORDS, null,
-                USER_NAME + "=?" + " " + "AND" + " " + TESTING_TIME + "=?",new String[]{username,testing_time},null,null,null);
+                USER_NAME + "=?" + " " + "AND" + " " + TESTING_TIME + "=?"
+                +" "+"AND"+" "+USE_TYPE+ "=?",new String[]{username,testing_time,useType},null,null,null);
 
         Logger.log(Level.INFO, TAG,TABLE_NAME_RECORDS+ " records count=" + cursor.getCount());
 
@@ -619,14 +656,15 @@ private final String TAG="DatabaseManager";
 
     // retreive list of BP Records submitted by userId
 
-    public List<biolight.BPMeasurementModel> getBioLightBPRecords(String username_)
+    public List<biolight.BPMeasurementModel> getBioLightBPRecords(String username_,String BioLightUseTYpe)
     {
 
         List<BPMeasurementModel> recordsDetailList=new ArrayList<>();
 
 
         Cursor cursor=mDatabase.query(BplOximterdbHelper.TABLE_NAME_BIO_LIGHT, null,
-                USER_NAME_+"=?",new String[]{username_},null,null,
+                USER_NAME_+"=?" +" "+ "AND" + " " + BIOLIGHT_USE_TYPE + "=?",new String[]{username_,BioLightUseTYpe},
+                null,null,
                 BplOximterdbHelper.TESTING_TIME_BIO_LIGHT+" "+"DESC"+" "+"LIMIT 100");
 
 
@@ -643,6 +681,8 @@ private final String TAG="DatabaseManager";
             m.setMeasurementTime(cursor.getString(cursor.getColumnIndex(BplOximterdbHelper.TESTING_TIME_BIO_LIGHT)));
             m.setTypeBP(cursor.getString(cursor.getColumnIndex(BplOximterdbHelper.TYPE_BP)));
             m.setComments(cursor.getString(cursor.getColumnIndex(BplOximterdbHelper.COMMENT)));
+            m.setBT02macId(cursor.getString(cursor.getColumnIndex(BplOximterdbHelper.BIOLIGHT_MACID)));
+            m.setBT02SerialNo(cursor.getString(cursor.getColumnIndex(BplOximterdbHelper.BIOLIGHT_SERIAL_N0)));
             recordsDetailList.add(m);
 
         }
@@ -658,10 +698,12 @@ private final String TAG="DatabaseManager";
 
 
 
-    public void deleteBioLightBPRecords(String username,String testing_time)
+    public void deleteBioLightBPRecords(String username,
+                                        String testing_time,String useType)
     {
         mDatabase.delete(BplOximterdbHelper.TABLE_NAME_BIO_LIGHT, BplOximterdbHelper.USER_NAME + "=?" + " " + "AND"
-                + " " + BplOximterdbHelper.TESTING_TIME_BIO_LIGHT + "=?", new String[]{username, testing_time});
+                + " " + BplOximterdbHelper.TESTING_TIME_BIO_LIGHT + "=?"
+                +" "+"AND"+" "+BplOximterdbHelper.USE_TYPE+"=?", new String[]{username, testing_time,useType});
     }
 
 

@@ -13,6 +13,25 @@ public class BPMeasurementModel implements Serializable{
     private String comments;
     private String typeBP;
 
+    private String BT02macId;
+    private String BT02SerialNo;
+
+    public String getBT02macId() {
+        return BT02macId;
+    }
+
+    public void setBT02macId(String BT02macId) {
+        this.BT02macId = BT02macId;
+    }
+
+    public String getBT02SerialNo() {
+        return BT02SerialNo;
+    }
+
+    public void setBT02SerialNo(String BT02SerialNo) {
+        this.BT02SerialNo = BT02SerialNo;
+    }
+
     public String getTypeBP() {
         return typeBP;
     }

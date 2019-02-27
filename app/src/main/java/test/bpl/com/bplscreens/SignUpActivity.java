@@ -194,6 +194,8 @@ public class SignUpActivity extends Activity{
                     return;
                 }
 
+
+
                 if (email_id.getText().toString().trim().equals("")) {
                     Toast.makeText(SignUpActivity.this, "Please enter Email Id", Toast.LENGTH_SHORT).show();
                     return;
@@ -225,7 +227,14 @@ public class SignUpActivity extends Activity{
                     Toast.makeText(SignUpActivity.this,
                             "Please Accept the Terms And Condition",Toast.LENGTH_SHORT).show();
                     return;
-                } else {
+                }
+
+                else if(DatabaseManager.getInstance().IsUsernameexists(email_id.getText().toString())){
+                    Toast.makeText(SignUpActivity.this,
+                            "Email Id is already registered",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else {
 
                     DatabaseManager.getInstance().openDatabase();
                     if (!DatabaseManager.getInstance().IsUsernameexists(email_id.getText().toString().trim())) {
@@ -234,7 +243,7 @@ public class SignUpActivity extends Activity{
                                 addUsers(email_id.getText().toString().trim(), password.getText().toString().trim(),
                                         security_question1.getText().toString().toLowerCase().trim()
                                         , security_question2.getText().toString().toLowerCase().trim(),
-                                        security_question3.getText().toString().toLowerCase().trim()));
+                                        security_question3.getText().toString().trim()));
                         // database.close(); Don't close it directly!
 
                         StoreCredentials.
@@ -276,6 +285,8 @@ public class SignUpActivity extends Activity{
             return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
         }
     }
+
+
 
 
 

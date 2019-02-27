@@ -938,6 +938,6 @@ ALONG WITH PRIVACY POLICY WITH  AND HAVE UNDERSTOOD IT, AND AGREE THAT THEY WILL
     <string name="bt">BT02</string>
     <string name="tap_bt">Tap on BPL iPressure BT02</string>
     <string name="tap_connect">Tap on Connect</string>
-    <string name="logged_as">Logged As</string>
+    <string name="logged_as">Primary Email</string>
     <string name="bp_ip">Bpl iPressure</string>
 </resources>

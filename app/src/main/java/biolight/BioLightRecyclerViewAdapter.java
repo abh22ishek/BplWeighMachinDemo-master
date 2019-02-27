@@ -410,7 +410,7 @@ public class BioLightRecyclerViewAdapter extends  RecyclerView.Adapter<BioLightR
 
                             DatabaseManager.getInstance().openDatabase();
                             DatabaseManager.getInstance().deleteBioLightBPRecords(Constants.LOGGED_User_ID,
-                                   recordsDetailList.get(getAdapterPosition()).getMeasurementTime());
+                                   recordsDetailList.get(getAdapterPosition()).getMeasurementTime(),Constants.SELECTED_USER_TYPE);
 
                             recordsDetailList.remove(getAdapterPosition());
                             notifyItemRemoved(getAdapterPosition());

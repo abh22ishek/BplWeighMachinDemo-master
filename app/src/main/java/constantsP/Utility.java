@@ -111,7 +111,7 @@ public class Utility {
 
 
 
-    public static ContentValues lastActivityUsers(String admin_email, String user, String device_parameter, String date)
+    public static ContentValues lastActivityUsers(String admin_email, String user, String device_parameter, String date,String useType)
     {
 
         ContentValues values = new ContentValues();
@@ -122,6 +122,7 @@ public class Utility {
         values.put(BplOximterdbHelper.DEVICE_PARAMETER,device_parameter);
         values.put(BplOximterdbHelper.LAST_ACTIVITY_USERS, date);
 
+        values.put(BplOximterdbHelper.USE_TYPE, useType);
         return values;
 
 
@@ -635,7 +636,9 @@ public class Utility {
 
 
     public static  ContentValues content_values_biolight_bp_monitor(String username,String user_name_ ,String systolicPressure, String diastolicPressure,
-                                                            String pulsePerMin, String testingTime, String typeBP, String comment,String macid,String sno) {
+                                                            String pulsePerMin, String testingTime,
+                                                                    String typeBP, String comment,String macid,
+                                                                    String sno,String useType) {
 
         ContentValues values = new ContentValues();
 
@@ -649,6 +652,8 @@ public class Utility {
         values.put(BplOximterdbHelper.COMMENT,comment);
         values.put(BplOximterdbHelper.BIOLIGHT_MACID,macid);
         values.put(BplOximterdbHelper.BIOLIGHT_SERIAL_N0,sno);
+
+        values.put(BplOximterdbHelper.BIOLIGHT_USE_TYPE,useType);
 
         return values;
     }

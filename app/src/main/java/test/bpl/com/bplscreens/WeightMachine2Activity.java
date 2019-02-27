@@ -382,7 +382,7 @@ boolean isUpload;
 
                     database.insert(BplOximterdbHelper.TABLE_NAME_LAST_ACTIVITY_USERS,null, Utility.
                             lastActivityUsers(username,
-                                    mUserName,Constants.DEVICE_PARAMETER_IWEIGH,DateTime.getCurrentDate()));
+                                    mUserName,Constants.DEVICE_PARAMETER_IWEIGH,DateTime.getCurrentDate(),globalVariable.getUserType()));
 
                 }catch (Exception e)
                 {

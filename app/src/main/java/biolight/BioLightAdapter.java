@@ -19,12 +19,16 @@ public class BioLightAdapter extends BaseAdapter {
 
     BioLightListner bioLightListner;
 
+
+
     public BioLightAdapter(Activity c ,ArrayList<Peripheral> showDevice) {
         super();
         mContext = c;
         mLeDevices = showDevice;
         mInflator = mContext.getLayoutInflater();
     }
+
+
     public Peripheral getDevice(int position)   {
         return mLeDevices.get(position);
     }

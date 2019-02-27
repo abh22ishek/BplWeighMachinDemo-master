@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.bluetoothlibrary.entity.*;
+
 import java.util.List;
 
 import constantsP.Constants;
@@ -33,8 +35,6 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     List<RecordsDetail> recordsDetailList;
     Context context;
     Dialog dialog;
-
-
     String userName;
 
 
@@ -195,7 +195,9 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
                         Logger.log(Level.INFO, MyRecyclerViewAdapter.this.getClass().getSimpleName(),recordsDetailList.get(getAdapterPosition()).getTesting_time());
                         if(Constants.LOGGED_User_ID!="")
                         {
-                            DatabaseManager.getInstance().delete_records(Constants.LOGGED_User_ID, recordsDetailList.get(getAdapterPosition()).getTesting_time());
+                            DatabaseManager.getInstance().
+                                    delete_records(Constants.LOGGED_User_ID, recordsDetailList.
+                                            get(getAdapterPosition()).getTesting_time(), Constants.SELECTED_USER_TYPE);
                             recordsDetailList.remove(getAdapterPosition());
                             notifyItemRemoved(getAdapterPosition());
                             dialog.dismiss();
@@ -210,7 +212,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
                 if(Constants.LOGGED_User_ID!="")
                 {
                     Logger.log(Level.INFO, MyRecyclerViewAdapter.this.getClass().getSimpleName(),recordsDetailList.get(getAdapterPosition()).getTesting_time());
-                    mRecorddetaillist=DatabaseManager.getInstance().get_Records_Test_Report(Constants.LOGGED_User_ID,recordsDetailList.get(getAdapterPosition()).getTesting_time());
+                    mRecorddetaillist=DatabaseManager.getInstance().get_Records_Test_Report(Constants.LOGGED_User_ID,recordsDetailList.get(getAdapterPosition()).getTesting_time(),Constants.SELECTED_USER_TYPE);
                     context.startActivity(new Intent(context, UserTestReportActivity.class).
                                     putExtra(Constants.SPO2_CONSTANTS,mRecorddetaillist.get(0).getSpo2().toString()).
                             putExtra(Constants.PR_CONSTANTS,mRecorddetaillist.get(0).getHeartrate().toString()).
@@ -231,7 +233,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             {
                 List<RecordsDetail> mRecorddetaillist;
                 if(Constants.LOGGED_User_ID!="") {
-                    mRecorddetaillist=DatabaseManager.getInstance().get_Records_Test_Report(Constants.LOGGED_User_ID,recordsDetailList.get(getAdapterPosition()).getTesting_time());
+                    mRecorddetaillist=DatabaseManager.getInstance().get_Records_Test_Report(Constants.LOGGED_User_ID,recordsDetailList.get(getAdapterPosition()).getTesting_time(),Constants.SELECTED_USER_TYPE);
                     context.startActivity(new Intent(context, UserTestReportGraphActivity.class).
                             putExtra(Constants.SPO2_CONSTANTS, mRecorddetaillist.get(0).getSpo2()).
                             putExtra(Constants.PR_CONSTANTS, mRecorddetaillist.get(0).getHeartrate()).

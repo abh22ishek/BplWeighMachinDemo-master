@@ -69,7 +69,7 @@ public class UsersRecordActivity extends FragmentActivity {
         if(mUserName!=null)
         {
             DatabaseManager.getInstance().openDatabase();
-            mRecordDetailList=DatabaseManager.getInstance().get_Records_list(mUserName);
+            mRecordDetailList=DatabaseManager.getInstance().get_Records_list(mUserName,globalVariable.getUserType());
         }
 
         final ViewPager viewPager =  findViewById(R.id.pager);

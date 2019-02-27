@@ -109,6 +109,8 @@ public class BplOximterdbHelper extends SQLiteOpenHelper {
     public static final String BIOLIGHT_MACID="biolight_macid";
     public static final String BIOLIGHT_SERIAL_N0="biolight_Serial_no";
 
+    public static final String BIOLIGHT_USE_TYPE="use_type";
+
     public static final String CREATE_TABLE="CREATE TABLE " +TABLE_NAME+"("+KEY_ID+" integer primary key autoincrement"+","
             +USER_NAME+" "+"text"+","+PASSWORD+" "+"text"+","+SECURITY_Q_1+" "+"text"+","
     +SECURITY_Q_2+" "+"text"+","+USE_TYPE+" "+"text"+")";
@@ -151,7 +153,7 @@ public static final String CREATE_TABLE_HOME_PROFILE="CREATE TABLE " +TABLE_NAME
     public static final String CREATE_TABLE_RECORDS="CREATE TABLE " +TABLE_NAME_RECORDS+"("+KEY_ID+" integer primary key autoincrement"+","
             +USER_NAME+" "+"text"+","+USER_NAME_+" "+"text"+","+
             SPO2+" "+"text"+","+PULSE_RATE+" "+"text"+","+PERFUSION_INDEX+" "+"text"+","+TESTING_TIME+" "+"text"+","+
-            DURATION+" "+"text"+","+DEVICE_MACID+" "+"text"+")";
+            DURATION+" "+"text"+","+DEVICE_MACID+" "+"text"+ ","+USE_TYPE+" "+"text"+")";
 
 
     public static final String CREATE_TABLE_WEIGHT="CREATE TABLE " +TABLE_NAME_WEIGHT+"("+KEY_ID+" integer primary key autoincrement"+","
@@ -176,7 +178,8 @@ public static final String CREATE_TABLE_HOME_PROFILE="CREATE TABLE " +TABLE_NAME
             "integer primary key autoincrement"+","
             +USER_NAME+" "+"REAL"+","+USER_NAME_+" "+"text"+","+SYS+" "+"REAL"+","
             +DIA+" "+"REAL"+","+PUL+" "+"REAL"+","+TESTING_TIME+" "+"TEXT"+","+TYPE_BP+" "+"TEXT"+","+
-            COMMENT+" "+"TEXT"+","+ BIOLIGHT_MACID+" "+"TEXT"+","+ BIOLIGHT_SERIAL_N0+" "+"TEXT" +")";
+            COMMENT+" "+"TEXT"+","+ BIOLIGHT_MACID+" "+"TEXT"+","+ BIOLIGHT_SERIAL_N0+" "+"TEXT" +","+
+            BIOLIGHT_USE_TYPE+" "+"TEXT"+ ")";
 
 
 
@@ -186,7 +189,7 @@ public static final String CREATE_TABLE_HOME_PROFILE="CREATE TABLE " +TABLE_NAME
                     +USER_NAME+" "+"text"+","+
                     USER_NAME_+" "+"text"+","+
                     DEVICE_PARAMETER+" "+"text"+","+
-                    LAST_ACTIVITY_USERS+" "+"text"
+                    LAST_ACTIVITY_USERS+" "+"text"+","+USE_TYPE+" "+"text"
                     +")";
 
 

@@ -1051,7 +1051,9 @@ public class HomeScreenActivity extends FragmentActivity {
     }
 
 
-    public ContentValues insert_pulsemeter_readings(String admin_email, String user,String spo2, String pr, String pi, String testing_time, String duration,String mac_id) {
+    public ContentValues insert_pulsemeter_readings(String admin_email, String user,String spo2,
+                                                    String pr, String pi, String testing_time,
+                                                    String duration,String mac_id,String useType) {
         ContentValues values = new ContentValues();
 
 
@@ -1063,6 +1065,7 @@ public class HomeScreenActivity extends FragmentActivity {
         values.put(BplOximterdbHelper.TESTING_TIME, testing_time);
         values.put(BplOximterdbHelper.DURATION, duration);
         values.put(BplOximterdbHelper.DEVICE_MACID,mac_id);
+        values.put(BplOximterdbHelper.USE_TYPE,useType);
         return values;
 
 
@@ -1491,7 +1494,9 @@ public class HomeScreenActivity extends FragmentActivity {
                 if (globalVariable.getUsername() != null) {
                     mDatabase = DatabaseManager.getInstance().openDatabase();
                     mDatabase.insert(BplOximterdbHelper.TABLE_NAME_RECORDS, null,
-                            insert_pulsemeter_readings(globalVariable.getUsername(),mUserName, spo2_str, pr_str, pi_str,recording_time,String.valueOf(spo2_vector.size()),device_macid));
+                            insert_pulsemeter_readings(globalVariable.getUsername(),mUserName,
+                                    spo2_str, pr_str, pi_str,recording_time,
+                                    String.valueOf(spo2_vector.size()),device_macid,globalVariable.getUserType()));
                     Logger.log(Level.DEBUG,TAG,"**Recording Time**="+recording_time);
 
                     Logger.log(Level.DEBUG, TAG, "New Records are inserted into the database");
@@ -1500,7 +1505,7 @@ public class HomeScreenActivity extends FragmentActivity {
                     try{
 
                         mDatabase.insert(BplOximterdbHelper.TABLE_NAME_LAST_ACTIVITY_USERS,null,Utility.lastActivityUsers(globalVariable.getUsername(),
-                                mUserName,Constants.DEVICE_PARAMETER_IOXY,DateTime.getCurrentDate()));
+                                mUserName,Constants.DEVICE_PARAMETER_IOXY,DateTime.getCurrentDate(),globalVariable.getUserType()));
 
                     }catch (Exception e)
                     {

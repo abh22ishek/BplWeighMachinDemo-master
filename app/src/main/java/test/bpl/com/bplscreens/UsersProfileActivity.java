@@ -297,6 +297,10 @@ public class UsersProfileActivity extends Activity {
 
                             //----------
 
+
+
+
+
                             SQLiteDatabase database = DatabaseManager.getInstance().openDatabase();
                             database.insert(BplOximterdbHelper.TABLE_NAME_PROFILE, null, addContentProfiles(globalVariable.getUsername(), name.getText().toString(),
                                     age.getText().toString())

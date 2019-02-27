@@ -58,7 +58,7 @@
 
                     android:maxLines="1"
                     android:imeOptions="actionNext"
-                    android:inputType="text|textPersonName"
+                    android:inputType="textEmailAddress"
                     android:background="@android:color/transparent"
                     android:scrollHorizontally="true"
                     android:textColor="@color/black"

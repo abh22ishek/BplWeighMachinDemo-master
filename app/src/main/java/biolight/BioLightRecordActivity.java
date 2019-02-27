@@ -139,7 +139,7 @@ public class BioLightRecordActivity extends Activity implements BioLightListner{
 
         if(mUserName!=null)
         {
-            mRecordDetailList= DatabaseManager.getInstance().getBioLightBPRecords(mUserName);
+            mRecordDetailList= DatabaseManager.getInstance().getBioLightBPRecords(mUserName,globalVariable.getUserType());
 
         }
 

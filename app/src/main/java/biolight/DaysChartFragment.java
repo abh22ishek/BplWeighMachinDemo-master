@@ -32,6 +32,7 @@ import java.text.*;
 import java.util.*;
 
 import constantsP.*;
+import database.*;
 import logger.*;
 import test.bpl.com.bplscreens.*;
 import test.bpl.com.bplscreens.R;
@@ -75,6 +76,8 @@ public class DaysChartFragment extends Fragment{
     }
 
     String globalUserName;
+    List<BPMeasurementModel> mRecordDetailList;
+    String mMacId,mSerialNo;
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -93,6 +96,8 @@ public class DaysChartFragment extends Fragment{
         }
 
 
+
+
         if(getArguments().getString("global_user")!=null){
             globalUserName=getArguments().getString("global_user");
         }
@@ -108,6 +113,18 @@ public class DaysChartFragment extends Fragment{
 
         if(getArguments().getString(Constants.DATE)!=null){
             selectedDate=getArguments().getString(Constants.DATE);
+        }
+
+
+        if(userName!=null)
+        {
+            mRecordDetailList= DatabaseManager.getInstance().getBioLightBPRecords(userName,Constants.SELECTED_USER_TYPE);
+            if(mRecordDetailList.size()>0){
+                mMacId=mRecordDetailList.get(0).getBT02macId();
+                mSerialNo=mRecordDetailList.get(0).getBT02SerialNo();
+
+            }
+
         }
 
 
@@ -489,8 +506,8 @@ public class DaysChartFragment extends Fragment{
             contentStream.beginText();
             contentStream.setFont(font, 9);
             contentStream.newLineAtOffset(120f, marginUpperLine - 27);
-            contentStream.showText("Mac Id -" + Constants.SELECTED_MAC_ID_BT02+"  "+
-                    "Serial No. - "+Constants.SELECTED_SERIAL_NO_ID_BT02+"            "+"App Version -"+BuildConfig.VERSION_NAME);
+            contentStream.showText("Mac Id -" +mMacId+"  "+
+                    "Serial No. - "+mSerialNo+"            "+"App Version -"+BuildConfig.VERSION_NAME);
             contentStream.endText();
 
 
@@ -888,11 +905,7 @@ public class DaysChartFragment extends Fragment{
 
     private void drawTables2( PDPageContentStream contentStream ,List<BPMeasurementModel> mRecords_) {
 
-
-
-
-
-            float unit_per_cm = 28.34f;
+        float unit_per_cm = 28.34f;
             float graph_width = unit_per_cm * 9.7f;
             float graph_height = unit_per_cm * 16.8f;
 
@@ -905,16 +918,16 @@ public class DaysChartFragment extends Fragment{
 
             float xoffset=1.9f * unit_per_cm;
             float yoffset =1.4f *unit_per_cm;
+
+
         try {
             contentStream.addRect(startX, startY, graph_width, graph_height);
             contentStream.setStrokingColor(AWTColor.BLACK);
             contentStream.setLineWidth(1.4f);
             contentStream.stroke();
-
-
-
-
             contentStream.setStrokingColor(AWTColor.BLACK);
+
+
             for(int i=30;i>=0 ;i--){
 
                 if(mRecords_.size()>i)
@@ -1100,12 +1113,6 @@ public class DaysChartFragment extends Fragment{
         PDFont font = PDType1Font.HELVETICA;
         PDFont fontSeries = PDType1Font.HELVETICA_BOLD;
         try {
-          /*  contentStream.addRect(startX, startY, graph_width, graph_height);
-            contentStream.setStrokingColor(AWTColor.BLACK);
-            contentStream.setLineWidth(1.4f);
-            contentStream.stroke();*/
-
-
 
             int px=0;
             contentStream.setLineWidth(0.5f);

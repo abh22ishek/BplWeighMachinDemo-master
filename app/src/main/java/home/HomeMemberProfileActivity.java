@@ -270,7 +270,18 @@ public class HomeMemberProfileActivity extends FragmentActivity {
                     if(!validateFields())
                         return;
 
+                    if(DatabaseManager.getInstance().
+                            IsMemeberNameExists(globalVariable.getUserType(),member_name.getText().toString().trim())){
+                        member_name.setError("Member Name already exists. Please select new name");
+                        return;
+                    }
+
+
+
+
+
                     if (globalVariable.getUsername() != null) {
+
 
 
                         SQLiteDatabase database = DatabaseManager.getInstance().openDatabase();
@@ -300,7 +311,7 @@ public class HomeMemberProfileActivity extends FragmentActivity {
 
 
                 if (TAG_USER == "Edit") {
-                    member_name.setEnabled(true);
+                    member_name.setEnabled(false);
                     age.setEnabled(true);
                     height.setEnabled(true);
                    // weight.setEnabled(true);
@@ -319,6 +330,14 @@ public class HomeMemberProfileActivity extends FragmentActivity {
 
                         if(!validateFields())
                             return;
+
+
+/*
+                        if(DatabaseManager.getInstance().
+                                IsMemeberNameExists(globalVariable.getUserType(),member_name.getText().toString().trim())){
+                            member_name.setError("Member Name already exists. Please select new name");
+                            return;
+                        }*/
 
 
                         if (globalVariable.getUsername() != null) {

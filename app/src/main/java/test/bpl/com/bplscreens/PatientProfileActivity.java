@@ -286,6 +286,13 @@ public class PatientProfileActivity extends Activity {
 
                                  database = DatabaseManager.getInstance().openDatabase();
 
+
+                              /*  if(DatabaseManager.getInstance().
+                                        IsMemeberNameExists(globalVariable.getUserType(),userName_.getText().toString())){
+                                    userName_.setError("User Name already exists. Please select new name");
+                                    return;
+                                }
+*/
                                 try{
                                     database.update(BplOximterdbHelper.TABLE_NAME_USER_PROFILE,
                                             addContentProfiles(globalVariable.getUsername(), userName_.getText().toString(),
@@ -328,11 +335,18 @@ public class PatientProfileActivity extends Activity {
             public void onClick(View view) {
 
 
-                if(validate_profile() && isUserExists)
+                if(validate_profile())
                 {
                     if(validateFields())
                     {
                          database = DatabaseManager.getInstance().openDatabase();
+
+
+                        if(DatabaseManager.getInstance().
+                                IsMemeberNameExists(globalVariable.getUserType(),userName_.getText().toString())){
+                            userName_.setError("User Name already exists. Please select new name");
+                            return;
+                        }
 
                         try{
                             database.insert(BplOximterdbHelper.TABLE_NAME_USER_PROFILE, null,
@@ -631,6 +645,7 @@ public class PatientProfileActivity extends Activity {
 
         if(userPhone.getText().toString().trim().length()<10){
             userPhone.setError("Phone not valid");
+            return b;
         }
 
         if(Integer.parseInt(height.getText().toString())>50 && Integer.parseInt(height.getText().toString())<250)
