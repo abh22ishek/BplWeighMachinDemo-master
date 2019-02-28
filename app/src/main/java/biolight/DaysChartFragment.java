@@ -482,7 +482,7 @@ public class DaysChartFragment extends Fragment{
 
             if(Constants.SELECTED_USER_TYPE.equalsIgnoreCase("Clinic")){
                 contentStream.showText("User Name : " + userName + "   " + "Age : " + age + "   " + "Gender : " +
-                        gender+ "  " + "Clinic Name : " + "Bpl Med Tech");
+                        gender+ "  " + "Clinic Name : " + "          ");
             }else{
                 contentStream.showText("User Name : " + userName + "   " + "Age : " + age + "   " + "Gender : " +
                         gender+ "  " );
@@ -1000,13 +1000,6 @@ public class DaysChartFragment extends Fragment{
 
             }
 
-
-            contentStream.setNonStrokingColor(0, 0, 0); //black text
-            contentStream.beginText();
-            contentStream.setFont(fontH, 9);
-            contentStream.newLineAtOffset(startX+2, graph_height/2-10);
-            contentStream.showText("CLINICAL NOTES  ...");
-            contentStream.endText();
 
             contentStream.setNonStrokingColor(0, 0, 0); //black text
             contentStream.beginText();

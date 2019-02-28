@@ -157,7 +157,7 @@ BPL Be Well app is designed and developed by BPL Medical Technologies Pvt. Ltd f
 
     </string-array>
 
-    <string name="connect_device">Switch On BPL iOxy device </string>
+    <string name="connect_device">Switch On BPL iOxy device. Please Tap on Connect </string>
     <string name="disconnect_device">Do you want to exit BPL iOxy measurement ?</string>
     <string name="search">Search</string>
     <string name="search_by_name">Search By User Name</string>
@@ -937,7 +937,8 @@ ALONG WITH PRIVACY POLICY WITH  AND HAVE UNDERSTOOD IT, AND AGREE THAT THEY WILL
     <string name="bpl_ip">BPLBeWell iPressure</string>
     <string name="bt">BT02</string>
     <string name="tap_bt">Tap on BPL iPressure BT02</string>
-    <string name="tap_connect">Tap on Connect</string>
+    <string name="tap_connect">Connect</string>
     <string name="logged_as">Primary Email</string>
-    <string name="bp_ip">Bpl iPressure</string>
+    <string name="bp_ip">BPL iPressure</string>
+    <string name="clinic_email">Clinic Email</string>
 </resources>

@@ -121,7 +121,7 @@
                     android:gravity="start"
                     android:textSize="16sp"
                     android:textColor="@color/black"
-                    android:text="@string/email"/>
+                    android:text="@string/clinic_email"/>
 
                 <EditText
                     android:id="@+id/userEmail"

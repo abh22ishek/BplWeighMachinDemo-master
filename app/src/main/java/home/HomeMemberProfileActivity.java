@@ -60,6 +60,7 @@ public class HomeMemberProfileActivity extends FragmentActivity {
     String mMemeberName;
     List<UserModel> userModelList_home;
 
+    boolean isBackButtonPressed;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,11 +111,16 @@ public class HomeMemberProfileActivity extends FragmentActivity {
             userEmail.setEnabled(false);
         }
 
-        userModelList_home=new ArrayList<>();
+        userModelList_home=DatabaseManager.getInstance().
+                getAllMemberProfilecontent(globalVariable.getUsername(),Constants.USER_NAME);
 
 
-       /* userModelList_home.addAll( DatabaseManager.getInstance().
-                getAllMemberProfilecontent(globalVariable.getUsername(),Constants.USER_NAME));*/
+        if(userModelList_home.size()>=1){
+            isBackButtonPressed=true;
+        }
+
+
+
 
         headertitle.setText(R.string.add_fam_mem);
 
@@ -254,11 +260,19 @@ public class HomeMemberProfileActivity extends FragmentActivity {
         @Override
         public void onClick(View v) {
 
-            if (v == mBackkey) {
-                if (headertitle.getText().toString().equalsIgnoreCase(getString(R.string.add_fam_mem)))
-                    Toast.makeText(HomeMemberProfileActivity.this, "Please add Any Family Member", Toast.LENGTH_SHORT).show();
-                else
+          if (v == mBackkey) {
+                if (headertitle.getText().toString().equalsIgnoreCase(getString(R.string.add_fam_mem))) {
+                    if (isBackButtonPressed) {
+                        finish();
+
+                    }else{
+                        Toast.makeText(HomeMemberProfileActivity.this, "Please add Any Family Member", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else{
                     finish();
+                }
+
 
             } else if (v == img_photo) {
 
@@ -277,12 +291,7 @@ public class HomeMemberProfileActivity extends FragmentActivity {
                     }
 
 
-
-
-
                     if (globalVariable.getUsername() != null) {
-
-
 
                         SQLiteDatabase database = DatabaseManager.getInstance().openDatabase();
                         database.insert(BplOximterdbHelper.TABLE_NAME_HOME_PROFILE,
@@ -490,9 +499,6 @@ public class HomeMemberProfileActivity extends FragmentActivity {
         if (requestCode == Constants.SELECT_PICTURE && resultCode == RESULT_OK && null != data) {
             Uri uri = data.getData();
 
-
-
-
             Glide
                     .with(HomeMemberProfileActivity.this)
                     .load(uri)
@@ -516,11 +522,6 @@ public class HomeMemberProfileActivity extends FragmentActivity {
 
             hide_soft_keypad(HomeMemberProfileActivity.this);
             profile_image=uri.toString();
-
-
-
-
-
 
         }
         else if(requestCode==Constants.CAMERA_CODE && resultCode==RESULT_OK)

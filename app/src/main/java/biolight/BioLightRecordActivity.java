@@ -319,7 +319,7 @@ public class BioLightRecordActivity extends Activity implements BioLightListner{
                 sb.append("\n\n");
 
             }
-            createUsersTextFile(mUserName+
+            createUsersTextFile(mUserName+"-"+
                     DateTime.getDateTimeinMinutes()+"_BPL_iPressure_BT02"+".txt", globalVariable.getUsername(),sb);
             currentTime=DateTime.getDateTimeinMinutes();
             onCreateDialog();
