@@ -395,7 +395,6 @@ public class UsersProfileActivity extends Activity {
 
         if(Integer.parseInt(height.getText().toString())>50 && Integer.parseInt(height.getText().toString())<250)
         {
-
             b=true;
         }else{
             Toast.makeText(UsersProfileActivity.this,"Please enter a valid height",Toast.LENGTH_SHORT).show();
@@ -405,7 +404,6 @@ public class UsersProfileActivity extends Activity {
 
 
         if(Integer.parseInt(weight.getText().toString())>10 && Integer.parseInt(weight.getText().toString())<200)
-
         {
             b=true;
         }else
@@ -469,9 +467,6 @@ public class UsersProfileActivity extends Activity {
         if (requestCode == Constants.SELECT_PICTURE && resultCode == RESULT_OK && null != data) {
             Uri uri = data.getData();
 
-
-
-
             Glide
                     .with(UsersProfileActivity.this)
                     .load(uri)
@@ -495,11 +490,6 @@ public class UsersProfileActivity extends Activity {
 
             hide_soft_keypad(UsersProfileActivity.this);
             profile_image=uri.toString();
-
-
-
-
-
 
         }
         else if(requestCode==Constants.CAMERA_CODE && resultCode==RESULT_OK)
@@ -708,7 +698,6 @@ public class UsersProfileActivity extends Activity {
                 {
 
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-
                         ActivityCompat.requestPermissions(UsersProfileActivity.this,
                                 new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE},
                                 Constants.CAMERA_REQUEST_CODE);

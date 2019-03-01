@@ -172,23 +172,34 @@ public class BioLightRecordActivity extends Activity implements BioLightListner{
         }
 
 
-    private static void  createUsersTextFile(String fileName, String loginFileName, StringBuilder data) {
+        File listOfUsersFile;
+    private  void  createUsersTextFile(String fileName, String userName,String loggedinEmailDir, StringBuilder data) {
         String fileNameDir =Constants.BPL_FOLDER;
 
         File file = new File(Environment.getExternalStorageDirectory(), fileNameDir);
+
+
         if (!file.exists()) {
             file.mkdir();
 
         }
 
-        File loginFile = new File(file, loginFileName);
+        File loginFile=new File(file,loggedinEmailDir);
 
-        if (!loginFile.exists()) {
+        if(!loginFile.exists()){
+
             loginFile.mkdir();
         }
 
+        File userDir=new File(loginFile,userName);
 
-        File listOfUsersFile = new File(loginFile, fileName);
+        if(!userDir.exists()){
+            userDir.mkdir();
+        }
+
+
+        listOfUsersFile=new File(userDir,fileName);
+
 
 
         try {
@@ -230,9 +241,10 @@ public class BioLightRecordActivity extends Activity implements BioLightListner{
                         // PDF ViewerDaysCha
 
                         File   mFile = new File(Environment.getExternalStorageDirectory() +
-                                "/"+Constants.BPL_FOLDER+"/"+globalVariable.getUsername()+"/" +mUserName+"_bp_report_"+currentTime+".txt");
+                                "/"+Constants.BPL_FOLDER+"/"+globalVariable.getUsername()+"/"+mUserName+"/"+mUserName+"_"+ currentTime+"_BPL_iPressure_BT02"+".txt");
 
 
+                        Logger.log(Level.DEBUG,TAG,"get path="+mFile.getAbsolutePath());
                         Intent target = new Intent(Intent.ACTION_VIEW);
 
                         target.setDataAndType(Uri.fromFile(mFile), "text/plain");
@@ -259,7 +271,7 @@ public class BioLightRecordActivity extends Activity implements BioLightListner{
 
 
                      File   mFile = new File(Environment.getExternalStorageDirectory() +
-                                "/"+Constants.BPL_FOLDER+"/"+globalVariable.getUsername()+"/" +mUserName+"_bp_report_"+currentTime+".txt");
+                                "/"+Constants.BPL_FOLDER+"/"+globalVariable.getUsername()+"/" +mUserName+"/"+mUserName+"_"+ currentTime+"_BPL_iPressure_BT02"+".txt");
 
                      Logger.log(Level.DEBUG,TAG,"-File Path-"+mFile.toString()+"--"+mFile.getAbsolutePath());
 
@@ -319,9 +331,11 @@ public class BioLightRecordActivity extends Activity implements BioLightListner{
                 sb.append("\n\n");
 
             }
-            createUsersTextFile(mUserName+"-"+
-                    DateTime.getDateTimeinMinutes()+"_BPL_iPressure_BT02"+".txt", globalVariable.getUsername(),sb);
+
             currentTime=DateTime.getDateTimeinMinutes();
+            String mFileName=mUserName+"_"+ currentTime+"_BPL_iPressure_BT02"+".txt";
+            createUsersTextFile(mFileName,mUserName, globalVariable.getUsername(),sb);
+
             onCreateDialog();
 
         }catch (Exception e)

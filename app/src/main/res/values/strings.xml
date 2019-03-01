@@ -157,7 +157,7 @@ BPL Be Well app is designed and developed by BPL Medical Technologies Pvt. Ltd f
 
     </string-array>
 
-    <string name="connect_device">Switch On BPL iOxy device. Please Tap on Connect </string>
+    <string name="connect_device">Switch On BPL iOxy device.Tap on Connect </string>
     <string name="disconnect_device">Do you want to exit BPL iOxy measurement ?</string>
     <string name="search">Search</string>
     <string name="search_by_name">Search By User Name</string>
@@ -446,7 +446,7 @@ Body posture\n\n
     <string name="body_age">Body Age</string>
     <string name="metabolism">Metabolism</string>
     <string name="bone_mass">Bone \n Mass</string>
-    <string name="muscle_mass">Muscle Mass</string>r
+    <string name="muscle_mass">Muscle Mass</string>
     <string name="lbm">LBM</string>
     <string name="obesity">Obesity</string>
     <string name="pulse_min_vs_time">Pulse/min Vs Time</string>

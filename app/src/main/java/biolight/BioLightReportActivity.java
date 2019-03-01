@@ -448,7 +448,6 @@ public class BioLightReportActivity extends Activity {
 
          screenShotFile=new File(userDir,fileName);
 
-      //  mSavePath=screenShotFile.getAbsolutePath();
 
         try {
             FileWriter filewriter=new FileWriter(screenShotFile,false);

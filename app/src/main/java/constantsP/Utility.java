@@ -86,7 +86,7 @@ public class Utility {
                 file.mkdir();
             }
 
-        String timeStamp = new SimpleDateFormat("yyyy_MM_dd_HHmmss").format(new Date());
+        @SuppressLint("SimpleDateFormat") String timeStamp = new SimpleDateFormat("yyyy_MM_dd_HHmmss").format(new Date());
         File mediaFile;
         mediaFile = new File(file.getPath() + File.separator +
                     "IMG_" + timeStamp + ".jpg");

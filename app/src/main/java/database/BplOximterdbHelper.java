@@ -261,6 +261,7 @@ public static final String CREATE_TABLE_HOME_PROFILE="CREATE TABLE " +TABLE_NAME
     @Override
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         super.onDowngrade(db, oldVersion, newVersion);
-        Logger.log(Level.DEBUG,TAG,"On Downgrade () is called with new Version="+newVersion +"and Old version="+oldVersion);
+        Logger.log(Level.DEBUG,TAG,"On Downgrade () " +
+                "is called with new Version="+newVersion +"and Old version="+oldVersion);
     }
 }

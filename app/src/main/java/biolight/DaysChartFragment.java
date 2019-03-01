@@ -970,7 +970,7 @@ public class DaysChartFragment extends Fragment{
                     contentStream.setFont(font, 7);
                     contentStream.newLineAtOffset(xoffset+4*unit_per_cm, yoffset);
 
-                    contentStream.showText( Utility.validateTypeBP(
+                    contentStream.showText( validateTypeBP(
                             String.valueOf(mRecords_.get(i).getSysPressure()),String.valueOf(
                                     mRecords_.get(i).getDiabolicPressure())));
 
@@ -1302,5 +1302,227 @@ public class DaysChartFragment extends Fragment{
             task.execute(new String[0]);
         }
     }
+
+
+
+
+    public  String validateTypeBP(String systolicX,String diabolicX)
+    {
+
+        String typeBP="";
+        int systolic;
+        int diabolic;
+        if(systolicX.contains("."))
+        {
+            systolic=Integer.parseInt(systolicX.substring(0, systolicX.length() - 2));
+        }else{
+            systolic=Integer.parseInt(systolicX);
+        }
+
+
+
+        if(diabolicX.contains(".")){
+            diabolic=Integer.parseInt(diabolicX.substring(0, diabolicX.length() - 2));
+
+        }else{
+            diabolic=Integer.parseInt(diabolicX);
+        }
+        if(systolic<90)
+        {
+            if(diabolic<=60)
+            {
+                typeBP=Constants.LOW_;
+            }else if(diabolic>60 && diabolic <80)
+            {
+                typeBP=Constants.DESIRABLE;
+            }else if(diabolic >=80 && diabolic <85)
+            {
+                typeBP=Constants.NORMAL;
+            }
+            else if(diabolic >=85 && diabolic <90)
+            {
+                typeBP=Constants.PRE_HYPERTENSION;
+            }
+            else if(diabolic >=90 && diabolic <100)
+            {
+                typeBP=Constants.MILD_HYPERTENSION;
+            }
+
+            else if(diabolic >=100 && diabolic <110)
+            {
+                typeBP=Constants.MODERATE_HYPERTENSION;
+            }
+            else{
+                typeBP=Constants.SEVERE_HYPERTENSION;
+            }
+        }
+        else if(systolic <=120 && systolic>=90)
+        {
+            typeBP= Constants.DESIRABLE;
+
+            if(diabolic<=60)
+            {
+                typeBP=Constants.DESIRABLE;
+            }else if(diabolic>60 && diabolic <80)
+            {
+                typeBP=Constants.DESIRABLE;
+            }else if(diabolic >=80 && diabolic <85)
+            {
+                typeBP=Constants.NORMAL;
+            }
+
+            else if(diabolic >=85 && diabolic <90)
+            {
+                typeBP=Constants.PRE_HYPERTENSION;
+            }
+
+            else if(diabolic >=90 && diabolic <100)
+            {
+                typeBP=Constants.PRE_HYPERTENSION;
+            }
+
+            else if(diabolic >=100 && diabolic <110)
+            {
+                typeBP=Constants.MODERATE_HYPERTENSION;
+            }
+            else{
+                typeBP=Constants.SEVERE_HYPERTENSION;
+            }
+        }else if(systolic >120 && systolic <=129)
+        {
+            typeBP= Constants.NORMAL;
+            if(diabolic<=60)
+            {
+                typeBP=Constants.NORMAL;
+            }else if(diabolic>60 && diabolic <80)
+            {
+                typeBP=Constants.NORMAL;
+            }else if(diabolic >=80 && diabolic <85)
+            {
+                typeBP=Constants.NORMAL;
+            }
+
+            else if(diabolic >=85 && diabolic <90)
+            {
+                typeBP=Constants.PRE_HYPERTENSION;
+            }
+
+            else if(diabolic >=90 && diabolic <100)
+            {
+                typeBP=Constants.MILD_HYPERTENSION;
+            }
+
+            else if(diabolic >=100 && diabolic <110)
+            {
+                typeBP=Constants.MODERATE_HYPERTENSION;
+            }
+            else{
+                typeBP=Constants.SEVERE_HYPERTENSION;
+            }
+
+        }else if(systolic >=130 && systolic <=139)
+        {
+            typeBP= Constants.PRE_HYPERTENSION;
+            if(diabolic<=60)
+            {
+                typeBP=Constants.PRE_HYPERTENSION;
+            }else if(diabolic>60 && diabolic <80)
+            {
+                typeBP=Constants.PRE_HYPERTENSION;
+            }else if(diabolic >=80 && diabolic <85)
+            {
+                typeBP=Constants.PRE_HYPERTENSION;
+            }
+
+            else if(diabolic >=85 && diabolic <90)
+            {
+                typeBP=Constants.PRE_HYPERTENSION;
+            }
+
+            else if(diabolic >=90 && diabolic <100)
+            {
+                typeBP=Constants.MILD_HYPERTENSION;
+            }
+
+            else if(diabolic >=100 && diabolic <110)
+            {
+                typeBP=Constants.MODERATE_HYPERTENSION;
+            }
+            else{
+                typeBP=Constants.SEVERE_HYPERTENSION;
+            }
+        }else if(systolic >=140 && systolic <=159)
+        {
+            typeBP= Constants.MILD_HYPERTENSION;
+
+            if(diabolic<=60)
+            {
+                typeBP=Constants.MILD_HYPERTENSION;
+            }else if(diabolic>60 && diabolic <80)
+            {
+                typeBP=Constants.MILD_HYPERTENSION;
+            }else if(diabolic >=80 && diabolic <85)
+            {
+                typeBP=Constants.MILD_HYPERTENSION;
+            }
+
+            else if(diabolic >=85 && diabolic <90)
+            {
+                typeBP=Constants.MILD_HYPERTENSION;
+            }
+
+            else if(diabolic >=90 && diabolic <100)
+            {
+                typeBP=Constants.MILD_HYPERTENSION;
+            }
+
+            else if(diabolic >=100 && diabolic <110)
+            {
+                typeBP=Constants.MODERATE_HYPERTENSION;
+            }
+            else{
+                typeBP=Constants.SEVERE_HYPERTENSION;
+            }
+        }else if(systolic >=160 && systolic <=179)
+        {
+            typeBP= Constants.HYPERTENSION;
+            if(diabolic<=60)
+            {
+                typeBP=Constants.MODERATE_HYPERTENSION;
+            }else if(diabolic>60 && diabolic <80)
+            {
+                typeBP=Constants.MODERATE_HYPERTENSION;
+            }else if(diabolic >=80 && diabolic <85)
+            {
+                typeBP=Constants.MODERATE_HYPERTENSION;
+            }
+
+            else if(diabolic >=85 && diabolic <90)
+            {
+                typeBP=Constants.MODERATE_HYPERTENSION;
+            }
+
+            else if(diabolic >=90 && diabolic <100)
+            {
+                typeBP=Constants.MODERATE_HYPERTENSION;
+            }
+
+            else if(diabolic >=100 && diabolic <110)
+            {
+                typeBP=Constants.MODERATE_HYPERTENSION;
+            }
+            else{
+                typeBP=Constants.SEVERE_HYPERTENSION;
+            }
+        }else if(systolic >=180)
+        {
+
+            typeBP= Constants.SEVERE_HYPERTENSION;
+
+        }
+
+        return  typeBP;
+    }
+
 
 }
