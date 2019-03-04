@@ -460,6 +460,7 @@ public class PatientProfileActivity extends Activity {
                     Intent intent;
                     if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
                         intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                        intent.addCategory(Intent.CATEGORY_OPENABLE);
                         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                         intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
                     }else{
@@ -636,11 +637,11 @@ public class PatientProfileActivity extends Activity {
         boolean b=false;
 
 
-        if(!isValidEmail(userEmail.getText().toString()))
+      /*  if(!isValidEmail(userEmail.getText().toString()))
         {
             userEmail.setError("Email Id not valid");
             return b;
-        }
+        }*/
 
 
         if(userPhone.getText().toString().trim().length()<10){
