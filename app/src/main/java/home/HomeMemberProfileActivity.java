@@ -498,6 +498,15 @@ public class HomeMemberProfileActivity extends FragmentActivity {
 
         if (requestCode == Constants.SELECT_PICTURE && resultCode == RESULT_OK && null != data) {
             Uri uri = data.getData();
+            final int takeFlags = data.getFlags() & (Intent.FLAG_GRANT_READ_URI_PERMISSION |
+                    Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+
+            try {
+                HomeMemberProfileActivity.this.getContentResolver().takePersistableUriPermission(uri, takeFlags);
+            }
+            catch (SecurityException e){
+                e.printStackTrace();
+            }
 
             Glide
                     .with(HomeMemberProfileActivity.this)
@@ -747,6 +756,7 @@ public class HomeMemberProfileActivity extends FragmentActivity {
                         intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
                         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                         intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+                        intent.addCategory(Intent.CATEGORY_OPENABLE);
                     }else{
                         intent = new Intent(Intent.ACTION_GET_CONTENT);
                     }

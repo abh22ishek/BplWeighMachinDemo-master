@@ -138,6 +138,7 @@
                 android:textStyle="bold"
                 android:layout_height="wrap_content"
 
+                android:visibility="gone"
                 android:text="@string/weight" />
 
 

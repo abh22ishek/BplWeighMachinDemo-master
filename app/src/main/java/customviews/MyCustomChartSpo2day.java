@@ -32,7 +32,7 @@ public class MyCustomChartSpo2day extends View {
 
     int no_labels_x_axis=0;
 
-
+    String str_pax1,str_pax2,str_pax3;
 
 
     public MyCustomChartSpo2day(Context context) {
@@ -86,13 +86,34 @@ public class MyCustomChartSpo2day extends View {
         String time[]=day_time.split(" ");
         String time_str=time[1];// hh:mm:ss
 
-        int tx= Integer.parseInt(time_str.replace(":", ""));
+        String pxTime=time_str.replace(":","");
+
+
+        int tx= Integer.parseInt(pxTime);
+
+
+
         int max_x_axis=Integer.parseInt(UserTestReportGraphActivity.total_time);
 
-        String str_pax1=String.valueOf(tx).substring(0,2);
-        String str_pax2=String.valueOf(tx).substring(2,4);
-        String str_pax3=String.valueOf(tx).substring(4,6);
+        if(pxTime.charAt(0)=='0' && pxTime.charAt(1)!='0')
+        {
+            str_pax1=String.valueOf(tx).substring(0,1);
+            str_pax2=String.valueOf(tx).substring(1,3);
+            str_pax3=String.valueOf(tx).substring(3,5);
 
+        }else if(pxTime.charAt(0)=='0' && pxTime.charAt(1)=='0'){
+
+            str_pax1="00";
+            str_pax2=String.valueOf(tx).substring(0,2);
+            str_pax3=String.valueOf(tx).substring(2,4);
+        }
+
+        else{
+            str_pax1=String.valueOf(tx).substring(0,2);
+            str_pax2=String.valueOf(tx).substring(2,4);
+            str_pax3=String.valueOf(tx).substring(4,6);
+
+        }
         Logger.log(Level.DEBUG, TestReportDayFragment.class.getSimpleName(), "str_pax1=" +str_pax1);
         Logger.log(Level.DEBUG,TestReportDayFragment.class.getSimpleName(), "str_pax2=" +str_pax2);
         Logger.log(Level.DEBUG,TestReportDayFragment.class.getSimpleName(), "str_pax3=" +str_pax3);

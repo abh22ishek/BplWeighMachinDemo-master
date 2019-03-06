@@ -70,6 +70,7 @@ String uri;
 
             holder.height=convertView.findViewById(R.id.height);
             holder.weight=convertView.findViewById(R.id.weight);
+
             holder.gender=convertView.findViewById(R.id.gender);
             holder.patientIcon=convertView.findViewById(R.id.patientIcon);
             convertView.setTag(holder);
@@ -89,14 +90,14 @@ String uri;
         }
 
         holder.phone.setText(userModelList.get(position).getPhone());
-        holder.age.setText(new StringBuilder().append(userModelList.get(position).getAddress()).append("Years").toString());
+        holder.age.setText(new StringBuilder().append(userModelList.get(position).getAddress()).append(" Years").toString());
 
         holder.gender.setText(new StringBuilder().append(",").
                 append(userModelList.get(position).getSex()).toString());
         holder.height.setText(new StringBuilder().append(",").
-                append(userModelList.get(position).getHeight()).append("CM").toString());
-        holder.weight.setText(new StringBuilder().append(",").
-                append(userModelList.get(position).getWeight()).append("Kg").toString());
+                append(userModelList.get(position).getHeight()).append(" CM").toString());
+       /* holder.weight.setText(new StringBuilder().append(",").
+                append(userModelList.get(position).getWeight()).append(" Kg").toString());*/
 
 
 
@@ -151,7 +152,7 @@ String uri;
                 }
                 else{
                     array[position]=false;
-
+                    listlistner.getSelectedUser("data","","",array);
                 }
 
             }

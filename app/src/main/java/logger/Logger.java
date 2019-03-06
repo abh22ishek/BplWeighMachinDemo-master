@@ -12,8 +12,6 @@ public class Logger {
         if (!isLoggingenbaled)
             return;
 
-
-
         if (message == null || className == null) {
             return;
         }
@@ -29,10 +27,5 @@ public class Logger {
         }else if(level==Level.TRACE){
             Log.wtf(className,message);
         }
-
-
-
-
-
     }
 }

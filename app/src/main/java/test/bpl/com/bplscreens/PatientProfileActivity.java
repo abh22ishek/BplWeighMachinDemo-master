@@ -496,7 +496,15 @@ public class PatientProfileActivity extends Activity {
 
         if (requestCode == Constants.SELECT_PICTURE && resultCode == RESULT_OK && null != data) {
             Uri uri = data.getData();
+            final int takeFlags = data.getFlags() & (Intent.FLAG_GRANT_READ_URI_PERMISSION |
+                    Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
 
+            try {
+                PatientProfileActivity.this.getContentResolver().takePersistableUriPermission(uri, takeFlags);
+            }
+            catch (SecurityException e){
+                e.printStackTrace();
+            }
 
 
 
@@ -515,7 +523,6 @@ public class PatientProfileActivity extends Activity {
                         @Override
                         public void onLoadFailed(Exception e, Drawable errorDrawable) {
                             super.onLoadFailed(e, errorDrawable);
-
                             Logger.log(Level.ERROR,TAG,e.toString());
                         }
                     });

@@ -42,6 +42,7 @@ public class ExistingUserActivityManage extends FragmentActivity implements List
 
 
     String mUseType;
+    List<String> selectedUsersList;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -139,8 +140,26 @@ public class ExistingUserActivityManage extends FragmentActivity implements List
             @Override
             public void onClick(View view) {
                 if (selectedTAG.equals("")){
-                    Toast.makeText(ExistingUserActivityManage.this, "Please Select Any Users",
-                            Toast.LENGTH_SHORT).show();
+
+                    if(booleansArr!=null && booleansArr.length>1){
+
+                        selectedUsersList=new ArrayList<>();
+                        for(int i=0;i<booleansArr.length;i++){
+                            selectedUsersList.add(String.valueOf(booleansArr[i]));
+                        }
+
+                        if(selectedUsersList.contains("true")|| selectedUsersList.contains("True")){
+                            ExportSelectedUsers();
+                        }else{
+                            Toast.makeText(ExistingUserActivityManage.this, "Please Select Any Users",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+
+                    }else{
+                        Toast.makeText(ExistingUserActivityManage.this, "Please Select Any Users",
+                                Toast.LENGTH_SHORT).show();
+                    }
+
                 return;
             }
                 if(selectedTAG.equalsIgnoreCase("Mark All Users") ||
@@ -259,6 +278,7 @@ public class ExistingUserActivityManage extends FragmentActivity implements List
                 }else{
                     popUpTag=false;
                     existingUserAdapter.unMarkAll();
+                    selectedTAG="";
                     booleansArr=null;
                 //    popup.getMenu().findItem(R.id.markAll).setTitle("Un Mark All");
                 }
@@ -403,6 +423,34 @@ public class ExistingUserActivityManage extends FragmentActivity implements List
 
 
 
+    private void ExportSelectedUsers()
+    {
+        StringBuilder sb=new StringBuilder();
+
+        try {
+            for(int i=0;i<userModelList_.size();i++){
+                sb.append(i+1).append(". ").append(" Name :").append(userModelList_.get(i).getUserName()).
+                        append(" Email :").append(userModelList_.get(i).getUserEmail()).append(" Gender :")
+                        .append(userModelList_.get(i).getSex()).append(" Age : ").append(userModelList_.get(i).getAddress()).
+                        append("Years").append(" Phone No. ").append(userModelList_.get(i).getPhone()).append(" Height :").
+                        append(userModelList_.get(i).getHeight()+"CM").append(" Weight :").append(userModelList_.get(i).getWeight()+"Kg").
+                        append(" Active Status :").append("Active");
+                sb.append("\n\n");
+
+            }
+
+            createUsersTextFile("ListOfUsers_"+DateTime.getDateTime()+".txt", globalVariable.getUsername(),sb);
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        Toast.makeText(ExistingUserActivityManage.this,
+                "Users Exported Successfully in "+Constants.BPL_FOLDER,Toast.LENGTH_SHORT).show();
+    }
+
+
     private void ExportAllUsers()
     {
         StringBuilder sb=new StringBuilder();
@@ -427,7 +475,7 @@ public class ExistingUserActivityManage extends FragmentActivity implements List
         }
 
         Toast.makeText(ExistingUserActivityManage.this,
-                "Users Exported Successfully",Toast.LENGTH_SHORT).show();
+                "Users Exported Successfully in "+Constants.BPL_FOLDER,Toast.LENGTH_SHORT).show();
     }
 
     private void ExportActiveUsers()
