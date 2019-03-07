@@ -13,8 +13,8 @@ android {
         applicationId "bpl.be.well"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 3
-        versionName "BplBeWell_v1_99"
+        versionCode 4
+        versionName "BplBeWell_v2_00"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }

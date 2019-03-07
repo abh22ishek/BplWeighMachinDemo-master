@@ -5,4 +5,5 @@
     <dimen name="needle_margin_bottom">120dp</dimen>
     <dimen name="iweigh_txt">98sp</dimen>
     <dimen name="fab_speed_margin_bottom">50dp</dimen>
+    <dimen name="text_bio">18sp</dimen>
 </resources>

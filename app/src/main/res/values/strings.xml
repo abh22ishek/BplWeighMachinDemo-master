@@ -215,6 +215,12 @@ BPL Be Well app is designed and developed by BPL Medical Technologies Pvt. Ltd f
     <string name="bmi">BMI</string>
     <string name="ok">OK</string>
     <string name="delete">Delete</string>
+
+    <string name="bio_text">1. Sit down and Wear the BPL iPressure as shown.\n
+                            2. Relax and Switch ON the device.
+            </string>
+
+
     <string name="weigh_machine_manual_1">1. Place the scale on a hard and flat surface. Gently step on it, and
 it turns on with digits display on the LED. Then step off the scale
 until the value on the LED displays zero. Step on it again in an
@@ -928,6 +934,8 @@ sales.medical@bpl.in
 BY CLICKING THE "ACCEPT" BUTTON BELOW, USERS ACKNOWLEDGE THAT THEY HAVE READ THIS TERMS AND CONDITIONS OF THE AGREEMENT
 ALONG WITH PRIVACY POLICY WITH  AND HAVE UNDERSTOOD IT, AND AGREE THAT THEY WILL BE BOUND BY ITS TERMS.
 \n\n
+
+
 
 
 </string>

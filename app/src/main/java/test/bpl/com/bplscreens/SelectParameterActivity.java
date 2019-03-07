@@ -148,10 +148,10 @@ public class SelectParameterActivity extends Activity {
 
             if (view == select_weigh_machine) {
 
-             /*  Toast.makeText(SelectParameterActivity.this,"Coming Soon",Toast.LENGTH_SHORT).show();
+               Toast.makeText(SelectParameterActivity.this,"Coming Soon",Toast.LENGTH_SHORT).show();
                 return;
-*/
-               if (userNameSelected.getText().toString().equals("")) {
+
+              /* if (userNameSelected.getText().toString().equals("")) {
 
                    if(globalVariable.getUserType().equalsIgnoreCase("home")){
                        callExistingUserActivity(SelectParameterActivity.this);
@@ -177,7 +177,7 @@ public class SelectParameterActivity extends Activity {
                                 .putExtra(Constants.USER_NAME, userNameChosen).
                                         addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                     }
-                }
+                }*/
 
 
             } else if (view == select_records) {

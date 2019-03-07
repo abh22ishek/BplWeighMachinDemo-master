@@ -803,7 +803,7 @@ public class BioLightDeviceScanActivity extends Activity implements BioLightList
 
 
                     uuid = gattCharacteristic.getUuid().toString();
-                    Logger.log(Level.INFO,TAG,"Display Gatt Service()->Gatt Characacter.getUuid"+
+                    Logger.log(Level.INFO,TAG,"Display Gatt Service()->Gatt Character.getUuid"+
                             gattCharacteristic.getUuid().toString());
 
 

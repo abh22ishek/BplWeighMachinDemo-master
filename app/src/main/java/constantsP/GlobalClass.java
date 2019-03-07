@@ -41,7 +41,7 @@ public class GlobalClass extends Config {
     public void onCreate() {
         super.onCreate();
         get_density();
-        // Thread.setDefaultUncaughtExceptionHandler(new ForceCloseHandlerException(getApplicationContext()));
+        Thread.setDefaultUncaughtExceptionHandler(new ForceCloseHandlerException(getApplicationContext()));
         DatabaseManager.initializeInstance(new BplOximterdbHelper(getApplicationContext()));
     }
 
