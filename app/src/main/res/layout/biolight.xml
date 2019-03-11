@@ -36,10 +36,13 @@
         android:id="@+id/textView9"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:gravity="start"
         android:textColor="@color/white"
         android:layout_marginBottom="10dp"
-        app:fontname="centralSansXBold"
+        app:fontname="avangami"
+        android:paddingStart="5dp"
+        android:paddingEnd="0dp"
+
         android:textSize="@dimen/text_bio"
         android:layout_above="@+id/btnFindDevice"
         android:text="@string/bio_text" />

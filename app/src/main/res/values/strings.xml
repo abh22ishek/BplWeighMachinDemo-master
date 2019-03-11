@@ -216,8 +216,7 @@ BPL Be Well app is designed and developed by BPL Medical Technologies Pvt. Ltd f
     <string name="ok">OK</string>
     <string name="delete">Delete</string>
 
-    <string name="bio_text">1. Sit down and Wear the BPL iPressure as shown.\n
-                            2. Relax and Switch ON the device.
+    <string name="bio_text">** Sit down and Wear the BPL iPressure as shown.\n** Relax and Switch ON the device.
             </string>
 
 
@@ -949,4 +948,5 @@ ALONG WITH PRIVACY POLICY WITH  AND HAVE UNDERSTOOD IT, AND AGREE THAT THEY WILL
     <string name="logged_as">Primary Email</string>
     <string name="bp_ip">BPL iPressure</string>
     <string name="clinic_email">Clinic Email</string>
+    <string name="sel_use_type">Select a Use Type</string>
 </resources>

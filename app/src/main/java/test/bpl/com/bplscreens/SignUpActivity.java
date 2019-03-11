@@ -346,16 +346,21 @@ public class SignUpActivity extends Activity{
 
     public void onCreateDialog(final String [] arrayC, final String params) {
         AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this,R.style.AlertDialogCustom);
-        builder.setTitle(getString(R.string.pick_col));
+
 
 // add a radio button list
 
         final int checkedItem = 0; // cow
 
-        if(params.equals("1"))
-        security_question1.setText(arrayC[checkedItem]);
-        else
+        if(params.equals("1")){
+            security_question1.setText(arrayC[checkedItem]);
+            builder.setTitle(getString(R.string.pick_col));
+        }
+        else{
             security_question3.setText(arrayC[checkedItem]);
+            builder.setTitle(getString(R.string.sel_use_type));
+        }
+
         builder.setSingleChoiceItems(arrayC, checkedItem, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -387,9 +392,6 @@ public class SignUpActivity extends Activity{
     {
 
         dialog = new Dialog(context);
-
-
-
         dialog.getWindow().getAttributes().windowAnimations =R.style.DialogBoxAnimation;
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.setContentView(R.layout.terms_condition);
