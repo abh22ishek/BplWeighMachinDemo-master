@@ -110,6 +110,22 @@
             <TextView
                 android:layout_width="@dimen/chart_text"
                 android:layout_height="wrap_content"
+                android:text="@string/share"
+                android:textStyle="bold"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                />
+
+            <View android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:layout_margin="3dp"
+                />
+
+            <TextView
+                android:layout_width="@dimen/chart_text"
+                android:layout_height="wrap_content"
                 android:text="@string/delete"
                 android:textStyle="bold"
                 android:layout_marginStart="10dp"

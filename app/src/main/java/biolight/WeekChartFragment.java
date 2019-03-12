@@ -189,7 +189,11 @@ public class WeekChartFragment extends Fragment{
             @Override
             public void onClick(View view) {
 
-             Toast.makeText(getActivity(),"Coming Soon", LENGTH_SHORT).show();
+                if(!isStoragePermissionGranted())
+                {
+                    Toast.makeText(getActivity(),"Storage Permission is necessary to generate PDF ",Toast.LENGTH_SHORT).show();
+
+                }
             }
         });
 

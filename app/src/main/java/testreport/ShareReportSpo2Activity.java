@@ -1,60 +1,34 @@
-package test.bpl.com.bplscreens;
+package testreport;
 
-import android.Manifest;
+import android.*;
 import android.content.*;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
+import android.content.pm.*;
+import android.graphics.*;
+import android.graphics.drawable.*;
 import android.net.*;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Environment;
-import android.support.design.internal.NavigationMenu;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
+import android.os.*;
+import android.support.v4.app.*;
 import android.support.v4.content.*;
 import android.util.*;
-import android.view.LayoutInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.ScrollView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.view.*;
+import android.widget.*;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.io.*;
+import java.util.*;
 
-import biolight.*;
 import constantsP.*;
 import customviews.*;
-import database.DatabaseManager;
-import io.github.yavski.fabspeeddial.FabSpeedDial;
-import io.github.yavski.fabspeeddial.SimpleMenuListenerAdapter;
-import jjoe64.graphview.DefaultLabelFormatter;
-import jjoe64.graphview.GraphView;
-import jjoe64.graphview.GridLabelRenderer;
-import jjoe64.graphview.Viewport;
-import jjoe64.graphview.series.DataPoint;
-import jjoe64.graphview.series.LineGraphSeries;
-import logger.Level;
-import logger.Logger;
-import model.UserModel;
+import database.*;
+import io.github.yavski.fabspeeddial.*;
+import jjoe64.graphview.*;
+import jjoe64.graphview.series.*;
+import logger.*;
+import model.*;
+import test.bpl.com.bplscreens.*;
+import test.bpl.com.bplscreens.R;
 
+public class ShareReportSpo2Activity extends FragmentActivity {
 
-public class UserTestReportActivity extends FragmentActivity {
 
     private ImageView mBackKey;
     private TextView header_title;
@@ -66,7 +40,7 @@ public class UserTestReportActivity extends FragmentActivity {
     private TextView spo2_pulserate, pulserate_avergaebpm, pulserate_minimum;
 
 
-    private String TAG = UserTestReportActivity.class.getSimpleName();
+    private String TAG = ShareReportSpo2Activity.class.getSimpleName();
 
     private String spo2_str = "";
     private String pr_str = "";
@@ -118,7 +92,7 @@ public class UserTestReportActivity extends FragmentActivity {
 
         globalClass= (GlobalClass) getApplicationContext();
 
-        populate_view(UserTestReportActivity.this);
+        populate_view(ShareReportSpo2Activity.this);
         // mTestReport.setImageBitmap(convertTobitmap(UserTestReportActivity.this));
         userName=getIntent().getExtras().getString(Constants.USER_NAME);
         int density =this.getResources().getDisplayMetrics().densityDpi;
@@ -184,10 +158,11 @@ public class UserTestReportActivity extends FragmentActivity {
 
         display_text();
 
-        plot_Spo2_graph(mspo2_list, UserTestReportActivity.this);
-        plot_PR_graph(mPR_list, UserTestReportActivity.this);
+        plot_Spo2_graph(mspo2_list, ShareReportSpo2Activity.this);
+        plot_PR_graph(mPR_list, ShareReportSpo2Activity.this);
 
-
+        fabSpeedDial.setVisibility(View.INVISIBLE);
+/*
         fabSpeedDial.setMenuListener(new SimpleMenuListenerAdapter() {
             @Override
             public boolean onMenuItemSelected(MenuItem menuItem) {
@@ -197,9 +172,9 @@ public class UserTestReportActivity extends FragmentActivity {
 
                     if(!isStoragePermissionGranted("Save"))
                     {
-                       Toast.makeText(UserTestReportActivity.this,"Permission are necessary " +
-                               "in order to save " +
-                               "this file",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ShareReportSpo2Activity.this,"Permission are necessary " +
+                                "in order to save " +
+                                "this file",Toast.LENGTH_SHORT).show();
 
                     }
 
@@ -212,7 +187,7 @@ public class UserTestReportActivity extends FragmentActivity {
                     }else{
                         if(!isStoragePermissionGranted("Save"))
                         {
-                            Toast.makeText(UserTestReportActivity.this,"Permission are necessary " +
+                            Toast.makeText(ShareReportSpo2Activity.this,"Permission are necessary " +
                                     "in order to save " +
                                     "this file",Toast.LENGTH_SHORT).show();
                         }else{
@@ -223,7 +198,7 @@ public class UserTestReportActivity extends FragmentActivity {
                 }
                 return true;
             }
-        });
+        });*/
     }
 
 
@@ -268,6 +243,7 @@ public class UserTestReportActivity extends FragmentActivity {
 
 
         graphview_spo2 = findViewById(R.id.graph_spo2);
+
         graphview_pr = findViewById(R.id.graph_pr);
         List<UserModel>UserModellist;
         if (Constants.LOGGED_User_ID != null || !Constants.LOGGED_User_ID.equals("")) {
@@ -275,22 +251,22 @@ public class UserTestReportActivity extends FragmentActivity {
 
             if(globalClass.getUserType()!=null && globalClass.getUserType().
                     equalsIgnoreCase("home")){
-              UserModellist = new ArrayList<>(DatabaseManager.getInstance().
+                UserModellist = new ArrayList<>(DatabaseManager.getInstance().
                         getAllMemberProfilecontent(userName,""));
 
             }else{
-                 UserModellist = new ArrayList<>(DatabaseManager.getInstance().
+                UserModellist = new ArrayList<>(DatabaseManager.getInstance().
                         getAllUserprofilecontent(userName,""));
 
             }
 
             if (UserModellist.size() > 0) {
-               loginName=UserModellist.get(0).getName();
-               if(globalClass.getUserType().equalsIgnoreCase("home")){
-                   age.setText(UserModellist.get(0).getAge());
-               }else{
-                   age.setText(UserModellist.get(0).getAddress());
-               }
+                loginName=UserModellist.get(0).getName();
+                if(globalClass.getUserType().equalsIgnoreCase("home")){
+                    age.setText(UserModellist.get(0).getAge());
+                }else{
+                    age.setText(UserModellist.get(0).getAddress());
+                }
 
                 weight.setText(UserModellist.get(0).getWeight());
                 height.setText(UserModellist.get(0).getHeight());
@@ -386,9 +362,9 @@ public class UserTestReportActivity extends FragmentActivity {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.testreport, root_layout);
         spo2_graph=  findViewById(R.id.spo2_custom_graph);
-        spo2_graph.setTag("");
+        spo2_graph.setTag("share");
         MyCustomPRGraph pr_graph_=findViewById(R.id.pr_custom_graph);
-        pr_graph_.setTag("");
+        pr_graph_.setTag("share");
 
         Logger.log(Level.INFO, TAG, "view returned=" + v);
         return v;
@@ -503,7 +479,7 @@ public class UserTestReportActivity extends FragmentActivity {
         graphview_pr.setTitleColor(Color.BLACK);
         graphview_pr.setTitleTextSize(22f);
         graphview_pr.getGridLabelRenderer().setTextSize(24f);
-       // graph.getGridLabelRenderer().reloadStyles();
+        // graph.getGridLabelRenderer().reloadStyles();
         mSeries.setColor(Color.BLACK);
 
         mSeries.setColor(Color.BLACK);
@@ -580,13 +556,13 @@ public class UserTestReportActivity extends FragmentActivity {
             FileOutputStream fos = new FileOutputStream(saveScreenshot(name,loginName,userName));
             bmp.compress(Bitmap.CompressFormat.PNG, 100, fos);
             if(Tag.equalsIgnoreCase("save")){
-                Toast.makeText(UserTestReportActivity.this, "BPL iOxy Report is saved successfully in a folder " +
+                Toast.makeText(ShareReportSpo2Activity.this, "BPL iOxy Report is saved successfully in a folder " +
                         Constants.BPL_FOLDER, Toast.LENGTH_SHORT).show();
             }
 
             fos.flush();
             fos.close();
-          
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -599,7 +575,27 @@ public class UserTestReportActivity extends FragmentActivity {
     @Override
     public void onStart() {
         super.onStart();
+        mHandler=new Handler();
 
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if(screenShotFile!=null) {
+
+                    sharePNG();
+                }else{
+                    if(!isStoragePermissionGranted("Save"))
+                    {
+                        Toast.makeText(ShareReportSpo2Activity.this,"Permission are necessary " +
+                                "in order to share " +
+                                "this file",Toast.LENGTH_SHORT).show();
+                    }else{
+                        sharePNG();
+                    }
+
+                }
+            }
+        }, 100);
     }
 
     @Override
@@ -675,8 +671,8 @@ public class UserTestReportActivity extends FragmentActivity {
     {
         Intent shareIntent = new Intent();
         shareIntent.setAction(Intent.ACTION_SEND);
-        Uri contentUri = FileProvider.getUriForFile(UserTestReportActivity.this,
-                UserTestReportActivity.this.getPackageName() + ".provider", screenShotFile);
+        Uri contentUri = FileProvider.getUriForFile(ShareReportSpo2Activity.this,
+                ShareReportSpo2Activity.this.getPackageName() + ".provider", screenShotFile);
         shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
 
         shareIntent.setType("image/png");
@@ -694,9 +690,9 @@ public class UserTestReportActivity extends FragmentActivity {
         {
             file.mkdir();
 
-            }
+        }
 
-       File loginFile=new File(file,loginFileName);
+        File loginFile=new File(file,loginFileName);
 
         if(!loginFile.exists()){
             loginFile.mkdir();
@@ -710,7 +706,7 @@ public class UserTestReportActivity extends FragmentActivity {
             userDir.mkdir();
         }
 
-         screenShotFile=new File(userDir,fileName);
+        screenShotFile=new File(userDir,fileName);
 
         try {
             FileWriter filewriter=new FileWriter(screenShotFile,false);
@@ -722,5 +718,18 @@ public class UserTestReportActivity extends FragmentActivity {
         }
 
         return screenShotFile;
+    }
+
+    Handler mHandler;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
+
+
+
+
     }
 }

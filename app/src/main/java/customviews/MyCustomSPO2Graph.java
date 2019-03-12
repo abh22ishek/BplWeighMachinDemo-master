@@ -8,7 +8,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import test.bpl.com.bplscreens.UserTestReportActivity;
-
+import testreport.*;
 
 
 public class MyCustomSPO2Graph extends View {
@@ -20,7 +20,8 @@ public class MyCustomSPO2Graph extends View {
     Paint p;
     Paint mPaint;
 
-
+    String mTag;
+    int max_x_axis;
     public MyCustomSPO2Graph(Context context) {
         super(context);
 
@@ -75,7 +76,12 @@ public class MyCustomSPO2Graph extends View {
 
         //canvas.drawText("0"+"s",0,getHeight(),p);
 
-        int max_x_axis=Integer.parseInt(UserTestReportActivity.duration_str);
+        if(mTag.equalsIgnoreCase("share")){
+             max_x_axis=Integer.parseInt(ShareReportSpo2Activity.duration_str);
+        }else{
+             max_x_axis=Integer.parseInt(UserTestReportActivity.duration_str);
+        }
+
         int min_x_axis=0;
         int mid_x_axis=(max_x_axis+min_x_axis)/2;
 
@@ -141,30 +147,57 @@ public class MyCustomSPO2Graph extends View {
 
 
         final float height_scale=(float)height/20;
-        final float width_scale= ((float)width/Float.parseFloat(UserTestReportActivity.duration_str));
+        if(mTag.equalsIgnoreCase("share")){
+            final float width_scale= ((float)width/Float.parseFloat(ShareReportSpo2Activity.duration_str));
+
+            // first point
+            float p1x1=width_scale;
+            float p1y1=(100-(Integer.parseInt(ShareReportSpo2Activity.mspo2_list.get(0))))*height_scale;
+
+            mx=2*width_scale;
+            for(int i = 1; i< ShareReportSpo2Activity.mspo2_list.size(); i++)
+            {
+                float y_points=(100-(Integer.parseInt(ShareReportSpo2Activity.mspo2_list.get(i))));
+                float px_y=y_points*height_scale;// current y pointts
+
+
+                //canvas.drawCircle(mx,px_y,2f,paint);
+                canvas.drawLine(p1x1,p1y1,mx,px_y,paint);
+                p1x1=mx;
+                p1y1=px_y;
+                mx=mx+width_scale;
+
+
+
+
+            }
+        }else{
+            final float width_scale= ((float)width/Float.parseFloat(UserTestReportActivity.duration_str));
+
+            // first point
+            float p1x1=width_scale;
+            float p1y1=(100-(Integer.parseInt(UserTestReportActivity.mspo2_list.get(0))))*height_scale;
+
+            mx=2*width_scale;
+            for(int i = 1; i< UserTestReportActivity.mspo2_list.size(); i++)
+            {
+                float y_points=(100-(Integer.parseInt(UserTestReportActivity.mspo2_list.get(i))));
+                float px_y=y_points*height_scale;// current y pointts
+
+
+                //canvas.drawCircle(mx,px_y,2f,paint);
+                canvas.drawLine(p1x1,p1y1,mx,px_y,paint);
+                p1x1=mx;
+                p1y1=px_y;
+                mx=mx+width_scale;
+
+
+
+
+            }
+        }
        // mx=width_scale;
 
-        // first point
-        float p1x1=width_scale;
-        float p1y1=(100-(Integer.parseInt(UserTestReportActivity.mspo2_list.get(0))))*height_scale;
-
-        mx=2*width_scale;
-        for(int i = 1; i< UserTestReportActivity.mspo2_list.size(); i++)
-        {
-            float y_points=(100-(Integer.parseInt(UserTestReportActivity.mspo2_list.get(i))));
-            float px_y=y_points*height_scale;// current y pointts
-
-
-            //canvas.drawCircle(mx,px_y,2f,paint);
-            canvas.drawLine(p1x1,p1y1,mx,px_y,paint);
-            p1x1=mx;
-            p1y1=px_y;
-            mx=mx+width_scale;
-
-
-
-
-        }
 
 
 
@@ -174,5 +207,12 @@ public class MyCustomSPO2Graph extends View {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         setMeasuredDimension(10*pixels_per_unit,5*pixels_per_unit);
+    }
+
+
+    public void setTag(String Tag)
+    {
+
+        mTag=Tag;
     }
 }

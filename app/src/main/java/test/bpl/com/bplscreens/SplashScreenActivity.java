@@ -1,21 +1,13 @@
 package test.bpl.com.bplscreens;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Handler;
+import android.content.*;
+import android.os.*;
 import android.support.v4.app.*;
-import android.view.View;
-import android.view.WindowManager;
+import android.view.*;
 
-import constantsP.Constants;
-import constantsP.GlobalClass;
-import database.DatabaseManager;
-import logger.Level;
-import logger.Logger;
+import constantsP.*;
+import database.*;
+import logger.*;
 
 public class SplashScreenActivity extends FragmentActivity {
 
@@ -35,9 +27,9 @@ public class SplashScreenActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
 
 
-            View decorView = getWindow().getDecorView();
-            int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
-            decorView.setSystemUiVisibility(uiOptions);
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
 
 
         setContentView(R.layout.splashscreen);

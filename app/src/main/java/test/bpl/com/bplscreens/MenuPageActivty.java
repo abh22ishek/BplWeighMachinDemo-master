@@ -1,6 +1,7 @@
 package test.bpl.com.bplscreens;
 
 
+import android.annotation.*;
 import android.app.*;
 import android.content.*;
 import android.graphics.*;
@@ -12,13 +13,16 @@ import android.transition.*;
 import android.view.*;
 import android.widget.*;
 
+import org.jsoup.*;
+
 import java.util.*;
+import java.util.concurrent.*;
 
 import constantsP.*;
 import adapter.*;
 import biolight.*;
 import localstorage.*;
-
+import logger.*;
 
 
 public class MenuPageActivty extends FragmentActivity {
@@ -112,14 +116,16 @@ public class MenuPageActivty extends FragmentActivity {
 
         dialog.getWindow().getAttributes().windowAnimations =R.style.DialogBoxAnimation;
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.setContentView(R.layout.customdialog_security);
+        dialog.setContentView(R.layout.app_version);
 
         final TextView content=  dialog.findViewById(R.id.content);
         final TextView header=  dialog.findViewById(R.id.header);
         final Button save= dialog.findViewById(R.id.save);
         final Button cancel=  dialog.findViewById(R.id.cancel);
 
-        cancel.setVisibility(View.GONE);
+        cancel.setVisibility(View.VISIBLE);
+        cancel.setText(getString(R.string.chk_up));
+
         header.setText(getResources().getString(R.string.app_version));
         content.setText(new StringBuilder().append(getString(R.string.curr_app)).append(" ").
                 append(BuildConfig.VERSION_NAME).toString());
@@ -129,6 +135,16 @@ public class MenuPageActivty extends FragmentActivity {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
+            }
+        });
+
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                GetVersionCode g=new GetVersionCode();
+                g.execute(new String[0]);
             }
         });
         dialog.show();
@@ -292,5 +308,37 @@ public class MenuPageActivty extends FragmentActivity {
 
 
 
+
+    @SuppressLint("StaticFieldLeak")
+    private  class GetVersionCode extends AsyncTask<String, String, String> {
+        @Override
+        protected String doInBackground(String... voids) {
+
+            String newVersion = null;
+            try {
+                newVersion = Jsoup.connect("https://play.google.com/store/apps/details?id=" + MenuPageActivty.this.getPackageName()+"&hl=it")
+                        .timeout(30000)
+                        .userAgent("Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6")
+                        .referrer("http://www.google.com")
+                        .get()
+                        .select("div[itemprop=softwareVersion]")
+                        .first()
+                        .ownText();
+                return newVersion;
+            } catch (Exception e) {
+                return newVersion;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String onlineVersion) {
+            super.onPostExecute(onlineVersion);
+            if (!BuildConfig.VERSION_NAME.equalsIgnoreCase(onlineVersion)) {
+
+                Logger.log(Level.DEBUG,"TAG","Please update App");
+            }
+
+        }
+    }
 
 }

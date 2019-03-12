@@ -53,6 +53,8 @@ public class SignUpActivity extends Activity{
     CheckBox termsCheckbox;
 
     boolean IsTermsAndCondition;
+    int mSave=0;
+    int mSaveUseType=0;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -154,7 +156,8 @@ public class SignUpActivity extends Activity{
                     {
                         hide_soft_keypad(SignUpActivity.this);
 
-                        onCreateDialog(useTypeArr,"3");
+                        onCreateDialogM(useTypeArr,"3");
+
                     }
                     return true;
                 }
@@ -344,32 +347,39 @@ public class SignUpActivity extends Activity{
 
     int index=0;
 
+
+
+
     public void onCreateDialog(final String [] arrayC, final String params) {
         AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this,R.style.AlertDialogCustom);
 
 
 // add a radio button list
 
-        final int checkedItem = 0; // cow
-
+         // cow
+       final int checkedItem = mSave;
         if(params.equals("1")){
             security_question1.setText(arrayC[checkedItem]);
             builder.setTitle(getString(R.string.pick_col));
         }
-        else{
-            security_question3.setText(arrayC[checkedItem]);
-            builder.setTitle(getString(R.string.sel_use_type));
-        }
+
 
         builder.setSingleChoiceItems(arrayC, checkedItem, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // user checked an item
                 if(which!=-1){
-                    if(params.equals("1"))
-                    security_question1.setText(arrayC[which]);
-                    else
-                        security_question3.setText(arrayC[which]);
+                    if(params.equals("1")) {
+                        mSave=which;
+
+                        if (mSave != 0) {
+                            security_question1.setText(arrayC[which]);
+                            mSave=which;
+                        } else {
+                            security_question1.setText(arrayC[mSave]);
+                        }
+
+                    }
 
                     dialog.dismiss();
                 }
@@ -402,4 +412,51 @@ public class SignUpActivity extends Activity{
         imgBackKey.setVisibility(View.INVISIBLE);
         dialog.show();
     }
+
+
+    public void onCreateDialogM(final String [] arrayC, final String params) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this,R.style.AlertDialogCustom);
+
+
+// add a radio button list
+
+        final int checkedItem = mSaveUseType;
+        security_question3.setText(arrayC[checkedItem]);
+            builder.setTitle(getString(R.string.sel_use_type));
+
+
+        builder.setSingleChoiceItems(arrayC, checkedItem, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogc, int which) {
+                // user checked an item
+                if(which!=-1){
+
+                        mSaveUseType=which;
+                        if(mSaveUseType!=0){
+                            mSaveUseType=which;
+                            security_question3.setText(arrayC[which]);
+                        }
+                        else{
+                            security_question3.setText(arrayC[mSaveUseType]);
+                        }
+
+                    }
+
+                    dialogc.dismiss();
+                }
+
+        });
+
+        // add OK and Cancel buttons
+
+
+
+        // create and show the alert dialog
+        AlertDialog dialogX = builder.create();
+        dialogX.show();
+    }
+
+
+
+
 }

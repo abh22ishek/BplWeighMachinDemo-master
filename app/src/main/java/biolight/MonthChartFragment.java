@@ -121,10 +121,13 @@ public class MonthChartFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                Toast.makeText(getActivity(),"Coming Soon", LENGTH_SHORT).show();
+                if(!isStoragePermissionGranted())
+                {
+                    Toast.makeText(getActivity(),"Storage Permission is necessary to generate PDF ",Toast.LENGTH_SHORT).show();
 
-                /*EcgPdf task = new EcgPdf();
-                task.execute(new String[0]);*/
+                }
+
+
             }
         });
 

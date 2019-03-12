@@ -10,7 +10,7 @@ import android.view.View;
 import logger.Level;
 import logger.Logger;
 import test.bpl.com.bplscreens.UserTestReportActivity;
-
+import testreport.*;
 
 
 public class MyCustomPRGraph extends View{
@@ -20,7 +20,7 @@ public class MyCustomPRGraph extends View{
     int pixels_per_unit=0;
     Paint p;
     Paint mPaint;
-
+  int  max_x_axis;
 
 
     public MyCustomPRGraph(Context context) {
@@ -70,7 +70,13 @@ public class MyCustomPRGraph extends View{
 
         //canvas.drawText("0"+"s",0,getHeight(),p);
 
-        int max_x_axis=Integer.parseInt(UserTestReportActivity.duration_str);
+        if(mTag.equalsIgnoreCase("share")){
+             max_x_axis=Integer.parseInt(ShareReportSpo2Activity.duration_str);
+
+        }else{
+             max_x_axis=Integer.parseInt(UserTestReportActivity.duration_str);
+
+        }
         int min_x_axis=0;
         int mid_x_axis=(max_x_axis+min_x_axis)/2;
 
@@ -135,34 +141,69 @@ public class MyCustomPRGraph extends View{
 
 
         final float height_scale=(float)height/200;
-        final float width_scale= ((float)width/Float.parseFloat(UserTestReportActivity.duration_str));
 
-        // first point
-        float p1x1=width_scale;
-        float p1y1=(200-(Integer.parseInt(UserTestReportActivity.mPR_list.get(0))))*height_scale;
+        if(mTag.equalsIgnoreCase("share")){
+            final float width_scale= ((float)width/Float.parseFloat(ShareReportSpo2Activity.duration_str));
 
-        mx=2*width_scale;
+            // first point
+            float p1x1=width_scale;
+            float p1y1=(200-(Integer.parseInt(ShareReportSpo2Activity.mPR_list.get(0))))*height_scale;
 
-        for(int i =1; i<UserTestReportActivity.mPR_list.size(); i++)
-        {
-            float y_points=(200-(Integer.parseInt(UserTestReportActivity.mPR_list.get(i))));
-            float px_y=y_points*height_scale;
-            //canvas.drawCircle(mx,px_y,2f,paint);
+            mx=2*width_scale;
 
-            canvas.drawLine(p1x1,p1y1,mx,px_y,paint);
+            for(int i =1; i<ShareReportSpo2Activity.mPR_list.size(); i++)
+            {
+                float y_points=(200-(Integer.parseInt(ShareReportSpo2Activity.mPR_list.get(i))));
+                float px_y=y_points*height_scale;
+                //canvas.drawCircle(mx,px_y,2f,paint);
 
-            p1x1=mx;
-            p1y1=px_y;
+                canvas.drawLine(p1x1,p1y1,mx,px_y,paint);
 
-            mx=mx+width_scale;
+                p1x1=mx;
+                p1y1=px_y;
+
+                mx=mx+width_scale;
 
 
+            }
+        }else{
+            final float width_scale= ((float)width/Float.parseFloat(UserTestReportActivity.duration_str));
+
+            // first point
+            float p1x1=width_scale;
+            float p1y1=(200-(Integer.parseInt(UserTestReportActivity.mPR_list.get(0))))*height_scale;
+
+            mx=2*width_scale;
+
+            for(int i =1; i<UserTestReportActivity.mPR_list.size(); i++)
+            {
+                float y_points=(200-(Integer.parseInt(UserTestReportActivity.mPR_list.get(i))));
+                float px_y=y_points*height_scale;
+                //canvas.drawCircle(mx,px_y,2f,paint);
+
+                canvas.drawLine(p1x1,p1y1,mx,px_y,paint);
+
+                p1x1=mx;
+                p1y1=px_y;
+
+                mx=mx+width_scale;
+
+
+            }
         }
+
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         setMeasuredDimension(10*pixels_per_unit,5*pixels_per_unit);
+    }
+
+    String mTag;
+    public void setTag(String Tag)
+    {
+
+        mTag=Tag;
     }
 }

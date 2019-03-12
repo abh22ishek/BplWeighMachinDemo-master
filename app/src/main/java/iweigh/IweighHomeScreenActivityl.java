@@ -107,7 +107,6 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
                     options = ActivityOptions.makeSceneTransitionAnimation(IweighHomeScreenActivityl.this);
 
                     startActivity(new Intent(IweighHomeScreenActivityl.this, IweighRecordsActivity.class)
-
                             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), options.toBundle());
                 } else {
                     startActivity(new Intent(IweighHomeScreenActivityl.this, IweighRecordsActivity.class)
@@ -228,6 +227,9 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
         Logger.log(Level.DEBUG,"On Resume()","called");
         menu_bar.setVisibility(View.VISIBLE);
 
+        if(mHandler==null){
+            mHandler=new Handler();
+        }
         scanLeDevice();
     }
 
@@ -453,7 +455,6 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
 
         int msb =(b << 8);
         int lsb =(a & 0x00FF);
-
         int result =(msb | lsb);
 
         return result;
@@ -475,10 +476,8 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
                 mScanning = false;
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     mBluetoothAdapter.getBluetoothLeScanner().stopScan(scancallback);
+                    pd.dismiss();
                 }
-
-                pd.dismiss();
-
             }
         }, SCAN_PERIOD);
 
@@ -507,13 +506,12 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
             mBluetoothAdapter.cancelDiscovery();
         }
 
-        //  BluetoothLeScanner bluetoothLeScanner =mBluetoothAdapter.getBluetoothLeScanner();
-        //  bluetoothLeScanner.startScan(ScanCallback);
-        // mBluetoothAdapter.startDiscovery(mLeScanCallback);
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             mBluetoothAdapter.getBluetoothLeScanner().startScan(scancallback);
+            pd.show();
         }
-        pd.show();
+
     }
 
 
@@ -528,7 +526,7 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
             if (BluetoothAdapter.ACTION_DISCOVERY_STARTED.equals(action)) {
                 //discovery starts, we can show progress dialog or perform other tasks
             } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
-                //discovery finishes, dismis progress dialog
+                //discovery finishes, dismiss progress dialog
             } else if (BluetoothDevice.ACTION_FOUND.equals(action)) {
                 //bluetooth device found
 

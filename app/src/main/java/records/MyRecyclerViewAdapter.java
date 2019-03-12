@@ -26,6 +26,7 @@ import model.RecordsDetail;
 import test.bpl.com.bplscreens.R;
 import test.bpl.com.bplscreens.UserTestReportActivity;
 import test.bpl.com.bplscreens.UserTestReportGraphActivity;
+import testreport.*;
 
 import static android.content.ContentValues.TAG;
 
@@ -73,19 +74,19 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         int avg_hrr_res=0;
         float avg_pi_res=0;
 
-        String []spo2_prod=recordsDetailList.get(position).getSpo2().toString().split(",");
+        String []spo2_prod=recordsDetailList.get(position).getSpo2().split(",");
         for(String s:spo2_prod)
         {
             avg_spo2=avg_spo2+Integer.parseInt(s);
         }
 
-        String [] pr_prod=recordsDetailList.get(position).getHeartrate().toString().split(",");
+        String [] pr_prod=recordsDetailList.get(position).getHeartrate().split(",");
         for(String s:pr_prod)
         {
             avg_hrr=avg_hrr+Integer.parseInt(s);
         }
 
-        String [] pi_prod=recordsDetailList.get(position).getPI().toString().split(",");
+        String [] pi_prod=recordsDetailList.get(position).getPI().split(",");
 
 
         float[] parsed_pi = new float[pi_prod.length];
@@ -105,9 +106,10 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         avg_pi_res= avg_pi/pi_prod.length;
 
 
-        Logger.log(Level.DEBUG,TAG," spo2="+recordsDetailList.get(position).getSpo2().toString()+"length="+spo2_prod.length);
-        Logger.log(Level.DEBUG,TAG," heart_rate="+recordsDetailList.get(position).getHeartrate().toString()+"length="+spo2_prod.length);
-        Logger.log(Level.DEBUG,TAG," Pi="+recordsDetailList.get(position).getPI().toString()+
+        Logger.log(Level.DEBUG,TAG," spo2="+recordsDetailList.get(position).getSpo2()+"length="+spo2_prod.length);
+        Logger.log(Level.DEBUG,TAG," heart_rate="+recordsDetailList.get(position).getHeartrate()+
+                "length="+spo2_prod.length);
+        Logger.log(Level.DEBUG,TAG," Pi="+recordsDetailList.get(position).getPI()+
                 "length="+spo2_prod.length);
 
         holder.spo2.setText(new StringBuilder().append(avg_spo2_res).toString());
@@ -132,6 +134,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         private TextView spo2;
         private TextView datetime;
         private TextView heratrate;
+        private ImageView iconShare;
         private ImageView delete,test_rport,graph_chart;
         private TextView PI;
         Context ctx;
@@ -148,9 +151,12 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             this.test_rport=  view.findViewById(R.id.imgreport);
             this.graph_chart= view.findViewById(R.id.imgchart);
 
+            this.iconShare=view.findViewById(R.id.iconShare);
+
             delete.setOnClickListener(this);
             test_rport.setOnClickListener(this);
             graph_chart.setOnClickListener(this);
+            iconShare.setOnClickListener(this);
             this.ctx=view.getContext();
 
         }
@@ -176,11 +182,11 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
                 save.setText(context.getString(R.string.ok));
                 final Button cancel= dialog.findViewById(R.id.cancel);
 
-                cancel.setText("No");
-                header.setText("Delete Record");
+                cancel.setText(context.getString(R.string.no));
+                header.setText(context.getString(R.string.del_rec));
                 content.setText(context.getResources().getString(R.string.delete_rec));
 
-                save.setText("Yes");
+                save.setText(context.getString(R.string.yes));
                 cancel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -214,18 +220,17 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
                     Logger.log(Level.INFO, MyRecyclerViewAdapter.this.getClass().getSimpleName(),recordsDetailList.get(getAdapterPosition()).getTesting_time());
                     mRecorddetaillist=DatabaseManager.getInstance().get_Records_Test_Report(Constants.LOGGED_User_ID,recordsDetailList.get(getAdapterPosition()).getTesting_time(),Constants.SELECTED_USER_TYPE);
                     context.startActivity(new Intent(context, UserTestReportActivity.class).
-                                    putExtra(Constants.SPO2_CONSTANTS,mRecorddetaillist.get(0).getSpo2().toString()).
-                            putExtra(Constants.PR_CONSTANTS,mRecorddetaillist.get(0).getHeartrate().toString()).
-                            putExtra(Constants.PI_CONSTATNTS,mRecorddetaillist.get(0).getPI().toString())
-                    . putExtra(Constants.TESTING_TIME_CONSTANTS,mRecorddetaillist.get(0).getTesting_time().toString())
-                    . putExtra(Constants.DURATION_CONSTANTS,mRecorddetaillist.get(0).getDuration().toString())
-                            .putExtra(Constants.DEVICE_MACID,mRecorddetaillist.get(0).getDevice_mac_id().toString()).
+                                    putExtra(Constants.SPO2_CONSTANTS,mRecorddetaillist.get(0).getSpo2()).
+                            putExtra(Constants.PR_CONSTANTS,mRecorddetaillist.get(0).getHeartrate()).
+                            putExtra(Constants.PI_CONSTATNTS,mRecorddetaillist.get(0).getPI())
+                    . putExtra(Constants.TESTING_TIME_CONSTANTS,mRecorddetaillist.get(0).getTesting_time())
+                    . putExtra(Constants.DURATION_CONSTANTS,mRecorddetaillist.get(0).getDuration())
+                            .putExtra(Constants.DEVICE_MACID,mRecorddetaillist.get(0).getDevice_mac_id()).
                                     putExtra(Constants.USER_NAME,userName).
                                     setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
 
 
 
-                            //putParcelableArrayListExtra(ConstantsP.RECORDS_DETAIL, (ArrayList<? extends Parcelable>) mRecorddetaillist));
 
                 }
 
@@ -244,6 +249,21 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
                            .putExtra(Constants.USER_NAME,userName)
                             .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 }
+            }else if(v==iconShare){
+                List<RecordsDetail> mRecorddetaillist;
+                Logger.log(Level.INFO, MyRecyclerViewAdapter.this.getClass().getSimpleName(),recordsDetailList.get(getAdapterPosition()).getTesting_time());
+                mRecorddetaillist=DatabaseManager.getInstance().get_Records_Test_Report(Constants.LOGGED_User_ID,recordsDetailList.get(getAdapterPosition()).getTesting_time(),Constants.SELECTED_USER_TYPE);
+                context.startActivity(new Intent(context, ShareReportSpo2Activity.class).
+                        putExtra(Constants.SPO2_CONSTANTS,mRecorddetaillist.get(0).getSpo2()).
+                        putExtra(Constants.PR_CONSTANTS,mRecorddetaillist.get(0).getHeartrate()).
+                        putExtra(Constants.PI_CONSTATNTS,mRecorddetaillist.get(0).getPI())
+                        . putExtra(Constants.TESTING_TIME_CONSTANTS,mRecorddetaillist.get(0).getTesting_time())
+                        . putExtra(Constants.DURATION_CONSTANTS,mRecorddetaillist.get(0).getDuration())
+                        .putExtra(Constants.DEVICE_MACID,mRecorddetaillist.get(0).getDevice_mac_id()).
+                                putExtra(Constants.USER_NAME,userName).
+
+                                setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+
             }
 
         }
