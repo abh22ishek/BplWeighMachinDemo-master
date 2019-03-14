@@ -1,5 +1,7 @@
 package cannyscale;
 
+import logger.*;
+
 public class HexUtil {
 
     private static final char[] DIGITS_LOWER =
@@ -103,5 +105,33 @@ public class HexUtil {
 
     public static int byteToInt(byte b) {
         return b & 0XFF;
+    }
+
+
+
+
+    public static String byteToHexVal(byte [] bytes)
+    {
+
+        StringBuilder sb = new StringBuilder();
+        for (byte b : bytes) {
+            sb.append(String.format("%02X ", b));
+        }
+        Logger.log(Level.DEBUG,"Hex Dec  Val from Byte Array[] ",sb.toString());
+
+        return sb.toString();
+    }
+
+
+    public static String byteToHex(byte val)
+    {
+
+        StringBuilder sb = new StringBuilder();
+
+            sb.append(String.format("%02X", val));
+
+        Logger.log(Level.DEBUG,"Hex Dec from Byte Val ",sb.toString());
+
+        return sb.toString();
     }
 }

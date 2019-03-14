@@ -13,7 +13,7 @@ public class CannyAlgorithms {
         String bodyFat;
 
 
-        double fat=(0.000295*imp+1.54)*bmi+0.075219*age-24.8;
+        double fat=((0.000295*imp+1.54)*bmi+(0.075219*age))-24.8;
 
         bodyFat=String.valueOf(fat);
 

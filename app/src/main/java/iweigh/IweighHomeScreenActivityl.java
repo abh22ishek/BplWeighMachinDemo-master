@@ -7,10 +7,9 @@ import android.bluetooth.le.*;
 import android.content.*;
 import android.os.*;
 import android.support.annotation.*;
-import android.support.v4.app.*;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.*;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.util.*;
 import android.view.*;
 import android.widget.*;
@@ -55,11 +54,12 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
     String mUserName;
     private GlobalClass globalVariable;
 
-    private TextView height,age,metabolicAge,visceralFat,bodyWater,bodyFat;
+    private TextView height,age,metabolicAge,visceralFat,bodyWater,bodyFat,boneMass,muscleMass;
 
 
     String sexType;
 
+    int mAge=0,mHeight,mWeight;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,7 +92,9 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
         visceralFat=findViewById(R.id.visceralFat);
         bodyWater=findViewById(R.id.bodyWater);
         bodyFat=findViewById(R.id.bodyFat);
+        boneMass=findViewById(R.id.boneMass);
 
+        muscleMass=findViewById(R.id.muscleMass);
         mUserName= getIntent().getExtras().getString(Constants.USER_NAME);
 
         Logger.log(Level.DEBUG,TAG,"Get m UserName--"+mUserName);
@@ -112,7 +114,8 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
                 height.setText(UserModellist.get(0).getHeight());
                 metabolicAge.setText(UserModellist.get(0).getAge());
                sexType= UserModellist.get(0).getSex();
-
+                mAge=Integer.parseInt(UserModellist.get(0).getAge());
+                mHeight= Integer.parseInt(UserModellist.get(0).getHeight());
 
             }
         }else {
@@ -125,6 +128,8 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
                 height.setText(UserModellist.get(0).getHeight());
                 metabolicAge.setText(UserModellist.get(0).getAge());
                 sexType= UserModellist.get(0).getSex();
+                mAge=Integer.parseInt(UserModellist.get(0).getAge());
+                mHeight= Integer.parseInt(UserModellist.get(0).getHeight());
             }
         }
 
@@ -443,6 +448,9 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
                     if(mFdata[8]==0x01)
                     {
 
+
+                        Logger.log(Level.DEBUG,TAG,"Byte Val="+HexUtil.byteToHexVal(mFdata));
+
                         int body_weight_scale =  mFdata[9] & 0xFF;
                         Log.i("Lock Flag=","Weight Data is locked  or LCD display perfect "+body_weight_scale);
 
@@ -456,21 +464,41 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
                         visceralFat.setText(CannyAlgorithms.
                                 visceralFat(Float.parseFloat(bmiTxt.getText().toString()),Integer.parseInt(
                                 age.getText().toString())));
+                        Logger.log(Level.DEBUG,TAG,"mFdata[12] "+HexUtil.byteToHex(mFdata[12])+" "+"mFdata[13]"
+                                +HexUtil.byteToHex(mFdata[13]));
 
-                        float impulseVal= combineMsbLsb(HexUtil.byteToInt(mFdata[12]),HexUtil.byteToInt(mFdata[13]));
-                        Log.d("Get Your Wt.=","Canny Scale is "+impulseVal);
+
+                    String impulse= (HexUtil.byteToHex(mFdata[12]))+ HexUtil.byteToHex(mFdata[13]);
+                        Log.d("Impulse String","From Canny Scale is"+impulse);
+                        int impulseVal;
+                        if(impulse.equalsIgnoreCase("0000")){
+                            impulseVal=0;
+                        }else{
+                            impulseVal=Integer.parseInt(impulse,16);
+                            Log.d("Get Your impulseVal","From Canny Scale is "+impulseVal);
+                        }
+
                         Log.d("SEX.=","SEX TYPE is "+sexType);
 
-                        Logger.log(Level.DEBUG,TAG,"mFdata[12] "+mFdata[12]+" "+"mFdata[13]" +mFdata[13]);
+                        Logger.log(Level.DEBUG,TAG,"mFdata[12] "+HexUtil.byteToHex(mFdata[12])+" "+"mFdata[13]"
+                                +HexUtil.byteToHex(mFdata[13]));
 
                         if(sexType.equalsIgnoreCase("Male")){
                             bodyFat.setText(CannyAlgorithms.
                                     bodyFatMale(Float.parseFloat(bmiTxt.getText().toString()),Integer.
                                             parseInt(age.getText().toString()),impulseVal));
+
+                            bodyWater.setText(CannyAlgorithms.bodyWaterMale(Float.parseFloat(bodyFat.getText().toString()),mAge));
+                            boneMass.setText(CannyAlgorithms.boneMassMale(Float.parseFloat(bodyFat.getText().toString()),mAge));
+                            muscleMass.setText(CannyAlgorithms.muscleMassMale(mHeight,impulseVal,weightData,mAge));
                         }else{
                             bodyFat.setText(CannyAlgorithms.
                                     bodyFatFeMale(Float.parseFloat(bmiTxt.getText().toString()),Integer.
                                             parseInt(age.getText().toString()),impulseVal));
+
+                            bodyWater.setText(CannyAlgorithms.bodyWaterFeMale(Float.parseFloat(bodyFat.getText().toString()),mAge));
+                            boneMass.setText(CannyAlgorithms.boneMassFeMale(Float.parseFloat(bodyFat.getText().toString()),mAge));
+                            muscleMass.setText(CannyAlgorithms.muscleMassFeMale(mHeight,impulseVal,weightData,mAge));
                         }
 
                     }
@@ -544,15 +572,7 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
         }
     };
 
-    private  int combineMsbLsb(int a, int b)// a= lsb
-    {
 
-        int msb =(b << 8);
-        int lsb =(a & 0x00FF);
-        int result =(msb | lsb);
-
-        return result;
-    }
 
     Handler mHandler;
     boolean mScanning;

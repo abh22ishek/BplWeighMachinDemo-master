@@ -300,7 +300,7 @@
                         app:fontname="centralSansXBold" />
 
                     <customviews.MyCustomTextView
-                        android:id="@+id/bodyMass"
+                        android:id="@+id/boneMass"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/bodyMassText"
@@ -510,7 +510,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/muscleMassText"
-                    android:layout_centerHorizontal="true"
                     android:layout_marginTop="0dp"
                     android:text="@string/dash"
                     android:textColor="@color/text_color"
