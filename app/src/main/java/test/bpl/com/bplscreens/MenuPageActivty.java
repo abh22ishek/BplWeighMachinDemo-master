@@ -15,6 +15,8 @@ import android.widget.*;
 
 import org.jsoup.*;
 
+import java.lang.*;
+import java.lang.Process;
 import java.util.*;
 import java.util.concurrent.*;
 
@@ -108,10 +110,6 @@ public class MenuPageActivty extends FragmentActivity {
 
     private void app_version_dialog(Context context)
     {
-
-
-
-
         dialog = new Dialog(context);
 
         dialog.getWindow().getAttributes().windowAnimations =R.style.DialogBoxAnimation;
@@ -309,20 +307,34 @@ public class MenuPageActivty extends FragmentActivity {
 
 
 
+    ProgressDialog progressDialog;
     @SuppressLint("StaticFieldLeak")
     private  class GetVersionCode extends AsyncTask<String, String, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog=new ProgressDialog(MenuPageActivty.this);
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressDialog.setIndeterminate(true);
+            progressDialog.setCancelable(false);
+            progressDialog.setCanceledOnTouchOutside(false);
+            progressDialog.setMessage("Check version from Playstore..");
+            progressDialog.show();
+        }
+
         @Override
         protected String doInBackground(String... voids) {
 
             String newVersion = null;
             try {
-                newVersion = Jsoup.connect("https://play.google.com/store/apps/details?id=" + MenuPageActivty.this.getPackageName()+"&hl=it")
+                newVersion = Jsoup.connect("https://play.google.com/store/apps/details?id=" + MenuPageActivty.this.getPackageName() + "&hl=it")
                         .timeout(30000)
                         .userAgent("Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6")
                         .referrer("http://www.google.com")
                         .get()
-                        .select("div[itemprop=softwareVersion]")
-                        .first()
+                        .select(".hAyfc .htlgb")
+                        .get(7)
                         .ownText();
                 return newVersion;
             } catch (Exception e) {
@@ -333,9 +345,14 @@ public class MenuPageActivty extends FragmentActivity {
         @Override
         protected void onPostExecute(String onlineVersion) {
             super.onPostExecute(onlineVersion);
-            if (!BuildConfig.VERSION_NAME.equalsIgnoreCase(onlineVersion)) {
 
-                Logger.log(Level.DEBUG,"TAG","Please update App");
+            if(progressDialog.isShowing())
+                progressDialog.dismiss();
+
+
+            if (!BuildConfig.VERSION_NAME.equalsIgnoreCase(onlineVersion)) {
+                Logger.log(Level.DEBUG,"TAG","Please update App= "+onlineVersion );
+
             }
 
         }
