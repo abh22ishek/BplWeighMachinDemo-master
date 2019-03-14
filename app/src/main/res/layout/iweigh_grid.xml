@@ -37,7 +37,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="5dp"
             android:gravity="center"
-            android:text="58.6"
+            android:text="@string/dash"
             android:textColor="@color/text_color"
             android:textSize="@dimen/iweigh_txt"
 
@@ -62,7 +62,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="5dp"
             android:gravity="center"
-            android:text="11-01-2019"
+
             android:textColor="@color/white"
             android:textSize="20sp"
 
@@ -119,7 +119,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="25dp"
+                    android:layout_marginTop="30dp"
                     android:text="@string/bmi"
                     android:textColor="@color/white"
                     android:textSize="20sp"
@@ -127,15 +127,14 @@
                     app:fontname="centralSansXBold" />
 
                 <customviews.MyCustomTextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/bmiTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
+                    android:layout_below="@+id/bmiText"
+
+                    android:layout_centerVertical="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginEnd="40dp"
-                    android:layout_marginBottom="22dp"
-                    android:text="27.5"
+                    android:text="@string/dash"
                     android:textColor="@color/iweigh_orange"
                     android:textSize="21sp"
                     android:textStyle="bold"
@@ -171,7 +170,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/bodywaterText"
-                    android:text="55.2%"
+                    android:text="@string/dash"
                     android:textColor="@color/text_color"
                     android:textSize="19sp"
                     android:layout_centerVertical="true"
@@ -218,7 +217,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/metabolismText"
-                    android:text="1459.9"
+                    android:text="@string/dash"
                     android:textColor="@color/iweigh_sky_blue"
                     android:textSize="20sp"
                     android:layout_centerVertical="true"
@@ -267,7 +266,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/bodyFattext"
-                        android:text="21.8%"
+                        android:text="@string/dash"
                         android:textColor="@color/iweigh_orange"
                         android:textSize="19sp"
                         android:layout_centerVertical="true"
@@ -305,7 +304,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/bodyMassText"
-                        android:text="2.5 Kg"
+                        android:text="@string/dash"
                         android:textColor="@color/red"
                         android:textSize="20sp"
                         android:layout_centerVertical="true"
@@ -342,7 +341,8 @@
             android:orientation="horizontal"
             android:layout_margin="1dp"
             android:layout_height="match_parent"
-            tools:ignore="NestedWeights,UselessLeaf">
+            tools:ignore="NestedWeights,UselessLeaf,UselessParent"
+            android:baselineAligned="false">
 
 
             <RelativeLayout
@@ -372,7 +372,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/proteinText"
-                    android:text="19.2%"
+                    android:text="@string/dash"
                     android:textColor="@color/text_color"
                     android:textSize="20sp"
                     android:layout_centerVertical="true"
@@ -409,7 +409,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/viscText"
-                    android:text="8.0"
+                    android:text="@string/dash"
                     android:textColor="@color/text_color"
                     android:textSize="20sp"
                     android:layout_centerVertical="true"
@@ -444,7 +444,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/bodyAgeText"
-                    android:text="31 Y"
+                    android:text="@string/dash"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:layout_centerVertical="true"
@@ -478,7 +478,7 @@
             android:orientation="horizontal"
 
             android:layout_height="match_parent"
-            tools:ignore="NestedWeights,UselessLeaf"
+            tools:ignore="NestedWeights,UselessLeaf,UselessParent"
             android:baselineAligned="false">
 
 
@@ -512,7 +512,7 @@
                     android:layout_below="@+id/muscleMassText"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="0dp"
-                    android:text="74.3%"
+                    android:text="@string/dash"
                     android:textColor="@color/text_color"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -548,7 +548,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/lbmText"
-                    android:text="50.91 Kg"
+                    android:text="@string/dash"
                     android:textColor="@color/text_color"
                     android:textSize="20sp"
                     android:layout_centerVertical="true"
@@ -582,7 +582,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/obesityText"
-                    android:text="11.9"
+                    android:text="@string/dash"
                     android:textColor="@color/iweigh_orange"
                     android:textSize="20sp"
                     android:layout_centerVertical="true"
@@ -599,7 +599,7 @@
         android:layout_height="0dp"
         android:layout_weight="0.5">
         <TextView
-            android:text="20"
+            android:text="@string/dash"
             android:layout_width="100dp"
             android:gravity="center"
             android:layout_height="wrap_content"
@@ -609,7 +609,7 @@
             android:layout_alignParentBottom="true" />
 
         <TextView
-            android:text="175"
+            android:text="@string/dash"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

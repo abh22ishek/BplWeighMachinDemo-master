@@ -21,11 +21,14 @@ import java.util.*;
 
 import cannyscale.*;
 import constantsP.*;
+import database.*;
 import logger.*;
+import model.*;
 import test.bpl.com.bplscreens.*;
 
 public class IweighHomeScreenActivityl extends FragmentActivity implements IweighNavigation{
 
+    private   ArrayList<UserModel> UserModellist ;
     RelativeLayout bmiRelativeLayout,metabolismRelativeLayout,visceralFatR;
     RelativeLayout muscleMassR,bodyFatR,bodyAgeR,proteinR,boneMassR,bodyWaterR,lbmR;
     LinearLayout menu_bar;
@@ -41,9 +44,21 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
     private BluetoothAdapter mBluetoothAdapter;
     private boolean isDiscovery;
     // Stops scanning after some seconds.
-    private static final long SCAN_PERIOD = 5000;
+    private static final long SCAN_PERIOD = 7000;
 
 
+
+    private TextView readingWeight,bmiTxt;
+    private Button btn_save;
+
+    TextView date;
+    String mUserName;
+    private GlobalClass globalVariable;
+
+    private TextView height,age,metabolicAge,visceralFat,bodyWater,bodyFat;
+
+
+    String sexType;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,8 +75,58 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
         bodyWaterR=findViewById(R.id.bodyWaterR);
         lbmR=findViewById(R.id.LBMR);
 
+        height=findViewById(R.id.txtheight_);
+        age=findViewById(R.id.txtage_);
         settings=findViewById(R.id.img_settings);
         record=findViewById(R.id.img_records);
+
+        date=findViewById(R.id.date);
+        date.setText(DateTime.getCurrentDate());
+        btn_save=findViewById(R.id.btn_save);
+        btn_save.setText(getString(R.string.scan));
+
+        bmiTxt=findViewById(R.id.bmiTxt);
+        metabolicAge=findViewById(R.id.metabolicAge);
+
+        readingWeight=findViewById(R.id.readingWeight);
+        visceralFat=findViewById(R.id.visceralFat);
+        bodyWater=findViewById(R.id.bodyWater);
+        bodyFat=findViewById(R.id.bodyFat);
+
+        mUserName= getIntent().getExtras().getString(Constants.USER_NAME);
+
+        Logger.log(Level.DEBUG,TAG,"Get m UserName--"+mUserName);
+
+
+        globalVariable = (GlobalClass) getApplicationContext();
+
+
+        if(globalVariable.getUserType().equalsIgnoreCase(Constants.USE_TYPE_HOME)) {
+            DatabaseManager.getInstance().openDatabase();
+
+            UserModellist = new ArrayList<>(DatabaseManager.getInstance().getMemberprofilecontent(mUserName));
+
+            if (UserModellist.size() > 0) {
+                age.setText(UserModellist.get(0).getAge());
+                //   weight.setText(UserModellist.get(0).getWeight());
+                height.setText(UserModellist.get(0).getHeight());
+                metabolicAge.setText(UserModellist.get(0).getAge());
+               sexType= UserModellist.get(0).getSex();
+
+
+            }
+        }else {
+            UserModellist = new ArrayList<>(DatabaseManager.getInstance().
+                    getAllUserprofilecontent(globalVariable.getUsername(), ""));
+
+            if (UserModellist.size() > 0) {
+
+                age.setText(UserModellist.get(0).getAge());
+                height.setText(UserModellist.get(0).getHeight());
+                metabolicAge.setText(UserModellist.get(0).getAge());
+                sexType= UserModellist.get(0).getSex();
+            }
+        }
 
         BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
         mBluetoothAdapter = bluetoothManager.getAdapter();
@@ -79,6 +144,15 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
             }
         });
 
+        btn_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(mHandler==null){
+                    mHandler=new Handler();
+                }
+                scanLeDevice();
+            }
+        });
 
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -227,10 +301,8 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
         Logger.log(Level.DEBUG,"On Resume()","called");
         menu_bar.setVisibility(View.VISIBLE);
 
-        if(mHandler==null){
-            mHandler=new Handler();
-        }
-        scanLeDevice();
+
+
     }
 
     @Override
@@ -306,8 +378,10 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
 
 
             ScanRecord scanRecord= null;
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+
                 scanRecord = result.getScanRecord();
+
+               // Logger.log(Level.DEBUG,TAG,"Scan Record -->"+scanRecord);
 
                 if(result.getDevice().getName()!=null && result.getDevice().getName().contains("ADV"))
                 {
@@ -348,7 +422,7 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
                     {
 
                         int body_weight_scale =  mFdata[7] & 0xFF;
-                        Log.i("Wt. Type=","Body Weight Type is"+body_weight_scale);
+                        Log.i("Wt. Type=","Body Weight Type is "+body_weight_scale);
                     }
 
 
@@ -375,10 +449,30 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
                         //int weightData= combineMsbLsb(mFdata[10] & 0xFF,mFdata[11] & 0xFF);
                         float weightData= (HexUtil.byteToInt(mFdata[10])*256.0f+HexUtil.byteToInt(mFdata[11])*1.0f)/10.0f;
                         Log.d("Get Your Wt.=","Canny Scale is "+weightData);
+                        readingWeight.setText(String.valueOf(weightData));
+                        bmiTxt.setText(CannyAlgorithms.calculate_bmi(weightData,Integer.parseInt(height
+                                .getText().toString().trim())));
 
+                        visceralFat.setText(CannyAlgorithms.
+                                visceralFat(Float.parseFloat(bmiTxt.getText().toString()),Integer.parseInt(
+                                age.getText().toString())));
 
                         float impulseVal= combineMsbLsb(HexUtil.byteToInt(mFdata[12]),HexUtil.byteToInt(mFdata[13]));
                         Log.d("Get Your Wt.=","Canny Scale is "+impulseVal);
+                        Log.d("SEX.=","SEX TYPE is "+sexType);
+
+                        Logger.log(Level.DEBUG,TAG,"mFdata[12] "+mFdata[12]+" "+"mFdata[13]" +mFdata[13]);
+
+                        if(sexType.equalsIgnoreCase("Male")){
+                            bodyFat.setText(CannyAlgorithms.
+                                    bodyFatMale(Float.parseFloat(bmiTxt.getText().toString()),Integer.
+                                            parseInt(age.getText().toString()),impulseVal));
+                        }else{
+                            bodyFat.setText(CannyAlgorithms.
+                                    bodyFatFeMale(Float.parseFloat(bmiTxt.getText().toString()),Integer.
+                                            parseInt(age.getText().toString()),impulseVal));
+                        }
+
                     }
 
                     int lockSerialNo= mFdata[9] & 0xFF;
@@ -417,7 +511,7 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
                 }
 
 
-            }
+
 
 
 
@@ -494,6 +588,7 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
 
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private void  scan_bt_device()
     {
         IntentFilter filter = new IntentFilter();
@@ -507,10 +602,10 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
         }
 
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+
             mBluetoothAdapter.getBluetoothLeScanner().startScan(scancallback);
             pd.show();
-        }
+
 
     }
 

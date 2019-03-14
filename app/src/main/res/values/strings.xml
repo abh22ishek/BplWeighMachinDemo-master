@@ -951,4 +951,6 @@ ALONG WITH PRIVACY POLICY WITH  AND HAVE UNDERSTOOD IT, AND AGREE THAT THEY WILL
     <string name="sel_use_type">Select a Use Type</string>
     <string name="share">Share</string>
     <string name="chk_up">Check Update</string>
+    <string name="scan">Scan</string>
+    <string name="dash">--</string>
 </resources>

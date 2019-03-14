@@ -1,10 +1,14 @@
 package cannyscale;
 
+import java.util.*;
+
+import logger.*;
+
 public class CannyAlgorithms {
 
 
 
-    public static String bodyFatMale(float bmi, int age , int imp){
+    public static String bodyFatMale(float bmi, int age , float imp){
 
         String bodyFat;
 
@@ -13,12 +17,15 @@ public class CannyAlgorithms {
 
         bodyFat=String.valueOf(fat);
 
+        Locale locale=  Locale.getDefault();
+        Logger.log(Level.DEBUG,"Body Fat Male is ",bodyFat);
+      //  String bFat = String.format(locale,"%.1f",bodyFat);
         return  bodyFat;
 
     }
 
 
-    public static String bodyFatFeMale(float bmi, int age , int imp){
+    public static String bodyFatFeMale(float bmi, int age , float imp){
 
         String bodyFat;
 
@@ -27,6 +34,7 @@ public class CannyAlgorithms {
 
         bodyFat=String.valueOf(fat);
 
+        Logger.log(Level.DEBUG,"Body Fat FeMale is ",bodyFat);
         return  bodyFat;
 
     }
@@ -38,9 +46,7 @@ public class CannyAlgorithms {
 
         String visceralFat;
 
-
         float k1=0,k2=0;
-
 
         if(bmi >0 && bmi< 18.8f){
             k1=0.1f;
@@ -62,7 +68,10 @@ public class CannyAlgorithms {
 
 
         visceralFat= String.valueOf(k1*age+k2);
+        Logger.log(Level.DEBUG,"Visceral Fat  is ",visceralFat);
 
+        Locale locale=  Locale.getDefault();
+      // String vis = String.format(locale,"%.1f",visceralFat);
         return  visceralFat;
 
     }
@@ -115,8 +124,6 @@ public class CannyAlgorithms {
     }
 
 
-
-
     public static String boneMassMale(float fat,  float weight){    // TBW
 
         double muscle=((1-fat/100)*0.93*weight+0.3 )*(0.052-0.357);
@@ -134,5 +141,33 @@ public class CannyAlgorithms {
 
         return  boneMass;
 
+    }
+
+
+
+
+    public static String calculate_bmi(float weight, float height) {
+
+        Logger.log(Level.DEBUG,"Get weight and height value =",weight+" "+height);
+
+        float  heightS=((height/100)*(height/100));
+        Logger.log(Level.DEBUG,"Get HeightS ="," "+heightS);
+        float bmi=weight/heightS;
+        Logger.log(Level.DEBUG,"BMI Algorithm=",""+bmi);
+        String s="";
+
+
+        try{
+          Locale locale=  Locale.getDefault();
+             s = String.format(locale,"%.1f",bmi);
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+
+        Logger.log(Level.DEBUG,"Get BMI value =",s);
+        return s;
     }
 }

@@ -252,4 +252,8 @@ public class Constants {
     public static String SELECTED_MAC_ID_BT02="";
     public static String SELECTED_SERIAL_NO_ID_BT02="";
 
+
+    public static final String USE_TYPE_HOME="Home";
+    public static final String USE_TYPE_CLINIC="Clinic";
+
 }
