@@ -27,7 +27,7 @@ public class WeighingMachineUsersguide extends Activity {
 
 
 
-                    user_guide_content.setText(getString(R.string.weigh_machine_manual_1));
+                    user_guide_content.setText(getString(R.string.bpl_iweigh_user_guide));
                 header_title.setText(getApplicationContext().getString(R.string.weigh_mc));
 
 

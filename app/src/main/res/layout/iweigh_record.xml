@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@mipmap/bpl_be_well_parameter_bg"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/include"
+        android:layout_height="wrap_content">
+
+
+
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imgBackKey"
+            android:padding="0dp"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/back"
+            android:layout_alignParentStart="true"
+            android:src="@mipmap/ic_chevron_left_white_48dp" />
+
+        <!--<View
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:background="@color/white"
+            android:layout_margin="5dp"
+
+            android:layout_alignBottom="@+id/imgBackKey"
+            android:layout_toEndOf="@+id/imgBackKey"
+            android:id="@+id/view" />-->
+
+        <customviews.MyCustomTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/base_header_title"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            app:fontname="centralSansXBold"
+            android:id="@+id/base_header_title"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            tools:ignore="RelativeOverlap" />
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/optionSettings"
+            android:padding="0dp"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/settings"
+            android:layout_alignParentEnd="true"
+            android:visibility="visible"
+            android:src="@mipmap/options_settings" />
+
+
+
+    </RelativeLayout>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:padding="1dp"
+        android:scrollbars="none"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="2dp"
+                android:background="@drawable/home_bg"
+                android:layout_height="40dp">
+
+                <customviews.MyCustomTextView
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/weight"
+                    android:textStyle="bold"
+                    app:fontname="centralSansXBold"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="0dp"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    />
+                <View android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:layout_margin="3dp"
+                    />
+
+                <customviews.MyCustomTextView
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bmi"
+                    android:textStyle="bold"
+                    app:fontname="centralSansXBold"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    />
+                <View android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:layout_margin="3dp"
+                    />
+
+
+                <customviews.MyCustomTextView
+                    android:layout_width="75dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/time"
+                    android:layout_marginStart="10dp"
+                    android:textStyle="bold"
+                    android:paddingStart="5dp"
+                    app:fontname="centralSansXBold"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    tools:ignore="RtlSymmetry" />
+
+                <View android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:layout_margin="3dp"
+                    />
+
+                <customviews.MyCustomTextView
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/report"
+                    android:textStyle="bold"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="0dp"
+
+                    app:fontname="centralSansXBold"
+                    android:layout_marginStart="1dp"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    />
+
+
+                <View android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:layout_margin="3dp"
+                    />
+
+                <customviews.MyCustomTextView
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/chart"
+                    android:textStyle="bold"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="0dp"
+                    app:fontname="centralSansXBold"
+                    android:layout_marginStart="1dp"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    />
+                <View android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:layout_margin="3dp"
+                    />
+
+                <customviews.MyCustomTextView
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sha"
+                    android:textStyle="bold"
+
+                    android:paddingEnd="0dp"
+
+                    android:paddingStart="7dp"
+                    app:fontname="centralSansXBold"
+                    android:layout_marginStart="1dp"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    />
+                <View android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:layout_margin="3dp"
+                    />
+
+                <customviews.MyCustomTextView
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/delete"
+                    android:textStyle="bold"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="0dp"
+                    app:fontname="centralSansXBold"
+                    android:layout_marginStart="8dp"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    />
+
+
+                <customviews.MyCustomTextView
+                    android:layout_width="10dp"
+                    android:layout_height="40dp"
+
+                    android:textStyle="bold"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="0dp"
+                    app:fontname="centralSansXBold"
+                    android:layout_marginStart="10dp"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    />
+
+
+            </LinearLayout>
+
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="0dp"
+                android:layout_margin="0dp"
+                android:id="@+id/recycler_view" />
+
+        </LinearLayout>
+    </HorizontalScrollView>
+</LinearLayout>

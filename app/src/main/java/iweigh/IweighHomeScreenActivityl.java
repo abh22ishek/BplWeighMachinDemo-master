@@ -5,6 +5,7 @@ import android.app.*;
 import android.bluetooth.*;
 import android.bluetooth.le.*;
 import android.content.*;
+import android.database.sqlite.*;
 import android.os.*;
 import android.support.annotation.*;
 import android.support.v4.app.Fragment;
@@ -25,9 +26,11 @@ import logger.*;
 import model.*;
 import test.bpl.com.bplscreens.*;
 
+import static constantsP.DateTime.getDateTime;
+
 public class IweighHomeScreenActivityl extends FragmentActivity implements IweighNavigation{
 
-    private   ArrayList<UserModel> UserModellist ;
+    private ArrayList<UserModel> UserModellist ;
     RelativeLayout bmiRelativeLayout,metabolismRelativeLayout,visceralFatR;
     RelativeLayout muscleMassR,bodyFatR,bodyAgeR,proteinR,boneMassR,bodyWaterR,lbmR;
     LinearLayout menu_bar;
@@ -59,7 +62,10 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
 
     String sexType;
 
-    int mAge=0,mHeight,mWeight;
+    int mAge=0,mHeight;
+
+    String mBMI,mWeight, mMetabolism="NA",mbodyWater,mBodyFat,
+            mBoneMass,mProtein="NA",mVisceralFat,mBodyAge="NA",mMuscleMass,mLBM="NA",mObesity="NA";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -185,10 +191,12 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
                     options = ActivityOptions.makeSceneTransitionAnimation(IweighHomeScreenActivityl.this);
 
-                    startActivity(new Intent(IweighHomeScreenActivityl.this, IweighRecordsActivity.class)
+                    startActivity(new Intent(IweighHomeScreenActivityl.this, IweighRecordsActivity.class).
+                            putExtra(Constants.USER_NAME,mUserName)
                             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), options.toBundle());
                 } else {
                     startActivity(new Intent(IweighHomeScreenActivityl.this, IweighRecordsActivity.class)
+                            .  putExtra(Constants.USER_NAME,mUserName)
                             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 }
             }
@@ -464,6 +472,11 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
                         visceralFat.setText(CannyAlgorithms.
                                 visceralFat(Float.parseFloat(bmiTxt.getText().toString()),Integer.parseInt(
                                 age.getText().toString())));
+
+                        mVisceralFat=visceralFat.getText().toString().trim();
+                        mWeight=readingWeight.getText().toString().trim();
+                        mBMI=bmiTxt.getText().toString().trim();
+
                         Logger.log(Level.DEBUG,TAG,"mFdata[12] "+HexUtil.byteToHex(mFdata[12])+" "+"mFdata[13]"
                                 +HexUtil.byteToHex(mFdata[13]));
 
@@ -491,6 +504,14 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
                             bodyWater.setText(CannyAlgorithms.bodyWaterMale(Float.parseFloat(bodyFat.getText().toString()),mAge));
                             boneMass.setText(CannyAlgorithms.boneMassMale(Float.parseFloat(bodyFat.getText().toString()),mAge));
                             muscleMass.setText(CannyAlgorithms.muscleMassMale(mHeight,impulseVal,weightData,mAge));
+
+                            mBodyFat=bodyFat.getText().toString().trim();
+                            mbodyWater=bodyWater.getText().toString().trim();
+                            mBoneMass=boneMass.getText().toString().trim();
+                            mMuscleMass=muscleMass.getText().toString().trim();
+
+
+
                         }else{
                             bodyFat.setText(CannyAlgorithms.
                                     bodyFatFeMale(Float.parseFloat(bmiTxt.getText().toString()),Integer.
@@ -499,8 +520,15 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
                             bodyWater.setText(CannyAlgorithms.bodyWaterFeMale(Float.parseFloat(bodyFat.getText().toString()),mAge));
                             boneMass.setText(CannyAlgorithms.boneMassFeMale(Float.parseFloat(bodyFat.getText().toString()),mAge));
                             muscleMass.setText(CannyAlgorithms.muscleMassFeMale(mHeight,impulseVal,weightData,mAge));
+
+                            mBodyFat=bodyFat.getText().toString().trim();
+                            mbodyWater=bodyWater.getText().toString().trim();
+                            mBoneMass=boneMass.getText().toString().trim();
+                            mMuscleMass=muscleMass.getText().toString().trim();
+
                         }
 
+                        SaveWeightData();
                     }
 
                     int lockSerialNo= mFdata[9] & 0xFF;
@@ -652,5 +680,69 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
             }
         }
     };
+
+
+
+
+    private void SaveWeightData()
+    {
+        String username="";
+        if(globalVariable.getUsername()!=null){
+            username=globalVariable.getUsername();
+        }
+
+
+        try{
+            SQLiteDatabase database = DatabaseManager.getInstance().openDatabase();
+            database.insert(BplOximterdbHelper.TABLE_NAME_WEIGHT_MACHINE_B, null,
+                    content_values_weight(username, mUserName,getDateTime(),
+                            mBMI,mWeight,mMetabolism,mbodyWater,mBodyFat,mBoneMass,
+                            mProtein,mVisceralFat,mBodyAge,mMuscleMass,mLBM,mObesity));
+
+            database.insert(BplOximterdbHelper.TABLE_NAME_LAST_ACTIVITY_USERS,null, Utility.
+                    lastActivityUsers(username,
+                            mUserName,Constants.DEVICE_PARAMETER_IWEIGH,DateTime.getCurrentDate(),
+                            globalVariable.getUserType()));
+
+            Logger.log(Level.DEBUG,TAG,"---Weight Successfully Saved into Database--");
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    public ContentValues content_values_weight(String username, String userSelected,String date_time,
+                                               String bmi,
+                                               String measured_weight,String metabol,
+                                               String bdy_water,String bdy_fat,String bone_mass,
+                                               String protein,String viscFat,String BdyAge,String muscMass,String lbm,String obesity) {
+        ContentValues values = new ContentValues();
+
+        values.put(BplOximterdbHelper.USER_NAME, username);
+        values.put(BplOximterdbHelper.USER_NAME_, userSelected);
+        values.put(BplOximterdbHelper.MEASURED_WEIGHT_DATE,date_time);
+        values.put(BplOximterdbHelper.MEASURED_BMI,bmi);
+        values.put(BplOximterdbHelper.MEASURED_WEIGHT,measured_weight);
+
+        values.put(BplOximterdbHelper.METABOLISM,metabol);
+        values.put(BplOximterdbHelper.BODY_WATER,bdy_water);
+        values.put(BplOximterdbHelper.BODY_FAT,bdy_fat);
+        values.put(BplOximterdbHelper.BONE_MASS,bone_mass);
+        values.put(BplOximterdbHelper.PROTEIN,protein);
+
+        values.put(BplOximterdbHelper.VISCERAL_FAT,viscFat);
+        values.put(BplOximterdbHelper.BODY_AGE,BdyAge);
+        values.put(BplOximterdbHelper.MUSCLE_MASS,muscMass);
+        values.put(BplOximterdbHelper.LBM,lbm);
+        values.put(BplOximterdbHelper.OBESITY,obesity);
+
+
+
+        return values;
+
+    }
 
 }

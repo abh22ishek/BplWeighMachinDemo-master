@@ -207,7 +207,10 @@ public class OximeterMainActivity extends Activity {
                 if(adapterView.getItemAtPosition(i).equals(getString(R.string.weigh_mc)))
                 {
 
-                    Toast.makeText(OximeterMainActivity.this,"Coming Soon",Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(OximeterMainActivity.this,"Coming Soon",Toast.LENGTH_SHORT).show();
+
+                    startActivity(new Intent(OximeterMainActivity.this,WeighingMachineUsersguide.class).
+                            setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
 
                 }else if(adapterView.getItemAtPosition(i).equals(getString(R.string.ioxy)))
                 {

@@ -533,6 +533,58 @@ private final String TAG="DatabaseManager";
             m.setBmi(Float.parseFloat(cursor.getString(cursor.getColumnIndex(MEASURED_BMI))));
             m.setWeight(Float.parseFloat(cursor.getString(cursor.getColumnIndex(MEASURED_WEIGHT))));
 
+
+            if(cursor.getString(cursor.getColumnIndex(METABOLISM)).equalsIgnoreCase("NA")){
+                m.setMetabolism(0f);
+            }else{
+                m.setMetabolism(Float.parseFloat(cursor.getString(cursor.getColumnIndex(METABOLISM))));
+            }
+
+            m.setBodyWater(Float.parseFloat(cursor.getString(cursor.getColumnIndex(BODY_WATER))));
+
+            m.setBodyFat(Float.parseFloat(cursor.getString(cursor.getColumnIndex(BODY_FAT))));
+
+            m.setBoneMass(Float.parseFloat(cursor.getString(cursor.getColumnIndex(BONE_MASS))));
+
+            if(cursor.getString(cursor.getColumnIndex(PROTEIN)).equalsIgnoreCase("NA")){
+                m.setProtein(0f);
+            }else{
+                m.setProtein(Float.parseFloat(cursor.getString(cursor.getColumnIndex(PROTEIN))));
+            }
+
+
+
+            m.setVisceralFat(Float.parseFloat(cursor.getString(cursor.getColumnIndex(VISCERAL_FAT))));
+
+            if(cursor.getString(cursor.getColumnIndex(BODY_AGE)).equalsIgnoreCase("NA")){
+                m.setBodyAge(0);
+            }else{
+                m.setBodyAge(Integer.parseInt(cursor.getString(cursor.getColumnIndex(BODY_AGE))));
+            }
+
+
+
+            m.setMuscleMass(Float.parseFloat(cursor.getString(cursor.getColumnIndex(MUSCLE_MASS))));
+
+
+            if(cursor.getString(cursor.getColumnIndex(LBM)).equalsIgnoreCase("NA")){
+                m.setLBM(0);
+            }else{
+                m.setLBM(Float.parseFloat(cursor.getString(cursor.getColumnIndex(LBM))));
+
+            }
+
+
+            if(cursor.getString(cursor.getColumnIndex(OBESITY)).equalsIgnoreCase("NA")){
+                m.setObesity(0);
+            }else{
+                m.setObesity(Float.parseFloat(cursor.getString(cursor.getColumnIndex(OBESITY))));
+
+            }
+
+
+
+
             user_weight_list.add(m);
         }
         cursor.close();

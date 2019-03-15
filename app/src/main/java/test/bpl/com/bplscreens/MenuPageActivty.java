@@ -241,9 +241,9 @@ public class MenuPageActivty extends FragmentActivity {
 
                 if(adapterView.getItemAtPosition(i).equals(getString(R.string.weigh_mc)))
                 {
-                    Toast.makeText(MenuPageActivty.this,"Coming Soon",Toast.LENGTH_SHORT).show();
-                    return;
-                  /*  ActivityOptions options;
+                    //Toast.makeText(MenuPageActivty.this,"Coming Soon",Toast.LENGTH_SHORT).show();
+                   // return;
+                    ActivityOptions options;
                     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
                         options = ActivityOptions.makeSceneTransitionAnimation(MenuPageActivty.this);
 
@@ -257,7 +257,7 @@ public class MenuPageActivty extends FragmentActivity {
                                 intent.putExtra("weigh machine","weigh machine 2");
                                intent. setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
-                    }*/
+                    }
                 }else if(adapterView.getItemAtPosition(i).equals(getString(R.string.ioxy)))
                 {
                     ActivityOptions options;

@@ -12,7 +12,7 @@
 
     
     <string name="ioxy">BPLBeWell iOxy</string>
-    <string name="weigh_mc">BPLBeWell iWeigh</string>
+    <string name="weigh_mc">iWeigh User\'s Guide</string>
     <string name="bp">BPLBeWell iPressure BT02</string>
       <!--user details strings-->
     <string name="name">Name</string>
@@ -953,4 +953,31 @@ ALONG WITH PRIVACY POLICY WITH  AND HAVE UNDERSTOOD IT, AND AGREE THAT THEY WILL
     <string name="chk_up">Check Update</string>
     <string name="scan">Scan</string>
     <string name="dash">--</string>
+
+
+
+    <string name="bpl_iweigh_user_guide">
+         <b>Preparation before Measurement</b>\n\n
+
+1. Please make sure good contact between bare feet and the metal electrodes, otherwise it will
+display your weight only.\n\n
+
+
+2. Ensure the scale is on a flat, even and firm surface. Avoid carpet or soft surfaces.\n\n
+
+3. The surface of the scale will be slippery if wet. Please make sure both the glass and your feet are
+dry before use.\n
+
+4. This scale is not water proof. Do not expose to moisture.\n
+
+5. Clean the scale with a slightly damp cloth. DO not use any chemical/abrasive cleaning agents to
+clean the scale.\n\n
+
+6. Please remove the batteries, if the scale is not to being used for a long time.\n
+
+7. The appliance is intended solely for domestic use within the home.\n
+
+8.Children should be supervised to ensure that they do not play with the appliance.\n
+
+</string>
 </resources>

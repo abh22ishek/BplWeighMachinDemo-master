@@ -96,6 +96,20 @@ public class BplOximterdbHelper extends SQLiteOpenHelper {
     public static  final String MEASURED_BMI="measured_weight_bmi";
 
 
+    public static  final String METABOLISM="metabolism";
+    public static  final String BODY_WATER="body_water";
+
+    public static  final String BODY_FAT="body_fat";
+    public static  final String BONE_MASS="bone_mass";
+
+    public static  final String VISCERAL_FAT="visceral_fat";
+    public static  final String PROTEIN="protein";
+
+    public static  final String BODY_AGE="body_age";
+    public static  final String MUSCLE_MASS="muscle_mass";
+
+    public static  final String LBM="lbm";
+    public static  final String OBESITY="obesity";
 
     // bio light parameters
 
@@ -168,7 +182,19 @@ public static final String CREATE_TABLE_HOME_PROFILE="CREATE TABLE " +TABLE_NAME
             +USER_NAME+" "+"text"+","+USER_NAME_+" "+"text"+","
             +MEASURED_WEIGHT_DATE+" "+"text"+","
             +MEASURED_BMI+" "+"text"+","
-            +MEASURED_WEIGHT+" "+"text"+")";
+            +MEASURED_WEIGHT+" "+"text"+","
+
+            +METABOLISM+" "+"text"+","
+            +BODY_WATER+" "+"text"+","
+            +BODY_FAT+" "+"text"+","
+            +BONE_MASS+" "+"text"+","
+            +PROTEIN+" "+"text"+","
+
+            +VISCERAL_FAT+" "+"text"+","
+            +BODY_AGE+" "+"text"+","
+            +MUSCLE_MASS+" "+"text"+","
+            +LBM+" "+"text"+","
+            +OBESITY+" "+"text" +")";
 
 
 
@@ -250,7 +276,10 @@ public static final String CREATE_TABLE_HOME_PROFILE="CREATE TABLE " +TABLE_NAME
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_LAST_ACTIVITY_USERS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_HOME_PROFILE);
         onCreate(db);
-     /*   if(oldVersion<1)
+
+
+
+        /*if(oldVersion<1)
         {
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_WEIGHT_MACHINE_B);
         }*/

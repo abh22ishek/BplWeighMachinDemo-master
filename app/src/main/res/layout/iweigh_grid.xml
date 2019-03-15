@@ -400,7 +400,7 @@
                     android:layout_gravity="center"
                     android:text="@string/visc_fat"
                     android:textColor="@color/white"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     app:fontname="centralSansXBold" />
 
@@ -409,11 +409,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/viscText"
+                    android:layout_centerHorizontal="true"
                     android:text="@string/dash"
                     android:textColor="@color/text_color"
                     android:textSize="20sp"
-                    android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true"
                     android:textStyle="bold"
                     app:fontname="centralSansXBold" />
             </RelativeLayout>
@@ -509,12 +508,14 @@
                     android:id="@+id/muscleMass"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:layout_below="@+id/muscleMassText"
                     android:layout_marginTop="0dp"
                     android:text="@string/dash"
                     android:textColor="@color/text_color"
                     android:textSize="20sp"
                     android:textStyle="bold"
+                    android:layout_centerHorizontal="true"
                     app:fontname="centralSansXBold" />
             </RelativeLayout>
 
@@ -568,7 +569,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="10dp"
                     android:layout_gravity="center"
                     android:text="@string/obesity"
                     android:textColor="@color/white"
