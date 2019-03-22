@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:id="@+id/iv_scroll"
+    android:layout_width="match_parent"
+    android:background="@mipmap/bpl_be_well_parameter_bg"
+    android:layout_height="match_parent">
+    <include layout="@layout/baseheader"
+
+        />
+
+
+
+
+
+
+    <include layout="@layout/iweigh_rep"
+
+
+        />
+
+
+    <io.github.yavski.fabspeeddial.FabSpeedDial
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|end"
+        app:fabGravity="bottom_end"
+        app:fabMenu="@menu/menu"
+
+        android:layout_marginBottom="@dimen/fab_speed_margin_bottom_iweighr"
+        android:id="@+id/fabSpeedDial"
+        app:miniFabBackgroundTint="@color/colorAccent"
+        app:miniFabDrawableTint="@color/white"
+        app:miniFabTitleTextColor="@color/colorAccent"
+
+        />
+
+
+</FrameLayout>

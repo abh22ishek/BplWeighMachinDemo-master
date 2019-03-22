@@ -93,7 +93,7 @@ public class IweighRecordsActivity extends FragmentActivity  implements ViewList
             recyclerView.setLayoutManager(layoutManager);
 
             CannyRecyclerView recyclerViewAdapter=new
-                    CannyRecyclerView(IweighRecordsActivity.this,UserMeasuredWeightList);
+                    CannyRecyclerView(IweighRecordsActivity.this,UserMeasuredWeightList,mUserName);
 
             recyclerView.setAdapter(recyclerViewAdapter);
 

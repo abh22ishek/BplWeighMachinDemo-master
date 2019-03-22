@@ -328,9 +328,7 @@ public class BioLightRecyclerViewAdapter extends  RecyclerView.Adapter<BioLightR
             }
         }else if(systolic >=180)
         {
-
             typeBP= Constants.SEVERE_HYPERTENSION;
-
         }
 
         return  typeBP;

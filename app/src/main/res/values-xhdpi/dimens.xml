@@ -5,6 +5,7 @@
     <dimen name="bmi_margin_top">5dp</dimen>
     <dimen name="needle_margin_bottom">134dp</dimen>
     <dimen name="fab_speed_margin_bottom">70dp</dimen>
+    <dimen name="fab_speed_margin_bottom_iweighr">90dp</dimen>
     <dimen name="iweigh_txt">86sp</dimen>
     <dimen name="text_bio">15sp</dimen>
 </resources>

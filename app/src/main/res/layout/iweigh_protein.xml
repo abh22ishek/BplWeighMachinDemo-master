@@ -21,13 +21,17 @@
             android:layout_width="match_parent"
             android:orientation="vertical"
 
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+
             android:layout_height="match_parent"
             tools:ignore="UselessParent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="vertical"
-                android:layout_weight="1"
+                android:layout_weight="1.7"
                 android:background="#212637"
                 android:layout_height="match_parent">
 
@@ -155,16 +159,32 @@
                         >
 
 
-                        <!-- <ImageView
+                        <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="15dp"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginLeft="10dp"
+                            android:layout_gravity="bottom|center_horizontal"
+                            android:layout_marginBottom="@dimen/needle_margin_bottom"
+                            android:src="@mipmap/needle"
+                            android:contentDescription="@string/bmi"
+                            android:id="@+id/needle" />
+                        <customviews.MyCustomTextView
+                            android:text="27.3"
+                            android:textSize="70sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/red"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:fontname="avangami"
+                            android:layout_gravity="bottom|center_horizontal"
 
-                            android:src="@mipmap/bmi_scale"
-                            android:id="@+id/imageView4" />-->
+                            android:layout_marginBottom="36dp"
+                            android:id="@+id/bmi_value" />
+
+                        <cannyscale.CannyUnitsCustomView
+                            android:id="@+id/curvePathView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="300dp"
+                            android:layout_marginTop="@dimen/margin_top_guage" />
 
                     </FrameLayout>
 

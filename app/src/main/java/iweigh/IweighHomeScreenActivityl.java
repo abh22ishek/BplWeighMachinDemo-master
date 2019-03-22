@@ -37,7 +37,7 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
     String headerBar="";
 
     private final String TAG=IweighHomeScreenActivityl.class.getSimpleName();
-    ImageView settings,record;
+    ImageView settings,record,help;
 
     ProgressDialog pd;
 
@@ -94,6 +94,28 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
         bmiTxt=findViewById(R.id.bmiTxt);
         metabolicAge=findViewById(R.id.metabolicAge);
 
+        help=findViewById(R.id.img_help);
+        help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActivityOptions options;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                    options = ActivityOptions.makeSceneTransitionAnimation(IweighHomeScreenActivityl.this);
+
+                    Intent intent=new Intent(IweighHomeScreenActivityl.this,
+                            WeighingMachineUsersguide.class);
+                    intent.putExtra("weigh machine","weigh machine 2");
+                    intent   .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent,options.toBundle());
+                }else{
+
+                    Intent intent=new Intent(IweighHomeScreenActivityl.this, WeighingMachineUsersguide.class);
+                    intent.putExtra("weigh machine","weigh machine 2");
+                    intent. setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }
+            }
+        });
         readingWeight=findViewById(R.id.readingWeight);
         visceralFat=findViewById(R.id.visceralFat);
         bodyWater=findViewById(R.id.bodyWater);

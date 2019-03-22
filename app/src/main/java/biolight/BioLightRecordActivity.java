@@ -86,7 +86,6 @@ public class BioLightRecordActivity extends Activity implements BioLightListner{
                             {
                                 Toast.makeText(BioLightRecordActivity.this,
                                         "Storage Permission is necessary to generate .txt File ",Toast.LENGTH_SHORT).show();
-
                             }
 
                         }
@@ -159,13 +158,11 @@ public class BioLightRecordActivity extends Activity implements BioLightListner{
         if(mRecordDetailList!=null){
 
             for(BPMeasurementModel m:mRecordDetailList){
-
                 dateTimeList.add(m.getMeasurementTime());
             }
         }
 
         Logger.log(Level.DEBUG,TAG,"// get Measurement Time List // "+dateTimeList);
-
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(recyclerViewAdapter);
 
@@ -173,6 +170,7 @@ public class BioLightRecordActivity extends Activity implements BioLightListner{
 
 
         File listOfUsersFile;
+
     private  void  createUsersTextFile(String fileName, String userName,String loggedinEmailDir, StringBuilder data) {
         String fileNameDir =Constants.BPL_FOLDER;
 
@@ -243,7 +241,6 @@ public class BioLightRecordActivity extends Activity implements BioLightListner{
                         File   mFile = new File(Environment.getExternalStorageDirectory() +
                                 "/"+Constants.BPL_FOLDER+"/"+globalVariable.getUsername()+"/"+mUserName+"/"+mUserName+"_"+ currentTime+"_BPL_iPressure_BT02"+".txt");
 
-
                         Logger.log(Level.DEBUG,TAG,"get path="+mFile.getAbsolutePath());
                         Intent target = new Intent(Intent.ACTION_VIEW);
 
@@ -269,13 +266,11 @@ public class BioLightRecordActivity extends Activity implements BioLightListner{
                     } else if (which == 1) {
                         // Share
 
-
-                     File   mFile = new File(Environment.getExternalStorageDirectory() +
-                                "/"+Constants.BPL_FOLDER+"/"+globalVariable.getUsername()+"/" +mUserName+"/"+mUserName+"_"+ currentTime+"_BPL_iPressure_BT02"+".txt");
-
+                        File   mFile = new File(Environment.getExternalStorageDirectory() +
+                                "/"+Constants.BPL_FOLDER+"/"+globalVariable.getUsername()+"/"
+                             +mUserName+"/"+mUserName+"_"+ currentTime+"_BPL_iPressure_BT02"+".txt");
                      Logger.log(Level.DEBUG,TAG,"-File Path-"+mFile.toString()+"--"+mFile.getAbsolutePath());
-
-                        Intent shareIntent = new Intent();
+                     Intent shareIntent = new Intent();
                         shareIntent.setAction(Intent.ACTION_SEND);
                         Uri contentUri = FileProvider.getUriForFile(BioLightRecordActivity.this,
                                 BioLightRecordActivity.this.getPackageName() + ".provider", mFile);

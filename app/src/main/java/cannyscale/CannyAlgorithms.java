@@ -34,7 +34,7 @@ public class CannyAlgorithms {
 
         bodyFat=String.valueOf(fat);
 
-        Logger.log(Level.DEBUG,"Body Fat FeMale is ",bodyFat);
+        Logger.log(Level.DEBUG,"Body Fat FEMALE is ",bodyFat);
         return  bodyFat;
 
     }

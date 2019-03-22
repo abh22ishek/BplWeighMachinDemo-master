@@ -980,4 +980,6 @@ clean the scale.\n\n
 8.Children should be supervised to ensure that they do not play with the appliance.\n
 
 </string>
+    <string name="wt_chart">Weight Chart (Weight in Kg VS Time)</string>
+    <string name="bmi_chart">BMI Chart (BMI Vs Time)</string>
 </resources>

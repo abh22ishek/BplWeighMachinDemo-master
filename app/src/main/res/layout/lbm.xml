@@ -20,14 +20,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="vertical"
-
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
             android:layout_height="match_parent"
             tools:ignore="UselessParent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="vertical"
-                android:layout_weight="3"
+                android:layout_weight="1"
                 android:background="#212637"
                 android:layout_height="match_parent">
 
@@ -148,28 +150,6 @@
                         android:layout_alignParentTop="true"
                         android:layout_marginTop="@dimen/bmi_margin_top"
                         android:id="@+id/textView29" />
-
-
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="0dp"
-                        >
-
-
-                        <!-- <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="15dp"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginLeft="10dp"
-
-                            android:src="@mipmap/bmi_scale"
-                            android:id="@+id/imageView4" />-->
-
-                    </FrameLayout>
 
 
                 </RelativeLayout>

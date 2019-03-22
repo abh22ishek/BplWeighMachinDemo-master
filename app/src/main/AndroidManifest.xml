@@ -181,6 +181,8 @@
             android:screenOrientation="portrait"
             />
         <activity android:name="testreport.ShareReportSpo2Activity" />
+        <activity android:name="iweigh.IweighReportActivity" />
+        <activity android:name="iweigh.IweighChartActivity" />
 
         <provider
 
