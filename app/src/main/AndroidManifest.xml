@@ -2,12 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="test.bpl.com.bplscreens"
-
     >
 
 
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
 
+
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
@@ -180,9 +180,18 @@
         <activity android:name="home.HomeMemberProfileActivity"
             android:screenOrientation="portrait"
             />
-        <activity android:name="testreport.ShareReportSpo2Activity" />
-        <activity android:name="iweigh.IweighReportActivity" />
-        <activity android:name="iweigh.IweighChartActivity" />
+        <activity android:name="testreport.ShareReportSpo2Activity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name="iweigh.IweighReportActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name="iweigh.IweighChartActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name="iweigh.IweighSearchScreen"
+            android:screenOrientation="portrait"
+            />
 
         <provider
 
