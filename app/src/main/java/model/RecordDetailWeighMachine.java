@@ -1,9 +1,11 @@
 package model;
 
 
+import java.io.*;
 
-public class RecordDetailWeighMachine {
+public class RecordDetailWeighMachine implements Serializable {
 
+    private static final long serialVersionUID = 132L;
     float weight;
     float bmi;
     String date;

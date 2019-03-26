@@ -53,6 +53,8 @@ public class WeightChartView extends View {
             paint=new Paint();
 
         }
+
+
         paint.setColor(Color.WHITE);
         paint.setStyle(Paint.Style.FILL_AND_STROKE);
         paint.setAntiAlias(true);
@@ -63,6 +65,8 @@ public class WeightChartView extends View {
             p=new Paint();
 
         }
+
+
         p.setColor(Color.BLACK);
         p.setTextSize(21);
 
@@ -98,10 +102,6 @@ public class WeightChartView extends View {
 
         int height=getHeight()-30;
         int width=getWidth()-30;
-
-
-
-
 
 
 
@@ -192,17 +192,7 @@ public class WeightChartView extends View {
         p.setColor(Color.GRAY);
         p.setAntiAlias(true);
 
-        /*mx=width_scale;
-        for(int i =0; i<WeighMachineRecordActivity.weight.size(); i++)
-        {
-            float y_points=(200-(Float.parseFloat(WeighMachineRecordActivity.weight.get(i))));
-            float px_y=y_points*height_scale;// current y pointts
 
-            canvas.drawLine(p1x1,p1y1,mx,px_y,p);
-            p1x1=mx;
-            p1y1=px_y;
-            mx=mx+(2*width_scale);
-        }*/
 
 
 
@@ -213,10 +203,8 @@ public class WeightChartView extends View {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         setMeasuredDimension((2*listWeight.size()*pixels_per_unit)+pixels_per_unit,
-                6*pixels_per_unit);
+                12*pixels_per_unit);
     }
-
-
 
 
     public void set_XY_points(List<RecordDetailWeighMachine> listX)

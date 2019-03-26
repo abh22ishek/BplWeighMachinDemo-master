@@ -169,7 +169,7 @@ public class SelectParameterActivity extends Activity {
                     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
                         options = ActivityOptions.makeSceneTransitionAnimation(SelectParameterActivity.this);
 
-                        startActivity(new Intent(SelectParameterActivity.this, IweighSearchScreen.class)
+                        startActivity(new Intent(SelectParameterActivity.this, IweighHomeScreenActivityl.class)
                                 .putExtra(Constants.USER_NAME, userNameChosen)
                                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), options.toBundle());
                     } else {

@@ -9,6 +9,7 @@ import android.support.v7.widget.*;
 import android.view.*;
 import android.widget.*;
 
+import java.io.*;
 import java.util.*;
 
 import constantsP.*;
@@ -179,6 +180,7 @@ public class CannyRecyclerView extends  RecyclerView.Adapter<CannyRecyclerView.C
             else if(v==chart){
                 Intent intent=new Intent(context,IweighChartActivity.class);
                 intent.putExtra(Constants.USER_NAME,mUserName);
+                intent.putExtra(Constants.CHART, (Serializable) recordsDetailList);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
                 context.startActivity(intent);

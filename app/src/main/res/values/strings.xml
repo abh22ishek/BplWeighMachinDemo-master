@@ -982,4 +982,6 @@ clean the scale.\n\n
 </string>
     <string name="wt_chart">Weight Chart (Weight in Kg VS Time)</string>
     <string name="bmi_chart">BMI Chart (BMI Vs Time)</string>
+    <string name="date">Date</string>
+    <string name="measurement_is_going_on">Measurement is going On ...</string>
 </resources>

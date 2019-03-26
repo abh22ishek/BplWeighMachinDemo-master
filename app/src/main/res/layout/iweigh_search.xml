@@ -3,12 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:background="@mipmap/bpl_be_well_parameter_bg"
-    android:layout_height="match_parent">
+    android:layout_height="500dp"
+    >
 
     <ImageView
-        android:id="@+id/weight"
+        android:id="@+id/weightT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="visible"
         android:layout_centerInParent="true"
         android:contentDescription="@string/weight"
         android:src="@mipmap/weight" />
@@ -17,15 +19,13 @@
         android:id="@+id/arrow"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_above="@+id/weight"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="154dp"
-        android:layout_marginTop="143dp"
-
-        android:layout_marginBottom="84dp"
+        android:layout_above="@+id/weightT"
+        android:layout_marginBottom="100dp"
+        android:layout_centerHorizontal="true"
         android:contentDescription="@string/action_report"
-        android:src="@android:drawable/arrow_down_float" />
+        android:src="@android:drawable/arrow_down_float"/>
+
+
 
 
     <pl.bclogic.pulsator4droid.library.PulsatorLayout
@@ -35,22 +35,29 @@
         app:pulse_color="@color/design_default_color_primary_dark"
         app:pulse_count="4"
         app:pulse_duration="8000"
-        android:layout_centerInParent="true"
         app:pulse_interpolator="Linear"
         app:pulse_repeat="0"
         app:pulse_startFromScratch="true">
 
         <ImageView
             android:id="@+id/weightPulse"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:contentDescription="@string/weight"
             android:src="@mipmap/weight" />
     </pl.bclogic.pulsator4droid.library.PulsatorLayout>
 
 
-    <TextView
+    <customviews.MyCustomTextView
         android:layout_width="match_parent"
+        android:text="@string/measurement_is_going_on"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:fontname="centralSansXBold"
+        android:id="@+id/text"
+        android:layout_marginBottom="30dp"
         android:layout_height="wrap_content" />
 </RelativeLayout>

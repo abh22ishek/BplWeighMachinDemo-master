@@ -8,54 +8,57 @@ import android.view.animation.*;
 import android.widget.*;
 
 import pl.bclogic.pulsator4droid.library.*;
-import test.bpl.com.bplscreens.*;
 import test.bpl.com.bplscreens.R;
 
-public class IweighSearchScreen extends FragmentActivity {
+public class IweighSearchScreen extends DialogFragment {
 
     ImageView arrw,weight,weightPulse;
-
+    PulsatorLayout pulsatorLayout;
     Handler mHandler;
     Animation animation;
 
-    PulsatorLayout pulsatorLayout;
+
+
+    static IweighSearchScreen newInstance() {
+        return new IweighSearchScreen();
+    }
+    @Nullable
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.iweigh_search);
-        arrw=findViewById(R.id.arrow);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view =inflater.inflate(R.layout.iweigh_search,container);
+        arrw=view.findViewById(R.id.arrow);
 
-        weight=findViewById(R.id.weight);
-        pulsatorLayout=findViewById(R.id.pulsator);
-        pulsatorLayout.setVisibility(View.GONE);
-        weightPulse=findViewById(R.id.weightPulse);
+        weight=view.findViewById(R.id.weightT);
+     //   pulsatorLayout=view.findViewById(R.id.pulsator);
+     //   pulsatorLayout.setVisibility(View.GONE);
+      //  weightPulse=view.findViewById(R.id.weightPulse);
+        return view;
+    }
 
-         animation = AnimationUtils.loadAnimation(IweighSearchScreen.this, R.anim.slide_in_out);
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+      /*  animation = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_in_out);
         animation.setRepeatCount(Animation.INFINITE);
         animation.setDuration(1000);
 
-         arrw.startAnimation(animation);
-        pulsatorLayout.start();
-    }
+        arrw.startAnimation(animation);*/
+      //  pulsatorLayout.start();
 
-
-    @Override
-    protected void onResume() {
-        super.onResume();
 
         if(mHandler==null){
             mHandler=new Handler();
         }
-
+/*
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
 
                 try{
                     arrw.clearAnimation();
-                    animation.cancel();
+                   // animation.cancel();
                     arrw.setVisibility(View.GONE);
-                  weight.setVisibility(View.GONE);
+                    weight.setVisibility(View.GONE);
                     pulsatorLayout.setVisibility(View.VISIBLE);
 
                 }catch (Exception e){
@@ -63,8 +66,9 @@ public class IweighSearchScreen extends FragmentActivity {
                 }
 
             }
-        }, 5000);
+        }, 5000);*/
     }
+
 
 
 

@@ -13,6 +13,7 @@ import android.support.v4.app.*;
 import android.support.v4.app.FragmentManager;
 import android.util.*;
 import android.view.*;
+import android.view.animation.*;
 import android.widget.*;
 
 import com.neovisionaries.bluetooth.ble.advertising.*;
@@ -24,7 +25,9 @@ import constantsP.*;
 import database.*;
 import logger.*;
 import model.*;
+import pl.bclogic.pulsator4droid.library.*;
 import test.bpl.com.bplscreens.*;
+import test.bpl.com.bplscreens.R;
 
 import static constantsP.DateTime.getDateTime;
 
@@ -46,7 +49,7 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
     private BluetoothAdapter mBluetoothAdapter;
     private boolean isDiscovery;
     // Stops scanning after some seconds.
-    private static final long SCAN_PERIOD = 7000;
+    private static final long SCAN_PERIOD = 10000;
 
 
 
@@ -66,6 +69,78 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
 
     String mBMI,mWeight, mMetabolism="NA",mbodyWater,mBodyFat,
             mBoneMass,mProtein="NA",mVisceralFat,mBodyAge="NA",mMuscleMass,mLBM="NA",mObesity="NA";
+
+
+    Animation animation;
+     Dialog dialog;
+    private void SearchScreenDialog(Context context)
+    {
+         dialog = new Dialog(context);
+        if(dialog.getWindow()!=null)
+        {
+            dialog.getWindow().getAttributes().windowAnimations = R.style.DialogBoxAnimation;
+            dialog.setContentView(R.layout.iweigh_search);
+        }
+
+
+    /*    Window window = dialog.getWindow();
+        WindowManager.LayoutParams wlp = window.getAttributes();
+
+        wlp.gravity = Gravity.BOTTOM;
+        wlp.flags &= ~WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+        window.setAttributes(wlp);*/
+
+       //dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.MATCH_PARENT);
+        final ImageView arrw,weight,weightPulse;
+        final PulsatorLayout pulsatorLayout;
+
+        final TextView text;
+
+
+        arrw=dialog.findViewById(R.id.arrow);
+
+        weight=dialog.findViewById(R.id.weightT);
+          pulsatorLayout=dialog.findViewById(R.id.pulsator);
+          pulsatorLayout.setVisibility(View.GONE);
+          text=dialog.findViewById(R.id.text);
+
+        animation = AnimationUtils.loadAnimation(IweighHomeScreenActivityl.this, R.anim.slide_in_out);
+        animation.setRepeatCount(Animation.INFINITE);
+        animation.setDuration(1000);
+
+        arrw.startAnimation(animation);
+        text.setVisibility(View.GONE);
+         pulsatorLayout.start();
+
+
+
+
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                try{
+                    arrw.clearAnimation();
+                   // animation.cancel();
+                    arrw.setVisibility(View.GONE);
+                    weight.setVisibility(View.GONE);
+                    pulsatorLayout.setVisibility(View.VISIBLE);
+                    text.setVisibility(View.VISIBLE);
+                     scanLeDevice();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+            }
+        }, 5000);
+
+
+        dialog.show();
+    }
+
+
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -183,7 +258,8 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
                 if(mHandler==null){
                     mHandler=new Handler();
                 }
-                scanLeDevice();
+
+                SearchScreenDialog(IweighHomeScreenActivityl.this);
             }
         });
 
@@ -416,10 +492,14 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
 
                 scanRecord = result.getScanRecord();
 
+
                // Logger.log(Level.DEBUG,TAG,"Scan Record -->"+scanRecord);
 
                 if(result.getDevice().getName()!=null && result.getDevice().getName().contains("ADV"))
                 {
+                    if(dialog.isShowing())
+                        dialog.dismiss();
+
                     List<ADStructure> structures = ADPayloadParser.getInstance().parse(scanRecord.getBytes());
 
                     Log.i(" Advertisement Data", "Length=" +structures.size()+
@@ -596,18 +676,7 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
 
 
         }
-        private void connect_Bpl_iOxy(String device_address)
-        {
-            Intent output = new Intent();
-            if(pd.isShowing())
-            {
-                pd.dismiss();
-            }
-            output.putExtra(Constants.MAC_ADDRESS,device_address);
-            setResult(RESULT_OK, output);
-            finish();
 
-        }
         @Override
         public void onBatchScanResults(List<ScanResult> results) {
             super.onBatchScanResults(results);
@@ -640,7 +709,9 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
                 mScanning = false;
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     mBluetoothAdapter.getBluetoothLeScanner().stopScan(scancallback);
-                    pd.dismiss();
+
+                    if(dialog.isShowing())
+                        dialog.dismiss();
                 }
             }
         }, SCAN_PERIOD);
@@ -674,7 +745,7 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
 
 
             mBluetoothAdapter.getBluetoothLeScanner().startScan(scancallback);
-            pd.show();
+          //  pd.show();
 
 
     }
@@ -760,8 +831,6 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
         values.put(BplOximterdbHelper.MUSCLE_MASS,muscMass);
         values.put(BplOximterdbHelper.LBM,lbm);
         values.put(BplOximterdbHelper.OBESITY,obesity);
-
-
 
         return values;
 
