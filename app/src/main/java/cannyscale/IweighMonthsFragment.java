@@ -120,6 +120,7 @@ public class IweighMonthsFragment extends Fragment {
             }
         });
 
+
         dates = new ArrayList<>();
         weight = new ArrayList<>();
         bmi = new ArrayList<>();
@@ -174,15 +175,15 @@ public class IweighMonthsFragment extends Fragment {
 
 
         monthDate.setText(new StringBuilder().append("SELECTED MONTH : ").
-                append(dates.get(0).substring(0, 10)).toString());
+                append(dates.get(0).substring(0,10)).toString());
 
 
         if (getArguments().getString(Constants.DATE) != null) {
             selectedDate = getArguments().getString(Constants.DATE);
             monthDate.setText(selectedDate.substring(3, 10));
-            monthOFYear = selectedDate.substring(3, 5);
+            monthOFYear = selectedDate.substring(3,5);
 
-            dates_list = getDaysBetweenDates(get_starting_date_month(selectedDate), get_last_date_month(selectedDate));
+            dates_list = getDaysBetweenDates(get_starting_date_month(selectedDate),get_last_date_month(selectedDate));
             wt_chart.setHorizontalLabel(dates_list);
             bmi_chart.setHorizontalLabels(dates_list);
 
@@ -190,8 +191,8 @@ public class IweighMonthsFragment extends Fragment {
 
 
         for (RecordDetailWeighMachine b : mRecordDetail) {
-            if (b.getDate().substring(3, 5).equals(monthOFYear) &&
-                    b.getDate().substring(6, 10).equals(selectedDate.substring(6, 10))) {
+            if (b.getDate().substring(3,5).equals(monthOFYear) &&
+                    b.getDate().substring(6,10).equals(selectedDate.substring(6, 10))) {
                 sameMonthOfYearWithDuplicates.add(b);
             }
 
@@ -221,16 +222,11 @@ public class IweighMonthsFragment extends Fragment {
                 List<Integer> weightVal = new ArrayList<>();
                 List<Integer> bmiVal = new ArrayList<>();
 
-
-
                 weightVal.add((int) bp.getWeight());
                 firstPassWeight.put(name, weightVal);
 
-
                 bmiVal.add((int) bp.getBmi());
                 firstPassBmi.put(name, bmiVal);
-
-
             }
         }
 

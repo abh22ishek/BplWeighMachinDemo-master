@@ -12,7 +12,8 @@ import model.*;
 
 public class IweighChartViewMonth extends View {
 
-    Paint paint,mPaint;
+    Paint paint,mPaint,dashpaint;
+    Path mPath;
     int pixels_per_unit=0;
 
 
@@ -21,6 +22,7 @@ public class IweighChartViewMonth extends View {
     List<String> datesList;
 
 
+    int goalWeight=68;
 
     int startX=0;
     int startY=0;
@@ -53,6 +55,7 @@ public class IweighChartViewMonth extends View {
         pixels_per_unit= (int) (density/5f);
         startx_=pixels_per_unit;
         heightScaleRatio=180;
+        mPath=new Path();
 
     }
 
@@ -117,6 +120,20 @@ public class IweighChartViewMonth extends View {
         final float height_scale=((float)getHeight()-pixels_per_unit)/heightScaleRatio;
         final float width_scale=pixels_per_unit;
 
+        if(dashpaint==null){
+            dashpaint=new Paint();
+            dashpaint.setStyle(Paint.Style.STROKE);
+            dashpaint.setPathEffect(new DashPathEffect(new float[] { 5,15 }, 0));
+        }
+
+        dashpaint.setColor(Color.parseColor("#7CBC50"));
+        dashpaint.setAntiAlias(true);
+        dashpaint.setStrokeWidth(20);
+
+
+        mPath.moveTo(0,(heightScaleRatio-goalWeight)*height_scale);
+        mPath.lineTo(getWidth(),(heightScaleRatio-goalWeight)* height_scale);
+        canvas.drawPath(mPath,dashpaint);
 
         // circle the points
         paint.setColor(Color.parseColor("#FF4081"));

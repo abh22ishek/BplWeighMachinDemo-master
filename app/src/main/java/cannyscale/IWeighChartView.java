@@ -11,7 +11,7 @@ import model.*;
 
 public class IWeighChartView extends View {
 
-    Paint paint,mPaint;
+    Paint paint,mPaint,dashpaint;
     int pixels_per_unit=0;
 
 
@@ -28,10 +28,13 @@ public class IWeighChartView extends View {
     int stopY=0;
 
 
+    int goalWeight=68;
 
 
     int startx_=0;
     int heightScaleRatio;
+    private Path mPath;
+
 
     public IWeighChartView(Context context) {
         super(context);
@@ -50,7 +53,7 @@ public class IWeighChartView extends View {
         pixels_per_unit= (int) (density/5f);
         startx_=pixels_per_unit;
         heightScaleRatio=180;
-
+        mPath=new Path();
     }
 
     @Override
@@ -71,8 +74,10 @@ public class IWeighChartView extends View {
         paint.setStrokeWidth(1.1f);
 
 
-
         // horizontal  lines
+
+
+
 
 
             stopX=getWidth();
@@ -121,8 +126,19 @@ public class IWeighChartView extends View {
         final float height_scale=((float)getHeight()-pixels_per_unit)/heightScaleRatio;
         final float width_scale=pixels_per_unit;
 
+        if(dashpaint==null){
+            dashpaint=new Paint();
+            dashpaint.setStyle(Paint.Style.STROKE);
+            dashpaint.setPathEffect(new DashPathEffect(new float[] { 5,15 }, 0));
+        }
 
+        dashpaint.setColor(Color.parseColor("#7CBC50"));
+        dashpaint.setAntiAlias(true);
+        dashpaint.setStrokeWidth(20);
 
+        mPath.moveTo(0,(heightScaleRatio-goalWeight)*height_scale);
+        mPath.lineTo(getWidth(),(heightScaleRatio-goalWeight)* height_scale);
+        canvas.drawPath(mPath,dashpaint);
 
 
 
@@ -151,8 +167,15 @@ public class IWeighChartView extends View {
             mpX=mpX+(2*width_scale);
         }
 
+        mPaint.setTextSize(50);
+        mPaint.setStrokeWidth(30);
+        mPaint.setAntiAlias(true);
+        Typeface custom_font = Typeface.createFromAsset(getContext().getAssets(),  "fonts/CentraleSans-Book.otf");
+        mPaint.setTypeface(custom_font);
 
 
+        mPaint.setColor(Color.parseColor("#7CBC50"));
+        canvas.drawText("Weight Goal 68 KG",4*pixels_per_unit,getHeight()-35,mPaint);
 
     }
 

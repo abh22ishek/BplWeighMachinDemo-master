@@ -112,6 +112,11 @@ class CustomBPDayChart extends View {
             dashpaint.setPathEffect(new DashPathEffect(new float[] { 2,10 }, 0));
         }
 
+        dashpaint.setColor(Color.BLACK);
+        dashpaint.setAntiAlias(true);
+        dashpaint.setStrokeWidth(1);
+
+
         if(mTextPaint==null){
             mTextPaint=new TextPaint();
         }
@@ -124,9 +129,7 @@ class CustomBPDayChart extends View {
         mPaint.setStrokeWidth(1);
 
 
-        dashpaint.setColor(Color.BLACK);
-        dashpaint.setAntiAlias(true);
-        dashpaint.setStrokeWidth(1);
+
 
         stopY=getHeight();
 
