@@ -54,6 +54,8 @@ public class MonthChartFragment extends Fragment {
 
     private Map<String, Integer> SystolicValue;
     private Map<String, Integer> DiabolicValue;
+
+
     private List<String> systolicList;
     private List<String> diabolicList;
     private List<String> commentsList;
@@ -454,6 +456,7 @@ public class MonthChartFragment extends Fragment {
         return dates_list_;
     }
 
+    //------------------------------------------------------------------------------------------------------------------
 
     @Override
     public void onResume() {
@@ -471,10 +474,7 @@ public class MonthChartFragment extends Fragment {
     class EcgPdf extends AsyncTask<String,String,String> {
 
 
-
-
         ProgressDialog progressDialog;
-
         String isloaded = "false";
 
 

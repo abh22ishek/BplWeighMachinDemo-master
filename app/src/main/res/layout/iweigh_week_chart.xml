@@ -66,7 +66,7 @@
                     android:layout_height="wrap_content">
 
 
-                    <cannyscale.IWeighChartView
+                    <cannyscale.IweighChartViewWeek
                         android:layout_width="match_parent"
                         android:id="@+id/weight_chart_"
                         android:layout_marginEnd="5dp"
@@ -127,7 +127,7 @@
                     android:layout_height="wrap_content">
 
 
-                    <cannyscale.IweighBmiView
+                    <cannyscale.IweighBmiViewWeek
                         android:layout_width="match_parent"
                         android:id="@+id/bmi_chart_"
                         android:layout_marginEnd="5dp"

@@ -36,6 +36,8 @@ public class IweighDaysChartFragment extends Fragment {
     LinearLayout layoutWeight,layoutBmi;
 
     private TextView DateTime;
+    private String selectedDate;
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -65,6 +67,9 @@ public class IweighDaysChartFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        if(getArguments().getString(Constants.DATE)!=null){
+            selectedDate=getArguments().getString(Constants.DATE);
+        }
 
         btn_weight.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,8 +127,8 @@ public class IweighDaysChartFragment extends Fragment {
 
 
 
-        wt_chart.set_XY_points(UserMeasuredWeightList);
-       bmi_chart.set_XY_points(UserMeasuredWeightList);
+        wt_chart.set_XY_points(sameDateRecords(UserMeasuredWeightList,selectedDate));
+       bmi_chart.set_XY_points(sameDateRecords(UserMeasuredWeightList,selectedDate));
 
 
         if(UserMeasuredWeightList!=null && UserMeasuredWeightList.size()>=1)
@@ -152,7 +157,24 @@ public class IweighDaysChartFragment extends Fragment {
        bmi_chart.setList(dates,bmi);
         wt_chart.setList(dates,weight);
 
-        DateTime.setText(new StringBuilder().append("SELECTED DATE : ").
-                append(dates.get(0).substring(0, 10)).toString());
+        DateTime.setText(new StringBuilder().append("SELECTED DATE : ").append(selectedDate));
+    }
+
+
+
+
+    private List<RecordDetailWeighMachine> sameDateRecords(List<RecordDetailWeighMachine> mRecordDetailList,String selectedDate)
+    {
+        final List<RecordDetailWeighMachine> listToReturn = new ArrayList<>();
+
+
+        for(RecordDetailWeighMachine b:mRecordDetailList){
+            if(selectedDate.equals(b.getDate().substring(0,10))){
+                listToReturn.add(b);
+            }
+        }
+
+        Logger.log(Level.WARNING,TAG,"****Record with same date****"+listToReturn.size());
+        return listToReturn;
     }
 }

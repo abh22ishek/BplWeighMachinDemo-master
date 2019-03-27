@@ -217,6 +217,8 @@ public class DaysChartFragment extends Fragment{
 
 
     boolean isshowVal;
+
+
     private List<BPMeasurementModel> sameDateRecords(List<BPMeasurementModel> mRecordDetailList,String selectedDate)
     {
         final List<BPMeasurementModel> listToReturn = new ArrayList<>();

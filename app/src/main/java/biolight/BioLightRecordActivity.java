@@ -60,10 +60,7 @@ public class BioLightRecordActivity extends Activity implements BioLightListner{
         setContentView(R.layout.biolight_record);
         globalVariable= (GlobalClass) getApplicationContext();
         headerText=findViewById(R.id.base_header_title);
-
-
         recyclerView= findViewById(R.id.recycler_view);
-
         optionsSettings=findViewById(R.id.optionSettings);
         optionsSettings.setVisibility(View.VISIBLE);
 

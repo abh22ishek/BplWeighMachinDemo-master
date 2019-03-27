@@ -28,16 +28,12 @@ public class IweighChartYaxis extends View {
 
 
 
-
-
-
     private void init() {
         int density = getResources().getDisplayMetrics().densityDpi;
         pixels_per_unit = (int) (density / 5f);
         if(mTextPaint==null){
             mTextPaint=new Paint();
         }
-
     }
 
     @Override

@@ -17,6 +17,7 @@ public class RecordDetailWeighMachine implements Serializable {
     float protein;
 
 
+
     float visceralFat;
 
     public float getMetabolism() {

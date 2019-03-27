@@ -7,7 +7,6 @@ import android.view.*;
 import java.io.*;
 import java.util.*;
 
-import biolight.*;
 import constantsP.*;
 import model.*;
 
@@ -54,16 +53,15 @@ public class CannyChartPagerAdapter extends FragmentStatePagerAdapter{
         {
             case 0:
 
-
                 IweighDaysChartFragment daysChartFragment=new IweighDaysChartFragment();
-                 bundle=new Bundle();
+                    bundle=new Bundle();
+                    bundle.putSerializable(Constants.CHART, (Serializable) mRecordDetailList);
+                    bundle.putString(Constants.USER_NAME,userName);
+                    bundle.putString("global_user",globalUserNme);
+                    bundle.putString(Constants.DATE,date);
 
-                bundle.putSerializable(Constants.CHART, (Serializable) mRecordDetailList);
-                bundle.putString(Constants.USER_NAME,userName);
-                bundle.putString("global_user",globalUserNme);
-
-                daysChartFragment.setArguments(bundle);
-                return daysChartFragment;
+                    daysChartFragment.setArguments(bundle);
+                    return daysChartFragment;
 
 
 
@@ -74,10 +72,10 @@ public class CannyChartPagerAdapter extends FragmentStatePagerAdapter{
                 IweighWeekChartFragment weekChartFragment=new IweighWeekChartFragment();
                  bundle=new Bundle();
 
-                bundle.putSerializable(Constants.CHART, (Serializable) mRecordDetailList);
+                 bundle.putSerializable(Constants.CHART, (Serializable) mRecordDetailList);
                 bundle.putString(Constants.USER_NAME,userName);
                 bundle.putString("global_user",globalUserNme);
-
+                bundle.putString(Constants.DATE,date);
                 weekChartFragment.setArguments(bundle);
                 return weekChartFragment;
 
@@ -86,11 +84,14 @@ public class CannyChartPagerAdapter extends FragmentStatePagerAdapter{
 
                 IweighMonthsFragment monthChartFragment =new IweighMonthsFragment();
 
-                 bundle=new Bundle();
+
+                bundle=new Bundle();
 
                 bundle.putSerializable(Constants.CHART, (Serializable) mRecordDetailList);
                 bundle.putString(Constants.USER_NAME,userName);
                 bundle.putString("global_user",globalUserNme);
+                bundle.putString(Constants.DATE,date);
+
                 monthChartFragment.setArguments(bundle);
 
 

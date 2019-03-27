@@ -179,6 +179,8 @@ public class CannyRecyclerView extends  RecyclerView.Adapter<CannyRecyclerView.C
 
             else if(v==chart){
                 Intent intent=new Intent(context,IweighChartActivity.class);
+                final String date= recordsDetailList.get(getAdapterPosition()).getDate().substring(0,10);
+                intent.putExtra(Constants.DATE,date);
                 intent.putExtra(Constants.USER_NAME,mUserName);
                 intent.putExtra(Constants.CHART, (Serializable) recordsDetailList);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

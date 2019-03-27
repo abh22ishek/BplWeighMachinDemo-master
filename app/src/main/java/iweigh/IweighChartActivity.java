@@ -49,6 +49,7 @@ public class IweighChartActivity extends FragmentActivity {
 
 
 
+
         globalClass = (GlobalClass) getApplication();
         // Fetch record data
         int density = this.getResources().getDisplayMetrics().densityDpi;

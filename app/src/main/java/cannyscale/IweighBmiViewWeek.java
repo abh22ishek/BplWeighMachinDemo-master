@@ -7,9 +7,10 @@ import android.view.*;
 
 import java.util.*;
 
+import logger.*;
 import model.*;
 
-public class IweighBmiView extends View {
+public class IweighBmiViewWeek extends View {
 
     Paint paint;
     int pixels_per_unit=0;
@@ -29,12 +30,12 @@ public class IweighBmiView extends View {
 
     int heightScaleRatio;
 
-    public IweighBmiView(Context context) {
+    public IweighBmiViewWeek(Context context) {
         super(context);
         init();
     }
 
-    public IweighBmiView(Context context, AttributeSet attrs) {
+    public IweighBmiViewWeek(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
@@ -43,7 +44,7 @@ public class IweighBmiView extends View {
     {
         int density=getResources().getDisplayMetrics().densityDpi;
         pixels_per_unit= (int) (density/5f);
-       // startx_=pixels_per_unit;
+        // startx_=pixels_per_unit;
         heightScaleRatio=50;
 
     }
@@ -102,16 +103,16 @@ public class IweighBmiView extends View {
 
 
 
-       // draw horizontal labels
+        // draw horizontal labels
         int startx_=pixels_per_unit;
         paint.setTextSize(25);
         for(int i=0;i<datesList.size();i++)
         {
             canvas.save();
-          //  canvas.rotate(-45,startx_,getHeight());
-            String [] dateTime=datesList.get(i).split(" ");
-           // canvas.drawText(dateTime[0],startx_-15,height-20,paint);
-            canvas.drawText(dateTime[1].substring(0,5),startx_,getHeight()-pixels_per_unit+20,paint);
+            //  canvas.rotate(-45,startx_,getHeight());
+
+            // canvas.drawText(dateTime[0],startx_-15,height-20,paint);
+            canvas.drawText(datesList.get(i).substring(0,5),startx_,getHeight()-pixels_per_unit+20,paint);
 
             startx_=startx_+(2*pixels_per_unit);
             canvas.restore();
@@ -170,7 +171,7 @@ public class IweighBmiView extends View {
         mx=width_scale;
         for(int i =0; i<bmiList.size(); i++)
         {
-            float y_points=(50-(Float.parseFloat(bmiList.get(i))));
+            float y_points=(heightScaleRatio-(Float.parseFloat(bmiList.get(i))));
             float px_y=y_points*height_scale;// current y points
 
             canvas.drawLine(p1x1,p1y1,mx,px_y,mPaint);
@@ -186,13 +187,10 @@ public class IweighBmiView extends View {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-        if(listBmi.size()<=3){
-            setMeasuredDimension((6*listBmi.size()*pixels_per_unit)+pixels_per_unit,
-                    6*pixels_per_unit);
-        }else{
-            setMeasuredDimension((2*listBmi.size()*pixels_per_unit)+pixels_per_unit,
-                    6*pixels_per_unit);
-        }
+
+        setMeasuredDimension((2*7*pixels_per_unit)+pixels_per_unit,
+                6*pixels_per_unit);
+
 
     }
 
@@ -206,8 +204,16 @@ public class IweighBmiView extends View {
 
 
 
-    public void setList(List<String> dates,List<String> bmi){
-        datesList=dates;
-        bmiList=bmi;
+    public List<String> setHorizontalLabels(List<String> WeekDates){
+        datesList=WeekDates;
+        Logger.log(Level.DEBUG,"Custom View ","**Day record size**="+datesList.size());
+        return datesList;
+    }
+
+    public List<String> setPlotPoints(List<String> points){
+        bmiList=points;
+        Logger.log(Level.DEBUG,"Custom View ","**Day record size**="+bmiList.size());
+
+        return bmiList;
     }
 }
