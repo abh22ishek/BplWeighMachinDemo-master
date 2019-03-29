@@ -13,10 +13,8 @@ import android.widget.*;
 import java.util.*;
 
 import biolight.*;
-import cannyscale.*;
+import canny.*;
 import constantsP.*;
-import customviews.*;
-import database.*;
 import logger.*;
 import model.*;
 import test.bpl.com.bplscreens.*;

@@ -1,4 +1,4 @@
-package cannyscale;
+package canny;
 
 import android.content.*;
 import android.graphics.*;
@@ -7,11 +7,13 @@ import android.view.*;
 
 import java.util.*;
 
+import logger.*;
 import model.*;
 
-public class IWeighChartView extends View {
+public class IweighChartViewMonth extends View {
 
     Paint paint,mPaint,dashpaint;
+    Path mPath;
     int pixels_per_unit=0;
 
 
@@ -20,6 +22,7 @@ public class IWeighChartView extends View {
     List<String> datesList;
 
 
+    int goalWeight=68;
 
     int startX=0;
     int startY=0;
@@ -28,20 +31,19 @@ public class IWeighChartView extends View {
     int stopY=0;
 
 
-    int goalWeight=68;
 
 
     int startx_=0;
     int heightScaleRatio;
-    private Path mPath;
 
 
-    public IWeighChartView(Context context) {
+
+    public IweighChartViewMonth(Context context) {
         super(context);
         init();
     }
 
-    public IWeighChartView(Context context, AttributeSet attrs) {
+    public IweighChartViewMonth(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
@@ -54,6 +56,7 @@ public class IWeighChartView extends View {
         startx_=pixels_per_unit;
         heightScaleRatio=180;
         mPath=new Path();
+
     }
 
     @Override
@@ -74,50 +77,41 @@ public class IWeighChartView extends View {
         paint.setStrokeWidth(1.1f);
 
 
+
         // horizontal  lines
 
 
+        stopX=getWidth();
+        startX=0;
+        startY=0;
+        stopY=0;
 
 
+        //  float phase = 0;
 
-            stopX=getWidth();
-            startX=0;
-            startY=0;
-            stopY=0;
-            //  float phase = 0;
+        for(int i=0;i<getHeight();i+=pixels_per_unit){
 
-            for(int i=0;i<getHeight();i+=pixels_per_unit){
+            canvas.drawLine(startX,startY,stopX,stopY,paint);
 
-                canvas.drawLine(startX,startY,stopX,stopY,paint);
+            startY=startY+pixels_per_unit;
+            stopY=stopY+pixels_per_unit;
 
-
-                startY=startY+pixels_per_unit;
-                stopY=stopY+pixels_per_unit;
-
-            }
+        }
 
 
-
-
-            // draw dates and time text
-
-
+        // draw dates and time text
         paint.setTextSize(18f);
 
         for(int i=0;i<datesList.size();i++)
         {
             canvas.save();
             //canvas.rotate(-45,startx_,height+20);
-            String [] dateTime=datesList.get(i).split(" ");
 
-           // canvas.drawText(dateTime[0],startx_-30,getHeight()-15,paint);
-            canvas.drawText(dateTime[1].substring(0,5),startx_-30,getHeight()-pixels_per_unit+20,paint);
+            // canvas.drawText(dateTime[0],startx_-30,getHeight()-15,paint);
+            canvas.drawText(datesList.get(i).substring(0,5),startx_-30,getHeight()-pixels_per_unit+20,paint);
             startx_=startx_+(2*pixels_per_unit);
             canvas.restore();
         }
-
-
-
 
         // plot the points
 
@@ -136,15 +130,12 @@ public class IWeighChartView extends View {
         dashpaint.setAntiAlias(true);
         dashpaint.setStrokeWidth(20);
 
+
         mPath.moveTo(0,(heightScaleRatio-goalWeight)*height_scale);
         mPath.lineTo(getWidth(),(heightScaleRatio-goalWeight)* height_scale);
         canvas.drawPath(mPath,dashpaint);
 
-
-
         // circle the points
-
-
         paint.setColor(Color.parseColor("#FF4081"));
         paint.setStrokeWidth(40);
         paint.setTextSize(30);
@@ -155,28 +146,19 @@ public class IWeighChartView extends View {
 
         // draw circle points
         float mpX=width_scale;
+
+
         for(int i = 0; i<weightList.size(); i++)
         {
             float y_points=(heightScaleRatio-(Float.parseFloat(weightList.get(i))));
             float px_y=y_points*height_scale;// current y pointts
 
             //canvas.drawCircle(mpX,px_y,7,p);
-          //  canvas.drawRect(mpX-25,px_y,mpX+25,getHeight()-pixels_per_unit,paint);
+            //  canvas.drawRect(mpX-25,px_y,mpX+25,getHeight()-pixels_per_unit,paint);
             canvas.drawCircle(mpX,px_y,10,paint);
             canvas.drawText("( " +weightList.get(i)+ " )",mpX,px_y,mPaint);
             mpX=mpX+(2*width_scale);
         }
-
-        mPaint.setTextSize(50);
-        mPaint.setStrokeWidth(30);
-        mPaint.setAntiAlias(true);
-        Typeface custom_font = Typeface.createFromAsset(getContext().getAssets(),  "fonts/CentraleSans-Book.otf");
-        mPaint.setTypeface(custom_font);
-
-
-        mPaint.setColor(Color.parseColor("#7CBC50"));
-        canvas.drawText("Weight Goal 68 KG",4*pixels_per_unit,getHeight()-35,mPaint);
-
     }
 
 
@@ -185,31 +167,28 @@ public class IWeighChartView extends View {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-        if(listWeight.size()<=3){
-            setMeasuredDimension((5*listWeight.size()*pixels_per_unit)+pixels_per_unit,
-                    10*pixels_per_unit);
-        }else{
-            setMeasuredDimension((2*listWeight.size()*pixels_per_unit)+pixels_per_unit,
-                    10*pixels_per_unit);
-        }
-
+        setMeasuredDimension((2*30*pixels_per_unit)+pixels_per_unit,
+                10*pixels_per_unit);
     }
 
 
     public void set_XY_points(List<RecordDetailWeighMachine> listX)
     {
         listWeight=listX;
-        datesList=new ArrayList<>();
-        weightList=new ArrayList<>();
-        for(int i=0;i<listWeight.size();i++){
-            datesList.add(listWeight.get(i).getDate());
-            weightList.add(String.valueOf(listWeight.get(i).getWeight()));
-        }
     }
 
 
-    public void setList(List<String> dates,List<String> weight){
-      //  datesList=dates;
-       // weightList=weight;
+
+
+    public List<String> setHorizontalLabel(List<String> WeekDates){
+        datesList=WeekDates;
+        Logger.log(Level.DEBUG,"Custom View ","**Day record size**="+datesList.size());
+        return datesList;
+    }
+
+    public List<String> setPlotPoints(List<String> points){
+        weightList=points;
+        Logger.log(Level.DEBUG,"Custom View ","**Day record size**="+weightList.size());
+        return weightList;
     }
 }

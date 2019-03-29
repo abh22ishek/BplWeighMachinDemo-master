@@ -1,4 +1,4 @@
-package cannyscale;
+package canny;
 
 import android.annotation.*;
 import android.content.*;
@@ -15,8 +15,6 @@ import constantsP.*;
 import logger.*;
 import model.*;
 import test.bpl.com.bplscreens.*;
-
-import static com.tom_roush.fontbox.ttf.OS2WindowsMetricsTable.TAG;
 
 public class IweighWeekChartFragment extends Fragment {
 

@@ -213,7 +213,7 @@
                     app:fontname="centralSansXBold" />
 
                 <customviews.MyCustomTextView
-                    android:id="@+id/visc"
+                    android:id="@+id/metabolismKcal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/metabolismText"

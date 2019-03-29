@@ -16,11 +16,12 @@ import android.view.*;
 import android.view.animation.*;
 import android.widget.*;
 
+import com.canny.xue.bialib.BodyFat;
 import com.neovisionaries.bluetooth.ble.advertising.*;
 
 import java.util.*;
 
-import cannyscale.*;
+import canny.*;
 import constantsP.*;
 import database.*;
 import logger.*;
@@ -60,7 +61,7 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
     String mUserName;
     private GlobalClass globalVariable;
 
-    private TextView height,age,metabolicAge,visceralFat,bodyWater,bodyFat,boneMass,muscleMass;
+    private TextView height,age,metabolicAge,visceralFat,bodyWater,bodyFat,boneMass,muscleMass,metabolismKcal;
 
 
     String sexType;
@@ -155,7 +156,7 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
         boneMassR=findViewById(R.id.boneMassR);
         bodyWaterR=findViewById(R.id.bodyWaterR);
         lbmR=findViewById(R.id.LBMR);
-
+        metabolismKcal=findViewById(R.id.metabolismKcal);
         height=findViewById(R.id.txtheight_);
         age=findViewById(R.id.txtage_);
         settings=findViewById(R.id.img_settings);
@@ -169,6 +170,34 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
         bmiTxt=findViewById(R.id.bmiTxt);
         metabolicAge=findViewById(R.id.metabolicAge);
 
+        boolean se=false;//false=male  true =female
+        float ag=37; //user age
+        float cm=170; //user height=170cm
+        float wtkg=66.2f; //user weight=66.2Kg
+        float imp=560.0f; // body impedance=560.0 Ohm .
+        int althlevel=0; //d
+
+        WeightFat wf= new WeightFat();
+        float bestWeight= BodyFat.getBestWeight(se,ag,cm,wtkg,imp,althlevel);
+        Logger.log(Level.DEBUG,TAG,"Best Weight ="+bestWeight);
+       // Java_cannyscale_BodyFat_Java_1com_1canny_1xue_1bialib_1BodyFat_1getBestWeight
+        /*wf.bmi=BodyFat.getBMI(se,ag,cm,wtkg,imp,althlevel);
+        wf.fat=BodyFat.getFat(se,ag,cm,wtkg,imp,althlevel);
+        wf.tbw=BodyFat.getTbw(se,ag,cm,wtkg,imp,althlevel);
+        wf.mus=BodyFat.getMus(se,ag,cm,wtkg,imp,althlevel);
+        wf.bone=BodyFat.getBone(se,ag,cm,wtkg,imp,althlevel);
+        wf.kcal=BodyFat.getKcal(se,ag,cm,wtkg,imp,althlevel);
+        wf.vfat=BodyFat.getVfat(se,ag,cm,wtkg,imp,althlevel);
+        wf.bodyage=BodyFat.getBage(se,ag,cm,wtkg,imp,althlevel);
+        wf.protein=BodyFat.getProtein(se,ag,cm,wtkg,imp,althlevel);
+        wf.lbm=BodyFat.getWeightWithoutFat(se,ag,cm,wtkg,imp,althlevel);
+        wf.obaserate=BodyFat.getObeseRate(se,ag,cm,wtkg,imp,althlevel);
+        wf.score=BodyFat.getScore(se,ag,cm,wtkg,imp,althlevel);
+        wf.bodyshape=BodyFat.getBodyShape(se,ag,cm,wtkg,imp,althlevel);*/
+
+
+
+        //--------
         help=findViewById(R.id.img_help);
         help.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -180,7 +209,7 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
                     Intent intent=new Intent(IweighHomeScreenActivityl.this,
                             WeighingMachineUsersguide.class);
                     intent.putExtra("weigh machine","weigh machine 2");
-                    intent   .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent,options.toBundle());
                 }else{
 
@@ -601,11 +630,14 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
                         if(sexType.equalsIgnoreCase("Male")){
                             bodyFat.setText(CannyAlgorithms.
                                     bodyFatMale(Float.parseFloat(bmiTxt.getText().toString()),Integer.
-                                            parseInt(age.getText().toString()),impulseVal));
+                                            parseInt(age.getText().toString()),impulseVal/10));
 
                             bodyWater.setText(CannyAlgorithms.bodyWaterMale(Float.parseFloat(bodyFat.getText().toString()),mAge));
                             boneMass.setText(CannyAlgorithms.boneMassMale(Float.parseFloat(bodyFat.getText().toString()),mAge));
-                            muscleMass.setText(CannyAlgorithms.muscleMassMale(mHeight,impulseVal,weightData,mAge));
+                            muscleMass.setText(CannyAlgorithms.muscleMassMale(mHeight,impulseVal/10,weightData,mAge));
+
+
+                            metabolismKcal.setText(CannyAlgorithms.MeatabolismMale(weightData,mAge));
 
                             mBodyFat=bodyFat.getText().toString().trim();
                             mbodyWater=bodyWater.getText().toString().trim();
@@ -623,6 +655,7 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
                             boneMass.setText(CannyAlgorithms.boneMassFeMale(Float.parseFloat(bodyFat.getText().toString()),mAge));
                             muscleMass.setText(CannyAlgorithms.muscleMassFeMale(mHeight,impulseVal,weightData,mAge));
 
+                            metabolismKcal.setText(CannyAlgorithms.MeatabolismFeMale(weightData,mAge));
                             mBodyFat=bodyFat.getText().toString().trim();
                             mbodyWater=bodyWater.getText().toString().trim();
                             mBoneMass=boneMass.getText().toString().trim();
@@ -835,5 +868,27 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
         return values;
 
     }
-
+    public class WeightFat{
+        public float fat,tbw,mus,bone,kcal,bestweight,bmi,vfat,bodyage,protein,lbm,obaserate,score,bodyshape;
+        public WeightFat(){}
+        @Override
+        public String toString() {
+            return "WeightFat{" +
+                    "fat=" + fat +
+                    ", tbw=" + tbw +
+                    ", mus=" + mus +
+                    ", bone=" + bone +
+                    ", kcal=" + kcal +
+                    ", bestweight=" + bestweight +
+                    ", bmi=" + bmi +
+                    ", vfat=" + vfat +
+                    ", bodyage=" + bodyage +
+                    ", protein=" + protein +
+                    ", LBM=" + lbm +
+                    ", obaseRate=" + obaserate +
+                    ", totalscore=" + score +
+                    ", BodyShape=" + bodyshape +
+                    '}';
+        }
+    }
 }

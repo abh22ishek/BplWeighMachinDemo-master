@@ -1,4 +1,4 @@
-package cannyscale;
+package canny;
 
 import android.app.*;
 import android.content.*;
@@ -13,7 +13,6 @@ import java.io.*;
 import java.util.*;
 
 import constantsP.*;
-import database.*;
 import iweigh.*;
 import logger.*;
 import model.*;

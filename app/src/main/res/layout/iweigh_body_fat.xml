@@ -177,7 +177,7 @@
                             android:layout_marginBottom="36dp"
                             android:id="@+id/bmi_value" />
 
-                        <cannyscale.CannyUnitsCustomView
+                        <canny.CannyUnitsCustomView
                             android:id="@+id/curvePathView"
                             android:layout_width="wrap_content"
                             android:layout_height="300dp"

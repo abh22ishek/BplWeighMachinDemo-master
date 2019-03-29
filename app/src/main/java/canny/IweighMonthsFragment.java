@@ -1,4 +1,4 @@
-package cannyscale;
+package canny;
 
 import android.annotation.*;
 import android.content.*;
@@ -11,7 +11,6 @@ import android.widget.*;
 import java.text.*;
 import java.util.*;
 
-import biolight.*;
 import constantsP.*;
 import logger.*;
 import model.*;
@@ -174,13 +173,13 @@ public class IweighMonthsFragment extends Fragment {
         }
 
 
-        monthDate.setText(new StringBuilder().append("SELECTED MONTH : ").
-                append(dates.get(0).substring(0,10)).toString());
+
 
 
         if (getArguments().getString(Constants.DATE) != null) {
             selectedDate = getArguments().getString(Constants.DATE);
-            monthDate.setText(selectedDate.substring(3, 10));
+            monthDate.setText(new StringBuilder().append("SELECTED MONTH : ").
+                    append(dates.get(0).substring(0,10)).toString());
             monthOFYear = selectedDate.substring(3,5);
 
             dates_list = getDaysBetweenDates(get_starting_date_month(selectedDate),get_last_date_month(selectedDate));

@@ -1,4 +1,4 @@
-package cannyscale;
+package canny;
 
 import android.content.*;
 import android.graphics.*;
@@ -10,10 +10,9 @@ import java.util.*;
 import logger.*;
 import model.*;
 
-public class IweighChartViewMonth extends View {
+public class IweighChartViewWeek extends View {
 
     Paint paint,mPaint,dashpaint;
-    Path mPath;
     int pixels_per_unit=0;
 
 
@@ -35,19 +34,18 @@ public class IweighChartViewMonth extends View {
 
     int startx_=0;
     int heightScaleRatio;
+    private Path mPath;
 
 
-
-    public IweighChartViewMonth(Context context) {
+    public IweighChartViewWeek(Context context) {
         super(context);
         init();
     }
 
-    public IweighChartViewMonth(Context context, AttributeSet attrs) {
+    public IweighChartViewWeek(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
-
 
     private void init()
     {
@@ -85,13 +83,12 @@ public class IweighChartViewMonth extends View {
         startX=0;
         startY=0;
         stopY=0;
-
-
         //  float phase = 0;
 
         for(int i=0;i<getHeight();i+=pixels_per_unit){
 
             canvas.drawLine(startX,startY,stopX,stopY,paint);
+
 
             startY=startY+pixels_per_unit;
             stopY=stopY+pixels_per_unit;
@@ -135,6 +132,9 @@ public class IweighChartViewMonth extends View {
         mPath.lineTo(getWidth(),(heightScaleRatio-goalWeight)* height_scale);
         canvas.drawPath(mPath,dashpaint);
 
+
+
+
         // circle the points
         paint.setColor(Color.parseColor("#FF4081"));
         paint.setStrokeWidth(40);
@@ -146,8 +146,6 @@ public class IweighChartViewMonth extends View {
 
         // draw circle points
         float mpX=width_scale;
-
-
         for(int i = 0; i<weightList.size(); i++)
         {
             float y_points=(heightScaleRatio-(Float.parseFloat(weightList.get(i))));
@@ -167,14 +165,15 @@ public class IweighChartViewMonth extends View {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-        setMeasuredDimension((2*30*pixels_per_unit)+pixels_per_unit,
-                10*pixels_per_unit);
+        setMeasuredDimension((2*7*pixels_per_unit)+pixels_per_unit,
+                    10*pixels_per_unit);
     }
 
 
     public void set_XY_points(List<RecordDetailWeighMachine> listX)
     {
         listWeight=listX;
+
     }
 
 

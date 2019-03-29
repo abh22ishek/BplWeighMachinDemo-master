@@ -1,4 +1,4 @@
-package cannyscale;
+package canny;
 
 import android.content.*;
 import android.os.*;

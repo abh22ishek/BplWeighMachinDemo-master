@@ -40,7 +40,7 @@
             android:layout_height="wrap_content">
 
 
-            <cannyscale.IweighChartYaxis
+            <canny.IweighChartYaxis
                 android:layout_width="wrap_content"
                 android:id="@+id/custom_day_chartYaxis"
                 android:layout_marginStart="5dp"
@@ -66,7 +66,7 @@
                     android:layout_height="wrap_content">
 
 
-                    <cannyscale.IWeighChartView
+                    <canny.IWeighChartView
                         android:layout_width="match_parent"
                         android:id="@+id/weight_chart_"
                         android:layout_marginEnd="5dp"
@@ -101,7 +101,7 @@
             android:layout_height="wrap_content">
 
 
-            <cannyscale.IweighBmiYaxis
+            <canny.IweighBmiYaxis
                 android:layout_width="wrap_content"
                 android:id="@+id/iweighBmiYaxis"
                 android:layout_marginStart="5dp"
@@ -127,7 +127,7 @@
                     android:layout_height="wrap_content">
 
 
-                    <cannyscale.IweighBmiView
+                    <canny.IweighBmiView
                         android:layout_width="match_parent"
                         android:id="@+id/bmi_chart_"
                         android:layout_marginEnd="5dp"

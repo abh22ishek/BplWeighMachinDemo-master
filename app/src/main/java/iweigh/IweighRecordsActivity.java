@@ -11,13 +11,11 @@ import android.widget.*;
 import java.util.*;
 
 import bluetooth.*;
-import cannyscale.*;
+import canny.*;
 import constantsP.*;
-import customviews.*;
 import database.*;
 import model.*;
 import test.bpl.com.bplscreens.*;
-import test.bpl.com.bplscreens.fragments.*;
 
 public class IweighRecordsActivity extends FragmentActivity  implements ViewListner{
 

@@ -1,4 +1,4 @@
-package cannyscale;
+package canny;
 
 import logger.*;
 
