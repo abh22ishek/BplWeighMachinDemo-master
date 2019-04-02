@@ -548,11 +548,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/lbmText"
+                    android:layout_centerHorizontal="true"
                     android:text="@string/dash"
                     android:textColor="@color/text_color"
                     android:textSize="20sp"
-                    android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true"
                     android:textStyle="bold"
                     app:fontname="centralSansXBold" />
             </RelativeLayout>

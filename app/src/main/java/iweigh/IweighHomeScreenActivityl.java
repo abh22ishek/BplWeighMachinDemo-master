@@ -61,7 +61,7 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
     String mUserName;
     private GlobalClass globalVariable;
 
-    private TextView height,age,metabolicAge,visceralFat,bodyWater,bodyFat,boneMass,muscleMass,metabolismKcal;
+    private TextView height,age,metabolicAge,visceralFat,bodyWater,bodyFat,boneMass,muscleMass,metabolismKcal,protein,lbm,obesity;
 
 
     String sexType;
@@ -98,12 +98,13 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
         final TextView text;
 
 
-        arrw=dialog.findViewById(R.id.arrow);
+            arrw=dialog.findViewById(R.id.arrow);
 
-        weight=dialog.findViewById(R.id.weightT);
-          pulsatorLayout=dialog.findViewById(R.id.pulsator);
-          pulsatorLayout.setVisibility(View.GONE);
-          text=dialog.findViewById(R.id.text);
+            weight=dialog.findViewById(R.id.weightT);
+            pulsatorLayout=dialog.findViewById(R.id.pulsator);
+            pulsatorLayout.setVisibility(View.GONE);
+
+            text=dialog.findViewById(R.id.text);
 
         animation = AnimationUtils.loadAnimation(IweighHomeScreenActivityl.this, R.anim.slide_in_out);
         animation.setRepeatCount(Animation.INFINITE);
@@ -161,7 +162,9 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
         age=findViewById(R.id.txtage_);
         settings=findViewById(R.id.img_settings);
         record=findViewById(R.id.img_records);
-
+        protein=findViewById(R.id.protein);
+        lbm=findViewById(R.id.lbm);
+        obesity=findViewById(R.id.obesity);
         date=findViewById(R.id.date);
         date.setText(DateTime.getCurrentDate());
         btn_save=findViewById(R.id.btn_save);
@@ -170,30 +173,6 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
         bmiTxt=findViewById(R.id.bmiTxt);
         metabolicAge=findViewById(R.id.metabolicAge);
 
-        boolean se=false;//false=male  true =female
-        float ag=37; //user age
-        float cm=170; //user height=170cm
-        float wtkg=66.2f; //user weight=66.2Kg
-        float imp=560.0f; // body impedance=560.0 Ohm .
-        int althlevel=0; //d
-
-        WeightFat wf= new WeightFat();
-        float bestWeight= BodyFat.getBestWeight(se,ag,cm,wtkg,imp,althlevel);
-        Logger.log(Level.DEBUG,TAG,"Best Weight ="+bestWeight);
-       // Java_cannyscale_BodyFat_Java_1com_1canny_1xue_1bialib_1BodyFat_1getBestWeight
-        /*wf.bmi=BodyFat.getBMI(se,ag,cm,wtkg,imp,althlevel);
-        wf.fat=BodyFat.getFat(se,ag,cm,wtkg,imp,althlevel);
-        wf.tbw=BodyFat.getTbw(se,ag,cm,wtkg,imp,althlevel);
-        wf.mus=BodyFat.getMus(se,ag,cm,wtkg,imp,althlevel);
-        wf.bone=BodyFat.getBone(se,ag,cm,wtkg,imp,althlevel);
-        wf.kcal=BodyFat.getKcal(se,ag,cm,wtkg,imp,althlevel);
-        wf.vfat=BodyFat.getVfat(se,ag,cm,wtkg,imp,althlevel);
-        wf.bodyage=BodyFat.getBage(se,ag,cm,wtkg,imp,althlevel);
-        wf.protein=BodyFat.getProtein(se,ag,cm,wtkg,imp,althlevel);
-        wf.lbm=BodyFat.getWeightWithoutFat(se,ag,cm,wtkg,imp,althlevel);
-        wf.obaserate=BodyFat.getObeseRate(se,ag,cm,wtkg,imp,althlevel);
-        wf.score=BodyFat.getScore(se,ag,cm,wtkg,imp,althlevel);
-        wf.bodyshape=BodyFat.getBodyShape(se,ag,cm,wtkg,imp,althlevel);*/
 
 
 
@@ -245,7 +224,7 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
                 //   weight.setText(UserModellist.get(0).getWeight());
                 height.setText(UserModellist.get(0).getHeight());
                 metabolicAge.setText(UserModellist.get(0).getAge());
-               sexType= UserModellist.get(0).getSex();
+                sexType= UserModellist.get(0).getSex();
                 mAge=Integer.parseInt(UserModellist.get(0).getAge());
                 mHeight= Integer.parseInt(UserModellist.get(0).getHeight());
 
@@ -597,16 +576,7 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
                         float weightData= (HexUtil.byteToInt(mFdata[10])*256.0f+HexUtil.byteToInt(mFdata[11])*1.0f)/10.0f;
                         Log.d("Get Your Wt.=","Canny Scale is "+weightData);
                         readingWeight.setText(String.valueOf(weightData));
-                        bmiTxt.setText(CannyAlgorithms.calculate_bmi(weightData,Integer.parseInt(height
-                                .getText().toString().trim())));
 
-                        visceralFat.setText(CannyAlgorithms.
-                                visceralFat(Float.parseFloat(bmiTxt.getText().toString()),Integer.parseInt(
-                                age.getText().toString())));
-
-                        mVisceralFat=visceralFat.getText().toString().trim();
-                        mWeight=readingWeight.getText().toString().trim();
-                        mBMI=bmiTxt.getText().toString().trim();
 
                         Logger.log(Level.DEBUG,TAG,"mFdata[12] "+HexUtil.byteToHex(mFdata[12])+" "+"mFdata[13]"
                                 +HexUtil.byteToHex(mFdata[13]));
@@ -622,22 +592,62 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
                             Log.d("Get Your impulseVal","From Canny Scale is "+impulseVal);
                         }
 
-                        Log.d("SEX.=","SEX TYPE is "+sexType);
+                        Log.d("SEX.=","SEX TYPE is "+sexType+" age is "+mAge +"  "+"Height is "+mHeight);
 
                         Logger.log(Level.DEBUG,TAG,"mFdata[12] "+HexUtil.byteToHex(mFdata[12])+" "+"mFdata[13]"
                                 +HexUtil.byteToHex(mFdata[13]));
 
                         if(sexType.equalsIgnoreCase("Male")){
-                            bodyFat.setText(CannyAlgorithms.
-                                    bodyFatMale(Float.parseFloat(bmiTxt.getText().toString()),Integer.
-                                            parseInt(age.getText().toString()),impulseVal/10));
 
-                            bodyWater.setText(CannyAlgorithms.bodyWaterMale(Float.parseFloat(bodyFat.getText().toString()),mAge));
-                            boneMass.setText(CannyAlgorithms.boneMassMale(Float.parseFloat(bodyFat.getText().toString()),mAge));
-                            muscleMass.setText(CannyAlgorithms.muscleMassMale(mHeight,impulseVal/10,weightData,mAge));
+                            //---------------------
+
+                            float bestweight=BodyFat.getBestWeight(false,mAge,mHeight,weightData,impulseVal/10,0);
+                            float bmi=BodyFat.getBMI(false,mAge,mHeight,weightData,impulseVal/10,0);
+                            float fat=BodyFat.getFat(false,mAge,mHeight,weightData,impulseVal/10,0);
+                            float tbw=BodyFat.getTbw(false,mAge,mHeight,weightData,impulseVal/10,0);
+                            float mus=BodyFat.getMus(false,mAge,mHeight,weightData,impulseVal/10,0);
+                            float bone=BodyFat.getBone(false,mAge,mHeight,weightData,impulseVal/10,0);
+                            float kcal=BodyFat.getKcal(false,mAge,mHeight,weightData,impulseVal/10,0);
+                            float vfat=BodyFat.getVfat(false,mAge,mHeight,weightData,impulseVal/10,0);
+                            float bodyage=BodyFat.getBage(false,mAge,mHeight,weightData,impulseVal/10,0);
+                            float proteinX=BodyFat.getProtein(false,mAge,mHeight,weightData,impulseVal/10,0);
+                            float  lbmX=BodyFat.getWeightWithoutFat(false,mAge,mHeight,weightData,impulseVal/10,0);
+                            float  obaserate=BodyFat.getObeseRate(false,mAge,mHeight,weightData,impulseVal/10,0);
+                            float   score=BodyFat.getScore(false,mAge,mHeight,weightData,impulseVal/10,0);
+                            float    bodyshape=BodyFat.getBodyShape(false,mAge,mHeight,weightData,impulseVal/10,0);
 
 
-                            metabolismKcal.setText(CannyAlgorithms.MeatabolismMale(weightData,mAge));
+                            //---------------------
+
+
+                            bmiTxt.setText(String.valueOf(bmi));
+
+                           bodyWater.setText(String.valueOf(tbw));
+
+                           bodyFat.setText(String.valueOf(fat));
+
+                           boneMass.setText(String.valueOf(bone));
+
+                            muscleMass.setText(String.valueOf(mus));
+
+
+                            metabolismKcal.setText(String.valueOf(kcal));
+
+
+                            protein.setText(String.valueOf(proteinX));
+
+                            visceralFat.setText(String.valueOf(vfat));
+
+
+                            metabolicAge.setText(String.valueOf(bodyage));
+
+                            lbm.setText(String.valueOf(lbmX));
+
+                            obesity.setText(String.valueOf(obaserate));
+
+                            mVisceralFat=visceralFat.getText().toString().trim();
+                            mWeight=readingWeight.getText().toString().trim();
+                            mBMI=bmiTxt.getText().toString().trim();
 
                             mBodyFat=bodyFat.getText().toString().trim();
                             mbodyWater=bodyWater.getText().toString().trim();
@@ -647,15 +657,55 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
 
 
                         }else{
-                            bodyFat.setText(CannyAlgorithms.
-                                    bodyFatFeMale(Float.parseFloat(bmiTxt.getText().toString()),Integer.
-                                            parseInt(age.getText().toString()),impulseVal));
 
-                            bodyWater.setText(CannyAlgorithms.bodyWaterFeMale(Float.parseFloat(bodyFat.getText().toString()),mAge));
-                            boneMass.setText(CannyAlgorithms.boneMassFeMale(Float.parseFloat(bodyFat.getText().toString()),mAge));
-                            muscleMass.setText(CannyAlgorithms.muscleMassFeMale(mHeight,impulseVal,weightData,mAge));
+                            float bestweight=BodyFat.getBestWeight(true,mAge,mHeight,weightData,impulseVal/10,0);
+                            float bmi=BodyFat.getBMI(true,mAge,mHeight,weightData,impulseVal/10,0);
+                            float fat=BodyFat.getFat(true,mAge,mHeight,weightData,impulseVal/10,0);
+                            float tbw=BodyFat.getTbw(true,mAge,mHeight,weightData,impulseVal/10,0);
+                            float mus=BodyFat.getMus(true,mAge,mHeight,weightData,impulseVal/10,0);
+                            float bone=BodyFat.getBone(true,mAge,mHeight,weightData,impulseVal/10,0);
+                            float kcal=BodyFat.getKcal(true,mAge,mHeight,weightData,impulseVal/10,0);
+                            float vfat=BodyFat.getVfat(true,mAge,mHeight,weightData,impulseVal/10,0);
+                            float bodyage=BodyFat.getBage(true,mAge,mHeight,weightData,impulseVal/10,0);
+                            float proteinX=BodyFat.getProtein(true,mAge,mHeight,weightData,impulseVal/10,0);
+                            float  lbmX=BodyFat.getWeightWithoutFat(true,mAge,mHeight,weightData,impulseVal/10,0);
+                            float  obaserate=BodyFat.getObeseRate(true,mAge,mHeight,weightData,impulseVal/10,0);
+                            float   score=BodyFat.getScore(true,mAge,mHeight,weightData,impulseVal/10,0);
+                            float    bodyshape=BodyFat.getBodyShape(true,mAge,mHeight,weightData,impulseVal/10,0);
 
-                            metabolismKcal.setText(CannyAlgorithms.MeatabolismFeMale(weightData,mAge));
+
+                            //---------------------
+
+
+                            bmiTxt.setText(String.valueOf(bmi));
+
+                            bodyWater.setText(String.valueOf(tbw));
+
+                            bodyFat.setText(String.valueOf(fat));
+
+                            boneMass.setText(String.valueOf(bone));
+
+                            muscleMass.setText(String.valueOf(mus));
+
+
+                            metabolismKcal.setText(String.valueOf(kcal));
+
+
+                            protein.setText(String.valueOf(proteinX));
+
+                            visceralFat.setText(String.valueOf(vfat));
+
+
+                            metabolicAge.setText(String.valueOf(bodyage));
+
+                            lbm.setText(String.valueOf(lbmX));
+
+                            obesity.setText(String.valueOf(obaserate));
+
+                            mVisceralFat=visceralFat.getText().toString().trim();
+                            mWeight=readingWeight.getText().toString().trim();
+                            mBMI=bmiTxt.getText().toString().trim();
+
                             mBodyFat=bodyFat.getText().toString().trim();
                             mbodyWater=bodyWater.getText().toString().trim();
                             mBoneMass=boneMass.getText().toString().trim();
@@ -868,27 +918,5 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
         return values;
 
     }
-    public class WeightFat{
-        public float fat,tbw,mus,bone,kcal,bestweight,bmi,vfat,bodyage,protein,lbm,obaserate,score,bodyshape;
-        public WeightFat(){}
-        @Override
-        public String toString() {
-            return "WeightFat{" +
-                    "fat=" + fat +
-                    ", tbw=" + tbw +
-                    ", mus=" + mus +
-                    ", bone=" + bone +
-                    ", kcal=" + kcal +
-                    ", bestweight=" + bestweight +
-                    ", bmi=" + bmi +
-                    ", vfat=" + vfat +
-                    ", bodyage=" + bodyage +
-                    ", protein=" + protein +
-                    ", LBM=" + lbm +
-                    ", obaseRate=" + obaserate +
-                    ", totalscore=" + score +
-                    ", BodyShape=" + bodyshape +
-                    '}';
-        }
-    }
+
 }
