@@ -25,10 +25,7 @@ public class CannyRecyclerView extends  RecyclerView.Adapter<CannyRecyclerView.C
 
     private Context context;
     private Dialog dialog;
-
-
     private String TAG= biolight.BioLightRecyclerViewAdapter.class.getSimpleName();
-
     private String mUserName;
 
 
@@ -37,9 +34,7 @@ public class CannyRecyclerView extends  RecyclerView.Adapter<CannyRecyclerView.C
         this.recordsDetailList = recordsDetailList;
         this.mUserName=mUserName;
 
-
     }
-
 
     @NonNull
     @Override
@@ -64,22 +59,12 @@ public class CannyRecyclerView extends  RecyclerView.Adapter<CannyRecyclerView.C
     }
 
 
-
-
-
-
-
     class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
 
         private TextView bmi;
         private TextView weight;
         private TextView testingTime;
-
-
         private ImageView report,share,delete,chart;
-
-
         Context ctx;
 
         private CustomViewHolder(View itemView) {
@@ -102,18 +87,19 @@ public class CannyRecyclerView extends  RecyclerView.Adapter<CannyRecyclerView.C
             share.setOnClickListener(this);
             delete.setOnClickListener(this);
             chart.setOnClickListener(this);
-
-
-
         }
+
+
+
 
         @Override
         public void onClick(View v) {
 
             if(v==report){
-
+                final String date= recordsDetailList.get(getAdapterPosition()).getDate();
                 Intent intent=new Intent(context, IweighReportActivity.class);
                 intent.putExtra(Constants.USER_NAME,mUserName);
+                intent.putExtra(Constants.DATE,date);
                 intent.putExtra("data","");
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
@@ -122,6 +108,8 @@ public class CannyRecyclerView extends  RecyclerView.Adapter<CannyRecyclerView.C
             else if(v==share){
                 Intent intent=new Intent(context,IweighReportActivity.class);
                 intent.putExtra(Constants.USER_NAME,mUserName);
+                final String date= recordsDetailList.get(getAdapterPosition()).getDate();
+                intent.putExtra(Constants.DATE,date);
                 intent.putExtra("data","share");
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
@@ -183,7 +171,6 @@ public class CannyRecyclerView extends  RecyclerView.Adapter<CannyRecyclerView.C
                 intent.putExtra(Constants.USER_NAME,mUserName);
                 intent.putExtra(Constants.CHART, (Serializable) recordsDetailList);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
                 context.startActivity(intent);
             }
 

@@ -216,15 +216,14 @@
                     app:fontname="centralSansXBold" />
 
                 <customviews.MyCustomTextView
-                    android:id="@+id/visc"
+                    android:id="@+id/metabolismT"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/metabolismText"
+                    android:layout_centerHorizontal="true"
                     android:text="@string/dash"
                     android:textColor="@color/iweigh_sky_blue"
                     android:textSize="20sp"
-                    android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true"
                     android:textStyle="bold"
                     app:fontname="centralSansXBold" />
             </RelativeLayout>
@@ -442,7 +441,7 @@
                     app:fontname="centralSansXBold" />
 
                 <customviews.MyCustomTextView
-                    android:id="@+id/metabolicAge"
+                    android:id="@+id/bodyAge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/bodyAgeText"
@@ -585,11 +584,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/obesityText"
+                    android:layout_centerHorizontal="true"
                     android:text="@string/dash"
                     android:textColor="@color/iweigh_orange"
                     android:textSize="20sp"
-                    android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true"
                     android:textStyle="bold"
                     app:fontname="centralSansXBold" />
             </RelativeLayout>

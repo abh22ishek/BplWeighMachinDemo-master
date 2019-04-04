@@ -5,7 +5,7 @@ import android.graphics.*;
 import android.util.*;
 import android.view.*;
 
-public class IweighBmiYaxis extends View {
+public class IweighVisceralFatYaxis extends View {
 
     Paint mTextPaint;
 
@@ -14,16 +14,16 @@ public class IweighBmiYaxis extends View {
 
 
     int pixels_per_unit=0;
-    public IweighBmiYaxis(Context context) {
+
+    public IweighVisceralFatYaxis(Context context) {
         super(context);
         init();
     }
 
-    public IweighBmiYaxis(Context context, AttributeSet attrs) {
+    public IweighVisceralFatYaxis(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
-
 
 
     private void init() {
@@ -32,7 +32,6 @@ public class IweighBmiYaxis extends View {
         if(mTextPaint==null){
             mTextPaint=new Paint();
         }
-
     }
 
     @Override
@@ -47,16 +46,14 @@ public class IweighBmiYaxis extends View {
 
         // draw txt for vertical labels
 
-
-        canvas.drawText("50",nStartX,10+nStartY,mTextPaint);
+        canvas.drawText("50",nStartX,nStartY+17,mTextPaint);
         nStartY=pixels_per_unit+2;
-
-        canvas.drawText("40",nStartX,1*nStartY,mTextPaint);
+        canvas.drawText("40",nStartX,nStartY+5,mTextPaint);
         canvas.drawText("30",nStartX,2*nStartY,mTextPaint);
         canvas.drawText("20",nStartX,3*nStartY,mTextPaint);
         canvas.drawText("10",nStartX,4*nStartY,mTextPaint);
-
         canvas.drawText("0",nStartX,5*nStartY,mTextPaint);
+
     }
 
 
@@ -65,4 +62,10 @@ public class IweighBmiYaxis extends View {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         setMeasuredDimension(60,6*pixels_per_unit);
     }
+
+
+
+
+
+
 }

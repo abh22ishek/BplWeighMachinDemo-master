@@ -19,6 +19,7 @@ import android.widget.*;
 import com.canny.xue.bialib.BodyFat;
 import com.neovisionaries.bluetooth.ble.advertising.*;
 
+import java.math.*;
 import java.util.*;
 
 import canny.*;
@@ -620,29 +621,35 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
                             //---------------------
 
 
+                            bmi=TwoReservations(bmi);
+                            fat=TwoReservations(fat);
+                            tbw=TwoReservations(tbw);
+
+                            mus=TwoReservations(mus);
+                            bone=TwoReservations(bone);
+
+                            kcal=TwoReservations(kcal);
+                            vfat=TwoReservations(vfat);
+
+                            bodyage=TwoReservations(bodyage);
+                            proteinX=TwoReservations(proteinX);
+
+                            lbmX=TwoReservations(lbmX);
+                            obaserate=TwoReservations(obaserate);
+
+
+
+
                             bmiTxt.setText(String.valueOf(bmi));
-
-                           bodyWater.setText(String.valueOf(tbw));
-
-                           bodyFat.setText(String.valueOf(fat));
-
-                           boneMass.setText(String.valueOf(bone));
-
+                            bodyWater.setText(String.valueOf(tbw));
+                            bodyFat.setText(String.valueOf(fat));
+                            boneMass.setText(String.valueOf(bone));
                             muscleMass.setText(String.valueOf(mus));
-
-
                             metabolismKcal.setText(String.valueOf(kcal));
-
-
                             protein.setText(String.valueOf(proteinX));
-
                             visceralFat.setText(String.valueOf(vfat));
-
-
                             metabolicAge.setText(String.valueOf(bodyage));
-
                             lbm.setText(String.valueOf(lbmX));
-
                             obesity.setText(String.valueOf(obaserate));
 
                             mVisceralFat=visceralFat.getText().toString().trim();
@@ -674,32 +681,36 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
                             float    bodyshape=BodyFat.getBodyShape(true,mAge,mHeight,weightData,impulseVal/10,0);
 
 
+                            bmi=TwoReservations(bmi);
+                            fat=TwoReservations(fat);
+                            tbw=TwoReservations(tbw);
+
+                            mus=TwoReservations(mus);
+                            bone=TwoReservations(bone);
+
+                            kcal=TwoReservations(kcal);
+                            vfat=TwoReservations(vfat);
+
+                            bodyage=TwoReservations(bodyage);
+                            proteinX=TwoReservations(proteinX);
+
+                            lbmX=TwoReservations(lbmX);
+                            obaserate=TwoReservations(obaserate);
+
+
+
                             //---------------------
 
-
                             bmiTxt.setText(String.valueOf(bmi));
-
                             bodyWater.setText(String.valueOf(tbw));
-
                             bodyFat.setText(String.valueOf(fat));
-
                             boneMass.setText(String.valueOf(bone));
-
                             muscleMass.setText(String.valueOf(mus));
-
-
                             metabolismKcal.setText(String.valueOf(kcal));
-
-
                             protein.setText(String.valueOf(proteinX));
-
                             visceralFat.setText(String.valueOf(vfat));
-
-
                             metabolicAge.setText(String.valueOf(bodyage));
-
                             lbm.setText(String.valueOf(lbmX));
-
                             obesity.setText(String.valueOf(obaserate));
 
                             mVisceralFat=visceralFat.getText().toString().trim();
@@ -918,5 +929,10 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
         return values;
 
     }
-
+    public static float TwoReservations(float f) {
+        BigDecimal bg = new BigDecimal(f);
+        float f1 = (float) bg.setScale(2, BigDecimal.ROUND_HALF_UP)
+                .doubleValue();
+        return f1;
+    }
 }

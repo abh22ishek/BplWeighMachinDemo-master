@@ -126,15 +126,19 @@ public class IWeighChartView extends View {
         final float height_scale=((float)getHeight()-pixels_per_unit)/heightScaleRatio;
         final float width_scale=pixels_per_unit;
 
+
+
+
         if(dashpaint==null){
             dashpaint=new Paint();
             dashpaint.setStyle(Paint.Style.STROKE);
-            dashpaint.setPathEffect(new DashPathEffect(new float[] { 5,15 }, 0));
+
+            dashpaint.setPathEffect(new DashPathEffect(new float[] { 5,5 }, 0));
         }
 
         dashpaint.setColor(Color.parseColor("#7CBC50"));
         dashpaint.setAntiAlias(true);
-        dashpaint.setStrokeWidth(20);
+        dashpaint.setStrokeWidth(8);
 
         mPath.moveTo(0,(heightScaleRatio-goalWeight)*height_scale);
         mPath.lineTo(getWidth(),(heightScaleRatio-goalWeight)* height_scale);
@@ -143,6 +147,37 @@ public class IWeighChartView extends View {
 
 
         // circle the points
+
+
+
+
+
+        float mx=0;
+
+        mx=width_scale;
+        // first point
+        float p1x1=width_scale;
+        float p1y1=0;
+        if(weightList.size()>0)
+        {
+            p1y1=(heightScaleRatio-(Float.parseFloat(weightList.get(0))))*height_scale;
+        }
+
+        mPaint.setStrokeWidth(3);
+        mPaint.setColor(Color.GRAY);
+        for(int i =0; i<weightList.size(); i++)
+        {
+            float y_points=(heightScaleRatio-(Float.parseFloat(weightList.get(i))));
+
+            float px_y= y_points*height_scale;// current y points
+
+            canvas.drawLine(p1x1,p1y1,mx,px_y,mPaint);
+
+
+            p1x1=mx;
+            p1y1=px_y;
+            mx=mx+(2*width_scale);
+        }
 
 
         paint.setColor(Color.parseColor("#FF4081"));
@@ -161,7 +196,7 @@ public class IWeighChartView extends View {
             float px_y=y_points*height_scale;// current y pointts
 
             //canvas.drawCircle(mpX,px_y,7,p);
-          //  canvas.drawRect(mpX-25,px_y,mpX+25,getHeight()-pixels_per_unit,paint);
+            //  canvas.drawRect(mpX-25,px_y,mpX+25,getHeight()-pixels_per_unit,paint);
             canvas.drawCircle(mpX,px_y,10,paint);
             canvas.drawText("( " +weightList.get(i)+ " )",mpX,px_y,mPaint);
             mpX=mpX+(2*width_scale);

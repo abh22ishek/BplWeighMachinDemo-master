@@ -68,6 +68,7 @@ public class IweighChartActivity extends FragmentActivity {
         }
 
 
+
         final ImageView backKey = findViewById(R.id.imgBackKey);
         backKey.setOnClickListener(new View.OnClickListener() {
             @Override

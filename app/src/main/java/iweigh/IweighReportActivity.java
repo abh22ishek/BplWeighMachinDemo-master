@@ -49,7 +49,7 @@ public class IweighReportActivity extends FragmentActivity {
 
     private GlobalClass globalVariable;
 
-    private TextView height,age,metabolicAge,visceralFat,bodyWater,bodyFat,boneMass,muscleMass;
+    private TextView height,age,bodyAge,visceralFat,bodyWater,bodyFat,boneMass,muscleMass,obesity,LBM,protein,metabolism;
 
 
 
@@ -58,6 +58,7 @@ public class IweighReportActivity extends FragmentActivity {
     private TextView base_header_title;
     private ArrayList<RecordDetailWeighMachine> UserMeasuredWeightList;
 
+    String mDate;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,13 +80,12 @@ public class IweighReportActivity extends FragmentActivity {
         record=findViewById(R.id.img_records);
 
         date=findViewById(R.id.date);
-        date.setText(DateTime.getCurrentDate());
         btn_save=findViewById(R.id.btn_save);
         btn_save.setText(getString(R.string.scan));
 
         btn_save.setVisibility(View.GONE);
         bmiTxt=findViewById(R.id.bmiTxt);
-        metabolicAge=findViewById(R.id.metabolicAge);
+        bodyAge=findViewById(R.id.bodyAge);
         base_header_title = findViewById(R.id.base_header_title);
         readingWeight=findViewById(R.id.readingWeight);
         visceralFat=findViewById(R.id.visceralFat);
@@ -93,10 +93,16 @@ public class IweighReportActivity extends FragmentActivity {
         bodyFat=findViewById(R.id.bodyFat);
         boneMass=findViewById(R.id.boneMass);
 
+        obesity=findViewById(R.id.obesity);
+        protein=findViewById(R.id.protein);
+
         iv_scroll=findViewById(R.id.iv_scroll);
 
         muscleMass=findViewById(R.id.muscleMass);
         fabSpeedDial=  findViewById(R.id.fabSpeedDial);
+        LBM=findViewById(R.id.lbm);
+
+        metabolism=findViewById(R.id.metabolismT);
 
 
          mUserName=getIntent().getExtras().getString(Constants.USER_NAME);
@@ -123,6 +129,16 @@ public class IweighReportActivity extends FragmentActivity {
         }
         Logger.log(Level.DEBUG,TAG,"Get m UserName--"+mUserName);
 
+
+
+        if (getIntent().getExtras().getString(Constants.DATE) != null) {
+            mDate = getIntent().getExtras().getString(Constants.DATE);
+            date.setText(mDate);
+        }
+
+
+
+
         fabSpeedDial.setMenuListener(new SimpleMenuListenerAdapter() {
             @Override
             public boolean onMenuItemSelected(MenuItem menuItem) {
@@ -136,7 +152,6 @@ public class IweighReportActivity extends FragmentActivity {
                                 "Permission are necessary in order to save " +
                                         "this file",Toast.LENGTH_SHORT).show();
                     }
-
 
 
 
@@ -164,26 +179,7 @@ public class IweighReportActivity extends FragmentActivity {
         globalVariable = (GlobalClass) getApplicationContext();
 
 
-        if(globalVariable.getUserType().equalsIgnoreCase(Constants.USE_TYPE_HOME)) {
-            DatabaseManager.getInstance().openDatabase();
 
-            UserMeasuredWeightList = new ArrayList<>(DatabaseManager.getInstance().get_measuredWeightMachineB(mUserName));
-
-            if (UserMeasuredWeightList.size() > 0) {
-                readingWeight.setText(String.valueOf(UserMeasuredWeightList.get(0).getWeight()));
-                bmiTxt.setText(String.valueOf(UserMeasuredWeightList.get(0).getBmi()));
-
-
-            }
-        }else {
-            UserMeasuredWeightList = new ArrayList<>(DatabaseManager.getInstance().get_measuredWeightMachineB(mUserName));
-
-            if (UserMeasuredWeightList.size() > 0) {
-
-                readingWeight.setText(String.valueOf(UserMeasuredWeightList.get(0).getWeight()));
-                bmiTxt.setText(String.valueOf(UserMeasuredWeightList.get(0).getBmi()));
-            }
-        }
 
         final ImageView  mBackKey=  findViewById(R.id.imgBackKey);
         mBackKey.setOnClickListener(new View.OnClickListener() {
@@ -300,8 +296,64 @@ public class IweighReportActivity extends FragmentActivity {
                 callFragments(metabolismScreenFragment,"metabolism");
             }
         });
+
+        if(getIntent().getExtras().getString("data")!=null ) {
+
+            if (!getIntent().getExtras().getString("data").equalsIgnoreCase("share")) {
+                callRec();
+            }else{
+                callRec();
+            }
+        }
     }
 
+
+    private void callRec()
+    {
+        if(globalVariable.getUserType().equalsIgnoreCase(Constants.USE_TYPE_HOME)) {
+            DatabaseManager.getInstance().openDatabase();
+
+            UserMeasuredWeightList = new ArrayList<>(DatabaseManager.getInstance().get_measuredWeightMachineBWithSelectedDate(mUserName,mDate));
+
+            if (UserMeasuredWeightList.size() > 0) {
+                readingWeight.setText(String.valueOf(UserMeasuredWeightList.get(0).getWeight()));
+                bmiTxt.setText(String.valueOf(UserMeasuredWeightList.get(0).getBmi()));
+                bodyFat.setText(String.valueOf(UserMeasuredWeightList.get(0).getBodyFat()));
+                bodyWater.setText(String.valueOf(UserMeasuredWeightList.get(0).getBodyWater()));
+                boneMass.setText(String.valueOf(UserMeasuredWeightList.get(0).getBoneMass()));
+                muscleMass.setText(String.valueOf(UserMeasuredWeightList.get(0).getMuscleMass()));
+                protein.setText(String.valueOf(UserMeasuredWeightList.get(0).getProtein()));
+                visceralFat.setText(String.valueOf(UserMeasuredWeightList.get(0).getVisceralFat()));
+                bodyAge.setText(String.valueOf(UserMeasuredWeightList.get(0).getBodyAge()));
+                LBM.setText(String.valueOf(UserMeasuredWeightList.get(0).getLBM()));
+                obesity.setText(String.valueOf(UserMeasuredWeightList.get(0).getObesity()));
+                metabolism.setText(String.valueOf(UserMeasuredWeightList.get(0).getMetabolism()));
+
+
+
+            }
+        }else {
+            UserMeasuredWeightList = new ArrayList<>(DatabaseManager.getInstance().get_measuredWeightMachineBWithSelectedDate(mUserName,mDate));
+
+            if (UserMeasuredWeightList.size() > 0) {
+
+                readingWeight.setText(String.valueOf(UserMeasuredWeightList.get(0).getWeight()));
+                bmiTxt.setText(String.valueOf(UserMeasuredWeightList.get(0).getBmi()));
+                readingWeight.setText(String.valueOf(UserMeasuredWeightList.get(0).getWeight()));
+                bmiTxt.setText(String.valueOf(UserMeasuredWeightList.get(0).getBmi()));
+                bodyFat.setText(String.valueOf(UserMeasuredWeightList.get(0).getBodyFat()));
+                bodyWater.setText(String.valueOf(UserMeasuredWeightList.get(0).getBodyWater()));
+                boneMass.setText(String.valueOf(UserMeasuredWeightList.get(0).getBoneMass()));
+                muscleMass.setText(String.valueOf(UserMeasuredWeightList.get(0).getMuscleMass()));
+                protein.setText(String.valueOf(UserMeasuredWeightList.get(0).getProtein()));
+                visceralFat.setText(String.valueOf(UserMeasuredWeightList.get(0).getVisceralFat()));
+                bodyAge.setText(String.valueOf(UserMeasuredWeightList.get(0).getBodyAge()));
+                LBM.setText(String.valueOf(UserMeasuredWeightList.get(0).getLBM()));
+                obesity.setText(String.valueOf(UserMeasuredWeightList.get(0).getObesity()));
+                metabolism.setText(String.valueOf(UserMeasuredWeightList.get(0).getMetabolism()));
+            }
+        }
+    }
     int mCountResume=0;
 
     Handler mHandler;
@@ -454,11 +506,9 @@ public class IweighReportActivity extends FragmentActivity {
         if(!file.exists())
         {
             file.mkdir();
-
         }
 
         File loginFile=new File(file,loginFileName);
-
         if(!loginFile.exists()){
 
             loginFile.mkdir();
@@ -469,14 +519,11 @@ public class IweighReportActivity extends FragmentActivity {
         if(!userDir.exists()){
             userDir.mkdir();
         }
-
-
         screenShotFile=new File(userDir,fileName);
 
 
         try {
             FileWriter filewriter=new FileWriter(screenShotFile,false);
-
             filewriter.flush();
             Logger.log(Level.DEBUG,TAG,"Saving Screenshot into Bpl Be Well Folder");
         } catch (IOException e) {
@@ -486,6 +533,9 @@ public class IweighReportActivity extends FragmentActivity {
 
         return screenShotFile;
     }
+
+
+
 
     @Override
     protected void onRestart() {

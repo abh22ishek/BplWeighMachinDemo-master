@@ -5,21 +5,22 @@ import android.graphics.*;
 import android.util.*;
 import android.view.*;
 
-public class IweighBmiYaxis extends View {
+public class IweighMuscleMassYaxis extends View {
+
 
     Paint mTextPaint;
 
     int nStartX=0;
     int nStartY=0;
-
-
     int pixels_per_unit=0;
-    public IweighBmiYaxis(Context context) {
+
+
+    public IweighMuscleMassYaxis(Context context) {
         super(context);
         init();
     }
 
-    public IweighBmiYaxis(Context context, AttributeSet attrs) {
+    public IweighMuscleMassYaxis(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
@@ -32,7 +33,6 @@ public class IweighBmiYaxis extends View {
         if(mTextPaint==null){
             mTextPaint=new Paint();
         }
-
     }
 
     @Override
@@ -46,23 +46,26 @@ public class IweighBmiYaxis extends View {
         nStartY=0;
 
         // draw txt for vertical labels
-
-
-        canvas.drawText("50",nStartX,10+nStartY,mTextPaint);
+        canvas.drawText("120",nStartX,10+nStartY,mTextPaint);
         nStartY=pixels_per_unit+2;
 
-        canvas.drawText("40",nStartX,1*nStartY,mTextPaint);
-        canvas.drawText("30",nStartX,2*nStartY,mTextPaint);
-        canvas.drawText("20",nStartX,3*nStartY,mTextPaint);
-        canvas.drawText("10",nStartX,4*nStartY,mTextPaint);
+        canvas.drawText("100",nStartX,1*nStartY,mTextPaint);
+        canvas.drawText("80",nStartX,2*nStartY,mTextPaint);
+        canvas.drawText("60",nStartX,3*nStartY,mTextPaint);
+        canvas.drawText("40",nStartX,4*nStartY,mTextPaint);
+        canvas.drawText("20",nStartX,5*nStartY,mTextPaint);
 
-        canvas.drawText("0",nStartX,5*nStartY,mTextPaint);
+        canvas.drawText("0",nStartX,6*nStartY,mTextPaint);
+
     }
 
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        setMeasuredDimension(60,6*pixels_per_unit);
+        setMeasuredDimension(60,7*pixels_per_unit);
     }
+
+
+
 }

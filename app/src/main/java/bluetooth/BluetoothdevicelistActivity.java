@@ -76,8 +76,6 @@ public class BluetoothdevicelistActivity extends FragmentActivity{
         mUniqueSet=new HashSet<>();
         mBack_key.setOnClickListener(listner);
         mSearch.setOnClickListener(listner);
-
-
         headertitle= findViewById(R.id.base_header_title);
         mSearch.setTextColor(Utility.getColorWrapper(BluetoothdevicelistActivity.this,R.color.black));
         headertitle.setText(R.string.blu);

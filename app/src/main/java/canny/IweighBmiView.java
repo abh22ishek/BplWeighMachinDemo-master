@@ -1,5 +1,6 @@
 package canny;
 
+import android.annotation.*;
 import android.content.*;
 import android.graphics.*;
 import android.util.*;
@@ -11,7 +12,7 @@ import model.*;
 
 public class IweighBmiView extends View {
 
-    Paint paint;
+    Paint paint,dashpaint;
     int pixels_per_unit=0;
 
     Paint mPaint;
@@ -29,6 +30,8 @@ public class IweighBmiView extends View {
 
     int heightScaleRatio;
 
+    Path path ;
+
     public IweighBmiView(Context context) {
         super(context);
         init();
@@ -45,6 +48,8 @@ public class IweighBmiView extends View {
         pixels_per_unit= (int) (density/5f);
        // startx_=pixels_per_unit;
         heightScaleRatio=50;
+
+        path=new Path();
 
     }
 
@@ -77,9 +82,14 @@ public class IweighBmiView extends View {
 
 
 
+        if(dashpaint==null) {
+            dashpaint = new Paint();
+            dashpaint.setStyle(Paint.Style.FILL);
+            dashpaint.setColor(Color.CYAN);
+            dashpaint.setStrokeWidth(30);
 
 
-
+        }
 
         stopX=getWidth();
         startX=0;
@@ -165,19 +175,40 @@ public class IweighBmiView extends View {
         mPaint.setColor(Color.GRAY);
 
         mPaint.setStrokeWidth(5);
+
+        path.setFillType(Path.FillType.EVEN_ODD);
+        path.moveTo(pixels_per_unit,300);
+        path.lineTo(2*pixels_per_unit,400);
+
+     /*    y_points=(heightScaleRatio-(Float.parseFloat(bmiList.get(1))));
+         px_y3=y_points*height_scale;
+
+        path.moveTo(pixels_per_unit,px_y3);
+        path.lineTo(3* pixels_per_unit,px_y3);
+
+        path.moveTo(3*pixels_per_unit,px_y3);
+        path.lineTo(3* pixels_per_unit,getHeight()-pixels_per_unit);
+*/
+        path.close();
+        canvas.drawPath(path,dashpaint);
         float mx=0;
 
+        float x1=0,y1=0;
         mx=width_scale;
         for(int i =0; i<bmiList.size(); i++)
         {
-            float y_points=(50-(Float.parseFloat(bmiList.get(i))));
-            float px_y=y_points*height_scale;// current y points
+            float y_points=(heightScaleRatio-(Float.parseFloat(bmiList.get(i))));
+
+            float px_y= y_points*height_scale;// current y points
 
             canvas.drawLine(p1x1,p1y1,mx,px_y,mPaint);
+
+
             p1x1=mx;
             p1y1=px_y;
             mx=mx+(2*width_scale);
         }
+
     }
 
 
@@ -202,8 +233,6 @@ public class IweighBmiView extends View {
     {
         listBmi=listX;
     }
-
-
 
 
     public void setList(List<String> dates,List<String> bmi){

@@ -374,24 +374,24 @@ public class SelectParameterActivity extends Activity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 if (adapterView.getItemAtPosition(i) == getString(R.string.weigh_mc)) {
-                    Toast.makeText(SelectParameterActivity.this,"Not Available",Toast.LENGTH_SHORT).show();
-                    return;
+                   // Toast.makeText(SelectParameterActivity.this,"Not Available",Toast.LENGTH_SHORT).show();
+                   // return;
 
-                  /*  ActivityOptions options;
+                   ActivityOptions options;
                     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
                         options = ActivityOptions.makeSceneTransitionAnimation(SelectParameterActivity.this);
 
-                        Intent intent = new Intent(SelectParameterActivity.this, WeightMachine2RecordActivity.class)
-                                .putExtra(ConstantsP.USER_NAME, userNameChosen).
+                        Intent intent = new Intent(SelectParameterActivity.this, IweighRecordsActivity.class)
+                                .putExtra(Constants.USER_NAME, userNameChosen).
                                         setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent, options.toBundle());
                     } else {
 
                         Intent intent = new Intent(SelectParameterActivity.this,
-                                WeightMachine2RecordActivity.class).putExtra(ConstantsP.USER_NAME, userNameChosen).
+                                IweighRecordsActivity.class).putExtra(Constants.USER_NAME, userNameChosen).
                                 setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
-                    }*/
+                    }
                 } else if (adapterView.getItemAtPosition(i) == getString(R.string.ioxy)) {
                     ActivityOptions options;
                     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {

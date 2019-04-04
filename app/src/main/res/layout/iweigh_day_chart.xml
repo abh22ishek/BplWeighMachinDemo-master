@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:id="@+id/item"
     android:layout_width="match_parent"
     android:background="@mipmap/bpl_be_well_parameter_bg"
     android:layout_height="match_parent">
@@ -16,6 +17,10 @@
         android:layout_marginTop="10dp"
         android:layout_alignParentTop="true"
         android:id="@+id/chart"
+
+
+
+        android:visibility="visible"
         android:layout_height="wrap_content">
 
         <customviews.MyCustomTextView
@@ -149,6 +154,19 @@
     </LinearLayout>
 
 
+    <include layout="@layout/metabolism_day_chart"
+        />
+
+
+    <include layout="@layout/visceral_fat_day_chart"
+        />
+
+    <include layout="@layout/muscle_mass_chart"/>
+
+    <include layout="@layout/bone_mass_chart"/>
+    <include layout="@layout/water_chart"/>
+    <include layout="@layout/body_fat_chart"/>
+
     <customviews.MyCustomTextView
         android:layout_width="match_parent"
         android:text="@string/date"
@@ -156,7 +174,7 @@
         android:textColor="@color/white"
         android:textSize="16sp"
         android:id="@+id/DateTime"
-        android:layout_above="@+id/tabs"
+        android:layout_above="@+id/tabs2"
         android:layout_marginBottom="20dp"
 
         android:gravity="center"
@@ -166,7 +184,63 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="horizontal"
+        android:id="@+id/tabs2"
+
+        android:layout_above="@+id/tabs"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="5dp"
+        android:gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        tools:ignore="UnknownIdInLayout">
+
+
+        <Button
+            android:layout_width="80dp"
+            android:id="@+id/btn_bdyFat_chart"
+            android:text="@string/body_fat"
+            android:padding="5dp"
+
+            android:background="@mipmap/button_green"
+            android:layout_height="30dp" />
+
+
+        <Button
+            android:layout_width="70dp"
+            android:id="@+id/btn_bdy_water_chart"
+            android:text="@string/water"
+            android:padding="5dp"
+
+            android:layout_marginStart="5dp"
+            android:background="@mipmap/button_green"
+            android:layout_height="30dp" />
+
+        <Button
+            android:layout_width="100dp"
+            android:id="@+id/btn_muscle_chart"
+            android:text="@string/muscle_mass"
+            android:layout_marginStart="5dp"
+            android:padding="5dp"
+            android:background="@mipmap/button_green"
+            android:layout_height="30dp" />
+        <Button
+            android:layout_width="100dp"
+            android:id="@+id/btn_bone_mass_chart"
+            android:text="@string/bone_mass"
+            android:layout_marginStart="5dp"
+            android:padding="5dp"
+            android:background="@mipmap/button_green"
+            android:layout_height="30dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
         android:id="@+id/tabs"
+
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="10dp"
         android:gravity="center_horizontal"
@@ -175,22 +249,41 @@
 
 
         <Button
-            android:layout_width="100dp"
+            android:layout_width="80dp"
             android:id="@+id/btn_weight_chart"
-            android:text="@string/weight_"
+            android:text="@string/wt_kg"
+            android:padding="5dp"
+
             android:background="@mipmap/button_green"
             android:layout_height="30dp" />
 
 
         <Button
-            android:layout_width="100dp"
+            android:layout_width="70dp"
             android:id="@+id/btn_bmi_chart"
             android:text="@string/bmi"
+            android:padding="5dp"
+
             android:layout_marginStart="5dp"
             android:background="@mipmap/button_green"
             android:layout_height="30dp" />
 
-
+        <Button
+            android:layout_width="100dp"
+            android:id="@+id/metabolism_chart"
+            android:text="@string/metaboli"
+            android:layout_marginStart="5dp"
+            android:padding="5dp"
+            android:background="@mipmap/button_green"
+            android:layout_height="30dp" />
+        <Button
+            android:layout_width="100dp"
+            android:id="@+id/btn_vfat_chart"
+            android:text="@string/visc_f"
+            android:layout_marginStart="5dp"
+            android:padding="5dp"
+            android:background="@mipmap/button_green"
+            android:layout_height="30dp" />
 
     </LinearLayout>
 

@@ -1,11 +1,11 @@
-package canny;
+package iweigh;
 
 import android.content.*;
 import android.graphics.*;
 import android.util.*;
 import android.view.*;
 
-public class IweighBmiYaxis extends View {
+public class IweighMetabolismYAxis extends View {
 
     Paint mTextPaint;
 
@@ -14,16 +14,16 @@ public class IweighBmiYaxis extends View {
 
 
     int pixels_per_unit=0;
-    public IweighBmiYaxis(Context context) {
+
+    public IweighMetabolismYAxis(Context context) {
         super(context);
         init();
     }
 
-    public IweighBmiYaxis(Context context, AttributeSet attrs) {
+    public IweighMetabolismYAxis(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
-
 
 
     private void init() {
@@ -32,7 +32,6 @@ public class IweighBmiYaxis extends View {
         if(mTextPaint==null){
             mTextPaint=new Paint();
         }
-
     }
 
     @Override
@@ -47,22 +46,27 @@ public class IweighBmiYaxis extends View {
 
         // draw txt for vertical labels
 
-
-        canvas.drawText("50",nStartX,10+nStartY,mTextPaint);
+        canvas.drawText("2000",nStartX,nStartY+17,mTextPaint);
         nStartY=pixels_per_unit+2;
+        canvas.drawText("1900",nStartX,nStartY+5,mTextPaint);
+        canvas.drawText("1800",nStartX,2*nStartY,mTextPaint);
+        canvas.drawText("1700",nStartX,3*nStartY,mTextPaint);
+        canvas.drawText("1600",nStartX,4*nStartY,mTextPaint);
+        canvas.drawText("1500",nStartX,5*nStartY,mTextPaint);
+        canvas.drawText("1400",nStartX,6*nStartY,mTextPaint);
+        canvas.drawText("1300",nStartX,7*nStartY,mTextPaint);
+        canvas.drawText("1200",nStartX,8*nStartY,mTextPaint);
 
-        canvas.drawText("40",nStartX,1*nStartY,mTextPaint);
-        canvas.drawText("30",nStartX,2*nStartY,mTextPaint);
-        canvas.drawText("20",nStartX,3*nStartY,mTextPaint);
-        canvas.drawText("10",nStartX,4*nStartY,mTextPaint);
-
-        canvas.drawText("0",nStartX,5*nStartY,mTextPaint);
+        canvas.drawText("1100",nStartX,9*nStartY,mTextPaint);
     }
 
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        setMeasuredDimension(60,6*pixels_per_unit);
+        setMeasuredDimension(60,10*pixels_per_unit);
     }
+
+
+
 }
