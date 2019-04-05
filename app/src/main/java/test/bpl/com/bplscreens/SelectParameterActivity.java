@@ -350,7 +350,7 @@ public class SelectParameterActivity extends Activity {
 
             options.add(getString(R.string.ioxy));
             options.add(getString(R.string.biolight));
-            options.add(getString(R.string.weigh_mc));
+            options.add(getString(R.string.bpl_iweigh));
         }
 
 
@@ -373,7 +373,7 @@ public class SelectParameterActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                if (adapterView.getItemAtPosition(i) == getString(R.string.weigh_mc)) {
+                if (adapterView.getItemAtPosition(i) == getString(R.string.bpl_iweigh)) {
                    // Toast.makeText(SelectParameterActivity.this,"Not Available",Toast.LENGTH_SHORT).show();
                    // return;
 

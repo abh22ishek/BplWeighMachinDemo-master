@@ -657,9 +657,15 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
                             mBMI=bmiTxt.getText().toString().trim();
 
                             mBodyFat=bodyFat.getText().toString().trim();
+                            mMetabolism=metabolismKcal.getText().toString().trim();
                             mbodyWater=bodyWater.getText().toString().trim();
                             mBoneMass=boneMass.getText().toString().trim();
                             mMuscleMass=muscleMass.getText().toString().trim();
+                            mObesity=obesity.getText().toString().trim();
+                            mProtein=protein.getText().toString().trim();
+                            mBodyAge=metabolicAge.getText().toString().trim();
+
+                            mLBM=lbm.getText().toString().trim();
 
 
 
@@ -713,14 +719,21 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
                             lbm.setText(String.valueOf(lbmX));
                             obesity.setText(String.valueOf(obaserate));
 
+
                             mVisceralFat=visceralFat.getText().toString().trim();
                             mWeight=readingWeight.getText().toString().trim();
                             mBMI=bmiTxt.getText().toString().trim();
 
                             mBodyFat=bodyFat.getText().toString().trim();
+                            mMetabolism=metabolismKcal.getText().toString().trim();
                             mbodyWater=bodyWater.getText().toString().trim();
                             mBoneMass=boneMass.getText().toString().trim();
                             mMuscleMass=muscleMass.getText().toString().trim();
+                            mObesity=obesity.getText().toString().trim();
+                            mProtein=protein.getText().toString().trim();
+                            mBodyAge=metabolicAge.getText().toString().trim();
+
+                            mLBM=lbm.getText().toString().trim();
 
                         }
 

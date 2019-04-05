@@ -8,7 +8,6 @@ import android.view.*;
 import android.widget.*;
 
 import java.util.*;
-import java.util.zip.*;
 
 import constantsP.*;
 import logger.*;
@@ -22,12 +21,29 @@ public class IweighDaysChartFragment extends Fragment {
 
     public List<String> dates;
     public  List<String> weight;
+    public List<String> metabolism;
     public  List<String> bmi;
+    public  List<String> bodyWater;
+    public  List<String> visceralFat;
+
+    public  List<String> muscleMass;
+    public  List<String> bodyFat;
+    public  List<String> boneMass;
+
 
     private Button btn_weight,btn_bmi,btn_metabolism,btn_bdy_water,btn_mus_mass,btn_bdy_fat,btn_bone_mass,btn_visc_fat;
 
     IWeighChartView wt_chart;
     IweighBmiView bmi_chart;
+
+    IweighMetabolismView metabolismView;
+    IweighBodyWaterView iweighBodyWaterView;
+
+    IweighVisceralFatView iweighVisceralFatView;
+    IweighMuscleMasView iweighMuscleMasView;
+    IweighBodyFatView iweighBodyFatView;
+
+    IweighBoneMassView iweighBoneMassView;
 
     LinearLayout chart;
     private TextView  txt_bmi_chart,txt_wt_chart;
@@ -40,6 +56,9 @@ public class IweighDaysChartFragment extends Fragment {
     private TextView DateTime;
     private String selectedDate;
     RelativeLayout iweigh_meta_chart,viscfat_chart,musc_mass_chart,water_chart,body_fat_chart,bone_mass_chart;
+
+
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -56,6 +75,15 @@ public class IweighDaysChartFragment extends Fragment {
         iweigh_meta_chart = view.findViewById(R.id.meta_chart);
         wt_chart= view.findViewById(R.id.weight_chart_);
        bmi_chart= view. findViewById(R.id.bmi_chart_);
+        metabolismView=  view.findViewById(R.id.metabolism_chart_);
+
+        iweighBodyWaterView=view.findViewById(R.id.iweighWaterView);
+        iweighVisceralFatView=view.findViewById(R.id.visceralFat_chart_);
+
+        iweighMuscleMasView=view.findViewById(R.id.iweighMuscleMassView);
+        iweighBodyFatView=view.findViewById(R.id.iweighBodyFatView);
+
+        iweighBoneMassView=view.findViewById(R.id.iweighBoneMassView);
 
         txt_bmi_chart=  view.findViewById(R.id.txt_bmi_chart);
         txt_wt_chart= view. findViewById(R.id.txt_wt_chart);
@@ -157,11 +185,8 @@ public class IweighDaysChartFragment extends Fragment {
                 chart.setVisibility(View.GONE);
                 viscfat_chart.setVisibility(View.GONE);
                 water_chart.setVisibility(View.GONE);
-
                 musc_mass_chart.setVisibility(View.GONE);
-
                 body_fat_chart.setVisibility(View.GONE);
-
                 bone_mass_chart.setVisibility(View.GONE);
             }
         });
@@ -239,6 +264,14 @@ public class IweighDaysChartFragment extends Fragment {
         dates=new ArrayList<>();
         weight=new ArrayList<>();
         bmi=new ArrayList<>();
+        metabolism=new ArrayList<>();
+        bodyWater=new ArrayList<>();
+
+
+        visceralFat=new ArrayList<>();
+        muscleMass=new ArrayList<>();
+        bodyFat=new ArrayList<>();
+        boneMass=new ArrayList<>();
 
 
         final String mUserName=getActivity().getIntent().getExtras().getString(Constants.USER_NAME);
@@ -265,6 +298,16 @@ public class IweighDaysChartFragment extends Fragment {
         wt_chart.set_XY_points(sameDateRecords(UserMeasuredWeightList,selectedDate));
        bmi_chart.set_XY_points(sameDateRecords(UserMeasuredWeightList,selectedDate));
 
+       metabolismView.set_XY_points(sameDateRecords(UserMeasuredWeightList,selectedDate));
+       iweighBodyWaterView.set_XY_points(sameDateRecords(UserMeasuredWeightList,selectedDate));
+
+
+        iweighVisceralFatView.set_XY_points(sameDateRecords(UserMeasuredWeightList,selectedDate));
+
+        iweighMuscleMasView.set_XY_points(sameDateRecords(UserMeasuredWeightList,selectedDate));
+      iweighBodyFatView.set_XY_points(sameDateRecords(UserMeasuredWeightList,selectedDate));
+      iweighBoneMassView.set_XY_points(sameDateRecords(UserMeasuredWeightList,selectedDate));
+
 
         if(UserMeasuredWeightList!=null && UserMeasuredWeightList.size()>=1)
         {
@@ -273,13 +316,19 @@ public class IweighDaysChartFragment extends Fragment {
                 dates.add(r.getDate());
                 weight.add(String.valueOf(r.getWeight()));
                 bmi.add(String.valueOf(r.getBmi()));
+                metabolism.add(String.valueOf(r.getMetabolism()));
+                bodyWater.add(String.valueOf(r.getBodyWater()));
+                visceralFat.add(String.valueOf(r.getVisceralFat()));
+                muscleMass.add(String.valueOf(r.getMuscleMass()));
+                bodyFat.add(String.valueOf(r.getBodyFat()));
+                boneMass.add(String.valueOf(r.getBoneMass()));
+
             }
 
-
             btn_bmi.setAlpha(0.8f);
-           layoutBmi.setVisibility(View.GONE);
+            layoutBmi.setVisibility(View.GONE);
             layoutWeight.setVisibility(View.VISIBLE);
-           txt_bmi_chart.setVisibility(View.GONE);
+            txt_bmi_chart.setVisibility(View.GONE);
             btn_weight.setAlpha(1f);
 
         }else{
@@ -291,6 +340,12 @@ public class IweighDaysChartFragment extends Fragment {
 
        bmi_chart.setList(dates,bmi);
         wt_chart.setList(dates,weight);
+        metabolismView.setList(dates,metabolism);
+        iweighBodyWaterView.setList(dates,bodyWater);
+        iweighVisceralFatView.setList(dates,visceralFat);
+        iweighMuscleMasView.setList(dates,muscleMass);
+        iweighBodyFatView.setList(dates,bodyFat);
+        iweighBoneMassView.setList(dates,boneMass);
 
         DateTime.setText(new StringBuilder().append("SELECTED DATE : ").append(selectedDate));
     }

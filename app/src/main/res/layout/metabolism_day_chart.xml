@@ -72,6 +72,16 @@
 
 
 
+                    <canny.IweighMetabolismView
+                        android:layout_width="match_parent"
+                        android:id="@+id/metabolism_chart_"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_height="wrap_content"
+
+
+                        />
 
 
                 </LinearLayout>
