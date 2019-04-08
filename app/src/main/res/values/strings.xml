@@ -994,5 +994,5 @@ clean the scale.\n\n
     <string name="visceral_fat_vs_time">Visceral Fat(%) Vs Time</string>
     <string name="muscle_mass_kg_vs_time">Muscle Mass(KG) Vs Time</string>
     <string name="bone_mass_in_kg_vs_time">Bone Mass(in Kg) Vs Time</string>
-    <string name="bpl_iweigh">BPLBeWEll Iweigh PWS</string>
+    <string name="bpl_iweigh">BPLBeWEll Iweigh PWS-01</string>
 </resources>

@@ -631,7 +631,8 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
                             kcal=TwoReservations(kcal);
                             vfat=TwoReservations(vfat);
 
-                            bodyage=TwoReservations(bodyage);
+                           int  bodyagep=(int)TwoReservations(bodyage);
+
                             proteinX=TwoReservations(proteinX);
 
                             lbmX=TwoReservations(lbmX);
@@ -648,7 +649,7 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
                             metabolismKcal.setText(String.valueOf(kcal));
                             protein.setText(String.valueOf(proteinX));
                             visceralFat.setText(String.valueOf(vfat));
-                            metabolicAge.setText(String.valueOf(bodyage));
+                            metabolicAge.setText(String.valueOf(bodyagep));
                             lbm.setText(String.valueOf(lbmX));
                             obesity.setText(String.valueOf(obaserate));
 
@@ -697,7 +698,7 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
                             kcal=TwoReservations(kcal);
                             vfat=TwoReservations(vfat);
 
-                            bodyage=TwoReservations(bodyage);
+                          int  bodyagep=(int)TwoReservations(bodyage);
                             proteinX=TwoReservations(proteinX);
 
                             lbmX=TwoReservations(lbmX);
@@ -715,7 +716,7 @@ public class IweighHomeScreenActivityl extends FragmentActivity implements Iweig
                             metabolismKcal.setText(String.valueOf(kcal));
                             protein.setText(String.valueOf(proteinX));
                             visceralFat.setText(String.valueOf(vfat));
-                            metabolicAge.setText(String.valueOf(bodyage));
+                            metabolicAge.setText(String.valueOf(bodyagep));
                             lbm.setText(String.valueOf(lbmX));
                             obesity.setText(String.valueOf(obaserate));
 

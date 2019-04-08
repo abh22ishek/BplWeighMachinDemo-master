@@ -111,6 +111,7 @@ public class IweighRecordsActivity extends FragmentActivity  implements ViewList
                 finish();
 
 
+
             }
         });
 
@@ -121,6 +122,7 @@ public class IweighRecordsActivity extends FragmentActivity  implements ViewList
 
     @Override
     public void updateViewWeighMachine(String TAG) {
+
 
     }
 

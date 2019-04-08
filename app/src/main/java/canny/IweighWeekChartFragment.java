@@ -8,6 +8,8 @@ import android.support.v4.app.*;
 import android.view.*;
 import android.widget.*;
 
+import com.canny.xue.bialib.BodyFat;
+
 import java.text.*;
 import java.util.*;
 
@@ -26,12 +28,15 @@ public class IweighWeekChartFragment extends Fragment {
     private List<RecordDetailWeighMachine> sameMonthOfYearWithDuplicates;
     int noOfDays=7;
 
-    List<String> week1List,weight11List,bmi11List,plotPoint1List;
-    List<String> week2List,weight2List,bmi2List,plotPoint2List;
-    List<String> week3List,weight3List,bmi33List,plotPoint3List;
-    List<String> week4List,weight4List,bmi44List,plotPoint4List;
-    List<String> week5List,weight5List,bmi5List,plotPoint5List;
+    List<String> week1List,weight11List,bmi11List,plotPoint1List,bodyFat1List,bodywater1List,vFat1List,musclemass1List;
+    List<String> week2List,weight2List,bmi2List,plotPoint2List,bodyFat2List,bodywater2List,vFat2List,musclemass2List;
+    List<String> week3List,weight3List,bmi33List,plotPoint3List,bodyFat3List,bodywater3List,vFat3List,musclemass3List;
+    List<String> week4List,weight4List,bmi44List,plotPoint4List,bodyFat4List,bodywater4List,vFat4List,musclemass4List;
+    List<String> week5List,weight5List,bmi5List,plotPoint5List,bodyFat5List,bodywater5List,vFat5List,musclemass5List;
 
+
+    List<String> boneMass1List,boneMass2List,boneMass3List,boneMass4List,boneMass5List;
+    List<String> Metabolism1List,Metabolism2List,Metabolism3List,Metabolism4List,Metabolism5List;
 
     TextView weekDate;
 
@@ -45,6 +50,15 @@ public class IweighWeekChartFragment extends Fragment {
 
     private Map<String, Integer> WeightValue;
     private Map<String, Integer> BmiValue;
+    private Map<String, Integer> BdyFatValue;
+    private   TreeMap<String, Integer> BodyWaterValue ;
+
+    private   TreeMap<String, Integer> VisceralFatValue ;
+
+    private   TreeMap<String, Integer> MuscleMassValue ;
+
+    private   TreeMap<String, Integer> BoneMassValue ;
+    private   TreeMap<String, Integer> MetabolismValue ;
     private List<String> weightList;
     private List<String> bmiList;
 
@@ -53,25 +67,44 @@ public class IweighWeekChartFragment extends Fragment {
     //-----------
 
     public List<String> dates;
-    public  List<String> weight;
-    public  List<String> bmi;
+
 
     private Button btn_weight,btn_bmi;
 
     IweighChartViewWeek wt_chart;
     IweighBmiViewWeek bmi_chart;
 
+
+    IweighMetabolismViewWeek metabolismView;
+    IweighBodyWaterWeek iweighBodyWaterView;
+
+    IweighVisceralFatViewWeek iweighVisceralFatView;
+    MuscleMassViewWeek iweighMuscleMasView;
+    IweighBodyFatViewWeek iweighBodyFatView;
+
+    IweighBoneMassViewWeek iweighBoneMassView;
+    
+    
     private TextView  txt_bmi_chart,txt_wt_chart;
     GlobalClass globalVariable;
 
     public  List<RecordDetailWeighMachine> UserMeasuredWeightList;
 
     LinearLayout layoutWeight,layoutBmi;
+    private ArrayList<String> metabolismList;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
     }
+
+    public  List<String> bodyWaterList;
+    public  List<String> visceralFatList;
+
+    public  List<String> muscleMassList;
+    public  List<String> bodyFatList;
+    public  List<String> boneMassList;
+
 
     @Nullable
     @Override
@@ -89,6 +122,13 @@ public class IweighWeekChartFragment extends Fragment {
         layoutWeight=view.findViewById(R.id.layoutWeight);
         layoutBmi=view.findViewById(R.id.layoutBmi);
         weekDate=view.findViewById(R.id.DateTime);
+        
+        metabolismView=view.findViewById(R.id.metabolism_chart_week);
+        iweighBodyWaterView=view.findViewById(R.id.iweighWaterViewWeek);
+                iweighMuscleMasView=view.findViewById(R.id.iweighMuscleMassViewWeek);
+                        iweighVisceralFatView=view.findViewById(R.id.visceralFat_chart_week);
+                                iweighBodyFatView=view.findViewById(R.id.iweighBodyFatViewWeek);
+                                        iweighBoneMassView=view.findViewById(R.id.iweighBoneMassViewWeek);
 
         return view;
     }
@@ -135,8 +175,9 @@ public class IweighWeekChartFragment extends Fragment {
         });
 
         dates=new ArrayList<>();
-        weight=new ArrayList<>();
-        bmi=new ArrayList<>();
+      //  weight=new ArrayList<>();
+       // bmi=new ArrayList<>();
+
 
 
         final String mUserName=getActivity().getIntent().getExtras().getString(Constants.USER_NAME);
@@ -164,6 +205,13 @@ public class IweighWeekChartFragment extends Fragment {
 
         wt_chart.set_XY_points(mRecordDetail);
         bmi_chart.set_XY_points(mRecordDetail);
+        iweighBodyFatView.set_XY_points(mRecordDetail);
+
+        iweighBodyWaterView.set_XY_points(mRecordDetail);
+        iweighBoneMassView.set_XY_points(mRecordDetail);
+        iweighMuscleMasView.set_XY_points(mRecordDetail);
+        iweighVisceralFatView.set_XY_points(mRecordDetail);
+        metabolismView.set_XY_points(mRecordDetail);
 
 
         sameMonthOfYearWithDuplicates=new ArrayList<>();
@@ -171,6 +219,21 @@ public class IweighWeekChartFragment extends Fragment {
 
         weightList=new ArrayList<>();
         bmiList=new ArrayList<>();
+
+
+
+
+        bodyWaterList=new ArrayList<>();
+
+
+        visceralFatList=new ArrayList<>();
+        muscleMassList=new ArrayList<>();
+        bodyFatList=new ArrayList<>();
+        boneMassList=new ArrayList<>();
+
+
+        metabolismList=new ArrayList<>();
+
 
 
         if (getArguments().getString(Constants.DATE) != null) {
@@ -200,11 +263,32 @@ public class IweighWeekChartFragment extends Fragment {
         WeightValue=new TreeMap<>();
         BmiValue=new TreeMap<>();
 
+        BdyFatValue=new TreeMap<>();
+
+        BodyWaterValue=new TreeMap<>();
+
+        VisceralFatValue=new TreeMap<>();
+
+        MuscleMassValue=new TreeMap<>();
+
+        BoneMassValue=new TreeMap<>();
+
+        MetabolismValue=new TreeMap<>();
 
         // first pass
 
         Map<String, List<Integer>> firstPassWeight = new TreeMap<>();
         Map<String, List<Integer>> firstPassBmi = new TreeMap<>();
+
+        Map<String, List<Integer>> firstPassBodyFat = new TreeMap<>();
+        Map<String, List<Integer>> firstPassBodyWater = new TreeMap<>();
+        Map<String, List<Integer>> firstPassVisceralFat = new TreeMap<>();
+
+        Map<String, List<Integer>> firstPassMuscleMass = new TreeMap<>();
+
+
+        Map<String, List<Integer>> firstPassBoneMass = new TreeMap<>();
+        Map<String, List<Integer>> firstPassMetabolism= new TreeMap<>();
 
         for (RecordDetailWeighMachine bp : sameMonthOfYearWithDuplicates) {
             String name = bp.getDate().substring(0,10);
@@ -212,20 +296,60 @@ public class IweighWeekChartFragment extends Fragment {
 
                 firstPassWeight.get(name).add((int) bp.getWeight());
                 firstPassBmi.get(name).add((int) bp.getBmi());
+                firstPassBodyFat.get(name).add((int) bp.getBodyFat());
+                firstPassBodyWater.get(name).add((int) bp.getBodyWater());
+
+                firstPassVisceralFat.get(name).add((int) bp.getVisceralFat());
+                firstPassMuscleMass.get(name).add((int) bp.getMuscleMass());
+
+                firstPassBoneMass.get(name).add((int) bp.getBoneMass());
+                firstPassMetabolism.get(name).add((int) bp.getMetabolism());
+
+
 
             } else {
                 List<Integer> wtVal = new ArrayList<>();
                 List<Integer> bmiVal = new ArrayList<>();
+                List<Integer> bodyFatVal = new ArrayList<>();
 
+                List<Integer> bodyWaterVal = new ArrayList<>();
 
+                List<Integer> viscFatVal=new ArrayList<>();
+                List<Integer> muscMassVal=new ArrayList<>();
 
-
+                List<Integer> boneMassVal=new ArrayList<>();
+                List<Integer> metabolismVal=new ArrayList<>();
 
                 wtVal.add((int) bp.getWeight());
                 firstPassWeight.put(name,wtVal);
 
                 bmiVal.add((int) bp.getBmi());
                 firstPassBmi.put(name,bmiVal);
+
+
+
+                bodyFatVal.add((int) bp.getBodyFat());
+                firstPassBodyFat.put(name,bodyFatVal);
+
+
+                bodyWaterVal.add((int) bp.getBodyWater());
+                firstPassBodyWater.put(name,bodyWaterVal);
+
+
+                viscFatVal.add((int) bp.getVisceralFat());
+                firstPassVisceralFat.put(name,viscFatVal);
+
+
+                muscMassVal.add((int) bp.getMuscleMass());
+                firstPassMuscleMass.put(name,muscMassVal);
+
+
+                boneMassVal.add((int) bp.getBoneMass());
+                firstPassBoneMass.put(name,boneMassVal);
+
+                metabolismVal.add((int) bp.getMetabolism());
+                firstPassMetabolism.put(name,metabolismVal);
+
 
             }
         }
@@ -235,10 +359,20 @@ public class IweighWeekChartFragment extends Fragment {
 
             WeightValue.put(dates_list.get(i),0);
             BmiValue.put(dates_list.get(i),0);
+            BdyFatValue.put(dates_list.get(i),0);
+
+            BodyWaterValue.put(dates_list.get(i),0);
+
+            VisceralFatValue.put(dates_list.get(i),0);
+
+            MuscleMassValue.put(dates_list.get(i),0);
+
+            BoneMassValue.put(dates_list.get(i),0);
+            MetabolismValue.put(dates_list.get(i),0);
         }
 
 
-        // Second pass for systolic
+        // Second pass for weight
 
         for (Map.Entry<String, List<Integer>> entry : firstPassWeight.entrySet()) {
             int average = (int) calcAverage(entry.getValue());
@@ -247,7 +381,7 @@ public class IweighWeekChartFragment extends Fragment {
             Logger.log(Level.WARNING, TAG, "Key and Average=" + entry.getKey()+"  "+average);
         }
 
-        // Second pass for diabolic
+        // Second pass for bmi
 
         for (Map.Entry<String, List<Integer>> entry : firstPassBmi.entrySet()) {
             int average = (int) calcAverage(entry.getValue());
@@ -257,11 +391,58 @@ public class IweighWeekChartFragment extends Fragment {
         }
 
 
+        //  // Second pass for bdyfat
+        for (Map.Entry<String, List<Integer>> entry : firstPassBodyFat.entrySet()) {
+            int average = (int) calcAverage(entry.getValue());
+            BdyFatValue.put(entry.getKey(), average);
+
+            Logger.log(Level.WARNING, TAG, "Key and Average=" + entry.getKey()+"  "+average);
+        }
 
 
+        // 2nd pass for body water
+        for (Map.Entry<String, List<Integer>> entry : firstPassBodyWater.entrySet()) {
+            int average = (int) calcAverage(entry.getValue());
+            BodyWaterValue.put(entry.getKey(), average);
+
+            Logger.log(Level.WARNING, TAG, "Key and Average=" + entry.getKey()+"  "+average);
+        }
 
 
-        // for systolic
+        // 2nd pass for visc fat
+        for (Map.Entry<String, List<Integer>> entry : firstPassVisceralFat.entrySet()) {
+            int average = (int) calcAverage(entry.getValue());
+            VisceralFatValue.put(entry.getKey(), average);
+
+            Logger.log(Level.WARNING, TAG, "Key and Average=" + entry.getKey()+"  "+average);
+        }
+
+        // 2nd pass for muscle mass
+        for (Map.Entry<String, List<Integer>> entry : firstPassMuscleMass.entrySet()) {
+            int average = (int) calcAverage(entry.getValue());
+            MuscleMassValue.put(entry.getKey(), average);
+
+            Logger.log(Level.WARNING, TAG, "Key and Average=" + entry.getKey()+"  "+average);
+        }
+
+
+        // 2nd pass for bone mass
+        for (Map.Entry<String, List<Integer>> entry : firstPassBoneMass.entrySet()) {
+            int average = (int) calcAverage(entry.getValue());
+            BoneMassValue.put(entry.getKey(), average);
+
+            Logger.log(Level.WARNING, TAG, "Key and Average=" + entry.getKey()+"  "+average);
+        }
+
+        // 2nd pass for metabolism
+        for (Map.Entry<String, List<Integer>> entry : firstPassMetabolism.entrySet()) {
+            int average = (int) calcAverage(entry.getValue());
+            MetabolismValue.put(entry.getKey(), average);
+
+            Logger.log(Level.WARNING, TAG, "Key and Average=" + entry.getKey()+"  "+average);
+        }
+        //-------------------------------------------------------------------------
+        // for weight
         for (String key : WeightValue.keySet()) {
 
             Logger.log(Level.WARNING, TAG, "Final Map Pulse Value Key=" + key);
@@ -271,7 +452,7 @@ public class IweighWeekChartFragment extends Fragment {
 
 
 
-        // for diabolic
+        // for bmi
 
         for (String key : BmiValue.keySet()) {
 
@@ -283,11 +464,69 @@ public class IweighWeekChartFragment extends Fragment {
 
 
 
+
+
+
+        // bdy Fat
+        for (String key : BdyFatValue.keySet()) {
+
+            Logger.log(Level.WARNING, TAG, "Final Map Pulse Value Key=" + key);
+            Logger.log(Level.WARNING, TAG, "Final Map Pulse Value value=" + BdyFatValue.get(key));
+            bodyFatList.add("" +  BdyFatValue.get(key));
+        }
+
+
+        // bdy water
+        for (String key : BodyWaterValue.keySet()) {
+
+            Logger.log(Level.WARNING, TAG, "Final Map Pulse Value Key=" + key);
+            Logger.log(Level.WARNING, TAG, "Final Map Pulse Value value=" + BodyWaterValue.get(key));
+            bodyWaterList.add("" +  BodyWaterValue.get(key));
+        }
+
+        // visc fat
+        for (String key : VisceralFatValue.keySet()) {
+
+            Logger.log(Level.WARNING, TAG, "Final Map Pulse Value Key=" + key);
+            Logger.log(Level.WARNING, TAG, "Final Map Pulse Value value=" + VisceralFatValue.get(key));
+            visceralFatList.add("" +  VisceralFatValue.get(key));
+        }
+
+
+        // muscle mass
+        for (String key : MuscleMassValue.keySet()) {
+
+            Logger.log(Level.WARNING, TAG, "Final Map Pulse Value Key=" + key);
+            Logger.log(Level.WARNING, TAG, "Final Map Pulse Value value=" + MuscleMassValue.get(key));
+            muscleMassList.add("" +  MuscleMassValue.get(key));
+        }
+
+
+        // bone mass
+        for (String key : BoneMassValue.keySet()) {
+
+            Logger.log(Level.WARNING, TAG, "Final Map Pulse Value Key=" + key);
+            Logger.log(Level.WARNING, TAG, "Final Map Pulse Value value=" + BoneMassValue.get(key));
+            boneMassList.add("" +  BoneMassValue.get(key));
+        }
+
+        // metabolism mass
+        for (String key : MetabolismValue.keySet()) {
+
+            Logger.log(Level.WARNING, TAG, "Final Map Pulse Value Key=" + key);
+            Logger.log(Level.WARNING, TAG, "Final Map Pulse Value value=" + MetabolismValue.get(key));
+            metabolismList.add("" +  MetabolismValue.get(key));
+        }
+
+
+        //------------------------------------
+
         storeWeekList();
 
 
 
-        weekDate.setText(new StringBuilder().append("Selected Week :").append(firstToLastDayOfWeek(checkSelectedDateWeeks(selectedDate))).toString());
+        weekDate.setText(new StringBuilder().append("Selected Week :").
+                append(firstToLastDayOfWeek(checkSelectedDateWeeks(selectedDate))).toString());
 
 
         wt_chart.setHorizontalLabel(checkSelectedDateWeeks(selectedDate));
@@ -296,7 +535,27 @@ public class IweighWeekChartFragment extends Fragment {
         bmi_chart.setHorizontalLabels(checkSelectedDateWeeks(selectedDate));
         bmi_chart.setPlotPoints(plotBmiValue(selectedDate));
 
+        iweighBodyFatView.setHorizontalLabels(checkSelectedDateWeeks(selectedDate));
+        iweighBodyFatView.setPlotPoints(plotBdyFatValue(selectedDate));
 
+
+        iweighBodyWaterView.setHorizontalLabel(checkSelectedDateWeeks(selectedDate));
+        iweighBodyWaterView.setPlotPoints(plotBodyWaterValue(selectedDate));
+
+
+        iweighVisceralFatView.setHorizontalLabel(checkSelectedDateWeeks(selectedDate));
+        iweighVisceralFatView.setPlotPoints(plotVisceralFatValue(selectedDate));
+
+
+        iweighMuscleMasView.setHorizontalLabel(checkSelectedDateWeeks(selectedDate));
+        iweighMuscleMasView.setPlotPoints(plotMuscleMassValue(selectedDate));
+
+
+        iweighBoneMassView.setHorizontalLabel(checkSelectedDateWeeks(selectedDate));
+        iweighBoneMassView.setPlotPoints(plotBoneMassValue(selectedDate));
+
+        metabolismView.setHorizontalLabel(checkSelectedDateWeeks(selectedDate));
+        metabolismView.setPlotPoints(plotMetabolismValue(selectedDate));
 
     }
 
@@ -392,7 +651,84 @@ public class IweighWeekChartFragment extends Fragment {
 
     }
 
+
+    private List<String> plotBodyWaterValue(String selectedDate)
+    {
+
+        if(week1List.contains(selectedDate)){
+
+            bodywater1List=bodyWaterList.subList(0,7);
+            return bodywater1List;
+        }
+
+
+        else if(week2List.contains(selectedDate)){
+
+            bodywater2List=bodyWaterList.subList(7,14);
+            return  bodyFat2List;
+        }
+
+
+
+        else if(week3List.contains(selectedDate)){
+            bodywater3List=bodyWaterList.subList(14,21);
+            return bodyFat3List;
+        }
+
+
+        else if(week4List.contains(selectedDate)){
+            bodywater4List=bodyWaterList.subList(21,28);
+            return bodyFat4List;
+        }
+
+
+        else{
+            bodywater5List=bodyWaterList.subList(28,dates_list.size());
+            return bodyFat5List;
+        }
+
+
+    }
+    private List<String> plotBdyFatValue(String selectedDate)
+    {
+
+        if(week1List.contains(selectedDate)){
+
+            bodyFat1List=bodyFatList.subList(0,7);
+            return bodyFat1List;
+        }
+
+
+        else if(week2List.contains(selectedDate)){
+
+            bodyFat2List=bodyFatList.subList(7,14);
+            return  bodyFat2List;
+        }
+
+
+
+        else if(week3List.contains(selectedDate)){
+            bodyFat3List=bodyFatList.subList(14,21);
+            return bodyFat3List;
+        }
+
+
+        else if(week4List.contains(selectedDate)){
+            bodyFat4List=bodyFatList.subList(21,28);
+            return bodyFat4List;
+        }
+
+
+        else{
+            bodyFat5List=bodyFatList.subList(28,dates_list.size());
+            return bodyFat5List;
+        }
+
+
+    }
+
     private List<String> plotBmiValue(String selectedDate)
+
     {
 
         if(week1List.contains(selectedDate)){
@@ -425,6 +761,166 @@ public class IweighWeekChartFragment extends Fragment {
         else{
             bmi5List=bmiList.subList(28,dates_list.size());
             return bmi5List;
+        }
+
+
+    }
+
+    private List<String> plotVisceralFatValue(String selectedDate)
+
+    {
+
+        if(week1List.contains(selectedDate)){
+
+            vFat1List=visceralFatList.subList(0,7);
+            return vFat1List;
+        }
+
+
+        else if(week2List.contains(selectedDate)){
+
+            vFat2List=visceralFatList.subList(7,14);
+            return  vFat2List;
+        }
+
+
+
+        else if(week3List.contains(selectedDate)){
+            vFat3List=visceralFatList.subList(14,21);
+            return vFat3List;
+        }
+
+
+        else if(week4List.contains(selectedDate)){
+            vFat4List=visceralFatList.subList(21,28);
+            return vFat4List;
+        }
+
+
+        else{
+            vFat5List=visceralFatList.subList(28,dates_list.size());
+            return vFat5List;
+        }
+
+
+    }
+
+
+    private List<String> plotMuscleMassValue(String selectedDate)
+
+    {
+
+        if(week1List.contains(selectedDate)){
+
+            musclemass1List=muscleMassList.subList(0,7);
+            return musclemass1List;
+        }
+
+
+        else if(week2List.contains(selectedDate)){
+
+            musclemass2List=muscleMassList.subList(7,14);
+            return  musclemass2List;
+        }
+
+
+
+        else if(week3List.contains(selectedDate)){
+            musclemass3List=muscleMassList.subList(14,21);
+            return musclemass3List;
+        }
+
+
+        else if(week4List.contains(selectedDate)){
+            musclemass4List=muscleMassList.subList(21,28);
+            return musclemass4List;
+        }
+
+
+        else{
+            musclemass5List=muscleMassList.subList(28,dates_list.size());
+            return musclemass5List;
+        }
+
+
+    }
+
+
+
+    private List<String> plotBoneMassValue(String selectedDate)
+
+    {
+
+        if(week1List.contains(selectedDate)){
+
+            boneMass1List=boneMassList.subList(0,7);
+            return boneMass1List;
+        }
+
+
+        else if(week2List.contains(selectedDate)){
+
+            boneMass2List=boneMassList.subList(7,14);
+            return  boneMass2List;
+        }
+
+
+
+        else if(week3List.contains(selectedDate)){
+            boneMass3List=boneMassList.subList(14,21);
+            return boneMass3List;
+        }
+
+
+        else if(week4List.contains(selectedDate)){
+            boneMass4List=boneMassList.subList(21,28);
+            return boneMass4List;
+        }
+
+
+        else{
+            boneMass5List=boneMassList.subList(28,dates_list.size());
+            return boneMass5List;
+        }
+
+
+    }
+
+
+    private List<String> plotMetabolismValue(String selectedDate)
+
+    {
+
+        if(week1List.contains(selectedDate)){
+
+            Metabolism1List=metabolismList.subList(0,7);
+            return Metabolism1List;
+        }
+
+
+        else if(week2List.contains(selectedDate)){
+
+            Metabolism2List=metabolismList.subList(7,14);
+            return  Metabolism2List;
+        }
+
+
+
+        else if(week3List.contains(selectedDate)){
+            Metabolism3List=metabolismList.subList(14,21);
+            return Metabolism3List;
+        }
+
+
+        else if(week4List.contains(selectedDate)){
+            Metabolism4List=metabolismList.subList(21,28);
+            return Metabolism4List;
+        }
+
+
+        else{
+            Metabolism5List=metabolismList.subList(28,dates_list.size());
+            return Metabolism5List;
         }
 
 
