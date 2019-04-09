@@ -1,4 +1,4 @@
-package canny;
+package cannymonth;
 
 import android.content.*;
 import android.graphics.*;
@@ -10,15 +10,16 @@ import java.util.*;
 import logger.*;
 import model.*;
 
-public class IweighBodyWaterWeek extends View {
+public class IweighMetabolismMonth extends View {
 
-    Paint paint,dashpaint;
+    Paint paint;
     int pixels_per_unit=0;
 
     Paint mPaint;
-    List<RecordDetailWeighMachine> listBdyWater;
 
-    List<String> bodyWaterList;
+    List<RecordDetailWeighMachine> listMetabolism;
+
+    List<String> metabolismList;
     List<String> datesList;
 
     int startX=0;
@@ -28,16 +29,13 @@ public class IweighBodyWaterWeek extends View {
     int stopY=0;
 
     int heightScaleRatio;
-    Path path ;
 
-
-    public IweighBodyWaterWeek(Context context) {
+    public IweighMetabolismMonth(Context context) {
         super(context);
         init();
-
     }
 
-    public IweighBodyWaterWeek(Context context,  AttributeSet attrs) {
+    public IweighMetabolismMonth(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
@@ -47,10 +45,9 @@ public class IweighBodyWaterWeek extends View {
         int density=getResources().getDisplayMetrics().densityDpi;
         pixels_per_unit= (int) (density/5f);
         // startx_=pixels_per_unit;
-        heightScaleRatio=120;
-        path=new Path();
-    }
+        heightScaleRatio=900;
 
+    }
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -81,14 +78,9 @@ public class IweighBodyWaterWeek extends View {
 
 
 
-        if(dashpaint==null) {
-            dashpaint = new Paint();
-            dashpaint.setStyle(Paint.Style.FILL);
-            dashpaint.setColor(Color.CYAN);
-            dashpaint.setStrokeWidth(30);
 
 
-        }
+
 
         stopX=getWidth();
         startX=0;
@@ -117,12 +109,18 @@ public class IweighBodyWaterWeek extends View {
         for(int i=0;i<datesList.size();i++)
         {
             canvas.save();
-            //canvas.rotate(-45,startx_,height+20);
+            //  canvas.rotate(-45,startx_,getHeight());
+            //   String [] dateTime=datesList.get(i).split(" ");
+            // canvas.drawText(dateTime[0],startx_-15,height-20,paint);
             canvas.drawText(datesList.get(i).substring(0,5),startx_,getHeight()-pixels_per_unit+20,paint);
 
             startx_=startx_+(2*pixels_per_unit);
             canvas.restore();
         }
+
+
+
+
 
 
         // Plotting the point
@@ -136,9 +134,9 @@ public class IweighBodyWaterWeek extends View {
         // first point
         float p1x1=width_scale;
         float p1y1=0;
-        if(bodyWaterList.size()>0)
+        if(metabolismList.size()>0)
         {
-            p1y1=(heightScaleRatio-(Float.parseFloat(bodyWaterList.get(0))))*height_scale;
+            p1y1=(heightScaleRatio-(Float.parseFloat(metabolismList.get(0))))*height_scale;
         }
 
 
@@ -151,41 +149,37 @@ public class IweighBodyWaterWeek extends View {
 
         // draw circle points
         float mpX=width_scale;
-        for(int i = 0; i<bodyWaterList.size(); i++)
+        for(int i = 0; i<metabolismList.size(); i++)
         {
-            float y_points=(heightScaleRatio-(Float.parseFloat(bodyWaterList.get(i))));
+            float y_points=(heightScaleRatio-(Float.parseFloat(metabolismList.get(i))));
             float px_y=y_points*height_scale;// current y pointts
 
             canvas.drawCircle(mpX,px_y,7,paint);
-            canvas.drawText("( "+bodyWaterList.get(i)+" )",mpX,px_y,mPaint);
+            canvas.drawText("( "+metabolismList.get(i)+" )",mpX,px_y,mPaint);
             mpX=mpX+(2*width_scale);
         }
+
 
 
         // draw line connecting to circle
         mPaint.setStrokeWidth(3);
         mPaint.setColor(Color.GRAY);
+
+        mPaint.setAntiAlias(true);
         mPaint.setStrokeWidth(5);
-
-
-
-
         float mx=0;
-        mx=width_scale;
 
-        for(int i =0; i<bodyWaterList.size(); i++)
+        mx=width_scale;
+        for(int i =0; i<metabolismList.size(); i++)
         {
-            float y_points=(heightScaleRatio-(Float.parseFloat(bodyWaterList.get(i))));
-            float px_y= y_points*height_scale;// current y points
+            float y_points=(heightScaleRatio-(Float.parseFloat(metabolismList.get(i))));
+            float px_y=y_points*height_scale;// current y points
 
             canvas.drawLine(p1x1,p1y1,mx,px_y,mPaint);
-
-
             p1x1=mx;
             p1y1=px_y;
             mx=mx+(2*width_scale);
         }
-
     }
 
 
@@ -194,35 +188,33 @@ public class IweighBodyWaterWeek extends View {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-        if(listBdyWater.size()<=3){
-            setMeasuredDimension((6*listBdyWater.size()*pixels_per_unit)+pixels_per_unit,
-                    7*pixels_per_unit);
-        }else{
-            setMeasuredDimension((2*listBdyWater.size()*pixels_per_unit)+pixels_per_unit,
-                    7*pixels_per_unit);
-        }
+
+        setMeasuredDimension((2*30*pixels_per_unit)+pixels_per_unit,
+                10*pixels_per_unit);
+
 
     }
+
 
 
     public void set_XY_points(List<RecordDetailWeighMachine> listX)
     {
-        listBdyWater=listX;
-
+        listMetabolism=listX;
     }
 
 
 
 
-    public List<String> setHorizontalLabel(List<String> WeekDates){
-        datesList=WeekDates;
-        Logger.log(Level.DEBUG,"Custom View ","**Day record size**="+datesList.size());
+    public List<String> setHorizontalLabels(List<String> MOnthDates){
+        datesList=MOnthDates;
+        Logger.log(Level.DEBUG,"Custom View ","**Month record size**="+datesList.size());
         return datesList;
     }
 
     public List<String> setPlotPoints(List<String> points){
-        bodyWaterList=points;
-        Logger.log(Level.DEBUG,"Custom View ","**Day record size**="+bodyWaterList.size());
-        return bodyWaterList;
+        metabolismList=points;
+        Logger.log(Level.DEBUG,"Custom View ","**Month record size**="+metabolismList.size());
+
+        return metabolismList;
     }
 }

@@ -28,6 +28,18 @@ public class IweighMonthsFragment extends Fragment {
     IweighChartViewMonth wt_chart;
     IweighBmiViewMonth bmi_chart;
 
+
+    IweighMetabolismViewWeek metabolismView;
+    IweighBodyWaterWeek iweighBodyWaterView;
+
+    IweighVisceralFatViewWeek iweighVisceralFatView;
+    MuscleMassViewWeek iweighMuscleMasView;
+    IweighBodyFatViewWeek iweighBodyFatView;
+
+    IweighBoneMassViewWeek iweighBoneMassView;
+
+
+
     private TextView  txt_bmi_chart,txt_wt_chart;
     GlobalClass globalVariable;
 
@@ -57,9 +69,11 @@ public class IweighMonthsFragment extends Fragment {
     private List<String> weightList;
     private List<String> bmiList;
 
+    LinearLayout chart;
 
     TextView monthDate,showVal2;
-
+    private Button btn_metabolism,btn_bdy_water,btn_mus_mass,btn_bdy_fat,btn_bone_mass,btn_visc_fat;
+    RelativeLayout iweigh_meta_chart,viscfat_chart,musc_mass_chart,water_chart,body_fat_chart,bone_mass_chart;
 
     @Override
     public void onAttach(Context context) {
@@ -83,6 +97,32 @@ public class IweighMonthsFragment extends Fragment {
         layoutBmi=view.findViewById(R.id.layoutBmi);
         monthDate=view.findViewById(R.id.DateTime);
 
+
+        btn_visc_fat=view.findViewById(R.id.btn_vfat_chart);
+        btn_metabolism=view.findViewById(R.id.metabolism_chart);
+        btn_bdy_water=view.findViewById(R.id.btn_bdy_water_chart);
+        btn_mus_mass=view.findViewById(R.id.btn_muscle_chart);
+        btn_bdy_fat=view.findViewById(R.id.btn_bdyFat_chart);
+        btn_bone_mass=view.findViewById(R.id.btn_bone_mass_chart);
+        chart=view.findViewById(R.id.chart);
+
+
+        bone_mass_chart=view.findViewById(R.id.bone_mass_chart_month);
+        iweigh_meta_chart=view.findViewById(R.id.meta_chart_month);
+        viscfat_chart=view.findViewById(R.id.viscfat_chart_month);
+        musc_mass_chart=view.findViewById(R.id.musc_mass_chart_month);
+        water_chart=view.findViewById(R.id.water_chart_month);
+        body_fat_chart=view.findViewById(R.id.body_fat_month);
+
+
+
+        metabolismView=view.findViewById(R.id.metabolism_chart_month);
+        iweighBodyWaterView=view.findViewById(R.id.iweighWaterViewMonth);
+        iweighMuscleMasView=view.findViewById(R.id.iweighMuscleMassViewMonth);
+        iweighVisceralFatView=view.findViewById(R.id.visceralFat_chart_month);
+        iweighBodyFatView=view.findViewById(R.id.iweighBodyFatViewMonth);
+        iweighBoneMassView=view.findViewById(R.id.iweighBoneMassViewMonth);
+
         return view;
     }
 
@@ -94,12 +134,19 @@ public class IweighMonthsFragment extends Fragment {
             public void onClick(View view) {
                 btn_bmi.setAlpha(0.8f);
                 btn_weight.setAlpha(1f);
-
+                chart.setVisibility(View.VISIBLE);
                 layoutBmi.setVisibility(View.GONE);
                 layoutWeight.setVisibility(View.VISIBLE);
 
                 txt_wt_chart.setVisibility(View.VISIBLE);
                 txt_bmi_chart.setVisibility(View.GONE);
+                iweigh_meta_chart.setVisibility(View.GONE);
+                viscfat_chart.setVisibility(View.GONE);
+
+                water_chart.setVisibility(View.GONE);
+                musc_mass_chart.setVisibility(View.GONE);
+                body_fat_chart.setVisibility(View.GONE);
+                bone_mass_chart.setVisibility(View.GONE);
             }
         });
 
@@ -109,13 +156,104 @@ public class IweighMonthsFragment extends Fragment {
             public void onClick(View view) {
                 btn_weight.setAlpha(0.8f);
                 btn_bmi.setAlpha(1f);
-
+                chart.setVisibility(View.VISIBLE);
 
                 layoutBmi.setVisibility(View.VISIBLE);
                 layoutWeight.setVisibility(View.GONE);
-
                 txt_bmi_chart.setVisibility(View.VISIBLE);
                 txt_wt_chart.setVisibility(View.GONE);
+                iweigh_meta_chart.setVisibility(View.GONE);
+                viscfat_chart.setVisibility(View.GONE);
+                water_chart.setVisibility(View.GONE);
+                musc_mass_chart.setVisibility(View.GONE);
+                body_fat_chart.setVisibility(View.GONE);
+                bone_mass_chart.setVisibility(View.GONE);
+            }
+        });
+
+
+        btn_metabolism.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                iweigh_meta_chart.setVisibility(View.VISIBLE);
+                chart.setVisibility(View.GONE);
+                viscfat_chart.setVisibility(View.GONE);
+                water_chart.setVisibility(View.GONE);
+                musc_mass_chart.setVisibility(View.GONE);
+                body_fat_chart.setVisibility(View.GONE);
+                bone_mass_chart.setVisibility(View.GONE);
+            }
+        });
+
+
+        btn_visc_fat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chart.setVisibility(View.GONE);
+                viscfat_chart.setVisibility(View.VISIBLE);
+                iweigh_meta_chart.setVisibility(View.GONE);
+                water_chart.setVisibility(View.GONE);
+                musc_mass_chart.setVisibility(View.GONE);
+                body_fat_chart.setVisibility(View.GONE);
+                bone_mass_chart.setVisibility(View.GONE);
+            }
+        });
+
+        btn_mus_mass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chart.setVisibility(View.GONE);
+                viscfat_chart.setVisibility(View.GONE);
+                iweigh_meta_chart.setVisibility(View.GONE);
+                musc_mass_chart.setVisibility(View.VISIBLE);
+                water_chart.setVisibility(View.GONE);
+                body_fat_chart.setVisibility(View.GONE);
+                bone_mass_chart.setVisibility(View.GONE);
+            }
+        });
+
+
+        btn_bdy_water.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chart.setVisibility(View.GONE);
+                viscfat_chart.setVisibility(View.VISIBLE);
+                iweigh_meta_chart.setVisibility(View.GONE);
+                musc_mass_chart.setVisibility(View.GONE);
+                water_chart.setVisibility(View.VISIBLE);
+                body_fat_chart.setVisibility(View.GONE);
+                bone_mass_chart.setVisibility(View.GONE);
+            }
+        });
+
+
+        btn_bdy_fat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chart.setVisibility(View.GONE);
+                viscfat_chart.setVisibility(View.GONE);
+                iweigh_meta_chart.setVisibility(View.GONE);
+                musc_mass_chart.setVisibility(View.GONE);
+                water_chart.setVisibility(View.GONE);
+                body_fat_chart.setVisibility(View.VISIBLE);
+                bone_mass_chart.setVisibility(View.GONE);
+            }
+        });
+
+
+        btn_bone_mass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bone_mass_chart.setVisibility(View.VISIBLE);
+                body_fat_chart.setVisibility(View.GONE);
+                chart.setVisibility(View.GONE);
+                viscfat_chart.setVisibility(View.GONE);
+                iweigh_meta_chart.setVisibility(View.GONE);
+                musc_mass_chart.setVisibility(View.GONE);
+                water_chart.setVisibility(View.GONE);
+                body_fat_chart.setVisibility(View.GONE);
             }
         });
 
@@ -149,6 +287,17 @@ public class IweighMonthsFragment extends Fragment {
 
         wt_chart.set_XY_points(UserMeasuredWeightList);
         bmi_chart.set_XY_points(UserMeasuredWeightList);
+
+
+        iweighBodyFatView.set_XY_points(UserMeasuredWeightList);
+
+        iweighBodyWaterView.set_XY_points(UserMeasuredWeightList);
+        iweighBoneMassView.set_XY_points(UserMeasuredWeightList);
+        iweighMuscleMasView.set_XY_points(UserMeasuredWeightList);
+        iweighVisceralFatView.set_XY_points(UserMeasuredWeightList);
+        metabolismView.set_XY_points(UserMeasuredWeightList);
+
+
 
 
         if (UserMeasuredWeightList != null && UserMeasuredWeightList.size() >= 1) {

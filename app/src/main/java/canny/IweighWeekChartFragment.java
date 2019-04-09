@@ -166,12 +166,19 @@ public class IweighWeekChartFragment extends Fragment {
             public void onClick(View view) {
                 btn_bmi.setAlpha(0.8f);
                 btn_weight.setAlpha(1f);
-
+                chart.setVisibility(View.VISIBLE);
                 layoutBmi.setVisibility(View.GONE);
                 layoutWeight.setVisibility(View.VISIBLE);
 
                 txt_wt_chart.setVisibility(View.VISIBLE);
                 txt_bmi_chart.setVisibility(View.GONE);
+                iweigh_meta_chart.setVisibility(View.GONE);
+                viscfat_chart.setVisibility(View.GONE);
+
+                water_chart.setVisibility(View.GONE);
+                musc_mass_chart.setVisibility(View.GONE);
+                body_fat_chart.setVisibility(View.GONE);
+                bone_mass_chart.setVisibility(View.GONE);
             }
         });
 
@@ -181,13 +188,18 @@ public class IweighWeekChartFragment extends Fragment {
             public void onClick(View view) {
                 btn_weight.setAlpha(0.8f);
                 btn_bmi.setAlpha(1f);
-
+                chart.setVisibility(View.VISIBLE);
 
                 layoutBmi.setVisibility(View.VISIBLE);
                 layoutWeight.setVisibility(View.GONE);
-
                 txt_bmi_chart.setVisibility(View.VISIBLE);
                 txt_wt_chart.setVisibility(View.GONE);
+                iweigh_meta_chart.setVisibility(View.GONE);
+                viscfat_chart.setVisibility(View.GONE);
+                water_chart.setVisibility(View.GONE);
+                musc_mass_chart.setVisibility(View.GONE);
+                body_fat_chart.setVisibility(View.GONE);
+                bone_mass_chart.setVisibility(View.GONE);
             }
         });
 

@@ -147,6 +147,19 @@
 
 
     </LinearLayout>
+    <include layout="@layout/metabolism_chart_month"
+        />
+
+
+    <include layout="@layout/visceral_fat_chart_month"
+        />
+
+    <include layout="@layout/muscle_mass_chart_month"/>
+
+    <include layout="@layout/bone_mass_chart_month"/>
+    <include layout="@layout/water_chart_month"/>
+    <include layout="@layout/body_fat_month"/>
+
 
 
     <customviews.MyCustomTextView
