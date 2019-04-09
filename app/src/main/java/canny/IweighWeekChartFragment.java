@@ -61,6 +61,7 @@ public class IweighWeekChartFragment extends Fragment {
     private   TreeMap<String, Integer> MetabolismValue ;
     private List<String> weightList;
     private List<String> bmiList;
+    private Button btn_metabolism,btn_bdy_water,btn_mus_mass,btn_bdy_fat,btn_bone_mass,btn_visc_fat;
 
 
 
@@ -92,6 +93,7 @@ public class IweighWeekChartFragment extends Fragment {
 
     LinearLayout layoutWeight,layoutBmi;
     private ArrayList<String> metabolismList;
+    private LinearLayout chart;
 
     @Override
     public void onAttach(Context context) {
@@ -104,7 +106,7 @@ public class IweighWeekChartFragment extends Fragment {
     public  List<String> muscleMassList;
     public  List<String> bodyFatList;
     public  List<String> boneMassList;
-
+    RelativeLayout iweigh_meta_chart,viscfat_chart,musc_mass_chart,water_chart,body_fat_chart,bone_mass_chart;
 
     @Nullable
     @Override
@@ -130,6 +132,21 @@ public class IweighWeekChartFragment extends Fragment {
                                 iweighBodyFatView=view.findViewById(R.id.iweighBodyFatViewWeek);
                                         iweighBoneMassView=view.findViewById(R.id.iweighBoneMassViewWeek);
 
+
+        bone_mass_chart=view.findViewById(R.id.bone_mass_chart_week);
+        iweigh_meta_chart=view.findViewById(R.id.meta_chart_week);
+        viscfat_chart=view.findViewById(R.id.viscfat_chart_week);
+        musc_mass_chart=view.findViewById(R.id.musc_mass_chart_week);
+        water_chart=view.findViewById(R.id.water_chart_week);
+        body_fat_chart=view.findViewById(R.id.body_fat_week);
+
+        btn_visc_fat=view.findViewById(R.id.btn_vfat_chart);
+        btn_metabolism=view.findViewById(R.id.metabolism_chart);
+        btn_bdy_water=view.findViewById(R.id.btn_bdy_water_chart);
+        btn_mus_mass=view.findViewById(R.id.btn_muscle_chart);
+        btn_bdy_fat=view.findViewById(R.id.btn_bdyFat_chart);
+        btn_bone_mass=view.findViewById(R.id.btn_bone_mass_chart);
+        chart=view.findViewById(R.id.chart);
         return view;
     }
 
@@ -174,6 +191,91 @@ public class IweighWeekChartFragment extends Fragment {
             }
         });
 
+
+        btn_metabolism.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                iweigh_meta_chart.setVisibility(View.VISIBLE);
+                chart.setVisibility(View.GONE);
+                viscfat_chart.setVisibility(View.GONE);
+                water_chart.setVisibility(View.GONE);
+                musc_mass_chart.setVisibility(View.GONE);
+                body_fat_chart.setVisibility(View.GONE);
+                bone_mass_chart.setVisibility(View.GONE);
+            }
+        });
+
+
+        btn_visc_fat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chart.setVisibility(View.GONE);
+                viscfat_chart.setVisibility(View.VISIBLE);
+                iweigh_meta_chart.setVisibility(View.GONE);
+                water_chart.setVisibility(View.GONE);
+                musc_mass_chart.setVisibility(View.GONE);
+                body_fat_chart.setVisibility(View.GONE);
+                bone_mass_chart.setVisibility(View.GONE);
+            }
+        });
+
+        btn_mus_mass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chart.setVisibility(View.GONE);
+                viscfat_chart.setVisibility(View.GONE);
+                iweigh_meta_chart.setVisibility(View.GONE);
+                musc_mass_chart.setVisibility(View.VISIBLE);
+                water_chart.setVisibility(View.GONE);
+                body_fat_chart.setVisibility(View.GONE);
+                bone_mass_chart.setVisibility(View.GONE);
+            }
+        });
+
+
+        btn_bdy_water.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chart.setVisibility(View.GONE);
+                viscfat_chart.setVisibility(View.VISIBLE);
+                iweigh_meta_chart.setVisibility(View.GONE);
+                musc_mass_chart.setVisibility(View.GONE);
+                water_chart.setVisibility(View.VISIBLE);
+                body_fat_chart.setVisibility(View.GONE);
+                bone_mass_chart.setVisibility(View.GONE);
+            }
+        });
+
+
+        btn_bdy_fat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chart.setVisibility(View.GONE);
+                viscfat_chart.setVisibility(View.GONE);
+                iweigh_meta_chart.setVisibility(View.GONE);
+                musc_mass_chart.setVisibility(View.GONE);
+                water_chart.setVisibility(View.GONE);
+                body_fat_chart.setVisibility(View.VISIBLE);
+                bone_mass_chart.setVisibility(View.GONE);
+            }
+        });
+
+
+        btn_bone_mass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bone_mass_chart.setVisibility(View.VISIBLE);
+                body_fat_chart.setVisibility(View.GONE);
+                chart.setVisibility(View.GONE);
+                viscfat_chart.setVisibility(View.GONE);
+                iweigh_meta_chart.setVisibility(View.GONE);
+                musc_mass_chart.setVisibility(View.GONE);
+                water_chart.setVisibility(View.GONE);
+                body_fat_chart.setVisibility(View.GONE);
+            }
+        });
         dates=new ArrayList<>();
       //  weight=new ArrayList<>();
        // bmi=new ArrayList<>();

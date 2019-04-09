@@ -199,7 +199,8 @@
             android:padding="5dp"
 
             android:background="@mipmap/button_green"
-            android:layout_height="30dp" />
+            android:layout_height="30dp"
+            tools:ignore="ButtonStyle" />
 
 
         <Button
@@ -207,7 +208,7 @@
             android:id="@+id/btn_bdy_water_chart"
             android:text="@string/water"
             android:padding="5dp"
-
+            tools:ignore="ButtonStyle"
             android:layout_marginStart="5dp"
             android:background="@mipmap/button_green"
             android:layout_height="30dp" />
@@ -219,6 +220,7 @@
             android:layout_marginStart="5dp"
             android:padding="5dp"
             android:background="@mipmap/button_green"
+            tools:ignore="ButtonStyle"
             android:layout_height="30dp" />
         <Button
             android:layout_width="100dp"
@@ -227,6 +229,7 @@
             android:layout_marginStart="5dp"
             android:padding="5dp"
             android:background="@mipmap/button_green"
+            tools:ignore="ButtonStyle"
             android:layout_height="30dp" />
 
     </LinearLayout>
@@ -250,7 +253,7 @@
             android:id="@+id/btn_weight_chart"
             android:text="@string/wt_kg"
             android:padding="5dp"
-
+            tools:ignore="ButtonStyle"
             android:background="@mipmap/button_green"
             android:layout_height="30dp" />
 
@@ -260,7 +263,7 @@
             android:id="@+id/btn_bmi_chart"
             android:text="@string/bmi"
             android:padding="5dp"
-
+            tools:ignore="ButtonStyle"
             android:layout_marginStart="5dp"
             android:background="@mipmap/button_green"
             android:layout_height="30dp" />
@@ -271,6 +274,7 @@
             android:text="@string/metaboli"
             android:layout_marginStart="5dp"
             android:padding="5dp"
+            tools:ignore="ButtonStyle"
             android:background="@mipmap/button_green"
             android:layout_height="30dp" />
         <Button
@@ -278,6 +282,7 @@
             android:id="@+id/btn_vfat_chart"
             android:text="@string/visc_f"
             android:layout_marginStart="5dp"
+            tools:ignore="ButtonStyle"
             android:padding="5dp"
             android:background="@mipmap/button_green"
             android:layout_height="30dp" />
